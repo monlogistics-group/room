@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Javkha. 2022-11-10
+ -->
+<odoo>
+    <record id="mlworldwide_quotation_mail_data" model="ir.ui.view">
+        <field name="name">mlworldwide.quotation.mail.form</field>
+        <field name="model">mlworldwide.quotation.mail</field>
+        <field name="arch" type="xml">
+            <form string="Worldwide address">
+                <sheet>
+                    <group>
+                        <field name="greeting"/>
+                        <field name="description"/>
+                        <field name="route"/>
+                        <field name="footer"/>
+                        <field name="table_number"/>
+                        <field name="table_type"/>
+                        <field name="table_id"/>
+                        <field name="table_information"/>
+                        <field name="price"/>
+                        <field name="table_estimated_time"/>
+                        <field name="locale"/>
+                  </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record id="mlworldwide_quotation_mail_data_tree_view" model="ir.ui.view">
+        <field name="name">mlworldwide.quotation.mail.tree</field>
+        <field name="model">mlworldwide.quotation.mail</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Worldwide Mail">
+                  <field name="locale"/>
+                  <field name="greeting"/>
+                  <field name="description"/>
+                  <field name="route"/>
+                  <field name="footer"/>
+                  <field name="table_number"/>
+                  <field name="table_type"/>
+                  <field name="table_id"/>
+                  <field name="table_information"/>
+                  <field name="price"/>
+                  <field name="table_estimated_time"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id='mlworldwide_quotation_mail_data_action' model='ir.actions.act_window'>
+        <field name="name">Quotation mail data</field>
+        <field name="res_model">mlworldwide.quotation.mail</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+       
+    <menuitem id="menu_mlworldwide_quotation_mail_data"
+              name="Quotation mail data"
+              action="mlworldwide_quotation_mail_data_action"
+              parent="menu_worldwide_configuration"
+              sequence="189"/>
+</odoo>

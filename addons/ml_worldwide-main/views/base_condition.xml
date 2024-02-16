@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mlworldwide_base_condition_view_form" model="ir.ui.view">
+            <field name="model">mlworldwide.base.condition</field>
+            <field name="arch" type="xml">
+                <form string="Condition">
+                  <sheet>
+                    <group col="4">
+                        <field name="name"/>
+                        <field name="user_id" string="Available for User"/>
+                        <field name="model_id"/>
+                        <field name="action_id"/>
+                        <field name="active" widget="boolean_toggle"/>
+                    </group>
+                    <group>
+                        <field name="domain" widget="domain" options="{'model': 'model_id'}"/>
+                        <field name="context"/>
+                        <field name="sort"/>
+                    </group>
+                   </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="mlworldwide_base_condition_view_tree" model="ir.ui.view">
+            <field name="model">mlworldwide.base.condition</field>
+            <field name="arch" type="xml">
+                <tree string="Condition">
+                    <field name="name"/>
+                    <field name="model_id"/>
+                    <field name="user_id"/>
+                    <field name="action_id"/>
+                    <field name="domain" groups="base.group_no_one"/>
+                    <field name="context" groups="base.group_no_one"/>
+                    <field name="sort" groups="base.group_no_one"/>
+                </tree>
+            </field>
+        </record>
+        <record id="actions_mlworldwide_base_condition_view" model="ir.actions.act_window">
+            <field name="name">Conditions</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mlworldwide.base.condition</field>
+        </record>
+        <menuitem id="menu_mlworldwide_base_condition"
+              name="Base condition"
+              action="actions_mlworldwide_base_condition_view"
+              parent="menu_worldwide_configuration"
+              groups=""
+              sequence="140"/>
+    </data>
+</odoo>

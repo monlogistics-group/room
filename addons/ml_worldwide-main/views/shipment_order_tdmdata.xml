@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Ariuka. 2022-12-7
+ -->
+<odoo>
+    
+    <record id="shipment_order_data_form_view" model="ir.ui.view">
+        <field name="name">shipment.order.data.form</field>
+        <field name="model">shipment.order.data</field>
+        <field name="arch" type="xml">
+            <form string="Shipment order data">
+                <sheet>
+                    <group>
+                        <field name="locale"/>
+                        <field name="ship_conf"/>
+                        <field name="title_name" />
+                        <field name="ship_date" />
+                        <field name="ship_type" />
+                        <field name="ship_to" />
+                        <field name="package_name"/>
+                        <field name="package_desc" />
+                        <field name="package_qty" />
+                        <field name="temp_deg" />
+                        <field name="package_vendor" />
+                        <field name="package_con"/>
+                        <field name="notice"/>
+                        <field name="ekso_condi" />
+                        <field name="package_valid_until" />
+                        <field name="package_rt_name" />
+                        <field name="condi_route" />
+                        <field name="package_cost" />
+                        <field name="border" />
+                        <field name="transport_agent" />
+                        <field name="costumer_name" />
+                        <field name="agent_name" />
+                        <field name="cos_name" />
+                        <field name="sign" />
+                        <field name="condi_text" />
+                        <field name="condi_texts" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="shipment_order_data_tree_view" model="ir.ui.view">
+        <field name="name">shipment.order.data.tree</field>
+        <field name="model">shipment.order.data</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Shipment order data">
+                <field name="locale"/>
+                <field name="ship_conf"/>
+                <field name="title_name" />
+                <field name="ship_date" />
+                <field name="ship_to" />
+                <field name="ship_type" />
+                <field name="package_name"/>
+                <field name="package_desc" />
+                <field name="package_qty" />
+                <field name="package_vendor" />
+                <field name="package_con"/>
+                <field name="ekso_condi" />
+                <field name="package_valid_until" />
+                <field name="package_rt_name" />
+                <field name="condi_route" />
+                <field name="package_cost" />
+                <field name="border" />
+                <field name="transport_agent" />
+                <field name="costumer_name" />
+                <field name="agent_name" />
+                <field name="cos_name" />
+                <field name="sign" />
+                <field name="condi_text" />
+                <field name="condi_texts" />
+            </tree>
+        </field>
+    </record>
+    
+    <record id="shipment_order_data_action" model="ir.actions.act_window">
+        <field name="name"> Shipment order data</field>
+        <field name="type">ir.actions.act_window</field>  
+        <field name="res_model">shipment.order.data</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+    </record>
+
+    <menuitem id="menu_trucking_sale_order_quotation"
+              name="Shipment order data"
+              action="shipment_order_data_action"
+              parent="menu_worldwide_configuration"
+              groups=""
+              sequence="109"/>
+              
+</odoo>

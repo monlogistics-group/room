@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Ariuka. 2022-11-7
+ -->
+<odoo>
+
+    <template id="report_invoice_with_payments" inherit_id="account.report_invoice_with_payments">
+        <xpath expr='//t[@t-call="account.report_invoice_document"]' position="before">
+            <t t-if="o._get_name_invoice_report() == 'ml_worldwide-main.mlworldwide_invoice_template'"
+               t-call="ml_worldwide-main.mlworldwide_invoice_template" t-lang="lang"/>
+        </xpath>
+    </template>
+    
+    <template id="mlworldwide_invoice_template">
+        <!-- <xpath expr="//t[@t-call='web.external_layout']" position="replace"> -->
+        <style>
+            .fs12{
+                font-size:12px;
+            }
+        </style>
+        <t t-set="o" t-value="o.with_context(lang=lang)" />
+        
+        <t t-if="len(request.env['mlworldwide.invoice.data'].search([('lang','=' ,base_lang)], limit = 1))>0">
+            <t t-set="k" t-value="request.env['mlworldwide.invoice.data'].search([('lang','=' ,base_lang)], limit = 1)" />
+        </t>
+        <t t-else="">
+            <t t-set="k" t-value="request.env['mlworldwide.invoice.data'].search([('lang.code','=','en_US')], limit = 1)" />
+        </t>
+        <div class="header" style="border-bottom: 1px solid black;!important; margin-left:5px;">
+            <div class="row">
+                <div name="header" class="col-6" style="margin-top: 4px;">
+                    <div class="text-left mb4" style="margin-bottom:10px;">
+                        <img t-if="o.freights_inv_id.freights_id.company_id.logo" t-att-src="image_data_uri(o.freights_inv_id.freights_id.company_id.logo)" style="max-height:30px;" alt="Logo"/>
+                        <div style="margin-top:10px">
+                            <span t-field="o.freights_inv_id.freights_id.company_id.partner_id.name" class="font-weight-bold text-uppercase"/>
+                        </div>
+                        <div>
+                            Address:
+                            <span t-field="o.freights_inv_id.freights_id.company_id.partner_id.street"/>
+                            <span t-field="o.freights_inv_id.freights_id.company_id.partner_id.street2"/>
+                        </div>
+                        <div>
+                            <span t-field="o.freights_inv_id.freights_id.company_id.partner_id.city"/>
+                            <span t-field="o.freights_inv_id.freights_id.company_id.partner_id.state_id"/>
+                            <span t-field="o.freights_inv_id.freights_id.company_id.partner_id.zip"/>
+                            Phone:
+                            <span t-if="o.freights_inv_id.freights_id.company_id.partner_id.phone" t-field="o.freights_inv_id.freights_id.company_id.partner_id.phone"/>
+                            <span t-if="o.freights_inv_id.freights_id.company_id.partner_id.mobile" t-field="o.freights_inv_id.freights_id.company_id.partner_id.mobile"/>
+                            <span t-field="o.freights_inv_id.freights_id.company_id.partner_id.country_id"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 text-uppercase">
+                    <div class="container">
+                        <div class="font-weight-bold"
+                             style="margin-top: 20px; text-align: center; font-size: 1.1rem">
+                             <strong><span t-field ="k.invoice_title"></span></strong>
+                        </div>
+                        <div style="margin-top: 20px" class="row">
+                            <div class="text-left col-8 font-weight-bold fs12"><span t-field ="k.invoice_num"></span>:</div>
+                            <div class="fs12"><t t-out="o.name"/></div>
+                        </div>
+                        <div class="row">
+                            <div class="text-left col-8 font-weight-bold fs12"><span t-field ="k.invoice_date"></span>:</div>
+                            <div class="fs12"><t t-out="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/></div>
+                        </div>
+                        <div class="row">
+                            <div class="text-left col-8 font-weight-bold fs12"><span t-field ="k.invoice_duedate"></span>:</div>
+                            <div class="fs12" style="font-size:12px; " t-out="o.freights_inv_id.due_date"/>
+                        </div>
+                        <div class="row">
+                          <div class="text-left col-8 font-weight-bold fs12"><span t-field ="k.payer"></span>:</div>
+                            <div class="fs12" style="font-size:12px; " t-out="o.freights_inv_id.customer_id.name"/>
+                        </div>
+                        <div class="row">
+                            <div class="text-left col-8 font-weight-bold fs12"><span t-field ="k.payer_number"></span>:</div>
+                            <div class="fs12"><t t-out="o.freights_inv_id.freights_id.customer_id.phone"/></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">                 
+               <t t-foreach="o.freights_inv_id" t-as="invs">
+                    <t t-set="freight" t-value="invs.freights_id"/>
+                </t>
+               <div  class="page" style="font-size:16px;">
+                    <div class="col-auto col-3 mw-100 mb-2" >
+                        <strong><span><br/></span></strong>
+                    </div>
+                    <div class="col-auto col-3 mw-100 mb-2" >
+                        <strong><span t-field ="k.freights_num"></span>:</strong><t t-out="freight.ref_num"/>                   
+                    </div>
+                    <div class="col-auto col-3 mw-100 mb-2" >
+                        <t t-if="o.freights_inv_id.freights_id.ordered_freights_type.type_name == 'AIR'">
+                            <strong><span t-field ="k.shipment_name_air"></span>:</strong>
+                        </t>
+                        <t t-elif="o.freights_inv_id.freights_id.ordered_freights_type.type_name == 'FCL'">
+                            <strong><span t-field ="k.shipment_name_fcl"></span>:</strong>
+                        </t>
+                         <t t-elif="o.freights_inv_id.freights_id.ordered_freights_type.type_name == 'LCL'">
+                            <strong><span t-field ="k.shipment_name_lcl"></span>:</strong>
+                        </t>
+                         <t t-elif="o.freights_inv_id.freights_id.ordered_freights_type.type_name == 'FTL'">
+                            <strong><span t-field ="k.shipment_name_ftl"></span>:</strong>
+                        </t>
+                         <t t-elif="o.freights_inv_id.freights_id.ordered_freights_type.type_name == 'MULTIMODAL'">
+                            <strong><span t-field ="k.shipment_name_multimodal"></span>:</strong>
+                        </t>
+                         <t t-elif="o.freights_inv_id.freights_id.ordered_freights_type.type_name == 'WGN'">
+                            <strong><span t-field ="k.shipment_name_wgn"></span>:</strong>
+                        </t>
+                         <t t-elif="o.freights_inv_id.freights_id.ordered_freights_type.type_name == 'Train'">
+                            <strong><span t-field ="k.shipment_name_train"></span>:</strong>
+                        </t>
+                        <t t-elif="o.freights_inv_id.freights_id.ordered_freights_type.type_name == 'LTL'">
+                            <strong><span t-field ="k.shipment_name_ltl"></span>:</strong>
+                        </t>
+                        
+                        <t t-foreach="freight.freights_shipment" t-as='shipment'>
+                            <t t-if="freight.freights_shipment[len(freight.freights_shipment)-1] == shipment">
+                                <t t-out="shipment.name"/>
+                            </t>
+                            <t t-else="">
+                                <t t-out="shipment.name"/>,
+                            </t>
+                        </t>
+                        
+                    </div>
+                       <div class="col-auto col-3 mw-100 mb-2" >
+                        <strong><span t-field ="k.cargo_name"></span>:</strong><t t-out="o.freights_inv_id.freights_id.shipper_info"/>                   
+                    </div>
+                    <div class="col-auto col-3 mw-100 mb-2" >
+                        <strong><span t-field ="k.package_qty"></span>:</strong><t t-out="o.freights_inv_id.freights_id.package_qty"/> x <t t-out="o.freights_inv_id.freights_id.taras_id.name"/>                  
+                    </div>
+                       <!-- <div class="col-auto col-3 mw-100 mb-2" >
+                        <strong><span t-field ="k.shipper_name"></span>:</strong><t t-out="o.freights_inv_id.freights_id.ref_num"/>                   
+                    </div> -->
+               </div>
+                <table class="table table-sm o_main_table" name="invoice_line_table">
+                    <thead>
+                        <tr style='background-color: #4c749c; color: white;'>
+                            <th name="th_description" class="text-center" style="border: 1px solid black; background-color: #4c749c;"><span t-field ="k.table_head_num"></span></th>       
+                            <th name="th_description" class="text-center" style="border: 1px solid black; background-color: #4c749c;"><span t-field ="k.table_head_desc"></span></th>                        
+                            <th name="th_quantity" class="text-center" style="border: 1px solid black; background-color: #4c749c;"><span t-field ="k.table_head_qty"></span></th>
+                            <th name="th_quantity" class="text-center" style="border: 1px solid black; background-color: #4c749c;"><span t-field ="k.table_head_price"></span></th>
+                            <th name="th_subtotal" class="text-center" style="border: 1px solid black; background-color: #4c749c;"><span t-field = "k.table_head_subtotal"></span></th>
+                        </tr>
+                    </thead>
+                    <tbody class="invoice_tbody">
+                        <t t-set="i" t-value="1"/>
+                        <t t-if="freight.is_export == False"> 
+                            <!--  IMPORTIIN INVOICE BOL  -->
+                            <t t-set="fname" t-value="'#'"/>
+                            <t t-foreach="freight.freights_route" t-as="route">
+                                <t t-if="route.point.country">
+                                    <t t-if="'#' in fname">
+                                        <t t-if="'Mongolia' not in route.point.country.name">
+                                            <t t-set="fname" t-value="route.point.name"/>
+                                        </t>    
+                                    </t>
+                                    <t t-else="">
+                                        <t t-if="'Mongolia' in route.point.country.name">
+                                            <t t-if="route.point.border == True">
+                                                <t t-set="fname" t-value="fname + ' - ' + route.point.name"/>
+                                            </t>
+                                        </t> 
+                                    </t>
+                                </t>
+                            </t>
+
+                            <t t-set="currency" t-value="''"/>
+
+                            <t t-foreach="freight.freights_quotations" t-as="quotation">
+                                <t t-if="'confirmed' in quotation.state_id">
+                                    <t t-if="quotation.base_currency != False">
+                                        <t t-set="currency" t-value="quotation.base_currency.name"/>
+                                    </t> 
+                                </t>    
+                            </t>
+
+                            <t t-set="f_subtotal" t-value="0"/>
+
+                            <t t-foreach="freight.freights_payments" t-as="line">
+                                <t t-if="'Freight cost' in line.type.name">
+                                    <t t-if="not line.type.product_id.taxes_id">
+                                        <t t-if="currency in line.currency_id.name">
+                                            <t t-set="f_subtotal" t-value="f_subtotal + line.subtotal_rate"/>
+                                        </t>
+                                        <t t-else="">
+                                            <t t-set="f_subtotal" t-value="f_subtotal + line.subtotal_rate"/>
+                                        </t>
+                                    </t> 
+                                </t>  
+                                <t t-elif="'Other charges' in line.type.name">
+                                    <t t-if="not line.type.product_id.taxes_id">
+                                        <t t-if="currency in line.currency_id.name">
+                                            <t t-set="f_subtotal" t-value="f_subtotal + line.subtotal_rate"/>
+                                        </t>
+                                        <t t-else="">
+                                            <t t-set="new_currency" t-value="request.env['currency.line'].search([('currency_id','=' ,line.currency_id.id)], limit = 1)" />
+                                            <t t-set="f_subtotal" t-value="f_subtotal + line.subtotal_rate * new_currency.sell"/>
+                                        </t>
+                                    </t> 
+                                </t>    
+                            </t>
+
+                            <tr>
+                                <td class="text-center" style="border: 1px solid black;">
+                                    <span t-esc="i"/>
+                                </td>
+                                <td name="account_invoice_line_name" style="border: 1px solid black;">
+                                    <span t-esc="fname"/>
+                                </td>
+                                <td class="text-right" style="border: 1px solid black;">
+                                    1
+                                </td>
+                                <td t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="border: 1px solid black;">
+                                    <span class="text-nowrap" t-esc="currency + ' '"/>
+                                    <span t-esc="f_subtotal" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                    
+                                <td class="text-right o_price_total" style="border: 1px solid black;">
+                                    <span class="text-nowrap" t-esc="currency + ' '"/>
+                                    <span t-esc="f_subtotal" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-center" colspan="4" style="border: 1px solid black;">    
+                                </td>
+                                <td class="text-right o_price_total" style="border: 1px solid black;">
+                                    <span t-esc="currency"/> 
+                                    <span t-esc="f_subtotal" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                            </tr>
+
+                            <t t-set="product_category" t-value="[]"/>
+
+                            <t t-foreach="freight.freights_payments" t-as="line">
+                                <t t-if="'Freight cost' not in line.type.name">
+                                    <t t-if="'Other charges' not in line.type.name">
+                                        <t t-set="product_category" t-value="product_category+[line.type.name + ' - ' + line.currency_id.name]"/>
+                                    </t>
+                                </t>
+                            </t>
+
+                            <t t-set="total_mnt" t-value="0"/>
+                            
+                            <t t-foreach="set(product_category)" t-as="category">
+                                <t t-set="sub_price" t-value="0"/>
+                                <t t-set="service_name" t-value="''"/>
+                                <t t-set="service_currency" t-value="''"/>
+                                <t t-set="service_currency_id" t-value="1"/>
+                                <t t-foreach="freight.freights_payments" t-as="line">
+                                    <t t-if="'Freight cost' not in line.type.name">
+                                        <t t-if="'Other charges' not in line.type.name">
+                                            <t t-if="category in line.type.name + ' - ' + line.currency_id.name">
+                                                <t t-set="sub_price" t-value="sub_price+line.subtotal_rate"/>
+                                                <t t-set="service_name" t-value="line.type.name"/>
+                                                <t t-set="service_currency" t-value="line.currency_id.name"/>
+                                                <t t-set="service_currency_id" t-value="line.currency_id.id"/>
+                                            </t>
+                                        </t>
+                                    </t>
+                                </t>
+                                <t t-if="sub_price!=0">
+                                <tr>
+                                    <td class="text-center" style="border: 1px solid black;">
+                                        <span t-esc="i"/>
+                                    </td>
+                                    <td name="account_invoice_line_name" style="border: 1px solid black;">
+                                        <span t-esc="service_name"/>
+                                    </td>
+                                    <td class="text-right" style="border: 1px solid black;">
+                                        1
+                                    </td>
+                                    <td t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="border: 1px solid black;">
+                                        <span class="text-nowrap" t-esc="service_currency + ' '"/>
+                                        <span t-esc="sub_price" t-options='{"widget": "float", "precision": 2}'/>
+                                    </td>
+                                        
+                                    <td class="text-right o_price_total" style="border: 1px solid black;">
+                                        <span class="text-nowrap" t-esc="service_currency + ' '"/>
+                                        <span t-esc="sub_price" t-options='{"widget": "float", "precision": 2}'/>
+                                        <t t-if="'MNT' not in service_currency">
+                                            <t t-set="new_currency" t-value="request.env['currency.line'].search([('currency_id','=' ,service_currency_id)], limit = 1)" />
+                                            x <span t-esc="new_currency.sell" t-options='{"widget": "float", "precision": 2}'/>
+                                            <br/>
+                                            MNT <span t-esc="sub_price * new_currency.sell" t-options='{"widget": "float", "precision": 2}'/>
+                                            <t t-set="total_mnt" t-value="total_mnt+sub_price * new_currency.sell"/>
+                                        </t>
+                                        <t t-else="">
+                                            <t t-set="total_mnt" t-value="total_mnt+sub_price"/>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <t t-set="i" t-value="i+1"/>
+                                </t>
+                            </t>
+
+                            <t t-if="total_mnt!=0">
+                            <tr>
+                                <td class="text-right" colspan="4" style="border: 1px solid black;">
+                                    <t t-out='k.nuot'/>
+                                </td>
+                                <td class="text-right o_price_total" style="border: 1px solid black;">
+                                    <span t-esc="k.mnt"/> 
+                                    <span t-esc="total_mnt*1.1/100" t-options='{"widget": "float", "precision": 2}'/>
+                                    <t t-set="total_mnt" t-value="total_mnt+total_mnt*1.1/100"/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-center" colspan="4" style="border: 1px solid black;">    
+                                </td>
+                                <td class="text-right o_price_total font-weight-bold" style="border: 1px solid black;">
+                                    <span t-esc="k.mnt"/> 
+                                    <span t-esc="total_mnt" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                            </tr>
+                            </t>
+
+                            <tr style='background-color: #4c749c; color: white;'>    
+                                <td class="text-right" colspan="5" style="border: 1px solid black;">
+                                    <span t-field ="k.table_head_subtotal"></span>
+                                </td>
+                            </tr>
+
+                            <t t-if="total_mnt!=0">
+                            <tr>
+                                <td class="text-right" colspan="4" style="border: 1px solid black;">
+                                    <b t-esc="k.abroad_title"/>
+                                    <br/>
+                                    <b t-esc="request.env['res.currency'].Amount2Word(total_mnt)"/>
+                                </td>
+                                <td class="text-right o_price_total font-weight-bold" style="border: 1px solid black;">
+                                    <span t-esc="k.mnt"/> 
+                                    <span t-esc="total_mnt" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                            </tr>
+                            </t>
+
+                            <t t-if="f_subtotal!=0">
+                            <tr>
+                                <td class="text-right" colspan="4" style="border: 1px solid black;">
+                                    <b t-esc="k.domestic_title"/> 
+                                    <br/>
+                                    <t t-foreach="freight.freights_quotations" t-as="quotation">
+                                        <t t-if="'confirmed' in quotation.state_id">
+                                            <t t-if="quotation.base_currency != False">
+                                                <t t-set="currency" t-value="quotation.base_currency.name"/>
+                                                <b t-esc="quotation.base_currency.amount_to_text(f_subtotal)"/>
+                                            </t> 
+                                        </t>    
+                                    </t>
+                                    
+                                </td>
+                                <td class="text-right o_price_total font-weight-bold" style="border: 1px solid black;">
+                                    <span t-esc="currency"/> 
+                                    <span t-esc="f_subtotal" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                            </tr>
+                            </t>
+                            <!-- 
+
+                            <t t-foreach="invoiceallline" t-as="line">
+                                <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+
+                                <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                    <t t-if="not line.display_type" name="account_invoice_line_accountable">
+                                        <td class="text-center">
+                                            <span t-esc="i"/>
+                                            <t t-foreach="o.freights_inv_id" t-as="invs">
+                                                <span t-esc="invs.freights_id.is_export"/>
+                                            </t>
+                                        </td>
+                                        <td name="account_invoice_line_name"><span t-field="line.name" t-options="{'widget': 'text'}"/></td>
+                                        <td class="text-right">
+                                            <span t-field="line.quantity"/>s
+                                            <span t-field="line.product_uom_id"  groups="uom.group_uom"/>
+                                        </td>
+                                        <td t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                            <span class="text-nowrap" t-field="line.price_unit"/>
+                                        </td>
+                                        <td t-if="display_discount" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                            <span class="text-nowrap" t-field="line.discount"/>
+                                        </td>
+                                        <td class="text-right o_price_total">
+                                            <span class="text-nowrap" t-field="line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                            <span class="text-nowrap" t-field="line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                                        </td>
+                                    </t>
+                                    <t t-if="line.display_type == 'line_section'">
+                                        <td colspan="99">
+                                            <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                        </td>
+                                        <t t-set="current_section" t-value="line"/>
+                                        <t t-set="current_subtotal" t-value="0"/>
+                                    </t>
+                                    <t t-if="line.display_type == 'line_note'">
+                                        <td colspan="99">
+                                            <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                        </td>
+                                    </t>
+                                </tr>
+
+                                <t t-if="current_section and (line_last or lines[line_index+1].display_type == 'line_section')">
+                                    <tr class="is-subtotal text-right">
+                                        <td colspan="99">
+                                            <strong class="mr16">Subtotal</strong>
+                                            <span
+                                                t-esc="current_subtotal"
+                                                t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                            />
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-set="i" t-value="i+1"/>
+                            </t>
+                        </t>
+                            <t t-set="freight" t-value="request.env['mlworldwide.freights'].search([('id','=' ,o.freights_inv_id.freights_id.id)], limit = 1)" />
+                            <t t-set="i" t-value="1"/>
+                            <t t-set="subtotal" t-value="0"/> 
+                            <t t-foreach="freight.freights_payments" t-as ="line">
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-esc="i"/>
+                                    </td>
+                                     <td class="text-center">
+                                        <t t-out="line.service_desc"/>
+                                    </td>
+                                     <td class="text-right">
+                                        <span t-esc="freight.package_qty"/>
+                                    </td>
+                                     <td class="text-right">
+                                        <span t-esc="line.currency_id.name"/>
+                                        <t t-out="line.service_rate"/>
+                                    </td>
+                                     <td class="text-right">
+                                        <span t-esc="line.currency_id.name"/>
+                                        <t t-out="line.service_rate * freight.package_qty"/>x
+                                        <t t-set="currency_rate" t-value="request.env['res.currency'].search([])" />
+                                        <t t-foreach="currency_rate" t-as="rate">
+                                            <t t-if="rate.name == o.freights_inv_id.domestic_currency.name">
+                                                <t t-out="round(rate.rate, 2)"/>
+                                                <br/>
+                                                <span t-esc="o.freights_inv_id.domestic_currency.name"/>
+                                                <t t-out="round(rate.rate, 2) * line.service_rate"/>
+                                                <t t-set="subtotal" t-value="subtotal + round(rate.rate, 2) * line.service_rate"/> 
+                                            </t>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <t t-set="i" t-value="i+1"/>
+                            </t>
+                            <tr>
+                                <td colspan='4' class="text-right">
+                                    <t t-out='k.total_price'/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-esc="o.freights_inv_id.domestic_currency.name"/>
+                                    <t t-out='subtotal'/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan='5' style="background-color: #4c749c; color: white; border: 1px solid black;" class="text-right">
+                                    <t t-out="k.total_payment"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan='4' class="text-right">
+                                    <t t-out="k.total_price"/>
+                                </td>
+                                <td class="text-right">
+                                   <span t-esc="o.freights_inv_id.domestic_currency.name"/>
+                                    <t t-out="subtotal"/>
+                                </td>
+                            </tr> -->
+                        </t>
+                    </tbody>
+                </table>
+            <t t-out='k.note_msg'/>:<t t-out='k.notice_text'/>
+            
+            <div style='margin: 0 auto; padding-top : 30px;'>
+                <div class='text-center'>
+                    <t t-set="accountant" t-value="freight.get_accountant(o.create_uid)"/>
+                    <t t-out='k.direct_name'/>: ..................
+                    <t t-if="accountant">
+                        <t t-out='accountant.name'/>
+                        <img t-if="accountant.blank_signature" t-att-src="image_data_uri(accountant.blank_signature)" style="max-height:50px; margin-left: 8px; margin-left: -220px" alt="Signature"/>
+                        <img t-if="accountant.blank_stamp" t-att-src="image_data_uri(accountant.blank_stamp)" style="max-height:50px; margin-left: 8px; margin-left: -50px" alt="Stamp"/>
+                    </t>
+                    
+                </div>
+            </div>
+            <table class="table table-sm o_main_table" name="invoice_bank_table">
+                <thead>
+                    <tr style='background-color: #4c749c; color: white;'>
+                        <th class="text-center" style="border: 1px solid black;"><strong><span t-field ="k.bank_name">Bank name</span></strong></th>    
+                        <th class="text-center" style="border: 1px solid black;"><strong><span t-field ="k.mnt">mnt</span></strong></th>
+                        <th class="text-center" style="border: 1px solid black;"><strong><span t-field ="k.usd">usd</span></strong></th>
+                        <th class="text-center" style="border: 1px solid black;"><strong><span t-field ="k.eur">eur</span></strong></th>
+                        <th class="text-center" style="border: 1px solid black;"><strong><span t-field ="k.cny">cny</span></strong></th>
+                        <th class="text-center" style="border: 1px solid black;"><strong><span t-field ="k.rub">rub</span></strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center" style="border: 1px solid black;"><div>TDB</div></td>
+                        <td class="text-center" style="border: 1px solid black;"><div>405029849</div></td>
+                        <td class="text-center" style="border: 1px solid black;"><div>405029850</div></td>
+                        <td class="text-center" style="border: 1px solid black;"><div>460016101</div></td>
+                        <td class="text-center" style="border: 1px solid black;"><div>460016102</div></td>
+                        <td class="text-center" style="border: 1px solid black;"><div>460016103</div></td>
+                    </tr>
+                     <tr>
+                        <td class="text-center" style="border: 1px solid black;"><div>Golomt Bank</div></td>
+                        <td class="text-center" style="border: 1px solid black;"><div>3615104166</div></td>
+                        <td class="text-center" style="border: 1px solid black;"><div>3615104167</div></td>
+                        <td class="text-center" style="border: 1px solid black;"><div></div></td>
+                        <td class="text-center" style="border: 1px solid black;"><div></div></td>
+                        <td class="text-center" style="border: 1px solid black;"><div></div></td>
+                    </tr>
+                     <tr>
+                        <td class="text-center" style="border: 1px solid black;"><div>Khan Bank</div></td>
+                        <td class="text-center" style="border: 1px solid black;"><div>5003448919</div></td>
+                        <td class="text-center" style="border: 1px solid black;"><div>5003448920</div></td>
+                        <td class="text-center" style="border: 1px solid black;"><div></div></td>
+                        <td class="text-center" style="border: 1px solid black;"><div></div></td>
+                        <td class="text-center" style="border: 1px solid black;"><div></div></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div t-attf-class="footer o_company_#{o.freights_inv_id.freights_id.company_id}_layout">
+                <div class="text-center">
+                    <ul class="list-inline">
+                        <li t-if="report_type == 'pdf'" class="list-inline-item text-right">
+                            Page:
+                            <span style="font-family: Ubuntu;" class="page"/>
+                            /
+                            <span class="topage"/>
+                        </li>
+                    </ul>
+                    <t t-foreach="o.freights_inv_id.freights_id.company_id.other_logos" t-as="logo">
+                        <img t-if="logo.freight_photo" t-att-src="image_data_uri(logo.freight_photo)" style="max-height:50px; margin-left: 8px; margin-right: 8px" alt="Logo"/>
+                    </t>
+                </div>
+            </div>
+        </div>      
+        <!-- </xpath> -->
+    </template>
+
+    <template id="external_layout_standard">
+        <t t-if="not company">
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+
+        <t t-set="company" t-value="company.with_context(lang='en_US')"/>
+        
+        <t t-set="layout" t-value="company.external_report_layout_id.key or 'web.external_layout_standard'" />
+        
+        <t t-if="layout == 'web.external_layout_standard'">
+            ___________________________________----
+        </t>
+    </template>
+</odoo>

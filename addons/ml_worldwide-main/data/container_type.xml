@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="freights_container_type" model="freights.container.type">
+        <field name="name">COC</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_container_type2" model="freights.container.type">
+        <field name="name">SOC</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_container_type3" model="freights.container.type">
+        <field name="name">Transfer</field>
+        <field name="active">1</field>
+    </record>
+</odoo>

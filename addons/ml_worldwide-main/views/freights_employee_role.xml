@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<odoo>
+    <record id="freights_employee_role_search_view" model="ir.ui.view">
+        <field name="name">freights.employee.role.search</field>
+        <field name="model">freights.employee.role</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name ="employee" string ="Participants" />     
+            </search>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+tt_odoo_rest_api_model_access_admin,tt_odoo_rest_api_model_access_admin,model_tortecs_rest_api,,1,1,1,1
+
+tt_odoo_rest_api_rule_access_admin,tt_odoo_rest_api_rule_access_admin,model_tortecs_rest_api_rule,,1,1,1,1

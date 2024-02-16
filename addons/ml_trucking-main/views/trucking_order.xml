@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Javkha. 2022-11-02
+ -->
+<odoo>
+    
+    <record id="ml_trucking_port_form_view" model="ir.ui.view">
+        <field name="name">mltrucking.order.form</field>
+        <field name="model">mltrucking.order</field>
+        <field name="arch" type="xml">
+            <form string="Trucking order">
+            <header>
+                <!-- <button name="write_fn" type="object" string="Confirm"/> -->
+            </header>
+                <sheet>
+                    <group col="2">
+                        <group>
+                            <field name="description"/>
+                            <field name="package"/>
+                            <field name="volume"/>
+                        </group>
+                        <group>
+                            <field name="gweight"/>
+                            <field name="quantity"/>
+                            <field name="operation"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record id="ml_trucking_port_tree_view" model="ir.ui.view">
+        <field name="name">mltrucking.order.tree</field>
+        <field name="model">mltrucking.order</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Trucking order">
+                <field name="description" />
+                <field name="package"/>
+                <field name="volume"/>
+                <field name="quantity"/>
+                <field name="gweight"/>
+            </tree>
+        </field>
+    </record>
+    <record id="ml_trucking_port_kanban_view" model="ir.ui.view">
+        <field name="name">mltrucking.order.kanban</field>
+        <field name="model">mltrucking.order</field>
+        <field name="type">kanban</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="description" />
+                <field name="package"/>
+                <field name="volume"/>
+                <field name="quantity"/>
+                <field name="gweight"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="col-oe_kanban_details d-flex flex-column">
+                                <strong class="o_kanban_record_title">
+                                    Description: <field name="description"/>
+                                </strong>
+                                <div class="d-flex flex-column">
+                                    <div>Package: <field name="package"/></div>
+                                    <div>Volume: <field name="volume"/></div>
+                                    <div>Quantity: <field name="quantity"/></div>
+                                    <div>Gross Weight: <field name="gweight"/></div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="ml_trucking_port_action" model="ir.actions.act_window">
+        <field name="name">Trucking Order</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mltrucking.order</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Define a new page
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_trucking_port"
+              name="Trucking Order"
+              action="ml_trucking_port_action"
+              parent="menu_trucking_data"
+              sequence="35"/>
+</odoo>

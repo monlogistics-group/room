@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ir_cron_auto_send_route_info_to_customer" model="ir.cron">
+        <field name="name">WORLDWIDE; Auto send email route information to customers</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">hours</field>
+        <field name="numbercall">1</field>
+        <field name="nextcall" eval="(DateTime.now().replace(hour=0, minute=0)).strftime('%Y-%m-%d %H:%M:%S')" />
+        <field name="active">True</field>
+        <field name="doall" eval="False"/>
+        <field name="model_id" ref="model_freight_transient"/>
+        <field name="code">model._autosend_route_info()</field>
+        <field name="state">code</field>
+    </record>
+</odoo>

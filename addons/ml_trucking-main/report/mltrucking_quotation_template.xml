@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Ariuka. 2022-11-7
+ -->
+<odoo>
+
+    <template id="quotation_body">
+        <t t-call="ml_trucking.mltrucking_empty_blank">
+            <t t-set="doc" t-value="doc.with_context(lang=base_lang)"/>
+            <t t-if="len(request.env['mltrucking.quotation.data'].search([('locale.code','=' ,base_lang)], limit = 1))>0">
+                <t t-set="k" t-value="request.env['mltrucking.quotation.data'].search([('locale.code','=' ,base_lang)], limit = 1)" />
+            </t>
+            <t t-else="">
+                <t t-set="k" t-value="request.env['mltrucking.quotation.data'].search([('locale.code','=','en_US')], limit = 1)" />
+            </t>
+            
+            <div class="row" style="font-size: 13px !important;" >
+                <div name="header" class="col-6" style="margin-top: 4px ">
+                    <div class="text-left mb4" style="margin-bottom:10px;">
+
+                        <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)" style="max-height:30px;" alt="Logo"/>
+                        <div style="margin-top:10px">
+                            <span t-field="doc.company_id.partner_id.name" class="font-weight-bold text-uppercase"/>
+                        </div>
+                        <div>
+                            <t t-esc="base_lang"></t>
+                            Address:
+                            <span t-field="doc.company_id.partner_id.street"/>
+                            <span t-field="doc.company_id.partner_id.street2"/>
+                        </div>
+                        <div>
+                            <span t-field="doc.company_id.partner_id.city"/>
+                            <span t-field="doc.company_id.partner_id.state_id"/>
+                            <span t-field="doc.company_id.partner_id.zip"/>
+                            Phone:
+                            <span t-if="doc.company_id.partner_id.phone" t-field="doc.company_id.partner_id.phone"/>
+                            <span t-if="doc.company_id.partner_id.mobile" t-field="doc.company_id.partner_id.mobile"/>
+                            <span t-field="doc.company_id.partner_id.country_id"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 text-uppercase">
+                    <div class="container">
+                        <div class="font-weight-bold"
+                             style="margin-top: 30px; text-align: center; font-size: 1.1rem">
+                             <strong><span t-field ="k.title_name"></span></strong>
+                        </div>
+                        <div style="margin-top: 20px" class="row">
+                            <div class="text-left col-4 font-weight-bold" style="font-size:12px"><span t-field ="k.truck_reference"></span>:</div>
+                            <div class="text-right col-8" t-field="doc.ref"/>
+                        </div>
+                        <div class="row">
+                            <div class="text-left col-4 font-weight-bold" style="font-size:12px"><span t-field ="k.truck_date"></span>:</div>
+                            <div class="text-right col-8" t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>
+                        </div>
+                        <div class="row">
+                            <div class="text-left col-8 font-weight-bold" style="font-size:12px"><span t-field ="k.truck_valit_until"></span>:</div>
+                            <div class="text-right col-4" t-esc="context_timestamp(datetime.datetime.now()+datetime.timedelta(days = 7)).strftime('%Y-%m-%d')"/>
+                        </div>
+                        <div class="row">
+                            <div class="text-left col-4 font-weight-bold" style="font-size:12px"><span t-field ="k.truck_to"></span>:</div>
+                            <div class="text-right col-8" t-field="doc.vendor_id"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page" style="font-size:12px">
+                <div style="border-bottom: 1px solid black;"/>
+                <div class="oe_structure"/>
+                <div class="col-auto col-3 mw-100 mb-2" style="margin-top:10px; margin-left:-12px;">
+                    <strong><span t-field ="k.truck_detail"></span>:</strong> <span t-field ="doc.cargo_details"></span>
+                    <!-- <t t-foreach="doc.truck_package" t-as="package">
+                        <t t-out="package.length "/>x<t t-out="package.width"/>x<t t-out="package.height"/> ;
+                    </t> -->
+                </div>
+                <div class="col-auto col-3 mw-100 mb-2" style="margin-left:-12px;">
+                    <strong><span t-field ="k.truck_transit_time"></span>:</strong>
+                    <span t-field ="doc.date_diff"></span>
+                </div>
+                <table class="table table-bordered table-sm o_main_table">
+                    <thead style="display: table-row-group; background-color: #4c749c; color: white">
+                        <tr>
+                            <th name="th_number" class="text-center" width="1%">#</th>
+                            <th name="th_route" class="text-center" width="79%"><strong><span t-field ="k.truck_service_name"></span></strong></th>
+                            <th name="th_rate" class="text-center" width="20%"><strong><span t-field ="k.truck_rate"></span></strong></th>
+                        </tr>
+                    </thead>
+                    <tbody class="sale_tbody">
+                        <t t-foreach="doc" t-as="line">
+                            <t t-foreach="doc.truck_services" t-as="service">
+                                <t t-if="service.is_show_quote == True">
+                                    <tr>
+                                        <td name="td_number" class="text-center">
+                                            <span t-esc="line_index +1"/>
+                                        </td>
+                                        
+                                        <td name="td_route" class="text-left">
+                                            <t t-esc="service.service_id.name"/>
+                                        </td>
+
+                                        <td name="th_rate" class="text-center">
+                                            <span t-field ="service.service_rate" t-options='{"widget": "float", "precision": 2}'> </span> - 
+                                            <t t-esc="service.rate_currency_id.currency_name"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                            
+                            <tr>
+                                
+                                <td name="td_number" class="text-center" colspan="2">
+                                    TOTAL COST
+                                </td>
+                                
+                                <td name="th_rate" class="text-center">
+                                    <span t-field ="line.total_rate" t-options='{"widget": "float", "precision": 2}'> </span> - 
+                                    <t t-esc="line.currency_id.currency_name"/>
+                                </td>
+                                    
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+                <t t-if="doc.truck_inc_notinc">
+                    <div class="row" >
+                        <div class="col-6">
+                            <ul>
+                                <strong class="text-left"><span t-field ="k.truck_include"></span></strong>
+                                <t t-foreach="doc.truck_inc_notinc" t-as="line">
+                                    <li style="margin-left:18px;">
+                                        <t t-esc="line.include_service" class ="text-left"/>
+                                    </li>
+                                </t>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <ul>
+                                <strong class="text-left"><span t-field ="k.truck_not_include"></span></strong>
+                                <t t-foreach="doc.truck_inc_notinc" t-as="line">
+                                    <li style="margin-left:18px;">
+                                        <t t-esc="line.not_include_service" class ="text-left"/>
+                                    </li>
+                                </t>
+                            </ul>
+                        </div>
+                    </div> 
+                </t>              
+            </div>
+            <div class ="row" style="font-size:13px; margin-left:-35px; " >
+                <ul >
+                    <strong><span t-field="k.truck_remark"/></strong>
+                    <div > 
+                    <span t-raw="k.truck_remark_body"/>
+                        
+                    </div>
+               </ul>
+            </div>
+        </t>
+        
+    
+    </template>
+
+    <template id="mltrucking_quotation">
+ 
+        <t t-call="web.html_container">
+            
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="base_lang" t-value="doc.vendor_id.lang"/>
+                <t t-call="ml_trucking.quotation_body" t-lang="base_lang"/>
+            </t>
+            <t t-foreach="doc.vendor_id.other_lang" t-as="lng">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-set="base_lang" t-value="lng.code"/>
+                    <t t-call="ml_trucking.quotation_body" t-lang="base_lang"/>
+                </t>
+            </t>
+        </t>
+
+    </template>
+
+    <record id="mltruck_paper_id" model="report.paperformat">
+        <field name="name">Paperformat</field>
+        <field name="default" eval="False"/>
+        <field name="disable_shrinking" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">8</field>
+        <field name="margin_bottom">32</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        <field name="dpi">96</field>
+    </record> 
+
+    <data>
+        <record id ="mltrucking_base_quotation" model="ir.actions.report">
+            <field name= "name">Quotation</field>
+            <field name= "model">mltrucking.base</field>
+            <field name= "report_type">qweb-pdf</field>
+            <field name= "report_name">ml_trucking.mltrucking_quotation</field>
+            <field name= "report_file">ml_trucking.mltrucking_quotation</field>
+            <field name= "print_report_name">object.ref.replace('/','_')</field>
+            <field name= "binding_model_id" ref ="model_mltrucking_base"></field>
+            <field name= "binding_view_types">form</field>
+            <field name= "binding_type">report</field>
+            <field name="paperformat_id" ref="mltruck_paper_id"/>
+        </record>
+    </data>
+
+</odoo>  

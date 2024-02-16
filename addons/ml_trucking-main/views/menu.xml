@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+    Created by Umbaa. 2022-10-24
+  -->
+<odoo>
+
+    <!-- Top menu item -->
+    <menuitem id="menu_trucking_root"
+              web_icon="ml_trucking-main,static/description/icon.png"
+              name="LMS Trucking"
+              action=""
+              sequence="0"/>
+
+    <menuitem id="menu_trucking_master"
+              parent="menu_trucking_root"
+              name="Master Data"
+              action=""
+              sequence="4"/>
+
+    <menuitem id="menu_trucking_data"
+              parent="menu_trucking_root"
+              name="Data"
+              action=""
+              sequence="5"/>          
+
+    <menuitem 
+      id="menu_trucking_config"
+      parent="menu_trucking_root"
+      name="Configuration"
+      action=""
+      sequence="200"
+    />
+    
+    <!-- <record id="mltrucking_dashboard_action" model="ir.actions.client">
+      <field name="name">Dashboard</field>
+      <field name="tag">mltrucking_dashboard_tags</field>
+    </record>
+
+    <menuitem name="Dashboard" id="mltrucking_dashboard" action="mltrucking_dashboard_action" sequence="1" parent="menu_trucking_root"/> -->
+
+</odoo>

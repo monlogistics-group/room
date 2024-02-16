@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Umbaa. 2022-12-02
+ -->
+<odoo>
+    <record id="freights_quotations_form_view" model="ir.ui.view">
+        <field name="name">freights.quotations.form</field>
+        <field name="model">freights.quotations</field>
+        <field name="arch" type="xml">
+            <form string="Freights" create="false">
+                 <header>
+                    <button name="action_send_quotation_email" string="Send by Quotation" type="object" context="{'default_quotation_id': id}" default_focus="1" class="oe_highlight"/>
+                    
+                    <button name="action_preview_quotation" string="Preview" type="object"/>
+                    <!-- <button name="action_send_shippment_confirm_email" string="shipment confirmation" type="object" context="{'default_quotation_id': id}" default_focus="1" class="oe_highlight"/> -->
+                    <!-- <button name="action_send_agent_confirm_email" string="shipment order" type="object" context="{'default_quotation_id': id}" default_focus="1" class="oe_highlight"/> -->
+                    <button name="quotation_confrim" string="Confirm" type="object" context="{'default_quotation_id': id}" default_focus="1" class="oe_highlight"  attrs="{'invisible': ['|', '&amp;', ('checker', '=', True),('confirm_active', '=', False), ('is_pd','=', True)]}"/>
+                    <button name="create_pay" string="Payment" type="object" />
+                    <!-- <field name="state" invisible="1"/> -->
+                    <field name="state_id" widget="statusbar"  options="{'clickable': '1'}"></field>
+                    <field eval="1" name="confirm_active" invisible="1"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h2>
+                            <field name="quotation_ref_num" attrs="{'readonly': True}"/>
+                            <field name="im_editable" invisible="1"/>
+                        </h2>
+                    </div>
+                    <group expand="1">
+                        <group>
+                            <field name='checker' invisible='1'/>
+                            <field name="freights_id" attrs="{'invisible': [('freights_id', '=', False)]}" readonly="1"/>
+                            <field name="freight_type_domain" invisible="1"/>
+                            <field name="freights_type_name" invisible="1"/>
+                            
+                            <field name="fcl_route_domain" invisible="1"/>
+                            <field name="taras_domain" invisible="1"/>
+                            <field name="show_tara" invisible="1"/>
+                            <field name="show_volgross" invisible="1"/>
+                            <field name="show_coc" invisible="1"/>
+                            <field name="showhasTir" invisible="1"/>
+                            <field name="is_sales" invisible="1"/>
+                            <field name="is_pd" invisible="1"/>
+                            <field name="base_currency"  required="1" attrs="{'readonly':[('checker','=',True)]}"/>
+                            <field name="freights_type_ids"  domain="freight_type_domain" attrs="{'readonly':[('checker','=',True)]}"  required="1"/>
+                            <field name="taras_ids" domain="taras_domain" attrs="{'readonly':[('checker','=',True)],'invisible': [('show_tara','!=', True)],'required' : [('show_tara','=',True)]}" options="{'no_create': True, 'no_create_edit':True}"/>
+                            <field name="fclroute_ids" domain="fcl_route_domain" attrs="{'invisible': [('show_tara','!=', True)],'readonly':[('checker','=',True)],'required' : [('show_tara','=',True)]}" options="{'no_create': True, 'no_create_edit':True}"/>
+                            <field name="container_type" attrs="{'invisible': [('show_tara','!=', True)],'required' : [('show_tara','=',True)],'readonly':[('checker','=',True)]}" options="{'no_create': True, 'no_create_edit':True}"/>
+                            <field name="shipping_line" attrs="{'invisible': [('show_coc','!=', True)],'required' : [('show_coc','=',True)],'readonly':[('checker','=',True)]}" options="{'no_create': True, 'no_create_edit':True}"/>
+                            <field name="container_owner" attrs="{'invisible': [('show_coc','!=', True)],'required' : [('show_coc','=',True)],'readonly':[('checker','=',True)]}" options="{'no_create': True, 'no_create_edit':True}"/>
+                            <field name="demmurage_start_point" attrs="{'invisible': [('show_coc','!=', True)],'required' : [('show_coc','=',True)],'readonly':[('checker','=',True)]}" options="{'no_create': True, 'no_create_edit':True}"/>
+                            <field name="demmurage_end_point" attrs="{'invisible': [('show_coc','!=', True)],'required' : [('show_coc','=',True)],'readonly':[('checker','=',True)]}" options="{'no_create': True, 'no_create_edit':True}"/>
+                            <field name="free_days" attrs="{'readonly':[('checker','=',True)],'invisible': [('show_coc','!=', True)],'required' : [('show_coc','=',True)]}"/>
+                            <field name="gross" attrs="{'readonly':[('checker','=',True)],'invisible': [('show_volgross','!=', True)]}"/>
+                            <field name="cbm" attrs="{'readonly':[('checker','=',True)],'invisible': [('show_volgross','!=', True)]}"/>
+                            <field name="chargabel_weight" attrs="{'readonly':[('checker','=',True)],'invisible': [('show_volgross','!=', True)],'required' : [('show_volgross','=',True)]}"/>
+                            <field name="employee" attrs="{'readonly':[('checker','=',True)]}"/>
+                        </group>
+                        <group col="6">
+                            <group col="6">
+                                
+                                    
+                                <field name="abroad_rate" widget="monetary" options="{'currency_field': 'abroad_rate_currency'}" attrs="{'readonly':['|','|',('checker','=',True), ('freights_type_name','=', 'AIR' ), ('is_pd', '=', True)]}"/>
+                                <span style="margin-right: 25px; "><field name="abroad_rate_currency" display="right" attrs="{'readonly':['|','|',('checker','=',True), ('freights_type_name','=', 'AIR' ), ('is_pd', '=', True)]}"/></span>     
+                            </group>
+                            <group col="6" >                              
+                                <field name="domestic_rate" widget="monetary" options="{'currency_field': 'domestic_rate_cuurency'}" attrs="{'readonly':['|','|',('checker','=',True), ('freights_type_name','=', 'AIR' ), ('is_pd', '=', True)]}"/>
+                                <span style="margin-right: 25px; "><field name="domestic_rate_cuurency" display="right" attrs="{'readonly':['|','|',('checker','=',True), ('freights_type_name','=', 'AIR' ), ('is_pd', '=', True)]}"/></span>
+                                
+                            </group>
+                             <group col="6" >                             
+                                <field name="insurance_cost" widget="monetary" options="{'currency_field': 'insurance_cost_currency'}" attrs="{'readonly':[('checker','=',True)]}"/>
+                                <span style="margin-right: 25px; "><field name="insurance_cost_currency" display="right" attrs="{'readonly':[('checker','=',True)]}"/></span>
+            
+                            </group>
+                            <group col="6">
+                                <field name="cfee" widget="monetary" options="{'currency_field': 'cfee_currency'}" attrs="{'readonly':['|', ('checker','=',True), ('is_pd', '=', True)]}"/>
+                                <span style="margin-right: 25px; "><field name="cfee_currency" display="right" attrs="{'readonly':['|', ('checker','=',True), ('is_pd', '=', True)]}"/></span>
+                            </group>
+                            <group col="6">
+                                <field name="free_service_cost" widget="monetary" options="{'currency_field': 'free_service_cost_currency'}" attrs="{'readonly':[('checker','=',True)]}"/>
+                                <span style="margin-right: 25px; "><field name="free_service_cost_currency" display="right" attrs="{'readonly':[('checker','=',True)]}"/></span>
+                            </group>
+                            <group col="6">
+                                <field name="lock_margin" attrs="{'readonly':[('checker','=',True)]}"/>
+                            </group>
+                            <group col="6">
+                                <field name="has_qrate" attrs="{'readonly':[('checker','=',True)]}"/>
+                            </group>
+                        </group>
+                    </group>
+                    
+                    <group expand="1">
+                        <group class="col-6">
+                                <field name="ett_min" readonly='1' />
+                                <field name="ett_max" attrs="{'readonly':['|', ('checker','=',True), ('is_pd', '=', True)]}"/>
+                                <field name="valid_until_date" attrs="{'readonly':['|', ('checker','=',True), ('is_pd', '=', True)]}"/>
+                                <field name="has_tir" attrs="{'readonly':[('checker','=',True)], 'invisible': [('showhasTir','!=', True)]}"/>
+                                <field name="cc_at_border" attrs="{'readonly':[('checker','=',True)]}"/>
+                        </group>
+                        
+                        <group class="col-6" string="Service Total" style="margin-top:-20px;">
+                                <field name="total_cost"  widget='monetary' options="{'currency_field': 'base_currency'}" string = "Total cost" readonly='1' force_save='1'/>
+                                <field name="total_rate" widget='monetary' options="{'currency_field': 'base_currency'}" string = "Total rate" readonly='1' force_save='1'/>
+                                <field name="margin" widget='monetary' options="{'currency_field': 'base_currency'}" string = "Total margin" readonly='1' force_save='1'/>
+                        </group>
+                    </group>
+
+                    <group expand="1">
+                        <group class="col-6">
+                                <field name="note" attrs="{'readonly':[('is_pd', '=', True)]}"/>
+                                <!-- <field name="last_agent_bill"/> -->
+                        </group>
+                        
+                        <group class="col-6" >
+                                <field name="reserved_cost_remark"  attrs="{'readonly':[('is_pd', '=', False)]}"/>
+                        </group>
+                        <group class="col-6" >
+                            <div class="badge badge-pill o_tag_color_1" style="float:left;">
+                                <span style = "font-size:14px;color:red;"><field name="warning_message" /></span>
+                            </div>
+                                
+                        </group>
+                        
+                    </group>
+                    
+                    <notebook>
+                        <page string="Services" name="services">
+                            <!-- <field name="service_ids">
+                                <tree style="width:300px">
+                                    <field name="template_id"/>
+                                 </tree>
+                            </field> -->
+                            <header>
+                            </header>
+                            <field name="service_ids" context="{'default_quotation_id': id, 'def_freight_type': freights_type_ids}" nolabel="1"  mode="kanban">
+                                <kanban class="o_kanban_mobile">
+                                    <control>
+                                        <create name="add_product_control" string="Add a Service" />
+                                    </control>
+                                    <field name="agent_id" options="{'no_open':True, 'no_create': True}" attrs="{'readonly': [('parent.im_editable', '!=', 1)]}"/>
+                                    <field name="bill_instruction"/>
+                                    <field name="service_from" attrs="{'readonly': [('parent.im_editable', '!=', 1)]}"/>
+                                    <field name="service_to" attrs="{'readonly': [('parent.im_editable', '!=', 1)]}"/>
+                                    <field name="purpose" attrs="{'readonly': [('parent.im_editable', '!=', 1)]}"/>
+                                    <field name="service_qty" attrs="{'readonly': [('parent.im_editable', '!=', 1)]}"/>
+                                    <field name="currency_id" attrs="{'readonly': [('parent.im_editable', '!=', 1)]}"/>
+                                    <field name="service_cost" widget="monetary" attrs="{'readonly': [('parent.im_editable', '!=', 1)]}"/>
+                                    <field name="service_rate" widget="monetary" attrs="{'readonly': [('parent.im_editable', '!=', 2)]}"/>
+                                    <field name="subtotal_cost" widget="monetary" readonly="1"/>
+                                    <field name="subtotal_rate" widget="monetary" readonly="1"/>
+                                    <field name="transport_type" widget="monetary" readonly="1"/>
+                                    <field name="remark" widget="monetary" readonly="1"/>
+                                    <field name="show_freghts_service" widget="monetary" readonly="1"/>
+                                    <field name="show_other_service" widget="monetary" readonly="1"/>
+                                    <field name="show_package_service" widget="monetary" readonly="1"/>
+                                    <field name="show_custiom_service" widget="monetary" readonly="1"/>
+                                    <field name="show_thc_service" widget="monetary" readonly="1"/>
+                                    <field name="show_delivery_service" widget="monetary" readonly="1"/>
+                                    <field name="fleet"/>
+                                    <field name="delivery_zone"/>
+                                    <templates>
+                                        <t t-name="kanban-box">
+                                            <div t-attf-class="oe_kanban_content oe_kanban_global_click oe_semantic_html_override oe_kanban_color_1" >
+                                                <div class="d-flex flex-column justify-content-between">
+                                                        <t t-if = "record.show_freghts_service.raw_value === true">
+                                                        <div class="o_field_many2manytags"> 
+                                                     
+                                                            <strong><field name = "agent_id"></field></strong>
+                                                            <div style =" float:right;">
+                                                                <img src = "https://i.pinimg.com/236x/1b/05/31/1b0531c865bd8519b4adcc203c99f182.jpg" style ="width:15px ; height: 15px ; margin-top: -4px;"/> 
+                                                                <field name = "valid_until_date"/>    
+                                                            </div>
+                                                            <div  >
+                                                                <span style = "font-size:12px;" class="badge badge-pill badge-primary" ><field name="service_from" /></span>
+                                                                <span style = "font-size:12px;" class="badge badge-pill badge-primary" ><field name="transport_type" /></span>
+                                                                <span style = "font-size:10px;" class="badge badge-pill badge-info"><field name = "ett"/> days</span>
+                                                                <span style = "font-size:12px;" class="badge badge-pill badge-danger"><field name="service_to" /></span>
+                                                                
+                                                            </div>
+                                                            
+                                                            <div style ="float:right;">
+                                                                <span>Cost:</span>
+                                                                <field name = "service_cost"/>
+                                                                <field name = "currency_id"/>
+                                                                <br/>
+                                                                <span>Rate:</span>
+                                                                <field name="service_rate"/>
+                                                                <field name = "currency_id"/>
+                                                            </div>
+                                                            <div style ="float: left; margin-top :10px;">
+                                                                <strong>Remark:</strong>
+                                                                <br/>
+                                                                <span style="margin-top:10px;"><field name = "remark"/></span>
+                                                            </div>
+                                                        
+                                                        </div>
+                                                    </t>
+                                                    <t t-if = "record.show_custiom_service.raw_value === true">
+                                                        <div class="o_field_many2manytags">
+                                                            <div>
+                                                               <span style = "font-size:12px;" class="badge badge-pill badge-success" >Customs</span> 
+                                                               <strong><field name = "agent_id"></field></strong>
+                                                               <field name = "purpose"/>
+                                                            </div>
+                                                            <div style ="float: left; margin-top :10px;">
+                                                                <span>Cost:</span>
+                                                                <field name="service_cost"/>
+                                                                <field name = "currency_id"/>
+                                                                <br/>
+                                                                <span>Rate:</span>
+                                                                <field name="service_rate"/>
+                                                                <field name = "currency_id"/>
+                                                            </div>
+                                                        </div>
+                                                    </t>
+                                                    <t t-if = "record.show_thc_service.raw_value === true">
+                                                        <div class="o_field_many2manytags">
+                                                            <div>
+                                                               <span style = "font-size:12px;" class="badge badge-pill badge-success" >THC</span> 
+                                                               <strong><field name = "agent_id"></field></strong>
+                                                               <field name = "purpose"/>
+                                                            </div>
+                                                            <div style ="float: left; margin-top :10px;">
+                                                                <span>Cost:</span>
+                                                                <field name="service_cost"/>
+                                                                <field name = "currency_id"/>
+                                                                <br/>
+                                                                <span>Rate:</span>
+                                                                <field name="service_rate"/>
+                                                                <field name = "currency_id"/>
+                                                            </div>                                                    
+                                                        </div>
+                                                    </t>
+                                                    <t t-if = "record.show_delivery_service.raw_value === true">
+                                                        <div class="o_field_many2manytags">
+                                                            <div>
+                                                               <span style = "font-size:12px;" class="badge badge-pill badge-success" >Delivery</span> 
+                                                               <span style = "font-size:12px;" class="badge badge-pill badge-primary" ><field name = "delivery_zone"/></span> 
+                                                               <span style = "font-size:12px;" class="badge badge-pill badge-danger" ><field name = "fleet"/></span> 
+                                                            </div>
+                                                            <div style ="float: left; margin-top :10px;">
+                                                                <span>Cost:</span>
+                                                                <field name="service_cost"/>
+                                                                <field name = "currency_id"/>
+                                                                <br/>
+                                                                <span>Rate:</span>
+                                                                <field name="service_rate"/>
+                                                                <field name = "currency_id"/>
+                                                            </div>                                                    
+                                                        </div>
+                                                    </t>
+                                                    <t t-if = "record.show_other_service.raw_value === true">
+                                                        <div class="o_field_many2manytags">
+                                                            <div>
+                                                               <strong><field name = "agent_id"></field></strong>
+                                                            </div>
+                                                            <div style =" float:right;">
+                                                                <img src = "https://i.pinimg.com/236x/1b/05/31/1b0531c865bd8519b4adcc203c99f182.jpg" style ="width:15px ; height: 15px ; margin-top: -4px;"/> 
+                                                                <field name = "valid_until_date"/>
+                                                            </div>
+                                                            <br/>                                                     
+                                                            <div style ="float:right;">
+                                                                <span>Cost:</span>
+                                                                <field name = "service_cost"/>
+                                                                <field name = "currency_id"/>
+                                                                <br/>
+                                                                <span>Rate:</span>
+                                                                <field name="service_rate"/>
+                                                                <field name = "currency_id"/>
+                                                            </div>
+                                                            <div style ="float: left; margin-top :10px;">
+                                                                <strong>Remark:</strong>
+                                                                <br/>
+                                                                <span style="margin-top:10px;"><field name = "remark"/></span>
+                                                            </div>
+                                                        
+                                                        </div>
+                                                    </t>
+                                                    <t t-if = "record.show_package_service.raw_value === true">
+                                                        <div class="o_field_many2manytags">                                                   
+                                                            <div>
+                                                               <span style = "font-size:12px;" class="badge badge-pill badge-success" >Package</span> 
+                                                               <strong><field name = "agent_id"></field></strong>
+                                                               <field name = "purpose"/>
+                                                            </div>
+                                                            <div style =" float:right;">
+                                                                <img src = "https://i.pinimg.com/236x/1b/05/31/1b0531c865bd8519b4adcc203c99f182.jpg" style ="width:15px ; height: 15px ; margin-top: -4px;"/> 
+                                                                <field name = "valid_until_date"/>    
+                                                            </div>
+                                                            <div  >
+                                                                <span style = "font-size:12px;" class="badge badge-pill badge-primary" ><field name="service_from" /></span>
+                                                                <span style = "font-size:12px;" class="badge badge-pill badge-primary" ><field name="transport_type" /></span>
+                                                                <span style = "font-size:10px;" class="badge badge-pill badge-info"><field name = "ett"/> days</span>
+                                                                <span style = "font-size:12px;" class="badge badge-pill badge-danger"><field name="service_to" /></span>                                                              
+                                                            </div>                                                        
+                                                            <div style ="float:right;">
+                                                                <field name = "service_cost"/>
+                                                                <field name = "currency_id"/>
+                                                            </div>
+                                                            
+                                                        
+                                                        </div>
+                                                    </t>
+                                                       
+                                                </div>
+                                            </div>        
+                                                        
+                                            
+                                                       
+                                        </t>
+                                    </templates>
+                                </kanban>
+                            </field>
+                            <group name="note_group" col="6">
+                                <group class="oe_subtotal_footer oe_right" colspan="2" name="total_cost">
+                                </group>
+                                <div class="oe_clear"/>
+                            </group>
+                        </page>
+                        <page string="Included excluded charges" name="incexc">
+                            <group expand="1">
+                                <group string="Included services" >
+                                    <field name="freights_incude_service" context="{'default_quotation_id': id}" nolabel="1" attrs="{'readonly':[('checker','=',True)]}">
+                                        <kanban >          
+                                            <templates style="size:10px">
+                                                <t t-name="kanban-box" attrs="{'invisible':[('isincluded','=',False)]}">
+                                                    <div> 
+                                                        <div style="float: left">
+                                                        <!-- <field name="name"/> -->
+                                                            <field name="name" />
+                                                            <field name="isincluded" invisible="1"/>
+                                                        </div>
+                                                        <div style="float: right">
+                                                            <button name="action_move_include" string="Move" type="object" class="btn btn-secondary fa fa-arrow-circle-down"/> 
+                                                            <button name="action_remove_include" string="Delete" type="object" class="btn btn-secondary fa fa-minus-circle" confirm="Are you sure you want to do this?"/>
+                                                        </div>
+                                                    </div>
+                                                </t>
+                                            </templates>                                   
+                                        </kanban>
+                                        <form>
+                                            <field name="name"/>
+                                            <field name="isincluded"/>
+                                        </form>
+                                    </field>
+                                </group>
+                                <group string="Excluded services" >
+                                    <field  attrs="{'readonly':[('checker','=',True)]}" name="freights_exclude_service" context="{'default_quotation_id': id}" nolabel="1" >
+                                        <kanban>          
+                                            <templates>
+                                                <t t-name="kanban-box"  attrs="{'invisible':[('isincluded','=',True)]}">
+                                                    <div> 
+                                                        <div style="float: left">
+                                                            <!-- <field name="name"/> -->
+                                                            <field name="name"/>
+                                                            <field name="isincluded" invisible="1"/>
+                                                        </div>
+                                                        <div style="float: right">
+                                                            <button name="action_move_exclude" string="Move" type="object" class="btn btn-secondary fa fa-arrow-circle-up"/> 
+                                                            <button name="action_remove_exclude" string="Delete" type="object" class="btn btn-secondary fa fa-minus-circle"  confirm="Are you sure you want to do this?"/>
+                                                        </div>
+                                                    </div>
+                                                </t>
+                                            </templates>                                   
+                                        </kanban>   
+                                        <form>
+                                            <field name="name"/>
+                                            <field name="isincluded"/>
+                                        </form>
+                                    </field>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Exchange rates" name="exchangerates">
+                            <field attrs="{'readonly':[('checker','=',True)]}" name="currency_ids">
+                                <tree editable="bottom" style="width:300px">
+                                    <field name="currency_id"/>
+                                    <field name="rate"/>
+                                    <field name="company_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page >
+                        <page string="Demmurage" name="demmurage" attrs="{'invisible':[('show_coc','!=', True)]}">
+                            <field attrs="{'readonly':[('checker','=',True)]}" name="demmurage_rates">
+                                    <tree editable="bottom" style="width:300px">
+                                        <field name="lowerdays" string="from"/>
+                                        <field name="upperdays" string="to"/>
+                                        <field name="service_rate"/>
+                                        <field name="currency_id"/>
+                                    </tree>
+                                </field>
+                        </page>
+                        
+                    </notebook>
+                    <group>
+                        <group expand="1" class="col-6" string="Custom ">
+                            <group>
+                                <field name="clear_service" attrs="{'readonly':[('checker','=',True)]}"/>
+                                <field name="from_declaration" attrs="{'readonly':[('checker','=',True)]}"/>
+                                <field name="item_qty" attrs="{'readonly':[('checker','=',True)]}"/> 
+                                
+                            </group>
+                            <group>
+                                <field name="from_cost" attrs="{'readonly':[('checker','=',True)]}"/>
+                                <field name="clearance_fee" attrs="{'readonly':[('checker','=',True)]}"/>
+                                <button name="action_create_custom" string="Create" type='object' attrs="{'invisible':[('checker','=',True)]}"/>
+                            </group>  
+                              
+                        </group>
+                        <group  expand="1" class="col-6" string="THC">
+                            <group>
+                                <field name="is_thc" attrs="{'readonly':[('checker','=',True)]}"/>
+                                <field name="days_data" attrs="{'readonly':[('checker','=',True)]}"/>
+                            </group>
+                            <group>
+                                <field name="storage" attrs="{'readonly':[('checker','=',True)]}"/>
+                                <button name="action_create_thc" string="create" type="object" attrs="{'invisible':[('checker','=',True)]}"/>
+                            </group>
+                        </group>
+
+                    </group>
+                </sheet>
+                <div class="oe_chatter" editable="bottom">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids" type="html" options="{'collaborative': true}"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+   
+    <record id="freights_quotations_tree_view" model="ir.ui.view">
+        <field name="name">freights.quotations.tree</field>
+        <field name="model">freights.quotations</field>
+        <field name="field_parent" eval="False"/>
+
+        <field name="arch" type="xml">
+            <tree string="Freights quotations" create="false" >
+                <field name="quotation_ref_num" />
+                <field name="freights_id" />
+                <field name="freights_type_ids"/>
+                <field name="employee" />
+                <field name="service_ids" />
+                <field name="total_rate" />
+                <field name="state_id"/>
+                <button name="action_open_record" 
+                    type="object" 
+                    icon="fa-edit" 
+                    string=" Edit" 
+                    class="btn-primary" 
+                />
+            </tree>
+        </field>
+    </record>
+
+    <record id="freights_quotations_kanban_view" model="ir.ui.view">
+        <field name="name">freights.quotations.kanban</field>
+        <field name="model">freights.quotations</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="quotation_ref_num" />
+                <field name="freights_id"/>
+                <field name="freights_type_ids" />
+                <field name="employee" />
+                <field name="quote_cost" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong><field name="quotation_ref_num"/></strong>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <span class="badge badge-pill"><field name="freights_id"/></span>
+                                </div>
+                            </div>
+                            <div>
+                                <strong>Cost: </strong><field name="quote_cost"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="freights_quotations_pivot_view" model="ir.ui.view">
+        <field name="name">freights.quotations.pivot</field>
+        <field name="model">freights.quotations</field>
+        <field name="arch" type="xml">
+            <pivot string="Freights quotations" sample="1">
+                <field name="state_id" type="col"/>
+                <!-- <renderer class="ml_worldwide.pivot_renderer_extension"/>
+                <field name="service_ids" type="row"/>
+                <field name="total_cost" type="measure"/>
+                <field name="total_rate" type="measure"/> -->
+            </pivot>
+        </field>
+    </record>
+ 
+
+
+    <record id="freights_quotations_graph_view" model="ir.ui.view">
+        <field name="name">freights.quotations.graph</field>
+        <field name="model">freights.quotations</field>
+        <field name="arch" type="xml">
+            <graph string="Freights quotations" type="line" sample="1">
+                <field name="freights_id"/>
+                <field name="quote_cost" type="measure"/>
+            </graph>
+        </field>
+    </record>
+    <record id="freights_quotations_search_view" model="ir.ui.view">
+        <field name="name">freights.quotations.search</field>
+        <field name="model">freights.quotations</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name ="freights_id" string ="Freight"/>
+     
+                <field name ="quotation_ref_num" string="Ref"/>
+                <field name ="freights_type_ids" string="Freight Type"/>
+                <field name ="employee" string="Employee"/>
+                <separator/>
+                
+            </search>
+        </field>
+    </record>
+
+    <record id="freights_quotations_action" model="ir.actions.act_window">
+        <field name="name">Freights quotations</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">freights.quotations</field>
+        <field name="view_mode">tree,form,kanban,pivot,graph</field>
+        <field name="view_id" eval="False"/>
+        <field name="context">{'default_freights_type_ids':1}</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('freights_quotations_tree_view')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('freights_quotations_form_view')})]"/>
+        <!-- <field name="context">{'search_default_freights_id':1}</field>
+        <field name="domain">[('freights_id', '!=', 1)]</field> -->
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Define a new pages
+            </p><p>
+                Freights app are used to Pages module.
+            </p>
+        </field>
+    </record>
+    
+    <menuitem id="menu_worldwide_quotations"
+                parent="menu_worldwide_root"
+                name="Quotations"
+                action="freights_quotations_action"
+                sequence="101"/>
+    
+    <record id="quotation_margin_confirm" model="ir.ui.view">
+        <field name="name">quotation.margin.confirm</field>
+        <field name="model">quotation.margin.confirm</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <p>This is <field name="ref_num" class="oe_inline" readonly="1"/> quotation low margin. </p>
+                    <p>Are you continue?</p>
+                </sheet>
+                <footer>
+                    <button string="Continue" type="object" name="apply" class="btn-primary" data-hotkey="q"/>
+                    <button string="Discard" class="btn-secondary" special="cancel" data-hotkey="z" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

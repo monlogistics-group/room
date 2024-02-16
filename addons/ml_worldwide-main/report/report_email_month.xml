@@ -1,0 +1,17 @@
+
+ <odoo>
+    <data>
+        <record id="mlworldwide_monthly_report_template" model="mail.template">
+            <field name="name">Monthly Report</field>
+            <field name="model_id" ref="ml_worldwide-main.model_monthly_report"/>
+            <field name="email_from">{{object.employee.work_email}}</field>
+            <field name="email_to">{{object.customer_id.email}}</field>
+            <field name="report_template" ref="mlworldwide_monthly_report"/>
+            <field name="report_name">{{object}}</field>
+            <field name="body_html" type="html">
+                <sapn>dshgjgfjhfga</sapn>
+            </field>
+        </record>
+    </data>
+ </odoo>
+ 

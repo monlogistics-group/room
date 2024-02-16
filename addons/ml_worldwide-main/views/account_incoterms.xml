@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    
+    <record id="origin_incoterms_form_view" model="ir.ui.view">
+        <field name="name">origin.incoterms.form</field>
+        <field name="model">origin.incoterms</field>
+        <field name="arch" type="xml">
+            <form string="Origin incoterms">
+                <sheet>
+                    <group>
+                        <field name="code"/>
+                        <field name="name"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="origin_incoterms_tree_view" model="ir.ui.view">
+        <field name="name">origin.incoterms.tree</field>
+        <field name="model">origin.incoterms</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Origin incoterms">
+                <field name="origin_sequence" widget="handle"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="origin_incoterms_action" model="ir.actions.act_window">
+        <field name="name">Origin incoterms</field>
+        <field name="type">ir.actions.act_window</field>  
+        <field name="res_model">origin.incoterms</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+    </record>
+    
+    <menuitem id="menu_origin_incoterms"
+        name="Origin incoterms"
+        action="origin_incoterms_action"
+        parent="menu_worldwide_customer_app"
+        groups=""
+        sequence="375"/>
+    
+    <record id="destination_incoterms_form_view" model="ir.ui.view">
+        <field name="name">destination.incoterms.form</field>
+        <field name="model">destination.incoterms</field>
+        <field name="arch" type="xml">
+            <form string="Destination incoterms">
+                <sheet>
+                    <group>
+                        <field name="code"/>
+                        <field name="name"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="destination_incoterms_tree_view" model="ir.ui.view">
+        <field name="name">destination.incoterms.tree</field>
+        <field name="model">destination.incoterms</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Destination incoterms">
+                <field name="destination_sequence" widget="handle"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="destination_incoterms_action" model="ir.actions.act_window">
+        <field name="name">Destination incoterms</field>
+        <field name="type">ir.actions.act_window</field>  
+        <field name="res_model">destination.incoterms</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+    </record>
+    
+    <menuitem id="menu_destination_incoterms"
+        name="Destination incoterms"
+        action="destination_incoterms_action"
+        parent="menu_worldwide_customer_app"
+        groups=""
+        sequence="376"/>
+</odoo>

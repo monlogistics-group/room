@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mlworldwide_view_employee_form" model="ir.ui.view">
+            <field name="name">hr.employee.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <!-- <xpath expr="//field[@name='work_email']" position="after">
+                     <field name="user_groups" widget="many2many_tags"/>
+                </xpath>  -->
+                <xpath expr="//field[@name='coach_id']" position="after">
+                     <field name="user_freight_types" widget="many2many_tags"/>
+                </xpath>
+                <xpath expr="//field[@name='work_email']" position="after">
+                     <field name="blank_stamp"/>
+                     <field name="blank_signature" widget="signature"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- <record id="view_kanban_freight_insurance" model="ir.ui.view">
+            <field name="name">freight.insurance.kanban</field>
+            <field name="model">freight.insurance</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="stage_id" class="o_kanban_small_column">
+                    <field name="name"/>
+                    <field name="color"/>
+                    <field name="date"/>
+                    <field name="activity_ids"/>
+                    <field name="activity_state"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click">
+                                <div class="o_dropdown_kanban dropdown" groups="base.group_user">
+                                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                                        <span class="fa fa-bars fa-lg" title="Operation Dropdown"/>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <t t-if="widget.editable">
+                                            <li>
+                                                <a type="edit">Edit</a>
+                                            </li>
+                                        </t>
+                                        <t t-if="widget.deletable">
+                                            <li>
+                                                <a type="delete">Delete</a>
+                                            </li>
+                                        </t>
+                                        <li>
+                                            <ul class="oe_kanban_colorpicker" data-field="color"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="oe_kanban_content">
+                                    <div>
+                                        <strong>
+                                            <field name="name"/>
+                                        </strong>
+                                    </div>
+                                    <div>
+                                        <field name="freights_id"/>
+                                        <field name="date"/>
+                                    </div>
+                                    <br/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record> -->
+        
+        <record model="ir.ui.view" id="view_freight_insurance_form">
+            <field name="name">freight.insurance.form</field>
+            <field name="model">freight.insurance</field>
+            <field name="arch" type="xml">
+                <form string="Freight Insurance">
+                    <header>
+                        <field name="state_id" widget="statusbar" options="{'clickable': '1'}"/>
+                    </header>
+                    <sheet>
+                        <group string="Insurance Case Info">
+                            <group>
+                                <field name="shippment_id" readonly="1"/>
+                                <field name="insurance_date"/>
+                                <field name="reimbursement_employee"/>
+                            </group>
+                            <group>
+                                <field name="short_desc"/>
+                                <field name="description"/>
+                                <field name="reimbursement_packages"/>
+                            </group>
+                        </group>
+                        <group string="Convert to the insurer">
+                            <group>
+                                <field name="state_id"/>
+                                <field name="transfer_date"/>
+                            </group>
+                            <group>
+                                <field name="transfer_note"/>
+                                <field name="waiting_day"/>
+                            </group>
+                        </group>
+                        <group string="Financial Info">
+                            <group>
+                                <field name="currency_id" invisible="1"/>
+                                <field name="claim_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                <field name="reimbursement_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                <field name="diff_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            </group>
+                            <group>
+                                <field name="reimbursement_note"/>
+                                <field name="contract_note"/>
+                                <field name="reimbursement_date"/>
+                            </group>
+                        </group>
+                        <group string="General Info">
+                            <group>
+                                <field name="closed_date"/>
+                                <field name="status_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <!-- <field name="activity_ids"/> -->
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_freight_insurance_tree">
+            <field name="name">freight.insurance.tree</field>
+            <field name="model">freight.insurance</field>
+            <field name="arch" type="xml">
+                <tree string="Freight Insurance">
+                    <field name="shippment_id"/>
+                    <field name="insurance_date"/>
+                    <field name="short_desc"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+    
+        <record model="ir.actions.act_window" id="view_freight_insurance_action">
+            <field name="name">Freight Insurance</field>
+            <field name="res_model">freight.insurance</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <!-- <record model="ir.ui.view" id="view_freight_insurance_offset_form">
+            <field name="name">freight.insurance.offset.form</field>
+            <field name="model">freight.insurance.offset</field>
+            <field name="arch" type="xml">
+                <form string="Freight Insurance Offset">
+                    <sheet>
+                        <field name="name"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_freight_insurance_offset_tree">
+            <field name="name">freight.insurance.offset.tree</field>
+            <field name="model">freight.insurance.offset</field>
+            <field name="arch" type="xml">
+                <tree string="Freight Insurance Offset">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+    
+        <record model="ir.actions.act_window" id="view_freight_insurance_offset_action">
+            <field name="name">Freight Insurance Offset</field>
+            <field name="res_model">freight.insurance.offset</field>
+            <field name="view_mode">tree,form</field>
+        </record> -->
+        
+    </data>
+</odoo>

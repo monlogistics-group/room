@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_worldwide_gmail_worldwide_gmail,worldwide_gmail.worldwide_gmail,model_worldwide_gmail_worldwide_gmail,base.group_user,1,1,1,1

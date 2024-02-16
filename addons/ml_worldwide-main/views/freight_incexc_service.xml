@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Ariuka.
+ -->
+<odoo>
+    <record id="freight_incexc_service_form_view" model="ir.ui.view">
+        <field name="name">freight.incexc.service.template.form</field>
+        <field name="model">freight.incexc.service.template</field>
+        <field name="arch" type="xml">
+            <form string="Freight Incexc Service">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="origin_terms" widget="many2many_tags"/>
+                        <field name="destination_terms" widget="many2many_tags"/>
+                        <field name="countries"/>
+                        <field name="incexc_freight_types"/>
+                        <field name="fcl_route" widget="many2many_tags"/>
+                        <field name="service_types"/>
+                        <field name="locale"/>
+                        <field name="isincluded"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="freight_incexc_service_tree_view" model="ir.ui.view">
+        <field name="name">freight.incexc.service.template.tree</field>
+        <field name="model">freight.incexc.service.template</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Freight Incexc Service">
+                <field name="name"/>
+                    <field name="origin_terms" widget="many2many_tags"/>
+                    <field name="destination_terms" widget="many2many_tags"/>
+                    <field name="countries"/>
+                    <field name="incexc_freight_types" widget="many2many_tags"/>
+                    <field name="service_types"/>
+                    <field name="fcl_route" widget="many2many_tags"/>
+                    <field name="locale"/>
+            </tree>
+        </field>
+    </record>
+    <record id="freight_incexc_service_action" model="ir.actions.act_window">
+        <field name="name"> Freight Incexc Service</field>
+        <field name="type">ir.actions.act_window</field>  
+        <field name="res_model">freight.incexc.service.template</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+    </record>
+    <menuitem id="menu_freight_incexc_service"
+            name="Freight Incexc Service"
+            action="freight_incexc_service_action"
+            parent="menu_worldwide_master_data"
+            groups=""
+            sequence="199"/>
+              
+</odoo>

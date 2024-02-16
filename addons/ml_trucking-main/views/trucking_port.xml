@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Ariuka. 2022-10-27
+ -->
+<odoo>
+    
+    <record id="ml_trucking_port_form_view" model="ir.ui.view">
+        <field name="name">mltrucking.port.form</field>
+        <field name="model">mltrucking.port</field>
+        <field name="arch" type="xml">
+            <form string="Trucking port">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="code" />
+                        <field name="country" />
+                        <field name="fed_state" />
+                        <field name="is_air" />
+                        <field name="is_active" />
+                        <field name="is_ocean" />
+                        <field name="is_land" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record id="ml_trucking_port_tree_view" model="ir.ui.view">
+        <field name="name">mltrucking.port.tree</field>
+        <field name="model">mltrucking.port</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Trucking port">
+                <field name="name" />
+                        <field name="code" />
+                        <field name="country" />
+                        <field name="fed_state" />
+                        <field name="is_air" />
+                        <field name="is_active" />
+                        <field name="is_ocean" />
+                        <field name="is_land" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="ml_trucking_port_action" model="ir.actions.act_window">
+        <field name="name">Trucking port</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mltrucking.port</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                LMS Monlogistics Holding LLC © 2023 он. Version 0.0.1
+            </p><p>
+                Trucking ports are used to LMS trucking module.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_trucking_port"
+              name="Trucking port"
+              action="ml_trucking_port_action"
+              parent="menu_trucking_master"
+              groups=""
+              sequence="17"/>
+</odoo>

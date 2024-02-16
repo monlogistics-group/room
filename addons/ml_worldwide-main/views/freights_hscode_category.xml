@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="freights_hscode_category_form_view">
+            <field name="name">freights.hscode.category.form</field>
+            <field name="model">freights.hscode.category</field>
+            <field name="arch" type="xml">
+                <form string="wagon type">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                                <field name="code" />
+                            </group>
+                            <group>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="freights_hscode_category_tree_view">
+            <field name="name">freights.hscode.category.tree</field>
+            <field name="model">freights.hscode.category</field>
+            <field name="arch" type="xml">
+                <tree string="freights hscode category">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="freights_hscode_category_view_action">
+            <field name="name">freights hscode category</field>
+            <field name="res_model">freights.hscode.category</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new port.
+                </p>
+            </field>
+        </record>
+        <menuitem id="menu_freights_hscode_category"
+            name="Cargo category (hs code)"
+            action="freights_hscode_category_view_action"
+            parent="menu_worldwide_configuration"
+            groups=""
+            sequence="134"/>
+    </data>
+</odoo>

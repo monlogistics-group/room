@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Ariuka. 2022-11-7
+ -->
+<odoo>
+    
+    <record id="ml_trucking_quotation_data_form_view" model="ir.ui.view">
+        <field name="name">mltrucking.quotation.data.form</field>
+        <field name="model">mltrucking.quotation.data</field>
+        <field name="arch" type="xml">
+            <form string="Quotation Data">
+                <sheet>
+                    <group>
+                        <field name="locale"/>
+                        <field name="title_name"/>
+                        <field name="truck_reference" />
+                        <field name="truck_date" />
+                        <field name="truck_valit_until" />
+                        <field name="truck_to"/>
+                        <field name="truck_detail" />
+                        <field name="truck_transit_time" />
+                        <field name="truck_incoterms" />
+                        <field name="truck_routes"/>
+                        <field name="truck_service_name"/>
+                        <field name="truck_rate" />
+                        <field name="truck_include" />
+                        <field name="truck_not_include" />
+                        <field name="truck_remark" />
+                        <field name="truck_remark_body" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="ml_trucking_quotation_data_tree_view" model="ir.ui.view">
+        <field name="name">mltrucking.quotation.data.tree</field>
+        <field name="model">mltrucking.quotation.data</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Quotation Data">
+                <field name="locale"/>
+                <field name="title_name"/>
+                <field name="truck_reference" />
+                <field name="truck_date" />
+                <field name="truck_valit_until" />
+                <field name="truck_to"/>
+                <field name="truck_detail" />
+                <field name="truck_transit_time" />
+                <field name="truck_incoterms" />
+                <field name="truck_routes"/>
+                <field name="truck_service_name"/>
+                <field name="truck_rate" />
+                <field name="truck_include" />
+                <field name="truck_not_include" />
+                <field name="truck_remark" />
+            </tree>
+        </field>
+    </record>
+    <record id="ml_trucking_quotation_data_action" model="ir.actions.act_window">
+        <field name="name"> Quotation Data</field>
+        <field name="type">ir.actions.act_window</field>  
+        <field name="res_model">mltrucking.quotation.data</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+       
+  
+    </record>
+    <menuitem id="menu_trucking_quotation_data"
+              name=" Trucking Quotation Data"
+              action="ml_trucking_quotation_data_action"
+              parent="menu_trucking_config"
+              groups=""
+              sequence="11"/>
+</odoo>

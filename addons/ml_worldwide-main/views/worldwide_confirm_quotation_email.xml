@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Javkha. 2022-12-16
+ -->
+<odoo>
+
+    <record id="mlworldwide_confirm_quotation_form_view" model="ir.ui.view">
+        <field name="name">worldwide.confirm.quotation.form</field>
+        <field name="model">worldwide.confirm.quotation</field>
+        <field name="arch" type="xml">
+            <form string="Confirm quotation email">
+             	<sheet>
+                    <group>
+                        <field name="locale"/>
+                        <field name="order"/>
+                        <field name="address"/>
+                        <field name="ref"/>
+                        <field name="trans_type"/>
+                        <field name="date"/>
+                        <field name="consignee"/>
+                        <field name="goods_name"/>
+                        <field name="goods_desc"/>
+                        <field name="quantity"/>
+                        <field name="receiver"/>
+                        <field name="sender"/>
+                        <field name="condition"/>
+                        <field name="estimated_time"/>
+                        <field name="employee"/>
+                        <field name="table_col_name_1"/>
+                        <field name="table_col_name_2"/>
+                        <field name="desc"/>
+                        <field name="trans_broker"/>
+                        <field name="name"/>
+                        <field name="autograph"/>
+                        <field name="customer"/>
+                        <field name="cust_name"/>
+                        <field name="cust_autograph"/>
+                        <field name="title"/>
+                        <field name="contract_cond_1"/>
+                        <field name="contract_cond_2"/>
+                        <field name="contract_cond_3"/>
+                        <field name="contract_cond_4"/>
+                        <field name="contract_cond_5"/>
+                        <field name="contract_cond_6"/>
+                        <field name="contract_cond_7"/>
+                        <field name="contract_cond_8"/>
+                        <field name="contract_cond_9"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mlworldwide_confirm_quotation_tree_view" model="ir.ui.view">
+        <field name="name">worldwide.confirm.quotation.tree</field>
+        <field name="model">worldwide.confirm.quotation</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Confirm quotation">
+                <field name="order"/>
+                <field name="address"/>
+                <field name="ref"/>
+                <field name="trans_type"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="mlworldwide_confirm_quotation_action" model="ir.actions.act_window">
+        <field name="name">Confirm quotation email</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">worldwide.confirm.quotation</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Define a new pages
+            </p><p>
+                Freights app are used to Pages module.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_mlworldwide_confirm_quotation"
+        name="Confirm quotation email"
+        action="mlworldwide_confirm_quotation_action"
+        parent="menu_worldwide_master_data"
+        groups=""
+        sequence="18"
+    />
+</odoo>

@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Javkha. 2022-11-25
+ -->
+<odoo>
+    <template id="document_body">
+         <t t-call="ml_worldwide-main.mlworldwide_empty_blank">
+            <t t-set="doc" t-value="doc.with_context(lang=base_lang)"/>
+            <t t-if="len(request.env['cargo.receipt.data'].search([('locale.code','=' ,base_lang)], limit = 1))>0">
+                <t t-set="k" t-value="request.env['cargo.receipt.data'].search([('locale.code','=' ,base_lang)], limit = 1)" />
+            </t>
+            <t t-else="">
+                <t t-set="k" t-value="request.env['cargo.receipt.data'].search([('locale.code','=','en_US')], limit = 1)" />
+            </t>
+            <div class="row d-flex" style="font-size: 13px !important;" >
+                <div class="col-6" style="margin-top: 4px ">
+                    <div class="text-left mb4" style="margin-bottom:10px;">
+                        <img t-if="doc.freights_package.number_id.freights_id.company_id.logo" t-att-src="image_data_uri(doc.freights_package.number_id.freights_id.company_id.logo)" style="max-height:30px;" alt="Logo"/>
+                        <div style="margin-top:10px">
+                            <span t-field="doc.freights_package.number_id.freights_id.company_id.partner_id.name" class="font-weight-bold text-uppercase"/>
+                        </div>
+                        <div>
+                            <t t-esc="base_lang"></t>
+                            <t t-out="k.address"/>:
+                            <span t-field="doc.freights_package.number_id.freights_id.company_id.partner_id.street"/>
+                            <span t-field="doc.freights_package.number_id.freights_id.company_id.partner_id.street2"/>
+                        </div>
+                        <div>
+                            <span t-field="doc.freights_package.number_id.freights_id.company_id.partner_id.city"/>
+                            <span t-field="doc.freights_package.number_id.freights_id.company_id.partner_id.state_id"/>
+                            <span t-field="doc.freights_package.number_id.freights_id.company_id.partner_id.zip"/>
+                            Phone:
+                            <span t-if="doc.freights_package.number_id.freights_id.company_id.partner_id.phone" t-field="doc.freights_package.number_id.freights_id.company_id.partner_id.phone"/>
+                            <span t-if="doc.freights_package.number_id.freights_id.company_id.partner_id.mobile" t-field="doc.freights_package.number_id.freights_id.company_id.partner_id.mobile"/>
+                            <span t-field="doc.freights_package.number_id.freights_id.company_id.partner_id.country_id"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 text-uppercase">
+                    <div class="container">
+                        <div class="font-weight-bold"
+                            style="margin-top: 30px; text-align: center; font-size: 1.1rem">
+                            <strong><span t-field ="k.title"></span></strong>
+                        </div>
+                        <div class="row">
+                            <div class="text-left col-4 font-weight-bold" style="font-size:12px"><span t-field ="k.ref"></span>:</div>
+                            <div class="text-right col-8" t-out="doc.freights_package.freight_id"/>
+                        </div>
+                        <div class="row d-flex">
+                            <div class="text-left col-8 font-weight-bold" style="font-size:12px"><span t-field ="k.date"></span>:</div>
+                            <div class="text-right col-4" t-out="datetime.datetime.now().strftime('%Y-%m-%d')"/>
+                        </div>
+                        <div class="row">
+                            <div class="text-left col-4 font-weight-bold" style="font-size:12px"><span t-field ="k.type"></span>:</div>
+                            <div class="text-right col-8" t-field="doc.freights_package.freight_type"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="height:1px; background-color: black; width:100%"/>
+            <br/>
+            <table style="padding-right: 1em;width:100%">
+                <tr>
+                    <td style="width:50%">
+                        <table style="padding-right: 1em;width:100%;">
+                        <t t-if='doc.freights_package.number_id.freights_id.is_prepaid != True'>
+                            <tr>
+                                <td style="font-weight: bold;">
+                                    <t t-out="k.goods_name"/>:
+                                </td>
+                                <td>
+                                    <t t-out="doc.freights_package.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">
+                                    <t t-out="k.quantity"/>:
+                                </td>
+                                <td> 
+                                    <t t-out='len(doc.freights_package.number_id.freights_id.freights_shipment)'/>x<t t-out="doc.freights_package.package_qty"/>H
+                                </td>
+                            </tr>
+                              <tr>
+                                <td style="font-weight: bold;" >
+                                    <t t-out="k.shipper"/>:
+                                </td>
+                                <td> 
+                                    <t t-out="doc.freights_package.number_id.freights_id.shipper_info"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;" >
+                                    <t t-out="k.consignee"/>:
+                                </td>
+                                <td> 
+                                    <t t-out="doc.freights_package.consignee_id.name"/>, phonenumber: <t t-out='doc.freights_package.consignee_id.phone'/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;" >
+                                    <t t-out="k.condition"/>:
+                                </td>
+                                <td> 
+                                    <t t-out="doc.freights_package.number_id.freights_id.origin_term.name"/>
+                                    <t t-out="doc.freights_package.number_id.freights_id.origin_point_id.name"/>-
+                                    <t t-out="doc.freights_package.number_id.freights_id.destination_term.name"/>
+                                    <t t-out="doc.freights_package.number_id.freights_id.destination_point_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;" >
+                                    <t t-out="k.operation"/>:
+                                </td>
+                                <td> 
+                                    <t t-foreach="doc.freights_package.number_id.freights_id.contributor_ids" t-as="contributor">
+                                        <!-- <t t-foreach="contributor.employee.user_groups" t-as='role'>
+                                            <t t-if="role.name =='operation' ">
+                                                <t t-out='contributor.employee.name'/>, email:<t t-out='contributor.employee.work_email'/>, phone:<t t-out='contributor.employee.work_phone'/>
+                                            </t>
+                                        </t> -->
+                                    </t>
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-elif="doc.freights_package.number_id.shipment_type_id.name == 'Container' or doc.freights_package.number_id.shipment_type_id.name == 'Vehicle'">
+                           <tr>
+                                <td style="font-weight: bold;" >
+                                    <t t-out="k.container_num"/>:
+                                    <t t-foreach="doc.freights_package.number_id.freights_id.freights_shipment" t-as='shipment'>
+                                        <t t-if="doc.freights_package.number_id.freights_id.freights_shipment[len(doc.freights_package.number_id.freights_id.freights_shipment)-1].id == shipment.id">
+                                            <t t-out='shipment.track_number'/>
+                                        </t>
+                                        <t t-else="">
+                                            <t t-out='shipment.track_number'/>
+                                        </t>
+                                    </t>
+                                </td>
+                            </tr>
+                        </t>
+                        <tr>
+                            <td style="font-weight: bold;" >
+                                <t t-out="k.terminal"/>:<t t-out="doc.freights_package.number_id.terminal_id.name"/>
+                            </td>
+                        </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+                 <br/>
+                <div class='table'>
+                <t t-if="doc.freights_package.number_id.freights_id.is_prepaid != True">
+                    <table style="padding-right: 1em;width:100%;border: 1px solid black;border-collapse: collapse;">
+                        <thead>
+                        <tr>
+                            <th scope="col" style="border: 1px solid black; background-color: #3f4c61">
+                                <t t-out="k.container_num"/>
+                            </th>
+                            <th scope="col" style="border: 1px solid black; background-color: #3f4c61">
+                                <t t-out="k.arrived_date"/>
+                            </th>
+                            <th scope="col" style="border: 1px solid black; background-color: #3f4c61">
+                            <t t-out="k.received_date"/></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="doc.freights_package.number_id.freights_id.freights_shipment" t-as="d">
+                                <t t-set='arr' t-value='[]'/>
+                                <t t-foreach='doc.freights_package.number_id.freights_id.freights_routes_shipment' t-as='track'>
+                                    <t t-if='d.name == track.shipment_id.name'>
+                                        <t t-set='arr' t-value='arr + [track.ata_date]'/>
+                                    </t>
+                                </t>
+                                <tr>
+                                    <td style="border: 1px solid black;">
+                                        <t t-out="d.name"/>
+                                    </td>
+                                    <td style="border: 1px solid black;text-align:right;padding-right: 1em">
+                                        <t t-out='arr[len(arr)-1]'/>
+                                    </td>
+                                    <td style="border: 1px solid black;text-align:right;padding-right: 1em">
+                                        <t t-out="doc.freights_package.released_date"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </t>
+                <t t-else="">
+                    <table style="padding-right: 1em;width:100%;border: 1px solid black;border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="border: 1px solid black; background-color: #3f4c61; color: white">
+                                    <t t-out="k.consignee"/>
+                                </th>
+                                <th scope="col" style="border: 1px solid black; background-color: #3f4c61; color: white">
+                                    <t t-out="k.cargo"/>
+                                </th>
+                                <th scope="col" style="border: 1px solid black; background-color: #3f4c61; color: white">
+                                    <t t-out="k.arrived_date"/>
+                                </th>
+                                <th scope="col" style="border: 1px solid black; background-color: #3f4c61; color: white">
+                                    <t t-out="k.received_date"/>
+                                </th>
+                                <th scope="col" style="border: 1px solid black; background-color: #3f4c61; color: white">
+                                    <t t-out="k.forwarder_signature"/>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="doc.freights_package.number_id.freights_id.freights_shipment" t-as="d">
+                            <t t-foreach="d.shipment_packages" t-as='package'>
+                                    <t t-set='arr' t-value='[]'/>
+                                    <t t-foreach='doc.freights_package.number_id.freights_id.freights_routes_shipment' t-as='track'>
+                                        <t t-if='d.name == track.shipment_id.name'>
+                                            <t t-set='arr' t-value='arr + [track.ata_date]'/>
+                                        </t>
+                                    </t>
+                                    <tr>
+                                        <td style="border: 1px solid black;">
+                                            <t t-out="package.consignee_id.name"/>
+                                        </td>
+                                        <td style="border: 1px solid black;text-align:right;padding-right: 1em">
+                                            <t t-out='len(d.shipment_packages)'/>x<t t-out='doc.freights_package.package_qty'/>H
+                                        </td>
+                                        <td style="border: 1px solid black;text-align:right;padding-right: 1em">
+                                            <t t-out='arr[len(arr)-1]'/>
+                                        </td>
+                                        <td style="border: 1px solid black;text-align:right;padding-right: 1em">
+                                            <t t-out="doc.freights_package.released_date"/>
+                                        </td>
+                                        <td style="border: 1px solid black;text-align:right;padding-right: 1em">
+                                            <div>...................</div>
+                                        </td>
+                                    </tr>
+                            </t>
+                            </t>
+                        </tbody>
+                    </table>
+                </t>
+
+                </div>
+                <br/>
+                <t t-if="doc.freights_package.number_id.freights_id.is_prepaid != True">
+                    <t style="font-weight: bold;" t-out="k.note"/>:<t t-out='doc.freights_package.number_id.remark'/>
+                    <div class="col-12 d-flex" style='margin-top: 20px'>
+                            <div class='col-6'>
+                                <div class="row">
+                                    <div class="text-left col-8 font-weight-bold" style="font-size:14px"><span t-field ="k.freight_forwarder"></span>:</div>
+                                    <div class="text-right col-4" t-out="doc.freights_package.number_id.freights_id.company_id.name"/>
+                                </div>
+                                <div class="row">
+                                    <div class="text-left col-8 font-weight-bold" style="font-size:14px"><span t-field ="k.name"></span>:</div>
+                                    <!-- <div class="text-right col-4" t-out="doc.employee.name"/> -->
+                                </div>
+                                <div class="row">
+                                    <div class="text-left col-4 font-weight-bold" style="font-size:14px"><span t-field ="k.forwarder_signature"></span>:</div>
+                                    ........................
+                                </div>
+                            </div>
+                            <div class='col-6'>
+                                <div class="row">
+                                    <div class="text-left col-4 font-weight-bold" style="font-size:14px"><span t-field ="k.consignee"></span>:</div>
+                                    <!-- <div class="text-right col-8" t-out="doc.customer_id.name"/> -->
+                                </div>
+                                <div class="row" style="font-size:14px;">
+                                    <div class="text-left col-4 font-weight-bold"><span t-field ="k.consignee_name"></span>:</div>
+                                    <t t-out='doc.freights_package.consignee_id.name'/>
+                                </div>
+                                <div class="row">
+                                    <div class="text-left col-4 font-weight-bold" style="font-size:14px"><span t-field ="k.consignee_signature"></span>:</div>
+                                    ........................
+                                </div>
+                            </div>
+                    </div>
+                
+                </t>
+                <br/>
+                <t style="font-weight: bold;" t-out='k.notice'/>
+                <br/>
+                <t t-out='k.data'/>
+                <br/>
+                </t>
+    </template>
+    
+
+    <template id="cargo_receipt">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="ml_worldwide-main.document_body" t-lang="base_lang"/>
+                <t t-set="base_lang" t-value="doc.freights_package.consignee_id.lang"/>
+            </t>
+            <!-- <t t-foreach="doc.freights_package.consignee_id.other_lang" t-as="lng">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-set="base_lang" t-value="lng.code"/>
+                    <t t-call="ml_worldwide-main.document_body" t-lang="base_lang"/>
+                </t>
+            </t> -->
+        </t>
+    </template>
+
+    <record id="ml_worldwide_document_paper_id" model="report.paperformat">
+        <field name="name">Paperformat</field>
+        <field name="default" eval="False"/>
+        <field name="disable_shrinking" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">8</field>
+        <field name="margin_bottom">32</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        <field name="dpi">96</field>
+    </record> 
+
+    <data>
+        <record id ="ml_worldwide_cargo_receipt" model="ir.actions.report">
+            <field name= "name">Cargo Receipt</field>
+            <field name= "model">preview.pdf.wizard</field>
+            <field name= "report_type">qweb-pdf</field>
+            <field name= "report_name">ml_worldwide-main.cargo_receipt</field>
+            <field name= "report_file">ml_worldwide-main.cargo_receipt</field>
+            <field name= "print_report_name">object</field>
+            <field name= "binding_model_id" ref ="model_preview_pdf_wizard"></field>
+            <field name= "binding_view_types">form</field>
+            <field name= "binding_type">report</field>
+            <field name="paperformat_id" ref="ml_worldwide_document_paper_id"/>
+        </record>
+    </data>
+
+</odoo>    

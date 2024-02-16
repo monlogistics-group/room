@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="add_records_to_payments" model="ir.ui.view">
+            <field name="name">add.record.to.payments.form</field>
+            <field name="model">add.record.to.payments</field>
+            <field name="arch" type="xml">
+                <form string="Add records">
+                <header>
+                    <field name="package"  invisible="1"/>
+                </header>
+               	<sheet>
+                
+                    <field name="type" widget="radio" options="{'horizontal': true}"/>
+                    <group>
+                        <group>
+                            <field name="shippment_ids" widget="many2many_tags"/>
+                            
+                            <field name="template_id"  attrs="{'invisible':  [('package','!=', False)]}"/>
+                            <field name="service_from"  attrs="{'invisible':  [('package','!=', False)]}"/>
+                            <field name="service_to" attrs="{'invisible':  [('package','!=', False)]}"/>
+                            <field name="service_qty" />
+                            <field name="ett" attrs="{'invisible':  [('package','!=', False)]}"/>
+                            <field name="valid_until_date" attrs="{'invisible':  [('package','!=', False)]}"/>
+                            <field name="transport_type" attrs="{'invisible':  [('package','!=', False)]}" />
+                        </group >
+                        <group><field name="agent_id">
+                            <!-- widget="many2many_tags"/ -->
+                                <kanban>
+                                    <field name="id"/>
+                                    <field name="color"/>
+                                    <field name="name"/>
+                                    <field name="title"/>
+                                    <field name="type"/>
+                                    <field name="email"/>
+                                    <field name="parent_id"/>
+                                    <field name="is_company"/>
+                                    <field name="function"/>
+                                    <field name="phone"/>
+                                    <field name="street"/>
+                                    <field name="street2"/>
+                                    <field name="zip"/>
+                                    <field name="city"/>
+                                    <field name="country_id"/>
+                                    <field name="mobile"/>
+                                    <field name="state_id"/>
+                                    <field name="image_128"/>
+                                    <field name="avatar_128"/>
+                                    <field name="lang"/>
+                                    <!-- fields in form x2many view to diminish requests -->
+                                    <field name="comment"/>
+                                    <field name="display_name"/>
+                                    <templates>
+                                        <t t-name="kanban-box">
+                                            <t t-set="color" t-value="kanban_color(record.color.raw_value)"/>
+                                            <div t-att-class="color + (record.title.raw_value == 1 ? ' oe_kanban_color_alert' : '') + ' oe_kanban_global_click'">
+                                                <div class="o_kanban_image">
+                                                    <img alt="Contact image" t-att-src="kanban_image('res.partner', 'avatar_128', record.id.raw_value)"/>
+                                                </div>
+                                                <div class="oe_kanban_details">
+                                                    <field name="name"/>
+                                                    <div t-if="record.function.raw_value"><field name="function"/></div>
+                                                    <div t-if="record.email.raw_value"><field name="email" widget="email"/></div>
+                                                    <div t-if="record.type.raw_value != 'contact'">
+                                                        <div>
+                                                            <field name="zip"/>
+                                                            <field name="city"/>
+                                                        </div>
+                                                        <field t-if="record.state_id.raw_value" name="state_id"/>
+                                                        <field name="country_id"/>
+                                                    </div>
+                                                    <div t-if="record.phone.raw_value">Phone: <t t-esc="record.phone.value"/></div>
+                                                    <div t-if="record.mobile.raw_value">Mobile: <t t-esc="record.mobile.value"/></div>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                            </field>
+                            <field name="currency_id" />
+                            <field name="service_cost" widget="monetary" />
+                            <field name="service_rate" widget="monetary" />
+                            <field name="subtotal_cost" widget="monetary"  attrs="{'invisible':  [('package','!=', False)]}"/>
+                            <field name="subtotal_rate" widget="monetary" readonly="1"/>
+                        </group>
+                        <field name="service_desc" />
+                    </group>
+                </sheet>
+                    <footer>
+                        <button type='object' name='add_records' string='Add'/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <record id="quotation" model="mlworldwide.quotation.data">
+       <field name="quote_lang"></field>
+       <field name="title_name">RATE QUOTATION</field>
+       <field name="worldwide_reference">REFERENCE</field>
+       <field name="worldwide_date">DATE</field>
+       <field name="worldwide_valit_until">VALID UNTIL</field>
+       <field name="worldwide_to">TO</field>
+       <field name="worldwide_detail">CARGO DETAILS</field>
+       <field name="worldwide_transit_time">ESTIMATED TRANSIT TIME</field>
+       <field name="worldwide_incoterms">INCOTERMS</field>
+       <field name="worldwide_routes">ROUTES</field>
+       <field name="worldwide_rate">RATE</field>
+       <field name="worldwide_include">ABOVE RATE INCLUDED BELOW CHARGES</field>
+       <field name="worldwide_not_include">ABOVE RATE NOT INCLUDED BELOW CHARGES</field>
+       <field name="worldwide_remark">REMARK</field>
+       <field name="worldwide_border">Border</field>
+       <field name="worldwide_remark_body" type='html'>
+           <ul>
+               <li>Above quotation does not include VAT</li>
+               <li>The actual date of dispatch means the date of loading cargo on vehicle and dispatching from origin point</li>
+               <li>Shipping packages must meet international packaging standards</li>
+               <li>In case of occurred VAT refunding charges and local tax will be negotiated who will pay this charges</li>
+               <li>If required shipper/ consignee must provide special loading instructions</li>
+               <li>Shipper/ Consignee must provide all necessary documents for custom clearanceIn event of unexpected custom inspection at transit ports there will be additional cost</li>
+               <li>Maximum weight limit is 21ton, volume- 80 cubic meter</li>
+               <li>Shipping order must be sent before 5days from loading date</li>
+               <li>The shipper has 48 hours custom clearance and loading at the origin point. If shipper does not clear shipment through the custom and load cargo  within defined period, there will be additional charges per day</li>
+               <li>Above rate Quotation invalid for nonferrous metals through Russia and for other products, prohibited transporting via Russia</li>
+               <li>Regarding alcohol, tobaccos, cosmetic and other food shipment through China Health certificate, Test report, COO, CIQ and other relevant certificates are required. For Chemicals shipment required MSDSM and Test report</li>
+               <li>Regarding on “wooden” products/ rice/ honey/ milk powder/ bean/ corn/ other organic items, XinGang CIQ requires COO and Phytosanitary Certificate by original copy and there will be phyrosanitary inspection chargePage 1/1</li>
+           </ul>
+       </field>
+   </record>
+</odoo>

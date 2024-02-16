@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+		<record id="search_wizard_model_view_form" model="ir.ui.view">
+        	<field name="name">freight.search.wizard.form</field>
+        	<field name="model">freight.search.wizard</field>
+        	<field name="arch" type="xml">
+				<form string="Test">
+				<group>
+                    <field name="helper_id" invisible='1'/>
+					<field name="type" widget="many2many_tags"/>
+					<field name='country'/>
+					<field name='agent_rating'/>
+					<field name='ability' widget="many2many_tags"/>
+				</group>
+				<footer>
+					<button type="object" name="filter_freights_agent_inquiry" string="Search"/>
+				</footer>
+				</form>
+			</field>
+		</record>
+</odoo>
+        	 

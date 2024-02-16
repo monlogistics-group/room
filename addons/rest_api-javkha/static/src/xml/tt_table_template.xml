@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="table_view_template">
+        <div class="container tt_parent_view">
+            <table class="table tt_table table-striped">
+                <thead class="thead-dark">
+                    <tr class="tt_table_row">
+                        <th scope="col">Name</th>
+                        <th scope="col">API Routes</th>
+                    </tr>
+                </thead>
+                <tbody class="tt_body">
+                </tbody>
+            </table>
+        </div>
+    </t>
+</templates>

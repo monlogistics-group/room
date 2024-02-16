@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="shipment_order_data" model="shipment.order.data">
+        <field name="ship_conf">SHIPMENT ORDER</field>
+        <field name="title_name">REFERENCE</field>
+        <field name="ship_date" >DATE</field>
+        <field name="ship_to" >TO</field>
+        <field name="ship_type" >SHIPMENT TYPE</field>
+        <field name="package_name">PACKAGE NAME</field>
+        <field name="package_desc" >CARGO DETAIL</field>
+        <field name="package_qty" >PACKAGE QTY</field>
+        <field name="temp_deg">TEMPERATURE DEGREES</field>
+        <field name="package_vendor" >PACKAGE VENDOR</field>
+        <field name="package_con">CONSIGNEE</field>
+        <field name="ekso_condi">INCOTERMS CONDITION</field>
+        <field name="package_valid_until">VALID UNTIL</field>
+        <field name="package_rt_name">ROUTE MANAGER</field>
+        <field name="condi_route">CONDITION AND ROUTE</field>
+        <field name="package_cost">COST</field>
+        <field name="border">Border</field>
+        <field name="transport_agent">TRANSPORT NAME</field>
+        <field name="costumer_name">COSTUMER NAME</field>
+        <field name="agent_name" >NAME:Bayarkhuu</field>
+        <field name="cos_name">NAME:Uyanga</field>
+        <field name="sign" >SIGN</field>
+        <field name="notice" >NOTICE</field>
+        <field name="condi_text">CONDITION TEXT</field>
+        <field name="condi_texts">
+            The present “Shipment confrmation” is considered as a freight agreement between Monlogistics Worldwide (MLW)and Tianjin Well-Carry Logistics Co.,Ltd (agent).
+            By accepting this confrmation, MLW’s nominated agent undertakes a responsibility to deliver the cargo within estimated time to a named port/border to respect an agreement with cargoes actual consignee.
+            In case of unforeseen additional charges occurred at the port/border/station, the agent is responsible to advise MLW prior the cargoes arrival at destination or cargo release to consignee. Any additional charges must be proved by documents.
+            MLW and its agent will exchange cargoes tracing information in daily fashion including special notices and demurrage standard of used equipment, informing each other about a release instruction and necessary documents in relation to transit customs formality, to avoid cargoes excessive delay at transit port or border station and related hereto charges.
+            MLW’s agent should send the freight invoice before the cargo arrival to the fnal destination.
+            MLW’s agent shall be responsible to instruct the shipper about cargoes proper loading and fxing into equipment, in order to avoid further charges to correct and balance the loading.
+            MLW’s agent is aware of fnancial policy of MLW, that the payment for all operations shall be made upon agent’s invoice confrmation and confrmed “Shipment confrmation”.
+            MLW and its agent shall respect the interests of each other and will not disclose any part of this agreement to third party without authorization of contractual counterpart.
+            MLW’s agent should pay high attention to top priority cargoes.</field> 
+         <field name="locale">1</field>
+    </record>
+ </odoo> 

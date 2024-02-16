@@ -1,0 +1,155 @@
+<odoo>
+   <data>
+       <record id="send_truck" model="mail.template">
+           <field name="name">Worldwide Truck Email</field>
+           <field name="model_id" ref="ml_worldwide-main.model_mlworldwide_freights"/>
+            <field name="email_from">{{object.employee.work_email}}</field>
+            <field name="email_to">{{object.customer_id.email}}</field>
+            <field name="subject">Shipment status - {{object.customer_id.parent_id.name}}</field>
+            <!-- <field name="report_template" ref="ml_worldwide.mlworldwide_base_quotation"/> -->
+           <field name="report_name"></field>
+           <field name="body_html" type="html">
+                <span>Сайн байна уу?</span>
+                <div><span>Ачааны замын мэдээ илгээж байгааг хүлээн авна уу.</span></div>
+                <br/>
+                  
+                <t t-if="request.env['route.data'].search([('lang.code','=' ,object.customer_id.lang)], limit = 1)">
+                    <t t-set="k" t-value="request.env['route.data'].search([('lang.code','=' ,object.customer_id.lang)], limit=1)" />
+                </t>
+                <t t-else="">
+                    <t t-set="k" t-value="request.env['route.data'].search([('lang.code','=','en_US')], limit = 1)" />
+                </t>
+                
+                <t t-foreach="object" t-as="freight">
+                    <table style="margin-top:20px;width:100%;border-left:1px solid #555555; border-right:1px solid #555555;border-top:1px solid #555555" cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr>
+                                <td style="width:100%;background-color:#20226d;color:white;padding:5px 10px;text-align:left;text-transform:uppercase;font-size:12px">
+                                    <strong><t t-out="freight.ref_num"/></strong>
+                                </td>
+                            </tr>
+                             <tr>
+                                <td style="padding-top:5px;padding-right:10px;text-align:left;text-transform:uppercase ; font-size:12px">
+                                    <t t-out="k.freight_con"/>:
+                                    <t t-out="freight.origin_point_id.name"/>-<t t-out="freight.destination_point_id.name"/>  
+                                </td>
+                                        
+                            </tr>
+                            <tr>
+                                <td style="padding-top:5px;padding-right:10px;text-align:left; ; text-transform:uppercase ; font-size:12px">
+                                    <t t-out="k.terminal_name"/>:
+                                    <t t-esc="freight.terminal_id.name"/>  
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-top:5px;padding-right:10px;text-align:left;text-transform:uppercase ; font-size:12px">
+                                    <t t-esc="freight.ordered_freights_type.type_name"/>:                     
+                                    <t t-if="freight.ordered_freights_type.type_name =='FCL'">                               
+                                        <t t-esc="len(freight.freights_shipment)"/>x<t t-esc="len(freight.freights_shipment)"/>x<t t-esc="freight.taras_id.name"/>
+                                    </t>
+                                    <t t-if="freight.ordered_freights_type.type_name =='LCL'">
+                                        1x<t t-esc="freight.package_qty"/>pcs,<t t-esc="freight.gross"/>kg,<t t-esc="freight.volume"/>cbm
+                                    </t>
+                                    <t t-if="freight.ordered_freights_type.type_name =='AIR'">
+                                        1x<t t-esc="freight.package_qty"/>pcs,<t t-esc="freight.gross"/>kg,<t t-esc="freight.volume"/>cbm
+                                    </t>
+                                    <t t-if="freight.ordered_freights_type.type_name =='LTL'">
+                                        1x<t t-esc="freight.package_qty"/>pcs,<t t-esc="freight.gross"/>kg,<t t-esc="freight.volume"/>cbm
+                                    </t>
+                                    <t t-if="freight.ordered_freights_type.type_name =='FTL'">
+                                        <t t-esc="len(freight.freights_shipment)"/> x Truck 
+                                    </t>
+                                    <t t-if="freight.ordered_freights_type.type_name =='WGN'">
+                                        <t t-esc="freight.wagon_type_id.name"/> 
+                                    </t>
+                                    <t t-if="freight.ordered_freights_type.type_name =='Train'">
+                                        <t t-esc="len(freight.freights_shipment)"/> x Truck 
+                                    </t>
+                                    <t t-if="freight.ordered_freights_type.type_name =='Multimodal'">
+                                        <t t-esc="len(freight.freights_shipment)"/> x Truck 
+                                    </t>
+                                    <!-- <t t-esc="freight.gross"/>   -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-top:5px;padding-right:10px;text-align:left;text-transform:uppercase ; font-size:12px">
+                                    <t t-out="k.document"/>:  
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-top:5px;padding-right:10px;text-align:left;text-transform:uppercase ; font-size:12px">
+                                    <t t-out="k.sender"/>:
+                                    <t t-esc="freight.customer_id.name"/>  
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-top:5px;padding-right:10px;text-align:left;text-transform:uppercase ; font-size:12px">
+                                    <t t-out="k.officer"/>:
+                                    <t t-esc="freight.employee.name"/>(<t t-esc="freight.employee.work_email"/> ,  <t t-esc="freight.employee.work_phone"/>)  
+                                </td>
+                            </tr>
+                            
+                     
+                            <br/>
+                        </tbody>    
+                    </table>
+                    <table style="width:100%;border-left:1px solid #42515e; border-right:1px solid #555555;border-top:1px solid #555555" cellspacing="0" cellpadding="0">
+                        <thead>
+                            <tr style="font-size:11px ; width:100% ">
+                                <th name="number" style="border-right:1px solid #42515e;border-bottom:1px solid #42515e ;width:6vw">                                      
+                                    <t t-esc="k.number"/>   
+                                </th>
+                                <t t-foreach="freight.freights_route" t-as="route">
+                                    <th name="route" style="border-right:1px solid #42515e;border-bottom:1px solid #42515e ; width:12vw">
+                                        <t t-esc="route.point.name"/>
+                                        
+                                    </th>         
+                                </t>
+                            </tr>
+
+                        </thead>
+                        
+                        
+                        <tbody>
+                            <t t-foreach="freight.freights_shipment" t-as="shipment">
+                                <tr style="font-size:11px ; width:100% ">
+                                    <th name="number" style=" border-right:1px solid #42515e;border-bottom:1px solid #42515e;width:6vw">
+                                        <t t-esc="shipment.name"/>
+                                    </th>
+                                    <t t-foreach="freight.freights_route" t-as="route">
+                                        <t t-foreach="freight.freights_routes_shipment" t-as="time">
+                                            <t t-if="route.id==time.route_point_new.id">
+                                                <t t-if="shipment.id==time.shipment_id.id">
+                                                    <th style="border-right:1px solid black !important; border-bottom:1px solid #42515e;width:12vw">  
+                                                        <t t-out="k.ata"/>:
+                                                        <t t-esc="time.ata_date"/>
+                                                        <div>
+                                                            <t t-out="k.atd"/>:
+                                                            <t t-esc="time.atd_date"/>
+                                                        </div>
+                                                    </th>
+                                                </t>
+                                            </t>
+                                        </t>
+                                    </t>
+                                </tr>
+                                <t t-foreach="freight.freights_shipment_remark" t-as="remark">
+                                    <t t-if="shipment.id==remark.freights_shipment.id">
+                                        <tr style="font-size:11px ; width:100% ">
+                                            <th style="border-right:1px solid black !important; border-bottom:1px solid #42515e;width:12vw" colspan="100%">  
+                                                 <t t-esc="remark.remark"/>
+                                             </th>
+                                        </tr>
+                                    </t>
+                                </t>
+                                
+                            </t>    
+                        </tbody>
+                    </table>
+                </t>
+                <br/>
+                <span>Асууж тодруулах зүйл байвал бидэнд илгээнэ үү. Бидэнтэй хамтран ажиллаж байгаад баярлалаа.</span>
+           </field>
+       </record>
+   </data>
+</odoo>

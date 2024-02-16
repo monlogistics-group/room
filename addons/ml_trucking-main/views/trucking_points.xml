@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="trucking_points_view_filter" model="ir.ui.view">
+        <field name="name">trucking.points.view.search</field>
+        <field name="model">trucking.points</field>
+        <field name="arch" type="xml">
+            <search position="inside" string="Operations">
+                <field name="code" filter_domain="['|', '|', '|', ('name','ilike',self), ('code','ilike',self), ('country','ilike',self), ('state','ilike',self)]" string="Operations" position="attributes">
+                    <attribute name="autocomplete">off</attribute>
+                </field>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Country" name="shipper" domain="[]" context="{'group_by':'country'}"/>
+                    <filter string="State" name="job" domain="[]" context="{'group_by':'state'}"/>
+                </group>
+                <searchpanel>
+                    <field name="country" icon="fa-filter" enable_counters="1"/>
+                    <field name="state" icon="fa-filter" enable_counters="1"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="trucking_points_form_view">
+        <field name="name">trucking.points.form</field>
+        <field name="model">trucking.points</field>
+        <field name="arch" type="xml">
+            <form string="Points">
+                <group>
+                    <group>
+                        <field name="code"/>
+                        <field name="name" required="1"/>
+                        <field name="country"/>
+                        <field name="state"/>
+                    </group>
+                    <group>
+                        <field name="border"/>
+                        <field name="latitude"/>
+                        <field name="longitude"/>
+                        <field name="active"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="trucking_points_tree_view">
+        <field name="name">trucking.points.tree</field>
+        <field name="model">trucking.points</field>
+        <field name="arch" type="xml">
+            <tree string="points">
+                <field name="sequence" width="handle"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="country"/>
+                <field name="border"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="trucking_points_view_action">
+        <field name="name">points</field>
+        <field name="res_model">trucking.points</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new points.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_trucking_points"
+            name="Points"
+            action="trucking_points_view_action"
+            parent="menu_trucking_data"
+            groups=""
+            sequence="368"/>
+</odoo>

@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+Created by Umbaa. 2022-12-02 -->
+<odoo>
+    <data noupdate="1">
+        <record id="mlworldwide_pdf_photo_data_1" model="mlworldwide.freight.photo">
+            <field name="freight_photo" type="base64" file="ml_worldwide-main/static/src/images/naklad5.png"/>
+        </record>
+        <record id="mlworldwide_pdf_photo_data_2" model="mlworldwide.freight.photo">
+            <field name="freight_photo" type="base64" file="ml_worldwide-main/static/src/images/naklad5.png"/>
+        </record>
+        <record id="mlworldwide_pdf_photo_data_3" model="mlworldwide.freight.photo">
+            <field name="freight_photo" type="base64" file="ml_worldwide-main/static/src/images/naklad5.png"/>
+        </record>
+        <record id="mlworldwide_pdf_photo_data_4" model="mlworldwide.freight.photo">
+            <field name="freight_photo" type="base64" file="ml_worldwide-main/static/src/images/naklad5.png"/>
+        </record>
+        <record id="mlworldwide_pdf_photo_data_5" model="mlworldwide.freight.photo">
+            <field name="freight_photo" type="base64" file="ml_worldwide-main/static/src/images/naklad5.png"/>
+        </record>
+        <record id="mlworldwide_pdf_photo_data_6" model="mlworldwide.freight.photo">
+            <field name="freight_photo" type="base64" file="ml_worldwide-main/static/src/images/naklad5.png"/>
+        </record>
+        
+        <!-- <record id="worldwide_insurance_cost_data_air" model="insurance.cost">
+            <field name="freight_type">5</field>
+            <field name="cost">5</field>
+            <field name="cost_currency">2</field>
+        </record>
+          <record id="worldwide_insurance_cost_data_fcl" model="insurance.cost">
+            <field name="freight_type">1</field>
+            <field name="cost">20</field>
+            <field name="cost_currency">2</field>
+        </record>
+          <record id="worldwide_insurance_cost_data_ftl" model="insurance.cost">
+            <field name="freight_type">3</field>
+            <field name="cost">40</field>
+            <field name="cost_currency">2</field>
+        </record>
+          <record id="worldwide_insurance_cost_data_lcl" model="insurance.cost">
+            <field name="freight_type">2</field>
+            <field name="cost">5</field>
+            <field name="cost_currency">2</field>
+        </record>
+        <record id="worldwide_insurance_cost_data_ltl" model="insurance.cost">
+            <field name="freight_type">4</field>
+            <field name="cost">5</field>
+            <field name="cost_currency">2</field>
+        </record>
+          <record id="worldwide_insurance_cost_data_train" model="insurance.cost">
+            <field name="freight_type">6</field>
+            <field name="cost">5</field>
+            <field name="cost_currency">2</field>
+        </record>
+          <record id="worldwide_insurance_cost_data_wgn" model="insurance.cost">
+            <field name="freight_type">7</field>
+            <field name="cost">20</field>
+            <field name="cost_currency">2</field>
+        </record>
+        <record id="worldwide_insurance_cost_data_multimodal" model="insurance.cost">
+            <field name="freight_type">8</field>
+            <field name="cost">5</field>
+            <field name="cost_currency">2</field>
+        </record> -->
+        <record id="worldwide_cargo_receipt_data" model="cargo.receipt.data">
+            <field name="title">Cargo Receipt</field>
+            <field name="cargo">Cargo</field>
+            <field name="ref">Ref</field>
+            <field name="type">Type</field>
+            <field name="date">date</field>
+            <field name='goods_name'>Goods name</field>
+            <field name="address">address</field>
+            <field name="quantity">Quantity</field>
+            <field name="terminal">Terminal</field>
+            <field name="shipper">Shipper</field>
+            <field name="consignee_company">Consignee company</field>
+            <field name="condition">Condition</field>
+            <field name="operation">Operation</field>
+            <field name="container_num">Container number</field>
+            <field name="arrived_date">Arrived date</field>
+            <field name="received_date">Received date</field>
+            <field name="note">Note</field>
+            <field name="freight_forwarder">Freight forwarder</field>
+            <field name="name">name</field>
+            <field name="forwarder_signature">Signature</field>
+            <field name="consignee">Consignee</field>
+            <field name="consignee_name">Name</field>
+            <field name="consignee_signature">Signature</field>
+            <field name="locale">1</field>
+            <field name="notice">Notice</field>
+            <field name="data">1) Монложистик Ворлдвайд ХХК нь нийлүүлэгчийн ачсан барааг лац ломбоны бүрэн, бүтэн байдлаар хүлээн авагчид хүлээлгэн өгнө. Тээвэрлэлт нь Олон Улсын Тээвэр Зуучлагчдын Холбооны ерөнхий удирдамжаар зохицуулагддаг ба тээврийн баримт дээр бичигддэг “Shippers Load and Count” гэсэн тодорхойлолтоор баталгааждаг болно. 2) Хүлээн авагч нь ачааг гаалийн хяналтын талбайд хүлээн авах явцад ачааны бүрэн бүтэн байдалд зөрчил илэрвэл уг ачааг хяналтын талбайгаас гаргалгүйгээр MLW-тай хамтран холбогдох мэргэжлийн байгууллагын акт тогтоолгоно. 3) MLW нь хүлээн авагчийн итгэмжлэлээр барааг гаалийн үзлэгээр шалгуулах тохиолдолд лац ломбо ба ачааны бодит байдлыг хянаж фото зураг, видео бичлэгээр үзлэгийн явцыг баримтжуулна. 4) Хүлээн авагч нь ачаатай чингэлгийг гаалийн хяналтын талбайгаас авч гарснаас хоосон чингэлгийг буцаан хүлээлгэн өгөх хүртэл чингэлгийн бүрэн байдал, цэвэрлэгээг хариуцаж  учирсан хохирлыг барагдуулна. 5) Ачааг хүлээн авснаас хойш ачааны бүрэн бүтэн байдлыг хүлээн авагч хариуцах болно.Хуудас 1/1</field>
+        </record>
+        <record id="worldwide_arrival_notice_data" model="arrival.notice">
+            <field name="greetings">Dear All Please kindly note below our arrival notice.</field>
+            <field name="title">Order Detail</field>
+            <field name="ref">Ref</field>
+            <field name="type">Freight Type</field>
+            <field name="terminal">Terminal</field>
+            <field name="contact">Terminal Contact</field>
+            <field name="contribute">Person in Charge</field>
+            <field name="ata">ATA</field>
+            <field name="transit_time">Transit time</field>
+            <field name="subTitle">Cargo Detail</field>
+            <field name="container_ref">Container No</field>
+            <field name="cargo_name">Cargo Name</field>
+            <field name="shipper">Shipper</field>
+            <field name="detail">Detail</field>
+            <field name="lang">1</field>
+        </record>
+        <!-- <record id="worldwide_freights_pdf_data" model="freights.container.movement">
+            <field name="cargoName">Контейнеры большой грузоподъемности порожные 99310000</field>
+            <field name="senderCertificateNumber">2685949</field>
+            <field name="pages">1,4,6</field>
+            <field name="cargoType">Контейнер</field>
+            <field name="packageQty">1</field>
+            <field name="loader">Отправитель</field>
+            <field name="weightCalculation">На стандартных весах</field>
+            <field name="sender">Монложистикс Ворлдвайд ООО Международная транспортно-экспедиторская компания Г-жа Эрдэнэбилэг Тел: 976-7011-5454, Факс: 976-7011-1616 Н.Сувд-Эрдэнэ</field>
+        </record> -->
+        <record id="worldwide_confirm_quotation_data" model="worldwide.confirm.quotation">
+                        <field name="order">Order</field>
+                        <field name="address">Address</field>
+                        <field name="ref">ID</field>
+                        <field name="trans_type">Transportation Type</field>
+                        <field name="date">Date</field>
+                        <field name="consignee">Consignee</field>
+                        <field name="goods_name">Goods name</field>
+                        <field name="goods_desc">Description</field>
+                        <field name="quantity">Quantity</field>
+                        <field name="receiver">Receiver</field>
+                        <field name="sender">Sender</field>
+                        <field name="condition">Condition</field>
+                        <field name="estimated_time">Estimated Time</field>
+                        <field name="employee">Employee</field>
+                        <field name="table_col_name_1">a</field>
+                        <field name="table_col_name_2">b</field>
+                        <field name="desc">qewr</field>
+                        <field name="trans_broker">Transportation Broker</field>
+                        <field name="name">Name</field>
+                        <field name="autograph">Autograph</field>
+                        <field name="customer">Customer</field>
+                        <field name="cust_name">Name</field>
+                        <field name="cust_autograph">Autograph</field>
+                        <field name="title">Contract condition</field>
+                        <field name="contract_cond_1">a</field>
+                        <field name="contract_cond_2">b</field>
+                        <field name="contract_cond_3">c</field>
+                        <field name="contract_cond_4">d</field>
+                        <field name="contract_cond_5">q</field>
+                        <field name="contract_cond_6">q</field>
+                        <field name="contract_cond_7">q</field>
+                        <field name="contract_cond_8">q</field>
+                        <field name="contract_cond_9">q</field>
+        </record>
+        <record id="worldwide_confirm_agent_quotation_data" model='worldwide.confirm.agent.quotation'>
+                        <field name="locale">1</field>
+                        <field name="title">Shipment Confirmation</field>
+                        <field name="address">Address</field>
+                        <field name="ref">Reference</field>
+                        <field name="date">Date</field>
+                        <field name="to">To</field>
+                        <field name="shipper">Shipper</field>
+                        <field name="pickup">Pickup Date</field>
+                        <field name="consignee">Consignee</field>
+                        <field name="cargo">Cargo</field>
+                        <field name="shipment_qty">Shipment qty</field>
+                        <field name="billInstruction">Bill instruction</field>
+                        <field name="temp">Temperature</field>
+                        <field name="carrier">Carrier</field>
+                        <field name="notice">Notice</field>
+                        <field name="billInstruction">Bill instruction</field>
+                        <field name="purpose">Purpose</field>
+                        <field name="conf_date">Confirmed Date</field>
+                        <field name="operationSpec">Operation Specialist</field>
+                        <field name="terms">Terms &amp; Conditions</field>
+                        <field name="contract_cond_1">1) The present “Shipment confrmation” is considered as a freight agreement between Monlogistics Worldwide (MLW)
+                            and</field>
+                        <field name="contract_cond_1_agent">(agent).</field>
+                        <field name="contract_cond_2">2) By accepting this confrmation, MLW’s nominated agent undertakes a responsibility to deliver the cargo within
+estimated time to a named port/border to respect an agreement with cargoes actual consignee.</field>
+                        <field name="contract_cond_3">3) In case of unforeseen additional charges occurred at the port/border/station, the agent is responsible to advise
+MLW prior the cargoes arrival at destination or cargo release to consignee. Any additional charges must be proved by
+documents.</field>
+                        <field name="contract_cond_4">4) MLW and its agent will exchange cargoes tracing information in daily fashion including special notices and
+demurrage standard of used equipment, informing each other about a release instruction and necessary documents
+in relation to transit customs formality, to avoid cargoes excessive delay at transit port or border station and related
+hereto charges.</field>
+                        <field name="contract_cond_5">5) MLW’s agent should send the freight invoice before the cargo arrival to the fnal destination.</field>
+                        <field name="contract_cond_6">6) MLW’s agent shall be responsible to instruct the shipper about cargoes proper loading and fxing into equipment,
+in order to avoid further charges to correct and balance the loading.</field>
+                        <field name="contract_cond_7">7) MLW’s agent is aware of fnancial policy of MLW, that the payment for all operations shall be made upon agent’s
+invoice confrmation and confrmed “Shipment confrmation”.</field>
+                        <field name="contract_cond_8">8) MLW and its agent shall respect the interests of each other and will not disclose any part of this agreement to third
+party without authorization of contractual counterpart.</field>
+                        <field name="contract_cond_9">9) MLW’s agent should pay high attention to top priority cargoes.</field>
+                        <field name="contract_cond_10">10) MLW’s agent should be gentle and friendly with shippers/suppliers.</field>
+        </record>
+        <record id="worldwide_confirm_agent_quotation_data_mn" model='worldwide.confirm.agent.quotation'>
+                        <field name="locale">49</field>
+                        <field name="title">Shipment Confirmation</field>
+                        <field name="address">Address</field>
+                        <field name="ref">Reference</field>
+                        <field name="date">Date</field>
+                        <field name="to">To</field>
+                        <field name="carrier">Carrier</field>
+                        <field name="shipper">Shipper</field>
+                        <field name="pickup">Pickup Date</field>
+                        <field name="consignee">Consignee</field>
+                        <field name="cargo">Cargo</field>
+                        <field name="shipment_qty">Shipment qty</field>
+                        <field name="billInstruction">Bill instruction</field>
+                        <field name="temp">Temperature</field>
+                        <field name="notice">Notice</field>
+                        <field name="billInstruction">Bill instruction</field>
+                        <field name="purpose">Purpose</field>
+                        <field name="conf_date">Confirmed Date</field>
+                        <field name="operationSpec">Operation Specialist</field>
+                        <field name="terms">Terms &amp; Conditions</field>
+                        <field name="contract_cond_1">(1) Энэхүү “Тээврийн Баталгаажуулах хуудас” гэдэг нь Монложистикс Ворлдвайд болон</field>
+                        <field name="contract_cond_1_agent">(агент) хооронд хийгдэж буй тээврийн гэрээ болно.</field>
+                        <field name="contract_cond_2">2) Тээврийн баталгаажуулах хуудасыг хүлээн зөвшөөрснөөр, Монложистикс Ворлдвайд-н тодорхойлсон агент нь баталгаажуулах хуудсанд тодорхойлсон портод болон заасан хугацаанд үйлчлүүлэгчийн ачааг хүлээн аван хүргэж өгөх үүрэг хүлээнэ.</field>
+                        <field name="contract_cond_3">(3) Хэрэв тухайлсан портод урьдчилан тооцоолсноос илүү нэмэлт зардал гарсан тохиолдолд агент тухайн ачааг зорилтот газраа хүргэгдэхээс өмнө эсвэл хүлээн авагчид хүргэгдэхээс өмнө Монложистикс Ворлдвайд-д зайлшгүй мэдэгдсэн байх (Аливаа нэмэгдэл зардал нь баримт бичгээр баталгаажсан байх)</field>
+                        <field name="contract_cond_4">(4) Тухайн ачааг дамжин өнгөрөх хил болон хүрэх хил дээр асуудал үүсэн саатуулагдахаас зайлсхийж Монложистикс Ворлдвайд болон Агент нь өдөр тутмын замын мэдээ, тусгайлсан мэдээлэл, тээвэрт ашиглагдаж буй эд зүйлийн түрээсийн стандарт, ачаа олгох талаархи мэдээлэл болон шаардлагатай бичиг баримтуудыг солилцсон байх.</field>
+                        <field name="contract_cond_5">(5) Тухайн ачаа эцсийн цэг дээр хүргэгдэхээс өмнө Агент нь тээврийн нэхэмжлэхийг илгээсэн байх.</field>
+                        <field name="contract_cond_6">(6) Тооцсоноос илүү зардал гархаас урьдчилан сэргийлэх үүднээс агент нь илгээгчид тухайн ачааг хэрхэн зөв ачих болон тоног төхөөрөмж зэргийг эвдрэл гэмтэлгүй ачих талаархи зааварчилгааг илгээгчид өгөх үүрэгтэй.</field>
+                        <field name="contract_cond_7">(7) Агентийн тээврийн үйлчилгээний хөлс тээврийн баталгаажсан хуудас болон нэхэмжлэх дээр үндэслэн хийгдэнэ.</field>
+                        <field name="contract_cond_8">(8) Монложистикс Ворлдвайд болон агент нь бие биенийхээ хүсэл сонирхолыг хүндэтгэн үзэн энэхүү тээвэрлэлтийн үйл ажиллагаа болон гэрээний хэсгийг ямар нэгэн байдлаар гуравдагч этгээдэд задруулахгүй байх үүрэгтэй.</field>
+                        <field name="contract_cond_9">9) Агент нь өндөр зэрэглэлийн ачаануудад нэн анхаарал тавин ажиллах шаардлагатай.</field>
+                        <field name="contract_cond_10">10) Агент нь илгээгч болон бэлтгэн нийлүүлэгчидтэй найрсаг харилцаатай байх.</field>
+        </record>
+        <record id='confirm_agent_header_quo' model='confirm.agent.quotation'>
+            <field name='greeting'>Dear Partner,</field>
+            <field name='locale'>1</field>
+            <field name='desc'>Please receive SHIPMENT CONFIRMATION for this shipment in attached file.</field>
+            <field name='desc2'>Further our operation manager</field>
+            <field name='desc3'>will assist on this order.</field>
+            <field name='ref'>Reference number</field>
+            <field name='shipper'>Shipper</field>
+            <field name='consignee'>Consignee</field>
+            <field name='hs_code'>HS Code</field>
+            <field name='cargo_detail'>Cargo Detail</field>
+            <field name='freight_type'>Freight type</field>
+            <field name='ending'>If you have any question, please use this REFERENCE NUMBER, Thank you.</field>
+        </record>
+        <record id='confirm_customer_header_quo_mail_data' model='confirm.quot.header'>
+                        <field name="locale">1</field>
+                        <field name="greeting">Dear customer,</field>
+                        <field name="desc">Биднийг сонгон захиалга өгсөнд баярлалаа. Хавсралтаар ЗАХИАЛГЫН ХУУДАС илгээж байна. Хүлээн авна уу.</field>
+                        <field name="desc2">Захиалгын явцын мэдээллийг</field>
+                        <field name="desc3">мэдээллэх болно</field>
+                        <field name="ref">Захиалгын дугаар</field>
+                        <field name="sender">Илгээгч</field>
+                        <field name='gross'>Бохир жин</field>
+                        <field name='volume'>Тоо хэмжээ</field>
+                        <field name='package_qty'>Package хэмжээ</field>
+                        <field name="trans_condition">Тээврийн нөхцөл</field>
+                        <field name="trans_type">Тээврийн төрөл</field>
+                        <field name='goods_info'>Ачааны мэдээлэл</field>
+                        <field name="gross">Бохир жин</field>
+                        <field name='volume'>Volume</field>
+                        <field name="package_qty">Package quantity</field>
+                        <field name='hscode'>HS Код</field>
+                        <field name="ending">Асууж тодруулах зүйл гарвал ЗАХИАЛГЫН ДУГААР-н дагуу холбогдоно уу, Баярлалаа.</field>
+        </record>
+        <record model='inquiry.data' id='inquiry_data'>
+            <field name='text_l1'>Dear valued partner,</field>
+            <field name='text_l2'>Would you please study below information and send us your offer?</field>
+            <field name='text_l3'>Shall you have any questions please feel free to contact us.</field>
+            <field name='text_l4'>Please also indicate ESTIMATED TRANSIT TIME, INCLUDED/EXCLUDED CHARGES AND VALID DATE in your rate proposal.</field>
+            <field name='text_l5'>Thank you for cooperation.</field>
+            <field name='locale'>1</field>
+        </record>
+         <record id="mail_template_data_agent_inquiry" model="mail.template">
+          
+            <field name="auto_delete" eval="True"/>
+            <field name="name">Agent Quotation: Send by Email</field>
+            <field name="model_id" ref="model_mlworldwide_freights"/>
+            <field name="subject" > {{object.freights_id.agent_inquiry_mail_subject}}</field>
+            <!-- <field name="email_from">{{object.user_id.email}}</field> -->
+            <field name="email_from">{{object.employee.email}}</field> 
+            <field name="email_to"></field>
+            <field name="body_html" type="html">
+                <t t-set='inquiry' t-value="request.env['freights.agent.inquiry'].search([('id' , '=', object.freights_id.ctx)])"/>
+                <t t-if="len(request.env['inquiry.data'].search([('locale','=' ,object.freights_id.customer_id.lang)], limit = 1))>0">
+                    <t t-set="k" t-value="request.env['inquiry.data'].search([('locale','=' ,object.freights_id.customer_id.lang)], limit = 1)" />
+                </t>
+                <t t-else="">
+                    <t t-set="k" t-value="request.env['inquiry.data'].search([('locale.code','=','en_US')], limit = 1)" />
+                </t>
+                <t t-out="k.text_l1"/><br/>
+                <!-- <t t-out="object.freights_id.customer_id.name"/> -->
+                <t t-out="k.text_l2"/>
+                <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        <br/>
+
+                        <table style="margin-top:20px; width:700px;" class="table" >
+                            <tr>
+                                <td style="border:  1px solid black;text-align:left ; vertical-align: middle;">
+                                    <strong>Reference</strong>
+                                    <!-- <span t-esc="inquiry"/> -->
+                                    
+                                </td>
+                                <td style="border:  1px solid black;text-align: left ; vertical-align: middle; ">
+                                    <span t-out="object.freights_id.ref_num"/>
+                                </td>
+                            </tr>
+                             <tr>
+                                <td style="border:  1px solid black;text-align: left; vertical-align: middle;">
+                                    <strong>Mode</strong>
+                                </td>
+                                <td style="border:  1px solid black;text-align: left; vertical-align: middle;">
+                                    <t t-foreach='inquiry.freigths_type' t-as='type'>
+                                        <span t-field="type.display_name"/>
+                                    </t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                    <strong>Freight Term</strong>
+                                </td>
+                                <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                    <span t-esc="object.freights_id.origin_term.code"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                    <strong>From</strong>
+                                </td>
+                                <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                    <span t-esc="inquiry.origin_point_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                    <strong>To</strong>
+                                </td>
+                                <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                    <span t-esc="inquiry.destination_point_id.name"/>
+                                </td>
+                            </tr> 
+                            <t t-if="inquiry.freigths_type.display_name== 'FCL'">
+                                <tr>
+                                    <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                        <strong>Route</strong>
+                                    </td>
+                                    <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                        <t t-foreach='inquiry.route_id' t-as='route'>
+                                            <span t-field="route.display_name"/>
+                                        </t>
+                                    </td>
+                                </tr>
+
+                            </t>
+                            
+                            <t t-if="object.freights_id.temperature">
+                                <tr>
+                                    <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                        <strong>Temperature Degree</strong>
+                                    </td>
+                                    <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                        <span t-field="object.freights_id.temperature"/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <t t-if="object.freights_id.origin_term.code == 'EXW' and object.freights_id.origin_point_id == object.freights_id.origin_point_id ">
+                                <tr>
+                                    <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                        <strong>Pick up address</strong>
+                                    </td>
+                                    <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                        <span t-esc="object.freights_id.pickup_address"/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <t t-if="object.freights_id.destination_term.display_name == 'EXW' and object.freights_id.destination_point_id == object.freights_id.destination_point_id ">
+                                <tr>
+                                    <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                        <strong>Delivery address</strong>
+                                    </td>
+                                    <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                        <span t-esc="object.freights_id.delivery_address"/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                    <strong>Cargo name</strong>
+                                </td>
+                                <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                    <span t-esc="object.freights_id.notes"/>
+                                </td>
+                            </tr>
+                             <t t-if="object.freights_id.hs_code">
+                                <tr>
+                                    <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                        <strong>HS Code</strong>
+                                    </td>
+                                    <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                        <span t-esc="object.freights_id.hs_code"/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <t t-if="len(inquiry.freigths_type)>0">
+                                <t t-if="inquiry.freigths_type[0].display_name== 'FCL'">
+                                    <tr>
+                                        <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                            <strong>Container type</strong>
+                                        </td>
+                                        <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                            <span>
+                                                <t t-out="inquiry.container_type.name"/> /
+                                                <t t-foreach="object.freights_id.taras_id" t-as="tara">
+                                                    <t t-out="tara.name"/>,
+                                                </t>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                            <tr>
+                                <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                    <strong>Cargo details</strong>
+                                </td>
+                                <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                    <t t-if="object.freights_id.package_qty">
+                                        <span t-esc="object.freights_id.package_qty"/>pcs, 
+                                    </t>
+                                    <t t-if="object.freights_id.volume">
+                                        <span t-esc="object.freights_id.volume"/>cbm, 
+                                    </t>
+                                     <t t-if="object.freights_id.gross">
+                                        <span t-esc="object.freights_id.gross"/>kg, 
+                                    </t>
+                                </td>
+                            </tr>
+                            <t t-if="inquiry.freigths_type.display_name == 'FCL'">
+                                <tr>
+                                    <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                        <strong>Shipping line</strong>
+                                    </td>
+                                    <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                       
+                                    </td>
+                                </tr>
+                            </t>
+                            <t t-if="inquiry.freigths_type.display_name == 'FTL'">
+                                <tr>
+                                    <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                        <strong>Dimension</strong>
+                                    </td>
+                                    <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                        <strong>Gross weight</strong>
+                                    </td>
+                                    <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                        <span t-field="object.freights_id.gross"/>kg, 
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                    <strong>Cargo Status</strong>
+                                </td>
+                                <td style="border: 1px solid black;text-align: left; vertical-align: middle;">
+                                    <t t-if="object.freights_id.dangerous_goods">
+                                        <span>Dangerous</span>
+                                    </t>
+                                    <t t-else="">
+                                        <span>Normal</span>
+                                    </t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black;text-align: left;text-color: gray ; vertical-align: middle;">
+                                    <strong>Remark</strong>
+                                </td>
+                                <td style="border: 1px solid black;text-align: left;  vertical-align: middle;">
+                                    <span t-esc="object.freights_id.notice"/>
+                                </td>
+                            </tr> 
+                        </table>
+                        <br/>
+                        <br/>
+                        
+                        <t t-out="k.text_l3"/><br/>
+                        <t t-out="k.text_l4"/><br/>
+                        <t t-out="k.text_l5"/><br/>
+                        <t t-if="user.signature">
+                            <br/>
+                            <t t-out="user.signature or ''">
+                                <br/>
+                            </t>
+                        </t>
+                    </p>
+                </div>
+            </field>
+            <field name="auto_delete" eval="True"/> 
+        </record>
+    </data>
+    
+
+</odoo>

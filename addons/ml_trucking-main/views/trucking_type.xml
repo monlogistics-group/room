@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Umbaa. 2022-10-24
+ -->
+<odoo>
+    
+    <!-- <record id="ml_trucking_type_form_view" model="ir.ui.view">
+        <field name="name">mltrucking.type.form</field>
+        <field name="model">mltrucking.type</field>
+        <field name="arch" type="xml">
+            <form string="Trucking types">
+                <sheet>
+                    <group>
+                        <field name="sequence" widget="handle"/>
+                        <field name="type_name" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record> -->
+    
+    <record id="ml_trucking_type_tree_view" model="ir.ui.view">
+        <field name="name">mltrucking.type.tree</field>
+        <field name="model">mltrucking.type</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Trucking types">
+                <field name="sequence" widget="handle"/>
+                <field name="type_name" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="ml_trucking_type_action" model="ir.actions.act_window">
+        <field name="name">Trucking types</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mltrucking.type</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                LMS Monlogistics Holding LLC © 2023 он. Version 0.0.1
+            </p><p>
+                Trucking types are used to LMS trucking module.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_trucking_type"
+        name="Trucking type"
+        action="ml_trucking_type_action"
+        parent="menu_trucking_master"
+        groups=""
+        sequence="17"
+    />
+
+    <!-- <record id="res_partner_form_inherit_trucking_agent" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.trucking.agent</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="type_name" />
+            </xpath>
+        </field>
+    </record> -->
+
+</odoo>

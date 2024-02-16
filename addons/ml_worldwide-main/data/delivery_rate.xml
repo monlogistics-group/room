@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="delivery_vehicle" model="delivery.vehicle">
+        <field name="name">Trailer</field>
+        <field name="sequence">0</field>
+        <field name="active">1</field>
+    </record>
+    <record id="delivery_vehicle2" model="delivery.vehicle">
+        <field name="name">Shalaanz</field>
+        <field name="sequence">1</field>
+        <field name="active">1</field>
+    </record>
+    <record id="delivery_vehicle3" model="delivery.vehicle">
+        <field name="name">Mayti MLW</field>
+        <field name="sequence">2</field>
+        <field name="active">1</field>
+    </record>
+    <record id="delivery_vehicle4" model="delivery.vehicle">
+        <field name="name">Mayti</field>
+        <field name="sequence">3</field>
+        <field name="active">1</field>
+    </record>
+    <record id="delivery_vehicle5" model="delivery.vehicle">
+        <field name="name">Porter</field>
+        <field name="sequence">4</field>
+        <field name="active">1</field>
+    </record>
+    <record id="delivery_vehicle6" model="delivery.vehicle">
+        <field name="name">Hiace</field>
+        <field name="sequence">5</field>
+        <field name="active">1</field>
+    </record>
+        <record id="delivery_zone" model="delivery.zone">
+        <field name="name">I zone</field>
+        <field name="sequence">0</field>
+        <field name="active">1</field>
+    </record>
+    <record id="delivery_zone2" model="delivery.zone">
+        <field name="name">II zone</field>
+        <field name="sequence">1</field>
+        <field name="active">1</field>
+    </record>
+    <record id="delivery_zone3" model="delivery.zone">
+        <field name="name">III zone</field>
+        <field name="sequence">2</field>
+        <field name="active">1</field>
+    </record>
+</odoo>

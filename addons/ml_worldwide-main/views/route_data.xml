@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Ariuka.
+ -->
+<odoo>
+    
+    <record id="freight_route_data_form_view" model="ir.ui.view">
+        <field name="name">route.data.form</field>
+        <field name="model">route.data</field>
+        <field name="arch" type="xml">
+            <form string="Route ship data">
+                <sheet>
+                    <group>
+                        <field name="freight_con"/>
+                        <field name="ltl"/>
+                        <field name="sender"/>
+                        <field name="officer"/>
+                        <field name="lang"/>
+                        <field name="terminal_name"/>
+                        <field name="document"/>
+                        <field name="number"/>
+                        <field name="eta"/>
+                        <field name="etd"/>
+                        <field name="atd"/>
+                        <field name="ata"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="freight_route_data_tree_view" model="ir.ui.view">
+        <field name="name">route.data.tree</field>
+        <field name="model">route.data</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Route ship data">
+                <field name="freight_con"/>
+                <field name="ltl"/>
+                <field name="sender"/>
+                <field name="officer"/>
+                <field name="lang"/>
+                <field name="terminal_name"/>
+                <field name="document"/>
+                <field name="number"/>
+                <field name="eta"/>
+                <field name="etd"/>
+                <field name="atd"/>
+                <field name="ata"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="freight_route_data_action" model="ir.actions.act_window">
+        <field name="name"> Route ship data</field>
+        <field name="type">ir.actions.act_window</field>  
+        <field name="res_model">route.data</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+    </record>
+
+    <menuitem id="menu_route_data"
+            name="Route ship data"
+            action="freight_route_data_action"
+            parent="menu_worldwide_configuration"
+            groups=""
+            sequence="551"/>
+    </odoo>          

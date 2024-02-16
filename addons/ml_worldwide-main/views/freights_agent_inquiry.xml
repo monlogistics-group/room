@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="freights_agent_inquiry_view_filter" model="ir.ui.view">
+        <field name="name">freights.agent.inquiry.view.search</field>
+        <field name="model">freights.agent.inquiry</field>
+        <field name="arch" type="xml">
+            <search string="Search Operations">
+                <field name="agent_id"/>
+                <field name="origin_point_id"/>
+                <field name="destination_point_id"/>
+                <separator/>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="freights_agent_inquiry_form_view">
+        <field name="name">freights.agent.inquiry.form</field>
+        <field name="model">freights.agent.inquiry</field>
+        <field name="arch" type="xml">
+            <form string="Inquiries">
+                <header>
+                    <field name='checker' invisible='1'/>
+                    <button name="action_inquiry_email_send" string="Send by Email" type="object" context="{'default_inquiry_id': id}" 
+                        default_focus="1" class="oe_highlight" attrs="{'invisible': [('checker','!=', False)]}"/>                    
+                 </header>
+                <group>
+                    <group>
+                        <button name='update_or_add_agents' type='object' string='Add' attrs="{'invisible': [('checker','!=', False)]}"/>
+                        <field name="freights_id" attrs="{'invisible':  [('freights_id', '=', False)]}" readonly='1'/>
+                        <field name="agent_id" readonly='1'>
+                            <kanban>
+                                <field name="id"/>
+                                <field name="color"/>
+                                <field name="name"/>
+                                <field name="title"/>
+                                <field name="type"/>
+                                <field name="email"/>
+                                <field name="parent_id"/>
+                                <field name="is_company"/>
+                                <field name="function"/>
+                                <field name="phone"/>
+                                <field name="street"/>
+                                <field name="street2"/>
+                                <field name="zip"/>
+                                <field name="city"/>
+                                <field name="country_id"/>
+                                <field name="mobile"/>
+                                <field name="state_id"/>
+                                <field name="image_128"/>
+                                <field name="avatar_128"/>
+                                <field name="lang"/>
+                                <field name="comment"/>
+                                <field name="display_name"/>
+                                <templates>
+                                    <t t-name="kanban-box">
+                                        <t t-set="color" t-value="kanban_color(record.color.raw_value)"/>
+                                        <div t-att-class="color + (record.title.raw_value == 1 ? ' oe_kanban_color_alert' : '') + ' oe_kanban_global_click'">
+                                            <div class="o_kanban_image">
+                                                <img alt="Contact image" t-att-src="kanban_image('res.partner', 'avatar_128', record.id.raw_value)"/>
+                                            </div>
+                                            <div class="oe_kanban_details">
+                                                <field name="name"/>
+                                                <div t-if="record.function.raw_value"><field name="function"/></div>
+                                                <div t-if="record.email.raw_value"><field name="email" widget="email"/></div>
+                                                <div t-if="record.type.raw_value != 'contact'">
+                                                    <div>
+                                                        <field name="zip"/>
+                                                        <field name="city"/>
+                                                    </div>
+                                                    <field t-if="record.state_id.raw_value" name="state_id"/>
+                                                    <field name="country_id"/>
+                                                </div>
+                                                <div t-if="record.phone.raw_value">Phone: <t t-esc="record.phone.value"/></div>
+                                                <div t-if="record.mobile.raw_value">Mobile: <t t-esc="record.mobile.value"/></div>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </templates>
+                            </kanban>
+                        </field>
+                        <field name="origin_point_id" attrs="{'readonly': [('checker','!=', False)]}"/>
+                        <field name="destination_point_id" attrs="{'readonly': [('checker','!=', False)]}"/>
+                    </group>
+                    <group>
+                        <field name="freight_type_domain" invisible="1"/>
+                        <field name="fcl_route_domain" invisible="1"/>
+                        <field name="freigths_type" domain="freight_type_domain" attrs="{'readonly': [('checker','!=', False)]}"/>
+                        <field name="route_id" domain="fcl_route_domain" attrs="{'readonly': [('checker','!=', False)],'invisible': [('show_tara','!=', True)],'required' : [('show_tara','=',True)]}" options="{'no_create': True, 'no_create_edit':True}"/>
+                        <field name="show_tara" invisible="1"/>
+                        <field name="show_volgross" invisible="1"/>
+                        <field name="taras_id" widget="many2many_tags" attrs="{'readonly': [('checker','!=', False)],'invisible': [('show_tara','!=', True)],'required' : [('show_tara','=',True)]}" options="{'no_create': True, 'no_create_edit':True}"/>
+                        <field name="container_type" attrs="{'readonly': [('checker','!=', False)],'invisible': [('show_tara','!=', True)],'required' : [('show_tara','=',True)]}" options="{'no_create': True, 'no_create_edit':True}"/>
+                        <field name="shipping_line" attrs="{'readonly': [('checker','!=', False)],'invisible': [('show_tara','!=', True)]}" options="{'no_create': True, 'no_create_edit':True}"/>
+                        <field name="volume" attrs="{'invisible': [('show_volgross','!=', True)],'required' : [('show_volgross','=',True)],'readonly': [('checker','!=', False)]}" />
+                        <field name="gross" attrs="{'invisible': [('show_volgross','!=', True)],'required' : [('show_volgross','=',True)], 'readonly': [('checker','!=', False)]}" />
+                        <field name="remark" attrs="{'readonly': [('checker','!=', False)]}"/>
+                    </group>
+                </group>
+                <notebook>
+                    <page  string="Agent cost" name="costs">
+                        <header>
+                        </header>
+                        <field name="agent_costs_ids" mode="tree" delete="0">
+                            <tree string="Agent costs" expand="1" editable="bottom" no_open="1" create="1" delete="0" >
+                                <field name="agent_id" />
+                                <field name="ett" />
+                                <field name="transport_type" />
+                                <field name="currency_id" />
+                                <field name="service_cost" widget="monetary"/>
+                                <field name="valid_until_date" />
+                                <field name="remark" />
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="freights_agent_inquiry_a_tree_view">
+        <field name="name">freights.agent.inquiry.tree</field>
+        <field name="model">freights.agent.inquiry</field>
+        <field name="arch" type="xml">
+            <tree string="Inquiries">
+                <field name="agent_id"/>
+                <field name="origin_point_id"/>
+                <field name="destination_point_id"/>
+                <field name="freigths_type"/>
+                <field name="taras_id" widget="many2many_tags"/>
+                <field name="container_type"/>
+                <field name="remark"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="freights_agent_inquiry_kanban_view" model="ir.ui.view">
+        <field name="name">freights.agent.inquiry.kanban</field>
+        <field name="model">freights.agent.inquiry</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="name"/>
+                <field name="gross" />
+                <field name="volume" />
+                <field name="remark" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong><field name="name"/></strong>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <span class="badge badge-pill"><t t-esc="record.gross.value"/></span>
+                                </div>
+                            </div>
+                            <div>
+                                <strong>Volume: </strong><t t-esc="record.volume.value"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="freights_agent_inquiry_pivot_view" model="ir.ui.view">
+        <field name="name">freights.agent.inquiry.pivot</field>
+        <field name="model">freights.agent.inquiry</field>
+        <field name="arch" type="xml">
+            <pivot string="Freights service" sample="1">
+                <field name="agent_id" type="col"/>
+                <field name="gross" type="row"/>
+                <field name="volume" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+    <record id="freights_agent_inquiry_graph_view" model="ir.ui.view">
+        <field name="name">freights.agent.inquiry.graph</field>
+        <field name="model">freights.agent.inquiry</field>
+        <field name="arch" type="xml">
+            <graph string="Freights service" type="line" sample="1">
+                <field name="agent_id"/>
+                <field name="volume" type="measure"/>
+            </graph>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="freights_agent_inquiry_view_action">
+        <field name="name">Inquiries</field>
+        <field name="res_model">freights.agent.inquiry</field>
+        <field name="view_mode">tree,form,kanban,pivot,graph</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new Inquiries.
+            </p>
+        </field>
+    </record>
+    <menuitem id="menu_freights_agent_inquiry"
+            name="Inquiries"
+            action="freights_agent_inquiry_view_action"
+            parent="menu_worldwide_master"
+            groups=""
+            sequence="151"/>
+</odoo>

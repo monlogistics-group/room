@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Javkha. 2023-04-13
+ -->
+<odoo>
+
+    <record id="mlworldwide_cargo_receipt_form_view" model="ir.ui.view">
+        <field name="name">cargo.receipt.data.form</field>
+        <field name="model">cargo.receipt.data</field>
+        <field name="arch" type="xml">
+            <form string="Cargo receipt">
+             	<sheet>
+                    <group>
+                        <field name="title"/>
+                        <field name="ref"/>
+                        <field name="type"/>
+                        <field name="date"/>
+                        <field name="address"/>
+                        <field name="goods_name"/>
+                        <field name="quantity"/>
+                        <field name="terminal"/>
+                        <field name="shipper"/>
+                        <field name="consignee"/>
+                        <field name="condition"/>
+                        <field name="operation"/>
+                        <field name="container_num"/>
+                        <field name="arrived_date"/>
+                        <field name="received_date"/>
+                        <field name="note"/>
+                        <field name="freight_forwarder"/>
+                        <field name="name"/>
+                        <field name="forwarder_signature"/>
+                        <field name="consignee"/>
+                        <field name="consignee_name"/>
+                        <field name="consignee_signature"/>
+                        <field name="notice"/>
+                        <field name="locale"/>
+                        <field name="data"/>
+                        <field name='cargo'/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mlworldwide_cargo_receipt_tree_view" model="ir.ui.view">
+        <field name="name">cargo.receipt.data.tree</field>
+        <field name="model">cargo.receipt.data</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Cargo receipt">
+                        <field name="title"/>
+                        <field name="ref"/>
+                        <field name="type"/>
+                        <field name="date"/>
+                        <field name="address"/>
+                        <field name="goods_name"/>
+                        <field name="quantity"/>
+                        <field name="terminal"/>
+                        <field name="shipper"/>
+                        <field name="consignee"/>
+                        <field name="condition"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="mlworldwide_cargo_receipt_action" model="ir.actions.act_window">
+        <field name="name">Cargo receipt</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cargo.receipt.data</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Define a new pages
+            </p><p>
+                Freights app are used to Pages module.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_mlworldwide_cargo_receipt"
+        name="Cargo receipt"
+        action="mlworldwide_cargo_receipt_action"
+        parent="menu_worldwide_master_data"
+        groups=""
+        sequence="501"
+    />
+</odoo>

@@ -1,0 +1,106 @@
+<odoo>
+    
+    <data>
+        <record id="email_all_template_name" model="mail.template">
+            <field name="name">Trucking Trasnport Email All Template</field>
+            <field name="model_id" ref="ml_worldwide-main.model_freight_transient"/>
+            <field name="email_from">{{object.freight_id.employee.work_email}}</field>
+            <field name="email_to">{{object.freight_id.customer_id.email}}</field>
+            <field name="subject">ajsdoijasodi</field>
+            <field name="body_html" type="html">
+                    <t t-foreach="object.freight_id" t-as="freight">
+                        <table style="margin-top:20px;width:100%;border-left:1px solid #555555; border-right:1px solid #555555;border-top:1px solid #555555" cellspacing="0" cellpadding="0">
+                            <tbody>
+                                <tr>
+                                    <td style="width:100%;background-color:#20226d;color:white;padding:5px 10px;text-align:left;text-transform:uppercase;font-size:12px">
+                                        <strong><t t-out="freight.ref_num"/></strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-top:5px;padding-right:10px;text-align:left;text-transform:uppercase ; font-size:12px">
+                                        <t t-out="object.route_data.freight_con"/>:
+                                        <t t-out="freight.origin_point_id.name"/>-<t t-out="freight.destination_point_id.name"/>  
+                                    </td>
+                                        
+                                </tr>
+                                <tr>
+                                    <td style="padding-top:5px;padding-right:10px;text-align:left; ; text-transform:uppercase ; font-size:12px">
+                                        <t t-out="object.route_data.terminal_name"/>:
+                                        <t t-esc="freight.terminal_id.name"/>  
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-top:5px;padding-right:10px;text-align:left;text-transform:uppercase ; font-size:12px">
+                                        <t t-out="object.route_data.document"/>:  
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-top:5px;padding-right:10px;text-align:left;text-transform:uppercase ; font-size:12px">
+                                        <t t-out="object.route_data.sender"/>:
+                                        <t t-esc="freight.customer_id.name"/>  
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-top:5px;padding-right:10px;text-align:left;text-transform:uppercase ; font-size:12px">
+                                        <t t-out="object.route_data.officer"/>:
+                                        <t t-esc="freight.employee.name"/>(<t t-esc="freight.employee.work_email"/> ,  <t t-esc="freight.employee.work_phone"/>)  
+                                    </td>
+                                </tr>
+                                <br/>
+                            </tbody>    
+                        </table>
+                        <table style="width:100%;border-left:1px solid #42515e; border-right:1px solid #555555;border-top:1px solid #555555" cellspacing="0" cellpadding="0">
+                            <thead>
+                                <tr style="font-size:11px ; width:100% ">
+                                    <!-- <th name="#" style="border-right:1px solid #42515e;border-bottom:1px solid #42515e">#</th> -->                                                                                <th name="number" style=" border-right:1px solid #42515e;border-bottom:1px solid #42515e ;width:6vw">
+                                        
+                                        
+                                        <t t-esc="object.route_data.number"/>
+                                            
+                                    </th>
+                                    <t t-foreach="freight.freights_route" t-as="route">
+                                        <th name="route" style=" border-right:1px solid #42515e;border-bottom:1px solid #42515e ; width:12vw">
+                                            <t t-esc="route.point.name"/>
+                                        </th>         
+                                    </t>
+                                </tr>
+
+                            </thead>
+                            <t t-foreach="freight.freights_shipment" t-as="shipment">
+                                <t t-if="len(freight.freights_shipment) >=1">
+                                    <tbody style="border-left:1px solid #42515e; border-right:1px solid #42515e;border-bottom:1px solid #42515e">
+                                        <tr>
+                                            
+                                            <td name="number"  style="border-right:1px solid #42515e;border-bottom:1px solid #42515e">
+
+                                                    <t t-esc="shipment.track_number"/>
+                                            </td>
+                                            <t t-foreach="freight.freights_routes_shipment" t-as="time">
+                                                
+                                                <t t-if="shipment.id==time.shipment_id.id">
+                                                    <td name="number"  style="border-right:1px solid #42515e;border-bottom:1px solid #42515e">                                                            
+                                                            <t t-out="object.route_data.ata"/>:
+                                                            <t t-esc="time.ata_date"/>
+                                                            <t t-out="object.route_data.atd"/>:
+                                                            <t t-esc="time.atd_date"/>
+    
+                                                    </td>
+                                                </t>
+                                                
+                                                
+                                            </t>
+                                        </tr>
+                                    
+                                        
+                                    </tbody>
+                                </t>
+
+                            </t>
+                        </table>
+
+                    </t> 
+                    
+            </field>
+        </record>
+    </data>
+ </odoo>

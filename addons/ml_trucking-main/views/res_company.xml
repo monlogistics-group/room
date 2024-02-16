@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mltrucking_view_company_form" model="ir.ui.view">
+            <field name="name">res.company.form.inherit</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='favicon']" position="after">
+                     <field name="other_logos"/>
+                     <field name="law_text"/>
+                     <field name="step_sign"/>
+                     <field name="bank_name"/>
+                     <field name="bank_number"/>
+                     <field name="bank_title"/>
+                     <field name="bank_info_l1"/>
+                     <field name="bank_info_l2"/>
+                     <field name="bank_info_l3"/>
+                     <field name="bank_info_l4"/>
+                </xpath> 
+            </field>
+        </record>
+    </data>
+</odoo>

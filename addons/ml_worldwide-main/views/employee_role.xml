@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Ariuka.
+ -->
+<odoo>
+    
+    <!-- <record id="employee_role_form_view" model="ir.ui.view">
+        <field name="name">freights.employee.role.form</field>
+        <field name="model">freights.employee.role</field>
+        <field name="arch" type="xml">
+            <form string="demurrages">
+                <sheet>
+                    <group>
+                        <field name="role_name"/>
+                        <field name="employee"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record> -->
+    <record id="employee_role_tree_view" model="ir.ui.view">
+        <field name="name">freights.employee.role.tree</field>
+        <field name="model">freights.employee.role</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Demurrages">
+                <field name="role_name"/>
+                <field name="employee"/>
+            </tree>
+        </field>
+    </record>
+    <record id="employee_role_action" model="ir.actions.act_window">
+        <field name="name">employee role</field>
+        <field name="type">ir.actions.act_window</field>  
+        <field name="res_model">freights.employee.role</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" eval="False"/>
+    </record>
+    <menuitem id="menu_employee_role"
+            name="Employee role"
+            action="employee_role_action"
+            parent="menu_worldwide_etc"
+            groups=""
+            sequence="119"/>
+</odoo>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="freights_stations_form_view">
+            <field name="name">freight.stations.form</field>
+            <field name="model">freight.stations</field>
+            <field name="arch" type="xml">
+                <form string="Container type">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="code"/>
+                                <field name="director"/>
+                                <field name="contact"/>
+                            </group>
+                            <group>
+                                <field name="name"/>
+                                <field name="prefix"/>
+                                <field name="transporter"/>
+                                <field name="ubtz_code"/>
+                                <field name="ubtz_country_code"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="freights_stations_tree_view">
+            <field name="name">freight.stations.tree</field>
+            <field name="model">freight.stations</field>
+            <field name="arch" type="xml">
+                <tree string="freights Container type">
+                    <field name="code"/>
+                    <field name="director"/>
+                    <field name="contact"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="freights_stations_view_action">
+            <field name="name">freights stations</field>
+            <field name="res_model">freight.stations</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new port.
+                </p>
+            </field>
+        </record>
+        <menuitem id="menu_freights_stations"
+            name="Freight Stations"
+            action="freights_stations_view_action"
+            parent="menu_worldwide_configuration"
+            groups=""
+            sequence="150"/>
+    </data>
+</odoo>

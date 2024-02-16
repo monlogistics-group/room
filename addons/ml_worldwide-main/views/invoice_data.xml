@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Ariuka.
+ -->
+<odoo>
+    <record id="freight_invoice_data_form_view" model="ir.ui.view">
+        <field name="name">mlworldwide.invoice.data.form</field>
+        <field name="model">mlworldwide.invoice.data</field>
+        <field name="arch" type="xml">
+            <form string="Invoice Data">
+                <sheet>
+                    <group>
+                        <field name="invoice_address"/>
+                        <field name="invoice_phone"/>
+                        <field name="invoice_title"/>
+                        <field name="invoice_num"/>
+                        <field name="invoice_date"/>
+                        <field name="invoice_duedate"/>
+                        <field name="payer"/>
+                        <field name="payer_number"/>
+                        <field name="freights_num"/>
+                        <field name="cargo_name"/>
+                        <field name="package_qty"/>
+                        <field name="shipment_name_fcl"/>
+                        <field name="shipment_name_lcl"/>
+                        <field name="shipment_name_ftl"/>
+                        <field name="shipment_name_ltl"/>
+                        <field name="shipment_name_air"/>
+                        <field name="shipment_name_train"/>
+                        <field name="shipment_name_wgn"/>
+                        <field name="shipment_name_multimodal"/>
+                        <field name="table_head_num"/>
+                        <field name="table_head_desc"/>
+                        <field name="table_head_qty"/>
+                        <field name="table_head_price"/>
+                        <field name="table_head_subtotal"/>
+                        <field name="total_price"/>
+                        <field name="abroad_title"/>
+                        <field name="domestic_title"/>
+                        <field name="note_msg"/>
+                        <field name="direct_name"/>
+                        <field name="nuot"/>
+                        <field name="lang"/>
+                        <field name="bank_name"/>
+                        <field name="mnt"/>
+                        <field name="usd"/>
+                        <field name="eur"/>
+                        <field name="cny"/>
+                        <field name="rub"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="freight_invoice_data_tree_view" model="ir.ui.view">
+        <field name="name">mlworldwide.invoice.data.tree</field>
+        <field name="model">mlworldwide.invoice.data</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Invoice Data">
+                <field name="invoice_address"/>
+                <field name="invoice_phone"/>
+                <field name="invoice_title"/>
+                <field name="invoice_num"/>
+                <field name="invoice_date"/>
+                <field name="invoice_duedate" optional="hide"/>
+                <field name="payer" optional="hide"/>
+                <field name="payer_number" optional="hide"/>
+                <field name="freights_num" optional="hide"/>
+                <field name="cargo_name" optional="hide"/>
+                <field name="package_qty" optional="hide"/>
+                <field name="shipper_name" optional="hide"/>
+                <field name="table_head_num" optional="hide"/>
+                <field name="table_head_desc" optional="hide"/>
+                <field name="table_head_qty" optional="hide"/>
+                <field name="table_head_price" optional="hide"/>
+                <field name="table_head_subtotal" optional="hide"/>
+                <field name="total_price" optional="hide"/>
+                <field name="abroad_title" optional="hide"/>
+                <field name="domestic_title" optional="hide"/>
+                <field name="note_msg" optional="hide"/>
+                <field name="direct_name" optional="hide"/>
+                <field name="nuot" optional="hide"/>
+                <field name="lang"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="freight_invoice_data_action" model="ir.actions.act_window">
+        <field name="name">Invoice Data</field>
+        <field name="type">ir.actions.act_window</field>  
+        <field name="res_model">mlworldwide.invoice.data</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+    </record>
+
+    <menuitem id="menu_invoice_data"
+        name="invoice data"
+        action="freight_invoice_data_action"
+        parent="menu_worldwide_configuration"
+        groups=""
+        sequence="552"/>
+</odoo>

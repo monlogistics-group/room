@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Ariuka. 2022-11-7
+ -->
+<odoo>
+
+    <template id="shipment_order">
+        <t t-call="ml_worldwide-main.mlworldwide_empty_blank">
+            <t t-set="doc" t-value="doc.with_context(lang=base_lang)"/>
+            <t t-if="len(request.env['shipment.order.data'].search([('locale.code','=' ,base_lang)], limit = 1))>0">
+                <t t-set="k" t-value="request.env['shipment.order.data'].search([('locale.code','=' ,base_lang)], limit = 1)" />
+            </t>
+            <t t-else="">
+                <t t-set="k" t-value="request.env['shipment.order.data'].search([('locale.code','=','en_US')], limit = 1)" />
+            </t>
+            <!-- <t t-set="quotation" t-value="request.env['freights.quotations'].search([('id','=' ,doc.base_id)], limit = 1)"/> -->
+            <div class="row" style="border-bottom: 1px solid black;!important; margin-left:5px" >
+                <div name="header" class="col-6" style="margin-top: 4px ">
+                    <div class="text-left mb4" style="margin-bottom:10px;">
+
+                        <img t-if="doc.freights_id.company_id.logo" t-att-src="image_data_uri(doc.freights_id.company_id.logo)" style="max-height:30px;" alt="Logo"/>
+                        <div style="margin-top:10px">
+                            <span t-field="doc.freights_id.company_id.partner_id.name" class="font-weight-bold text-uppercase"/>
+                        </div>
+                        <div>
+                            Address:
+                            <span t-field="doc.freights_id.company_id.partner_id.street"/>
+                            <span t-field="doc.freights_id.company_id.partner_id.street2"/>
+                        </div>
+                        <div>
+                            <span t-field="doc.freights_id.company_id.partner_id.city"/>
+                            <span t-field="doc.freights_id.company_id.partner_id.state_id"/>
+                            <span t-field="doc.freights_id.company_id.partner_id.zip"/>
+                            Phone:
+                            <span t-if="doc.freights_id.company_id.partner_id.phone" t-field="doc.freights_id.company_id.partner_id.phone"/>
+                            <span t-if="doc.freights_id.company_id.partner_id.mobile" t-field="doc.freights_id.company_id.partner_id.mobile"/>
+                            <span t-field="doc.freights_id.company_id.partner_id.country_id"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 text-uppercase">
+                    <div class="container">
+                        <div class="font-weight-bold"
+                             style="margin-top: 20px; text-align: center; font-size: 1.1rem">
+                             <strong><span t-field ="k.ship_conf"></span></strong>
+                        </div>
+                        <div style="margin-top: 20px" class="row">
+                            <div class="text-left col-8 font-weight-bold" style="font-size:12px"><span t-field ="k.title_name"></span>:</div>
+                            <div class="" style="font-size:12px"><t t-out="doc.freights_id.ref_num"/></div>
+                        </div>
+                        <div class="row">
+                            <div class="text-left col-8 font-weight-bold" style="font-size:12px"><span t-field ="k.ship_type"></span>:</div>
+                            <div class="" style="font-size:12px"><t t-out="doc.freights_type_ids.type_name"/></div>
+                        </div>
+                        <div class="row">
+                            <div class="text-left col-8 font-weight-bold" style="font-size:12px"><span t-field ="k.ship_date"></span>:</div>
+                            <div class="" style="font-size:12px; " t-out="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>
+                        </div>
+                        <div class="row">
+                            <div class="text-left col-8 font-weight-bold" style="font-size:12px"><span t-field ="k.ship_to"></span>:</div>
+                            <div class=" " style="font-size:12px"><t t-out="doc.freights_id.customer_id.name"/></div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div  class="page" style="font-size:12px ; " >   
+                <br/>
+                <div class="oe_structure"  />
+                <div style="margin-left: -10px;">
+                
+                    
+                        <div class="col-auto col-3 mw-100 mb-2" >
+                            <strong><span t-field ="k.package_name"></span>:</strong><t t-out="doc.freights_id.notes"/>                   
+                                
+                        </div>
+                        <t t-if="doc.freights_id.remark != ''">
+                            <div class="col-auto col-3 mw-100 mb-2" >
+                                <strong><span t-field ="k.notice"></span>:</strong><t t-out="doc.freights_id.remark"/>
+                            </div>
+                        </t>
+                        
+                        <div class="col-auto col-3 mw-100 mb-2" >
+                            <strong><span t-field ="k.package_desc"></span>:</strong>
+                                <t t-if="doc.freights_type_ids.display_name == 'FCL'">
+                                    <t t-out="doc.taras_ids.name"/>x<t t-out="doc.freights_id.shipment_qty"/>
+                                </t>
+                                <t t-if="doc.freights_type_ids.display_name == 'FTL'">
+                                    <span>Truck</span>
+                                </t>
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2 ">
+                            <strong><span t-field ="k.package_qty"></span>:</strong>
+                            <t t-out="doc.freights_id.shipment_qty"/>
+                        </div>
+                        <t t-if="doc.freights_id.ref == True">
+                            <div class="col-auto col-3 mw-100 mb-2 ">
+                                <strong><span t-field ="k.temp_deg"></span>:</strong>
+                                <t t-out="doc.freights_id.temperature"/>
+                            </div>
+                        </t>
+                        <t t-foreach="doc.freights_id" t-as="name">
+                            <div class="col-auto col-3 mw-100 mb-2">
+                                <strong><span t-field ="k.package_vendor"></span>:</strong>
+                                <t t-if="len(name.contributor_ids) > 0">
+                                    <t t-foreach="name.contributor_ids" t-as="conts">
+                                        <t t-if="conts.role_name == 'operation'">
+                                            <t t-out="name.employee.name"/>,<t t-out="name.employee.work_phone"/>,<t t-out="name.employee.work_email"/>
+                                        </t>
+                                        <t t-if="conts.role_name == 'sales'">
+                                            
+                                            <t t-out="name.employee.name"/>,<t t-out="name.employee.work_phone"/>,<t t-out="name.employee.work_email"/>
+                                        </t>
+                                    </t>
+                                </t>
+                                <t t-else="">
+                                    <t t-out="name.employee.name"/>,<t t-out="name.employee.work_phone"/>,<t t-out="name.employee.work_email"/>
+                                </t>
+                            </div>
+                        </t>
+
+                        <!-- <div class="col-auto col-3 mw-100 mb-2">
+                            <strong><span t-field ="k.package_vendor"></span>:</strong>
+                            <t t-out="doc.freights_id.shipper_info"/>
+                        </div> -->
+                        <div class="col-auto col-3 mw-100 mb-2" >
+                            <strong><span t-field ="k.package_con"></span>:</strong>
+                            <span t-field="doc.freights_id.customer_id.name"></span>
+                                
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2" >
+                            <strong><span t-field ="k.ekso_condi"></span>:</strong>
+                            <t t-out="doc.freights_id.origin_term.code"/>,<t t-out="doc.freights_id.origin_point_id.name"/> - <t t-out="doc.freights_id.destination_point_id.name"/>
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2" >
+                            <strong><span t-field ="k.package_valid_until"></span>:</strong>
+                            <t t-out="doc.ett_min"/>-<t t-out="doc.ett_max"/>
+                            
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2" >
+                            <strong><span t-field ="k.package_rt_name"></span>:</strong>
+                            <t t-out="doc.freights_id.employee.name"/>,<t t-out="doc.freights_id.employee.work_phone"/>,<t t-out="doc.freights_id.employee.work_email"/>
+
+                            
+                        </div>
+                   
+
+                </div>
+                
+            
+                
+                <table class="table table-bordered table-sm o_main_table" style="padding-right: 1em;width:100% ;">
+                    <thead style="display: table-row-group; background-color: #4c749c; color: white;">
+                        <tr>
+                            <th name="th_purpose" class="col-6" ><strong><span t-field ="k.condi_route"></span></strong></th>
+                            <th name="th_rate" class="col-6"><strong><span t-field ="k.package_cost"></span></strong></th>
+                        </tr>
+                    </thead>
+                    <tbody class="sale_tbody">
+                    
+                        <t t-set="from" t-value="a"/>
+                        <t t-foreach="doc.freights_id.freights_route" t-as="obj">
+                            <tr>
+                                <!-- <td>
+                                    <t t-if="from ==a">
+                                        <t t-set="from" t-value="obj.point.name"/>
+                                    </t>
+                                    <t t-else="">
+                                        
+                                            <t t-out="from"/>to
+                                            <t t-out="obj.point.name"/>
+
+                                            <t t-set="from" t-value="obj.point.name"/>
+                                        
+                                    </t>
+                                </td> -->
+                                <t t-if="from ==a">
+                                    <t t-set="from" t-value="obj.point.name"/>
+                                </t>
+                                <t t-else="">
+                                    <td>
+                                        <t t-out="from"/>to
+                                        <t t-out="obj.point.name"/>
+
+                                        <t t-set="from" t-value="obj.point.name"/>
+                                    </td> 
+                                </t>
+                                
+                            </tr>
+                        </t>
+                     
+                    </tbody>
+                </table>
+                <table style="padding-right: 1em;width:100%; margin-left: 2px;">
+                    <tr>
+                        <td>
+                            <strong><span t-field="k.transport_agent"></span>:</strong>
+                            <span t-field="doc.freights_id.employee.address_id"></span>
+                        </td>
+                        <td>
+                            <strong><span t-field="k.costumer_name"></span>:</strong>
+                            <span t-field="doc.freights_id.customer_id.parent_id"></span>
+                        </td>
+                        
+                        
+                    </tr>
+                    <tr>
+                        <td>
+                            <span t-field="k.agent_name"></span>
+                            <div class="row" style="margin-left:5px" ><span t-field="k.sign"></span></div>
+                        </td>
+                        <td>
+                            <span t-field="k.cos_name"></span>
+                            <div class="row" style="margin-left:5px"><span t-field="k.sign"></span></div>
+                        </td>
+                        
+                    </tr>
+                </table>
+                <br/>
+                <div class ="row" style="font-size:15px ; margin-left:-35px;" >
+                    <ul >
+                        <strong><span t-field="k.condi_text"/></strong>
+                        <div style="margin-left:20px;">
+                            <span t-raw="k.condi_texts"/>
+                            
+                        </div>
+                </ul>
+                </div>
+            
+
+            </div>
+        
+        </t>
+        
+    
+    </template>
+
+    <template id="mlworldwide_shipment_order">
+ 
+        <t t-call="web.html_container">
+            
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="base_lang" t-value="doc.freights_id.customer_id.lang"/>
+                <t t-call="ml_worldwide-main.shipment_order" t-lang="base_lang"/>
+            </t>
+            <t t-foreach="doc.freights_id.customer_id.other_lang" t-as="lng">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-set="base_lang" t-value="lng.code"/>
+                    <t t-call="ml_worldwide-main.shipment_order" t-lang="base_lang"/>
+                </t>
+            </t>
+        </t>
+
+    </template>
+
+    <record id="mlworldwide_paper_id" model="report.paperformat">
+        <field name="name">Paperformat</field>
+        <field name="default" eval="False"/>
+        <field name="disable_shrinking" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">8</field>
+        <field name="margin_bottom">32</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        <field name="dpi">96</field>
+    </record> 
+
+    <data>
+        <record id ="mlworldwide_base_shipment_order" model="ir.actions.report">
+            <field name= "name">Order</field>
+            <field name= "model">freights.quotations</field>
+            <field name= "report_type">qweb-pdf</field>
+            <field name= "report_name">ml_worldwide-main.mlworldwide_shipment_order</field>
+            <field name= "report_file">ml_worldwide-main.mlworldwide_shipment_order</field>
+            <field name= "print_report_name">object.ref.replace('/','_')</field>
+            <field name= "binding_model_id" ref ="model_mlworldwide_freights"></field>
+            <field name= "binding_view_types">form</field>
+            <field name= "binding_type">report</field>
+            <field name="paperformat_id" ref="mlworldwide_paper_id"/>
+        </record>
+    </data>
+
+</odoo>

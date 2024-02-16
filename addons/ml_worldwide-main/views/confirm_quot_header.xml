@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Javkha. 2022-12-20
+ -->
+<odoo>
+
+    <record id="mlworldwide_confirm_header_quotation_customer_form_view" model="ir.ui.view">
+        <field name="name">confirm.quot.header.form</field>
+        <field name="model">confirm.quot.header</field>
+        <field name="arch" type="xml">
+            <form string="Confirm header quotation for customer email">
+             	<sheet>
+                    <group>
+                        <field name="locale"/>
+                        <field name="greeting"/>
+                        <field name="desc"/>
+                        <field name="desc2"/>
+                        <field name="desc3"/>
+                        <field name="ref"/>
+                        <field name="sender"/>
+                        <field name="trans_condition"/>
+                        <field name="trans_type"/>
+                        <field name="ending"/>
+                        <field name='hscode'/>
+                        <field name='goods_info'/>
+                        <field name='gross'/>
+                        <field name='volume'/>
+                        <field name='package_qty'/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mlworldwide_confirm_header_quotation_customer_tree_view" model="ir.ui.view">
+        <field name="name">confirm.quot.header.tree</field>
+        <field name="model">confirm.quot.header</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Confirm header quotation agent">
+                        <field name="locale"/>
+                        <field name="greeting"/>
+                        <field name="desc"/>
+                        <field name="desc2"/>
+                        <field name="desc3"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="mlworldwide_confirm_quotation_customer_header_action" model="ir.actions.act_window">
+        <field name="name">Confirm quotation customer email</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">confirm.quot.header</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Define a new pages
+            </p><p>
+                Freights app are used to Pages module.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_mlworldwide_confirm_customer_header_quotation"
+        name="Confirm customer header quotation email"
+        action="mlworldwide_confirm_quotation_customer_header_action"
+        parent="menu_worldwide_master_data"
+        groups=""
+        sequence="24"
+    />
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="route_data1" model="route.data">
+        <field name="freight_con">FREIGHT CONDITION</field>
+        <field name="ltl">LTL</field>
+        <field name="sender">SENDER</field>
+        <field name="officer">OFFICER</field>
+        <field name="lang">1</field>
+        <field name="terminal_name">TERMINAL NAME</field>
+        <field name="document">DOCUMENT</field>
+        <field name="number">SHIPMENT NUMBER</field>
+        <field name="eta">ETA</field>
+        <field name="etd">ETD</field>
+        <field name="atd">ATD</field>
+        <field name="ata">ATA</field>
+    </record>
+</odoo>

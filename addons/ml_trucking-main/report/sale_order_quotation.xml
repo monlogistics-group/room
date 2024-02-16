@@ -1,0 +1,251 @@
+<odoo>
+    <template id="mltrucking_sale_order_email_quotation" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//t[@t-call='web.external_layout']" position="replace">
+            <t t-set="doc" t-value="doc.with_context(lang=base_lang)"/>
+            <t t-set="truck" t-value="request.env['mltrucking.base'].search([('id','=' ,doc.base_id)], limit = 1)"/>
+            <t t-set='lng_array' t-value='[]'/>
+            <t t-set='lng_array_s' t-value="lng_array.append(truck.vendor_id.lang)"/>
+            <t t-foreach='truck.vendor_id.other_lang' t-as='other_base_lng'>
+                <t t-set='lng_array_s' t-value="lng_array.append(other_base_lng.code)"></t>
+            </t>
+            <t t-foreach='lng_array' t-as='lng'>
+                <t t-if="len(request.env['mltrucking.sale.order.quotation.data'].search([('locale.code','=' ,lng)], limit = 1))>0"/>
+                    <t t-set="k" t-value="request.env['mltrucking.sale.order.quotation.data'].search([('locale.code','=' ,lng)], limit = 1)" />
+                    
+                
+                <t t-call="web.basic_layout">
+                    <div class="row" style="border-bottom: 1px solid black;!important; margin-left:5px" >
+                        <div class="header d-flex justify-content-between col-6 " style="font-size: 14px">
+                            <div class="text-left mb4 " style="margin-bottom:10px;">
+                                <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)" style="max-height:45px; " alt="Logo"/>
+                                <div style="margin-top:10px">
+                                    <span t-field="doc.company_id.partner_id.name" class="font-weight-bold text-uppercase"/>
+                                </div>
+                                <div>
+                                    Address:
+                                    <span t-field="doc.company_id.partner_id.street"/>
+                                    <span t-field="doc.company_id.partner_id.street2"/>
+                                </div>
+                                <div>
+                                    <span t-field="doc.company_id.partner_id.city"/>
+                                    <span t-field="doc.company_id.partner_id.state_id"/>
+                                    <span t-field="doc.company_id.partner_id.zip"/>
+                                    Phone:
+                                    <span t-if="doc.company_id.partner_id.phone" t-field="doc.company_id.partner_id.phone"/>
+                                    <span t-if="doc.company_id.partner_id.mobile" t-field="doc.company_id.partner_id.mobile"/>
+                                    <span t-field="doc.company_id.partner_id.country_id"/>
+                                </div>
+                            </div>
+                            <div style="width: 80px  "></div>    
+                            <div class="col-8  text-uppercase" style="margin-top: 10px ; font-size:14px ; margin- left : 10px;">
+                                
+                                <div class="container" style="">
+                                    <div style="font-size:20px ; margin-top: 10px;">
+                                        <strong><span t-field ="k.ship_conf"></span></strong>
+                                    </div>
+                                    <div class="row">
+                                        <span t-field ="k.title_name"></span>:<span t-out="truck.ref"></span>
+                                    
+                                        
+                                    </div>
+                                    <div class="row" >
+                                        <span t-field ="k.ship_type"></span>:
+                                        <t t-foreach="truck.truck_routes" t-as="obj">
+                                            <t t-out="obj.transport" />
+                                        </t>
+                                    </div>
+                                    <div class="row" >
+                                        <span t-field ="k.ship_date"></span>:
+                                        <div  t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>
+                                    </div>
+                                    <div class="row">
+                                        <span t-field ="k.ship_to"></span>:<span t-field ="truck.vendor_id"></span>
+                                    </div>    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                <div  class="page" style="font-size:14px ; " >
+                    
+                    <br/>
+                    <div class="oe_structure"  />
+                    <div style="margin-left: -10px;">
+                        <t t-foreach="truck.truck_package" t-as="package">
+                            <div class="col-auto col-3 mw-100 mb-2" >
+                                <strong><span t-field ="k.package_name"></span>:</strong>                   
+                                    <t t-out="package.name"/>
+                                
+                            </div>
+                            <div class="col-auto col-3 mw-100 mb-2" >
+                                <strong><span t-field ="k.package_desc"></span>:</strong>
+                                    <t t-out="package.length "/>x<t t-out="package.width"/>x<t t-out="package.height"/> ;
+                            </div>
+                            <div class="col-auto col-3 mw-100 mb-2 ">
+                                <strong><span t-field ="k.package_qty"></span>:</strong>
+                                <t t-out="package.quantity"/>
+                            </div>
+                            <div class="col-auto col-3 mw-100 mb-2">
+                                <strong><span t-field ="k.package_vendor"></span>:</strong>
+                                <span t-field="truck.vendor_id"></span>
+                                
+                                
+                            </div>
+                            <div class="col-auto col-3 mw-100 mb-2" >
+                                <strong><span t-field ="k.package_con"></span>:</strong>
+                                <span t-field="truck.vendor_id"></span>
+                                    
+                            </div>
+                            <div class="col-auto col-3 mw-100 mb-2" >
+                                <strong><span t-field ="k.ekso_condi"></span>:</strong>
+                                <t t-foreach="truck.truck_routes" t-as="obj">
+                                    <t t-if="not origin" t-set="origin" t-value="obj.origin.name" />
+                                    <t t-set="dest" t-value="obj.destination.name" />
+                                </t>
+                                
+                                    <t t-esc="origin"/>
+                                    -
+                                    <t t-esc="dest"/>
+            
+                            </div>
+                            <div class="col-auto col-3 mw-100 mb-2" >
+                                <strong><span t-field ="k.package_valid_until"></span>:</strong>
+                                <span t-field="truck.date_diff"></span>
+                                
+                            </div>
+                            <div class="col-auto col-3 mw-100 mb-2" >
+                                <strong><span t-field ="k.package_rt_name"></span>:</strong>
+                                <span t-field="truck.create_uid"/>
+    
+                                
+                            </div>
+                        </t> 
+
+                    </div>
+                    
+             
+                    
+                    <table class="table table-bordered table-sm o_main_table" style="width:235mm; margin-left: 2px;">
+                        <thead style="display: table-row-group; background-color: #4c749c; color: white">
+                            <tr>
+                                <th name="th_purpose" class="col-6" ><strong><span t-field ="k.condi_route"></span></strong></th>
+                                <th name="th_rate" class="col-6"><strong><span t-field ="k.package_cost"></span></strong></th>
+                            </tr>
+                        </thead>
+                        <tbody class="sale_tbody">
+                            <t t-foreach="truck.truck_routes" t-as="obj">
+                                <tr>
+                                    <td>
+                                        <span t-field="obj.origin_city.name"/>
+                                        -
+                                        <span t-field="obj.dest_city.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="truck.total_rate"></span><span t-field="truck.currency_id"></span>
+
+                                    </td>
+                                </tr>                            
+                            
+                        </t>
+                        </tbody>
+                    </table>
+                    <table style="padding-right: 1em;width:100%; margin-left: 2px;">
+                        <tr>
+                            <td>
+                                <strong><span t-field="k.transport_agent"></span>:</strong>
+                                <span t-field="doc.company_id.partner_id.name"></span>
+                            </td>
+                            <td>
+                                <strong><span t-field="k.costumer_name"></span>:</strong>
+                                <span t-field="truck.vendor_id"></span>
+                            </td>
+                            
+                            
+                        </tr>
+                        <tr>
+                            <td>
+                                <span t-field="k.agent_name"></span>
+                                <div class="row" style="margin-left:5px" ><span t-field="k.sign"></span></div>
+                            </td>
+                            <td>
+                                <span t-field="k.cos_name"></span>
+                                <div class="row" style="margin-left:5px"><span t-field="k.sign"></span></div>
+                            </td>
+                            
+                        </tr>
+                    </table>
+                    <br/>
+                    <div class ="row" style="font-size:15px ; margin-left:-35px;" >
+                        <ul >
+                            <strong><span t-field="k.condi_text"/></strong>
+                            <div style="margin-left:20px;">
+                                <span t-raw="k.condi_texts"/>
+                                
+                            </div>
+                    </ul>
+                    </div>
+                
+
+                </div>
+                <div t-attf-class="footer o_company_#{doc.company_id.id}_layout">
+                    <div class="text-center">
+                        <ul class="list-inline">
+                            <li t-if="report_type == 'pdf'" class="list-inline-item text-right">
+                                Page:
+                                <span style="font-family: Ubuntu;" class="page"/>
+                                /
+                                <span class="topage"/>
+                            </li>
+                        </ul>
+                        <t t-foreach="doc.company_id.other_logos" t-as="logo">
+                            <img t-if="logo.freight_photo" t-att-src="image_data_uri(logo.freight_photo)" style="max-height:50px; margin-left: 8px; margin-right: 8px" alt="Logo"/>
+                        </t>
+                    </div>
+                </div>
+               
+        
+                </t>
+            </t>
+        </xpath>
+    </template>
+    
+    
+   
+</odoo>
+
+
+<!-- nemelt ulsiin nereer -->
+<!-- <t t-foreach="base.truck_routes" t-as="obj">
+    <tr>
+        <td>
+        
+            <t t-if="obj.origin == obj.destination" >
+                <t t-if="obj.origin_city == obj.dest_city">
+                    <t t-out="obj.origin_city.name"/>
+                </t>    
+                <t t-if="obj.origin_city != obj.dest_city">
+                    <span t-field="obj.origin_city.name"/>
+                    -
+                     <span t-field="obj.dest_city.name"/>
+                
+                </t>    
+            </t>
+            <t t-if="obj.origin != obj.destination" >    
+                    <t t-out="obj.origin_city.name"/>
+                    -
+                    <span t-field="k.border"></span>                                       
+            </t>
+       
+        </td>
+    </tr>                            
+    <tr>
+        <td>
+            <t t-if="obj.origin != obj.destination" >
+                <span t-field="k.border"></span>
+                    -
+                <t t-out="obj.dest_city.name"/>
+            </t>
+        </td>
+    </tr>
+</t> -->

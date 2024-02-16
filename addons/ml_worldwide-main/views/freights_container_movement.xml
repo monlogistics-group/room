@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <record id="freights_container_movement_form_view" model="ir.ui.view">
+        <field name="name">freights.container.movement.form</field>
+        <field name="model">freights.container.movement</field>
+        <field name="arch" type="xml">
+            <form string="Freights">
+                <header>
+                    <field name="state_id" widget="statusbar"  options="{'clickable': '1'}" attrs="{'invisible': [('state3','!=', False)] }"/>
+                    <field name="state_id1" widget="statusbar"  attrs="{'invisible': [('state1','!=', True)]}"/>
+                    <field name="state_id2" widget="statusbar" attrs="{'invisible': [('state2','!=', True)]}"/>
+                    <field name="state_id3" widget="statusbar" attrs="{'invisible': [('state4','!=', True)]}" />
+                    <field name="show_field" invisible="1"/>
+                    <field name="show_field2" invisible="1"/>
+                    <field name="show_field3" invisible="1"/>
+                    <field name="state1" invisible="1"/>
+                    <field name="state2" invisible="1"/>
+                    <field name="state3" invisible="1"/>
+                    <field name="state4" invisible="1"/>
+                    <field name="out_terminal" invisible="1"/>
+                    <field name="in_consig" invisible="1"/>
+                    <field name="rent_bool" invisible="1"/>
+                    <field name="sold_bool" invisible="1"/>
+                    <field name="sold_boolean" invisible="1"/>
+                    <field name="rent_boolean" invisible="1"/>
+                    <field name="move_bool" invisible="1"/>
+                    <field name="move_boolean" invisible="1"/>
+                    <field name="transfer_bool" invisible="1"/>
+                    <field name="transfer_boolean" invisible="1"/>
+                    <field name="in_consignee_terminal" invisible="1"/>
+                    <field name="in_terminal" invisible="1"/>
+                    <field name="empty_boolean" invisible="1"/>
+                </header>
+                <sheet>
+                    <div class="o_not_full oe_right viewdetails" attrs="{'invisible': [ ('is_show_details', '=', True)]}">
+                        <field name="is_show_details" nolabel="1"/>
+                    </div>
+                    <div class="o_not_full oe_right viewdetails1" attrs="{'invisible': [ ('is_show_details', '=', False)]}">
+                        <field name="is_show_details" nolabel="1"/>
+                    </div>
+                    <group expand='1'>
+                        <group>
+                            <div class="oe_title">
+                                <h2>
+                                    <field name="container_num" attrs="{'readonly': True}"/>
+                                </h2>
+                            </div>
+                                <field name="freights_id" widget="many2many_tags"/>        
+                                <field name="container_num" />
+                                <!-- <field name="container_type"/> -->
+                                <!-- <field name="container_rail2rail"/> -->
+                                <field name="naklad_created"/>
+                                <field name="naklad_created_user"/>         
+                                <field name="shipment"/>
+                        </group>
+                        <group>
+                            <div class="oe_title">
+                                <h2>
+                                    <field name="container_type" attrs="{'readonly': True}"/>
+                                </h2>
+                            </div>
+                                <field name="taras_id"/>
+                                <field name="terminal_data"/>
+                                <field name="from_data"/>
+                                <field name="to_data"/>
+                                <field name="free_days"/>
+                                <field name='is_show_details' invisible='1'/>
+                        </group>
+                    </group>
+                    <!-- <button name='show_container_details' string='Show container details' type='object'/> -->
+                    <notebook>
+                        <page string="Container Details" attrs="{'invisible': [('is_show_details', '=', False)]}">
+                            <button name='make_pdf' string='PDF' type='object'/>
+                            <group expand="1">
+                                <group>
+                                        <field name="orderDate"/>
+                                        <field name="return_coming_date"/>
+                                        <field name="pages"/>
+                                        <field name="senderCertificateNumber"/>
+                                        <field name="packageQty"/>
+                                        <field name="sender"/>
+                                        <field name="weightCalculation"/>
+                                        <field name="uplata"/>
+                                        <field name="stations"/>
+                                    </group>
+                                    <group>
+                                        <field name="document"/>
+                                        <field name="polucha"/>
+                                        <field name="return_border_date"/>
+                                        <field name="return_type"/>
+                                        <field name="cargoName"/>
+                                        <field name="cargoType"/>
+                                        <field name="loader"/>
+                                        <field name="information"/>
+                                        <field name="receiver"/>
+                                        <field name="receiver_phone"/>
+                                        <field name="sha_num"/>
+                                    </group>
+                            </group>
+                        </page>
+                    </notebook>
+                    <button name='action_in_terminal' string='In terminal ' type='object' attrs="{'invisible': [('in_terminal','!=', False)]}"/>
+                    <button name='actoin_in_consignee' string='In terminal ' type='object' attrs="{'invisible': [('in_consignee_terminal','!=', False)]}"/>
+                    <button name='action_out_terminal' string='Out of terminal ' type='object'  attrs="{'invisible': [('out_terminal','!=', False)]}"/>
+                    <button name='action_sold' string='Sold ' type='object'  attrs="{'invisible': [('sold_bool','!=', False)]}"/>
+                    <button name='action_rent' string='Rent' type='object'  attrs="{'invisible': [('rent_bool','!=', False)]}"/>
+                    <button name='action_move' string='Move ' type='object'  attrs="{'invisible': [('move_bool','!=', False)]}"/>
+                    <button name='action_transfer' string='Transfer' type='object'  attrs="{'invisible': [('transfer_bool','!=', False)]}"/>
+                    <button name='empty_return_container' string='Empty return ' type='object'  attrs="{'invisible': [('show_field2','!=', False)]}"/>
+                    
+                    <group expand = "1">
+                        <field name="terminal_date" attrs="{'invisible': [('show_field','!=', True)]}"/>
+                        <field name="terminal" attrs="{'invisible': [('show_field','!=', True)]}"/>
+                    </group>
+                    <group expand = "1">
+                        <field name="empty_ret" attrs="{'invisible': [('empty_boolean','!=', True)]}"/>
+                        <field name="ret_employee" attrs="{'invisible': [('empty_boolean','!=', True)]}"/>
+                        <field name="arrive_border_date" attrs="{'invisible': [('empty_boolean','!=', True)]}"/>
+                        <field name="out_border_date" attrs="{'invisible': [('empty_boolean','!=', True)]}"/>
+                    </group>
+
+                    <group expand = "1">
+                        <field name="terminal_date_consig" attrs="{'invisible': [('in_consig','!=', True)]}"/>
+                        <field name="terminal_consig" attrs="{'invisible': [('in_consig','!=', True)]}"/>
+                    </group>
+                    <group expand = "1">
+                        <field name="exit_date" attrs="{'invisible': [('show_field3','!=', True)]}"/>
+                        <field name="employee" attrs="{'invisible': [('show_field3','!=', True)]}"/>
+                    </group>
+                    <group expand = "1" attrs="{'invisible': [('sold_boolean','!=', True)]}" >
+                        <group string ="Sold"  >
+                            <field name="sold_date" />
+                            <field name="buyer" />
+                            <field name="sold_cost"/>
+                        </group>
+                    </group>
+                    <group expand = "1" attrs="{'invisible': [('transfer_boolean','!=', True)]}" >
+                        <group string ="Transfer"  >
+                            <field name="transfer_date" />
+                            <field name="transfer_agent" />
+                            <field name="transfer_employee"/>
+                        </group>
+                    </group>
+                    <group expand = "1" attrs="{'invisible': [('rent_boolean','!=', True)]}" >
+                        <group string ="In rent"  >
+                            <field name="rent_date" />
+                            <field name="renter" />
+                            <field name="rent_cost"/>
+                        </group>
+                    </group>
+                    <group expand = "1" attrs="{'invisible': [('move_boolean','!=', True)]}" >
+                        <group string ="At container yard"  >
+                            <field name="container_yard" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+   
+    <record id="freights_container_movement_tree_view" model="ir.ui.view">
+        <field name="name">freights.container.movement.tree</field>
+        <field name="model">freights.container.movement</field>
+        <field name="field_parent" eval="False"/>
+
+        <field name="arch" type="xml">
+            <tree string="Freights"  >
+                <field name="container_num" />
+                <field name="container_type"/>
+                <field name="naklad_created"/>
+            </tree>
+        </field>
+    </record>
+    <record id="freights_container_movement_kanban_view" model="ir.ui.view">
+        <field name="name">freights.container.movement.kanban</field>
+        <field name="model">freights.container.movement</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="container_num" />
+                <field name="container_type"/>
+                <field name="naklad_created"/>
+                <field name="naklad_created_user"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong><field name="naklad_created"/></strong>
+                                    <field name="naklad_created"/>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="freights_container_movement_pivot_search_view" model="ir.ui.view">
+        <field name="name">freights.container.movement.search</field>
+        <field name="model">freights.container.movement</field>
+        <field name="arch" type="xml">
+            <search string="Freights">
+                <field name="freights_id" widget="many2many_tags"/> 
+                <field name="container_num" />
+                <field name="container_type"/>
+                <field name="terminal"/>
+                <field name="buyer" />
+                <field name="renter" />
+                <field name="naklad_created_user"/> 
+            </search>
+        </field>
+    </record> 
+
+    <record id="freights_container_movement_action" model="ir.actions.act_window">
+        <field name="name">Container</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">freights.container.movement</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="view_id" eval="False"/>
+        <field name="usage">menu</field>
+        <!-- <field name="context">{'search_default_container_num':1}</field> -->
+        <!--   
+            <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('freights_container_movement_tree_view')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('freights_container_movement_form_view')})]"/>
+        -->
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Define a new pages
+            </p><p>
+                Freights app are used to Pages module.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="worldwide_freights_container_menu"
+              parent="menu_worldwide_root"
+              name="Container Move"
+              action="freights_container_movement_action"
+              sequence="109"/>
+              
+</odoo>

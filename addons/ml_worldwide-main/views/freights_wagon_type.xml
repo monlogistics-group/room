@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="freights_wagon_type_form_view">
+            <field name="name">freights.wagon.type.form</field>
+            <field name="model">freights.wagon.type</field>
+            <field name="arch" type="xml">
+                <form string="wagon type">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                            </group>
+                            <group>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="freights_wagon_type_tree_view">
+            <field name="name">freights.wagon.type.tree</field>
+            <field name="model">freights.wagon.type</field>
+            <field name="arch" type="xml">
+                <tree string="freights wagon type">
+                    <field name="name"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="freights_wagon_type_view_action">
+            <field name="name">freights wagon_type</field>
+            <field name="res_model">freights.wagon.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new port.
+                </p>
+            </field>
+        </record>
+
+         <menuitem id="menu_freights_wagon_type"
+              name="Wagon type"
+              action="freights_wagon_type_view_action"
+              parent="menu_worldwide_configuration"
+              groups=""
+              sequence="135"/>
+    </data>
+</odoo>

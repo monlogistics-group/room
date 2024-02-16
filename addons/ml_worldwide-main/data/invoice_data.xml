@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model='mlworldwide.invoice.data' id = 'mlworldwide_invoice_data'>
+        <field name="lang">1</field>
+        <field name="invoice_title">debit note</field>
+        <field name="invoice_num">invoice no</field>
+        <field name="invoice_date">invoice date</field>
+        <field name="invoice_duedate">due date</field>
+        <field name="payer">payer</field>
+        <field name="payer_number">payer register</field>
+        <field name="freights_num">order reference</field>
+        <field name="shipment_name_fcl">container no</field>
+        <field name="shipment_name_lcl">container no</field>
+        <field name="shipment_name_ftl">VEHICLE NO</field>
+        <field name="shipment_name_ltl">VEHICLE NO</field>
+        <field name="shipment_name_air">AIRWAY BILL NO</field>
+        <field name="shipment_name_train">WAGON BILL NO</field>
+        <field name="shipment_name_wgn">WAGON NO</field>
+        <field name="shipment_name_multimodal">NO</field>
+        <field name="cargo_name">shipper</field>
+        <field name="package_qty">shipment qty</field>
+        <field name="note_msg">notice</field>
+        <field name="notice_text">The payment after 2023.06.11 results in 0.30% of interest per day</field>
+        <field name="table_head_num">#</field>
+        <field name="table_head_desc">purpose</field>
+        <field name="table_head_qty">qty</field>
+        <field name="table_head_price">unit rate</field>
+        <field name="table_head_subtotal">total rate</field>
+        <field name="total_price">subtotal</field>
+        <field name="direct_name">Accountant</field>
+        <field name="total_payment">total payment</field>
+    </record>
+</odoo>

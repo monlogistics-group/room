@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Ariuka.
+ -->
+<odoo>
+    
+    <record id="freight_invquiry_data_form_view" model="ir.ui.view">
+        <field name="name">inquiry.data.form</field>
+        <field name="model">inquiry.data</field>
+        <field name="arch" type="xml">
+            <form string="Invoice Data">
+                <header>
+                    <button name="action_send_all" string="send all" type="object" width="35"  /> 
+                </header>
+                <sheet>
+                    <group>
+                        <field name="text_l1"/>
+                        <field name="text_l2"/>
+                        <field name="text_l3"/>
+                        <field name="text_l4"/>
+                        <field name="customer_id"/>
+                        <field name="text_l5"/>
+                        <field name="locale"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="freight_invquiry_data_tree_view" model="ir.ui.view">
+        <field name="name">inquiry.data.tree</field>
+        <field name="model">inquiry.data</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Invoice Data">
+                <field name="text_l1"/>
+                <field name="text_l2"/>
+                <field name="text_l3"/>
+                <field name="text_l4"/>
+                <field name="text_l5"/>
+                <field name="locale"/> 
+                
+                
+            </tree>
+        </field>
+    </record>
+    
+    <record id="freight_inquiry_data_action" model="ir.actions.act_window">
+        <field name="name"> Invoice Data</field>
+        <field name="type">ir.actions.act_window</field>  
+        <field name="res_model">inquiry.data</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+       
+  
+    </record>
+    <menuitem id="menu_inquiry_data"
+            name="Inquiry data"
+            action="freight_inquiry_data_action"
+            parent="menu_worldwide_configuration"
+            groups=""
+            sequence="130"/>
+              
+</odoo>

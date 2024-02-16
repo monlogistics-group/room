@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Ariuka. 2022-11-7
+ -->
+<odoo>
+    
+    <record id="ml_worldwide_quotation_data_form_view" model="ir.ui.view">
+        <field name="name">mlworldwide.quotation.data.form</field>
+        <field name="model">mlworldwide.quotation.data</field>
+        <field name="arch" type="xml">
+            <form string="Quotation Data">
+                <sheet>
+                    <group>
+                        <field name="quote_lang"/>
+                        <field name="title_name"/>
+                        <field name="worldwide_reference" />
+                        <field name="worldwide_date" />
+                        <field name="worldwide_valit_until" />
+                        <field name="worldwide_to"/>
+                        <field name="worldwide_detail" />
+                        <field name="worldwide_transit_time" />
+                        <field name="worldwide_incoterms" />
+                        <field name="worldwide_routes"/>
+                        <field name="worldwide_rate" />
+                        <field name="worldwide_include" />
+                        <field name="worldwide_not_include" />
+                        <field name="worldwide_remark" />
+                        <field name="worldwide_remark_body" />
+                        
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="ml_worldwide_quotation_data_tree_view" model="ir.ui.view">
+        <field name="name">mlworldwide.quotation.data.tree</field>
+        <field name="model">mlworldwide.quotation.data</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Quotation Data">
+                <field name="quote_lang"/>
+                <field name="title_name"/>
+                <field name="worldwide_reference" />
+                <field name="worldwide_date" />
+                <field name="worldwide_valit_until" />
+                <field name="worldwide_to"/>
+                <field name="worldwide_detail" />
+                <field name="worldwide_transit_time" />
+                <field name="worldwide_incoterms" />
+                <field name="worldwide_routes"/>
+                <field name="worldwide_rate" />
+                <field name="worldwide_include" />
+                <field name="worldwide_not_include" />
+                <field name="worldwide_remark" />
+            </tree>
+        </field>
+    </record>
+    <record id="ml_worldwide_quotation_data_action" model="ir.actions.act_window">
+        <field name="name">Quotation Data</field>
+        <field name="type">ir.actions.act_window</field>  
+        <field name="res_model">mlworldwide.quotation.data</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+       
+  
+    </record>
+    <menuitem id="menu_worldwide_quotation_data"
+              name="Worldwide Quotation Data"
+              action="ml_worldwide_quotation_data_action"
+              parent="menu_worldwide_configuration"
+              groups=""
+              sequence="188"/>
+</odoo>

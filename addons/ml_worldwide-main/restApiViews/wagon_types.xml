@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Javkha. 2023-02-02
+ -->
+<odoo>
+
+    <record id="mlworldwide_restapi_wagon_types_from_view" model="ir.ui.view">
+        <field name="name">wagon.types.form</field>
+        <field name="model">wagon.types</field>
+        <field name="arch" type="xml">
+            <form string="Wagon Types">
+             	<sheet>
+                    <group>
+                        <field name="image"/>
+                        <field name="title"/>
+                        <field name="height"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mlworldwide_restapi_wagon_types_tree_view" model="ir.ui.view">
+        <field name="name">wagon.types.tree</field>
+        <field name="model">wagon.types</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Wagon Types">
+                        <field name="image"/>
+                        <field name="title"/>
+                        <field name="height"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="mlworldwide_restapi_wagon_types_action" model="ir.actions.act_window">
+        <field name="name">Wagon Types</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">wagon.types</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Define a new pages
+            </p><p>
+                Freights app are used to Pages module.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="mlworldwide_restapi_wagon_types"
+        name="Wagon Types"
+        action="mlworldwide_restapi_wagon_types_action"
+        parent="menu_worldwide_customer_app"
+        groups=""
+        sequence="220"
+    />
+</odoo>

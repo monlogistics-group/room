@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Ariuka. 2022-10-24
+ -->
+<odoo>
+    
+    <record id="ml_trucking_freight_photo_form_view" model="ir.ui.view">
+        <field name="name">mltrucking.freight.photo.form</field>
+        <field name="model">mltrucking.freight.photo</field>
+        <field name="arch" type="xml">
+            <form string="Trucking Page">
+                <header>
+                    <button name="download_photo" type="object" string="Download"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="freight_photo"/> 
+                        <!-- options="{'size': [90, 90]}"  -->
+                        <field name="freight_photo_desc"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="ml_trucking_freight_photo_action" model="ir.actions.act_window">
+        <field name="name"> Photos Pages</field>
+        <field name="type">ir.actions.act_window</field>  
+        <field name="res_model">mltrucking.freight.photo</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" eval="False"/>
+       
+  
+    </record>
+    <menuitem id="menu_trucking_freight_photo"
+              name=" Trucking Freight Photo"
+              action="ml_trucking_freight_photo_action"
+              parent="menu_trucking_data"
+              groups=""
+              sequence="14"/>
+</odoo>

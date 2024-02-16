@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="freights_shipments_delay" model="freights.shipments.delay.category">
+        <field name="name">Customer</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipments_delay2" model="freights.shipments.delay.category">
+        <field name="name">Supplier</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipments_delay3" model="freights.shipments.delay.category">
+        <field name="name">Freight Forwarder</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipments_delay4" model="freights.shipments.delay.category">
+        <field name="name">Force Majeure</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipments_delay5" model="freights.shipments.delay">
+        <field name="type">1</field>
+        <field name="name">Document</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipments_delay6" model="freights.shipments.delay">
+        <field name="type">1</field>
+        <field name="name">Customs tax payment</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipments_delay7" model="freights.shipments.delay">
+        <field name="type">1</field>
+        <field name="name">Goods payment</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipments_delay8" model="freights.shipments.delay">
+        <field name="type">1</field>
+        <field name="name">Public holiday</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipments_delay9" model="freights.shipments.delay">
+        <field name="type">1</field>
+        <field name="name">Other</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipments_delay10" model="freights.shipments.delay">
+        <field name="type">2</field>
+        <field name="name">Document</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipments_delay11" model="freights.shipments.delay">
+        <field name="type">2</field>
+        <field name="name">Public holiday</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipments_delay12" model="freights.shipments.delay">
+        <field name="type">2</field>
+        <field name="name">Other</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipments_delay13" model="freights.shipments.delay">
+        <field name="type">3</field>
+        <field name="name">Document</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipments_delay14" model="freights.shipments.delay">
+        <field name="type">3</field>
+        <field name="name">Carrier delay</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipments_delay15" model="freights.shipments.delay">
+        <field name="type">3</field>
+        <field name="name">Consolidation</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipments_delay16" model="freights.shipments.delay">
+        <field name="type">3</field>
+        <field name="name">Public holiday</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipments_delay17" model="freights.shipments.delay">
+        <field name="type">3</field>
+        <field name="name">Other</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipments_delay18" model="freights.shipments.delay">
+        <field name="type">4</field>
+        <field name="name">Other</field>
+        <field name="active">1</field>
+    </record>
+</odoo>

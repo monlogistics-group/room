@@ -1,0 +1,233 @@
+//*[@id="o_field_input_72"]/div[2]/div/table/tbody/tr[1]/td[1]
+.o_field_many2many > div.o_list_view > div > table > tbody > tr > td[name="route_point"] {
+    display:none !important;
+}
+
+.viewdetails {
+    padding-right: 20px;
+}
+
+.viewdetails div input {
+    display: none;
+}
+
+.viewdetails div label {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    left: 0;
+    width: 35px;
+    height: 35px;
+    margin: 0 auto;
+    background-color: #53b96a;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.viewdetails div label:before {
+    content: "▼"; /* Bars */
+    position: absolute;
+    top: -8px;
+    right: 0px;
+    left: -30px;
+    width: 0px;
+    height: 0px;
+    margin: 0 auto;
+    background-color: transparent;
+    transform: translateY(-50%);
+    border: 0px solid black;
+    font-size: 32px;
+    text-align: center;
+}
+
+.viewdetails div label:hover:before{
+    color: #b0a8c9;
+}
+
+.viewdetails1 {
+    padding-right: 20px;
+}
+
+.viewdetails1 div input {
+    display: none;
+}
+
+.viewdetails1 div label {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    left: 0;
+    width: 35px;
+    height: 35px;
+    margin: 0 auto;
+    background-color: #53b96a;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.viewdetails1 div label:before {
+    content: "▲"; /* Bars */
+    position: absolute;
+    top: -10px;
+    right: 0px;
+    left: -30px;
+    width: 0px;
+    height: 0px;
+    margin: 0 auto;
+    background-color: transparent;
+    transform: translateY(-50%);
+    border: 0px solid black;
+    font-size: 32px;
+    text-align: center;
+}
+
+.viewdetails1 div label:hover:before{
+    color: #b0a8c9;
+}
+
+
+// // *************************************************************     PIVOT       *********************************************************
+// // .o_pivot_cell_value{
+// //     background-color: #d1eee1;
+// // }
+
+// .o_pivot table td:nth-child(2), .o_pivot table th:nth-child(1){
+//     background-color:white;
+// }
+
+// .o_pivot table td:nth-child(3), .o_pivot table th:nth-child(2){
+//     background-color: #ffa726;
+// }
+
+// .o_pivot table td:nth-child(4), .o_pivot table th:nth-child(3){
+//     background-color: #4caf50;
+//     color: white;
+// }
+
+// .o_pivot table td:nth-child(5), .o_pivot table th:nth-child(4){
+//     background-color: #42a5f5;
+//     color: white;
+// }
+// .o_pivot table td:nth-child(6), .o_pivot table th:nth-child(5){
+//     background-color: #ef5350;
+//     color: white;
+// }
+// .o_pivot table td:nth-child(7), .o_pivot table th:nth-child(6){
+//     background-color: #3c4858;
+//     color: white;
+// }
+// .o_pivot table td:nth-child(8), .o_pivot table th:nth-child(7){
+//     background-color: #b45bc3;
+//     color: white;
+// }
+
+// .o_pivot table td:nth-child(2).o_cell_hover:hover {
+//     background-color: #b45bc3;
+//     color: white;
+// }
+
+// .o_pivot table td:nth-child(3).o_cell_hover:hover {
+//     background-color: #b45bc3;
+//     color: white;
+// }
+
+// .o_pivot table td:nth-child(4).o_cell_hover:hover {
+//     background-color: #b45bc3;
+//     color: white;
+// }
+
+// .o_pivot table td:nth-child(5).o_cell_hover:hover {
+//     background-color: #b45bc3;
+//     color: white;
+// }
+
+// .o_pivot table td:nth-child(6).o_cell_hover:hover {
+//     background-color: #b45bc3;
+//     color: white;
+// }
+
+// .o_pivot table td:nth-child(7).o_cell_hover:hover {
+//     background-color: #b45bc3;
+//     color: white;
+// }
+
+
+// ***********************************************************  STATE COLOR  **************************************************************************
+
+// btn o_arrow_button btn-secondary
+// .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-secondary[data-value="1"] {
+//     background: #e3c9c9;
+// }
+// .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-secondary[data-value="1"]:after {
+//     border-left-color:#e3c9c9;
+// }
+
+// .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-secondary[data-value="2"] {
+//     background: #f4e7e7;
+// }
+// .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-secondary[data-value="2"]:after {
+//     border-left-color:#f4e7e7;
+// }
+
+// .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-secondary[data-value="3"] {
+//     background: #eedbdb;
+// }
+// .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-secondary[data-value="3"]:after {
+//     border-left-color:#eedbdb;
+// }
+
+// .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-secondary[data-value="4"] {
+//     background: #cecbcb;
+// }
+// .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-secondary[data-value="4"]:after {
+//     border-left-color:#cecbcb;
+// }
+
+// .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-secondary[data-value="5"] {
+//     background: #cbdadb;
+// }
+// .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-secondary[data-value="5"]:after {
+//     border-left-color:#cbdadb;
+// }
+
+// .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-secondary[data-value="6"] {
+//     background: #64a1f4;
+// }
+// .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-secondary[data-value="6"]:after {
+//     border-left-color:#64a1f4;
+// }
+
+// .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-secondary[data-value="7"] {
+//     background: #65737e;
+// }
+// .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-secondary[data-value="7"]:after {
+//     border-left-color:#65737e;
+// }
+
+// .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-secondary[data-value="8"] {
+//     background: #e0ac69;
+// }
+// .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-secondary[data-value="8"]:after {
+//     border-left-color:#e0ac69;
+// }
+
+// .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-secondary[data-value="9"] {
+//     background: #e4dcf1;
+// }
+// .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-secondary[data-value="9"]:after {
+//     border-left-color:#e4dcf1;
+// }
+
+// .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-secondary[data-value="10"] {
+//     background: #d6eaff;
+// }
+// .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-secondary[data-value="10"]:after {
+//     border-left-color:#d6eaff;
+// }
+

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Umbaa. 2022-01-18
+ -->
+<odoo>
+    <record id="freights_payment_service_form_view" model="ir.ui.view">
+        <field name="name">freights.payment.service.form</field>
+        <field name="model">freights.payment.service</field>
+        <field name="arch" type="xml">
+            <form string="Freights serivce">
+             	<sheet>
+                    <field name="type" widget="radio" options="{'horizontal': true}"/>
+                    <group>
+                        <group>
+                            <field name="shippment_ids" widget="many2many_tags"/>
+                            <field name="template_id" />
+                            <field name="service_from" />
+                            <field name="service_to" />
+                            <field name="service_qty" />
+                            <field name="ett" />
+                            <field name='is_invoiced' invisible='1'/>
+                            <field name="valid_until_date" />
+                            <field name="transport_type" />
+                            <field name="package_id" />
+                        </group>
+                        <group><field name="agent_id">
+                            <!-- widget="many2many_tags"/ -->
+                                <kanban>
+                                    <field name="id"/>
+                                    <field name="color"/>
+                                    <field name="name"/>
+                                    <field name="title"/>
+                                    <field name="type"/>
+                                    <field name="email"/>
+                                    <field name="parent_id"/>
+                                    <field name="is_company"/>
+                                    <field name="function"/>
+                                    <field name="phone"/>
+                                    <field name="street"/>
+                                    <field name="street2"/>
+                                    <field name="zip"/>
+                                    <field name="city"/>
+                                    <field name="country_id"/>
+                                    <field name="mobile"/>
+                                    <field name="state_id"/>
+                                    <field name="image_128"/>
+                                    <field name="avatar_128"/>
+                                    <field name="lang"/>
+                                    <!-- fields in form x2many view to diminish requests -->
+                                    <field name="comment"/>
+                                    <field name="display_name"/>
+                                    <templates>
+                                        <t t-name="kanban-box">
+                                            <t t-set="color" t-value="kanban_color(record.color.raw_value)"/>
+                                            <div t-att-class="color + (record.title.raw_value == 1 ? ' oe_kanban_color_alert' : '') + ' oe_kanban_global_click'">
+                                                <div class="o_kanban_image">
+                                                    <img alt="Contact image" t-att-src="kanban_image('res.partner', 'avatar_128', record.id.raw_value)"/>
+                                                </div>
+                                                <div class="oe_kanban_details">
+                                                    <field name="name"/>
+                                                    <div t-if="record.function.raw_value"><field name="function"/></div>
+                                                    <div t-if="record.email.raw_value"><field name="email" widget="email"/></div>
+                                                    <div t-if="record.type.raw_value != 'contact'">
+                                                        <div>
+                                                            <field name="zip"/>
+                                                            <field name="city"/>
+                                                        </div>
+                                                        <field t-if="record.state_id.raw_value" name="state_id"/>
+                                                        <field name="country_id"/>
+                                                    </div>
+                                                    <div t-if="record.phone.raw_value">Phone: <t t-esc="record.phone.value"/></div>
+                                                    <div t-if="record.mobile.raw_value">Mobile: <t t-esc="record.mobile.value"/></div>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                            </field>
+                            <field name="currency_id" />
+                            <field name="service_cost" widget="monetary" />
+                            <field name="service_rate" widget="monetary" />
+                            <field name="subtotal_cost" widget="monetary" />
+                            <field name="subtotal_rate" widget="monetary" readonly="1"/>
+                        </group>
+                        <field name="service_desc" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+   
+    <record id="freights_payment_service_tree_view" model="ir.ui.view">
+        <field name="name">freights.payment.service.tree</field>
+        <field name="model">freights.payment.service</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Freights service" delete='false'>
+                <field name="shippment_ids" widget="many2many_tags"/>
+                <field name="agent_id"/>
+                <field name="service_from" />
+                <field name="service_to" />
+                <field name="service_desc" />
+                <field name="service_qty" />
+                <field name="currency_id" />
+                <field name="ett" optional="hide"/>
+                <field name="valid_until_date" optional="hide"/>
+                <field name="transport_type" optional="hide"/>
+                <field name="service_cost" widget="monetary" />
+                <field name="service_rate" widget="monetary" />
+                <field name="subtotal_cost" widget="monetary" readonly="1"/>
+                <field name="subtotal_rate" widget="monetary" readonly="1"/>
+                <field name='is_invoiced' invisible='1'/> 
+                <!-- <button name="delete_item" type="object" icon="fa-times" title="Delete" /> -->
+            </tree>
+        </field>
+    </record>
+    
+    <record id="freights_payment_service_kanban_view" model="ir.ui.view">
+        <field name="name">freights.payment.service.kanban</field>
+        <field name="model">freights.payment.service</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="agent_id"/>
+                <field name="service_from" />
+                <field name="service_to" />
+                <field name="subtotal_rate" />
+                <field name="service_qty" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong><field name="service_from"/> - <field name="service_to" /></strong>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <span class="badge badge-pill"><t t-esc="record.service_qty.value"/></span>
+                                </div>
+                            </div>
+                            <div>
+                                <strong>Rate: </strong><t t-esc="record.service_qty.value"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="freights_payment_service_pivot_view" model="ir.ui.view">
+        <field name="name">freights.payment.service.pivot</field>
+        <field name="model">freights.payment.service</field>
+        <field name="arch" type="xml">
+            <pivot string="Freights service" sample="1">
+                <field name="agent_id" type="col"/>
+                <field name="service_rate" type="row"/>
+                <field name="service_qty" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="freights_payment_service_graph_view" model="ir.ui.view">
+        <field name="name">freights.payment.service.graph</field>
+        <field name="model">freights.payment.service</field>
+        <field name="arch" type="xml">
+            <graph string="Freights service" type="line" sample="1">
+                <field name="agent_id"/>
+                <field name="service_rate" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="freights_payment_service_search_view" model="ir.ui.view">
+        <field name="name">freights.payment.service.search</field>
+        <field name="model">freights.payment.service</field>
+        <field name="arch" type="xml">
+            <search>
+                <group expand="0" string="Group By">
+                    <field string="Shippment" name="shippment_ids" context="{'group_by':'shippment_ids'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    
+    <record id="freights_payment_service_action" model="ir.actions.act_window">
+        <field name="name">Freights service</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">freights.payment.service</field>
+        <field name="view_mode">tree,form,kanban,pivot,graph</field>
+        <field name="view_id" eval="False"/>
+        <!-- <field name="context">{'search_default_shippment_ids':1}</field> -->
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Define a new pages
+            </p><p>
+                Freights app are used to Pages module.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_freights_payment_service"
+              name="Payment Service"
+              action="freights_payment_service_action"
+              parent="menu_worldwide_master"
+              groups=""
+              sequence="501"/>
+</odoo>
+

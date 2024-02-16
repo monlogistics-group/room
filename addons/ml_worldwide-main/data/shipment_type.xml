@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="freights_shipment_type" model="freights.shipment.type">
+        <field name="name">Container</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipment_type2" model="freights.shipment.type">
+        <field name="name">Wagon</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipment_type3" model="freights.shipment.type">
+        <field name="name">Bill</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipment_type4" model="freights.shipment.type">
+        <field name="name">Vehicle</field>
+        <field name="active">1</field>
+    </record>
+</odoo>

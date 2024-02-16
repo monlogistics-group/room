@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Ariuka. 2022-11-7
+ -->
+
+
+<odoo>
+   
+    <template id = "mltrucking_id_base">
+        <t t-call="web.html_container">
+            <t t-if="not o" t-set="o" t-value="docs" />
+            <!-- <t t-if="not k" t-set="k" t-value="quotation" /> -->
+            <t t-set="company" t-value="company_id" />
+            <div class="header">
+                <div class="" style='display: flex'>
+                    <div class="col">
+                         <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" alt="Company Logo" class="float-left" height="50" />
+                         <div>
+                
+                
+                
+                <div style="font-size:14px;text-align:left;" class="float-right">
+                    <div style ="font-size:25px">
+                        <strong>SHIPPING PRICE OFFER </strong>
+                    </div>
+                    <div>
+                        <strong>NUMBER: </strong>
+                    
+                            <span t-field="o.ref"/>
+                        </div>
+                        <div>
+                        
+                           <strong>DATE: </strong>
+                          <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>
+                       </div>
+                       <div>
+                        <strong>EXPIRATION DATE:</strong>
+                         <span t-esc="context_timestamp(datetime.datetime.now()+datetime.timedelta(days = 7)).strftime('%Y-%m-%d')"/>
+                       </div>
+                    
+                        <div >
+                        <strong>NAME: </strong>
+                        <span t-field="o.vendor_id"/>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div style="border-bottom: 1px solid black;"/>
+                </div>
+                
+            </div>
+                <!-- <div class="row">
+                    <div class="col" style ="float:left;">    
+                        <p><span t-field="o.company_id.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;], &quot;no_marker&quot;: true}"  />
+                         <span t-field="o.company_id.phone"/>
+                        </p>
+                        </div>   
+                </div> -->
+                
+            </div>
+
+        </div>
+        </div>
+             <div class ="tbody">
+                <div class ="text-center">
+                    <ul class="list-inline"/>
+                    <div class="oe_structure"/>
+                    <div class="col-auto col-3 mw-100 mb-2 margin-top:25px">
+                
+                    <strong>CARGO DETAILS:</strong>
+                    <span t-field ="o.freights"></span>
+                </div>
+                 
+              </div>
+               <div class="col-auto col-3 mw-100 mb-2">
+                     <strong>ESTIMATED TRANSIT TIME:</strong>
+                     <span t-field ="o.date_diff"></span>
+                     
+                </div>
+
+                 <table class="table table-condensed table-hover border" style="width:235mm;">
+                      <thead style ="display: table-row-group; background-color: #4c749c; color: white">
+                         <tr>
+                            <th name="th_number" class="text-center">#</th>
+                         <th name="th_route" class="text-center">INCOTERMS &amp; ROUTES</th>
+                         <th name="th_rate" class="text-center">RATE</th>
+                    </tr>
+                    </thead>
+                 <tbody class="sale_tbody">
+                      <t t-foreach="o" t-as="line">
+                        <tr>
+                             <td name="td_number" class="text-center" height="20" align="center" style="font-family:Times New Roman;border:1px solid black;padding: 3px;">
+                            <span t-esc="line_index +1"/>
+                        </td>
+                        <td name="td_route" class="text-center" height="20" align="center" style="font-family:Times New Roman;border:1px solid black;padding: 3px;">
+                            <t t-foreach="request.env['mltrucking.route'].search([])" t-as="obj">
+                                <t t-esc="obj.origin"/>
+                            </t>
+                            -
+                            <t t-foreach="request.env['mltrucking.route'].search([])" t-as="obj">
+                                <t t-esc="obj.destination"/>
+                            </t>
+                        </td>
+                        <td scope="col" height="20" align="center" style="font-family:Times New Roman;border:1px solid black;padding: 3px;">
+                            <span t-field ="o.total_rate"></span>
+                        </td>
+                    </tr>
+                </t>
+                
+                </tbody>
+        
+            </table>
+        
+        </div>
+        <table class="row">
+            <thead style="display: table-row-group; background-color: grey">
+                <th name ="th_above_included_below_charges" class="text-center">ABOVE RATE INCLUDED BELOW CHARGES</th> 
+                <th name ="th_above_rate_not_included_below_charges" class="text_center ">ABOVE RATE NOT INCLUDED BELOW CHARGES</th> 
+            </thead>
+            <tr>
+                <td>
+                <table class ="sale_tbody">
+                    <t t-foreach="o.truck_services"  t-as ="line">
+                        
+                        <span t-if ="line.service_qty > 0">
+                            <tr>
+                                <td>
+                                    <li>
+                                        <t t-esc="line.service_desc" class ="text-left"/>
+                                    </li>
+                                </td>
+                            </tr>
+                        </span>
+                    </t>
+                </table>
+            </td>
+            <td>
+                <table class ="sale_tbody">
+                    <t t-foreach="o.truck_services"  t-as ="line">
+                        
+                        <span t-if ="line.service_qty == 0 ">
+                            <tr>
+                                <td>
+                                    <li>
+                                        <t t-esc="line.service_desc" class ="text-left"/>
+                                    </li>
+                                </td>
+                            </tr>
+                        </span>
+                    </t>
+                </table>
+            </td>
+            
+            </tr>
+        </table>
+    
+        
+        <ul style="margin-top:25px">
+            <strong>REMARK</strong>
+
+            <li>Rate is not valid for non ferrous metals + DG</li>
+            <li>Above quotation does not include VAT</li>
+            <li>Actual Departure date is subject to vessel or airline space and empty container availability
+            </li>
+            <li>The actual date of dispatch means the date of loading cargo on vehicle and dispatching from
+                origin point
+            </li>
+            <li>Shipping packages must meet international packaging standards</li>
+            <li>If required shipper/ consignee must provide special loading instructions</li>
+            <li>Shipper/ Consignee must provide all necessary documents for custom clearance</li>
+            <li>Shipper must load balanced. Quotation exclude any unbalance cost</li>
+            <li>In event of unexpected custom inspection at transit ports there will be additional cost</li>
+            <li>In case of occurred VAT refunding charges and local tax will be negotiated who will pay this
+                charges
+            </li>
+            <li>Overweight charges will be incurred for weight from 21600kg/20’ to 25200kg/40’ /excluding
+                container tare weight/
+            </li>
+            <li>Regarding alcohol, tobaccos, cosmetic and other food shipment through China Health certificate,
+                Test report, COO, CIQ and other relevant certificates are required. For Chemicals shipment
+                required MSDS and Test report
+            </li>
+            <li>Regarding on “wooden” products/ rice/ honey/ milk powder/ bean/ corn/ other organic items,
+                XinGang CIQ requires COO and Phytosanitary Certificate by original copy and there will be
+                phytosanitary inspection charge
+            </li>
+            <li>Above rate Quotation invalid for nonferrous metals through Russia and for other products,
+                prohibited for transporting via Russia
+            </li>
+
+        </ul>
+
+
+
+          </t>
+    </template>
+
+
+
+    <data>
+        <record id ="report_mltrucking_base" model="ir.actions.report">
+            <field name= "name">report</field>
+            <field name= "model">mltrucking.base</field>
+            <field name= "report_type">qweb-pdf</field>
+            <field name= "report_name">ml_trucking.mltrucking_id_base</field>
+            <field name= "report_file">ml_trucking.mltrucking_id_base</field>
+            <field name= "print_report_name">object.ref.replace('/','_')</field>
+            <field name= "binding_model_id" ref ="model_mltrucking_base"></field>
+            <field name= "binding_view_types">form</field>
+            <field name= "binding_type">report</field>
+        </record>
+    </data>
+</odoo>    

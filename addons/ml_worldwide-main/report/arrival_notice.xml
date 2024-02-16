@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+   <data>
+       <record id="mlworlwide_arrival_notice" model="mail.template">
+           <field name="name">Worldwide Arrival Notice</field>
+           <field name="model_id" ref="ml_worldwide-main.model_freights_route_shipment"/>
+           <field name="email_from">{{object.freights_id.employee.work_email}}</field>
+           <!-- <field name="email_to">{{object.freights_id.customer_id.email}}</field> -->
+           <!-- <field name="lang">{{object.freights_id.freights_id.customer_id.lang}}</field> -->
+           <field name="subject">Arrival Notice</field>
+           <field name="body_html" type="html">
+              <t t-if="request.env['arrival.notice'].search([('lang.code','=' ,object.freights_id.customer_id.lang)], limit = 1)">
+                    <t t-set="k" t-value="request.env['arrival.notice'].search([('lang.code','=' ,object.freights_id.customer_id.lang)], limit=1)" />
+                </t>
+                <t t-else="">
+                    <t t-set="k" t-value="request.env['arrival.notice'].search([('lang.code','=','en_US')], limit = 1)" />
+                </t>
+           <div style="background-color:#e1e8ed">
+                <div style="margin:0px auto;max-width:600px">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" style="width:100%">
+                        <tbody>
+                            <tr>
+                            <td style="direction:ltr;font-size:0px;padding:20px 0;padding-bottom:0;text-align:center">
+                                <div style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%">
+                                        <table border="0" cellpadding="0" cellspacing="0"  style="vertical-align:top" width="100%"></table>
+                                </div>
+                            </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="background:#ffffff;background-color:#ffffff;margin:0px auto;max-width:600px">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" style="background:#ffffff;background-color:#ffffff;width:100%">
+                        <tbody>
+                            <tr>
+                                <td style="direction:ltr;font-size:0px;padding:20px 0;padding-left:10;padding-right:10;text-align:center">
+                                    <div style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%">
+                                        <table border="0" cellpadding="0" cellspacing="0" style="vertical-align:top" width="100%">
+                                            <tbody>
+                                                <tr>
+                                                    <td align="left" style="font-size:0px;padding:10px 25px;padding-left:30;word-break:break-word">
+                                                        <table border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td style="width:180px">
+                                                                        <img height="auto" src="https://ci4.googleusercontent.com/proxy/Opj6F4tjhCi5sDZVQ3m2PE7Po53NgZtkdL8G34T0MIq0w1_ZExXCGawi86ypCqY2FCuunhv6yRh3j3T7KC8RU6zWNo6i=s0-d-e1-ft#https://www.mlw.mn/static/images/logo/new-logo.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px" width="180"  data-bit="iit"/>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-size:0px;padding:10px 25px;padding-top:10;padding-right:0;padding-bottom:0;padding-left:0;word-break:break-word">
+                                                        <p style="border-top:solid 2px #f45e43;font-size:1px;margin:0px auto;width:100%"></p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="background:#ffffff;background-color:#ffffff;margin:0px auto;max-width:600px">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" style="background:#ffffff;background-color:#ffffff;width:100%">
+                        <tbody>
+                            <tr>
+                                <td style="direction:ltr;font-size:0px;padding:0px 15px;text-align:center">
+                                    <div style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%">
+                                        <table border="0" cellpadding="0" cellspacing="0" style="vertical-align:top" width="100%">
+                                            <tbody>
+                                                <tr>
+                                                    <td align="left" style="font-size:0px;padding:10px 25px;padding-top:10px;padding-bottom:0px;padding-left:0px;word-break:break-word">
+                                                        <div style="font-family:Ubuntu,Helvetica,Arial,sans-serif;font-size:14px;line-height:1;text-align:left;color:#000000"><t t-out="k.greetings"/></div>
+                                                    </td>
+                                                </tr>
+                        
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="background:#ffffff;background-color:#ffffff;margin:0px auto;max-width:600px">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" style="background:#ffffff;background-color:#ffffff;width:100%">
+                        <tbody>
+                            <tr>
+                                <td style="direction:ltr;font-size:0px;padding:0px 15px;text-align:center">
+                                    <div style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%">
+                                        <table border="0" cellpadding="0" cellspacing="0" style="vertical-align:top" width="100%">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="font-size:0px;word-break:break-word">
+                                                        <div style="height:20px"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-size:0px;word-break:break-word">
+                                                        <div style="height:20px"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="left" style="font-size:0px;padding:10px 25px;padding-bottom:0px;word-break:break-word">
+                                                        <div style="font-family:Ubuntu,Helvetica,Arial,sans-serif;font-size:16px;line-height:1;text-align:left;color:#000000"><strong>
+                                                        <img style="height:1.2em; width:1.2em" src="https://fonts.gstatic.com/s/e/notoemoji/15.0/1f4d8/32.png" loading="lazy"/><t t-out="k.title"/></strong></div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="background:#ffffff;background-color:#ffffff;margin:0px auto;max-width:600px">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" style="background:#ffffff;background-color:#ffffff;width:100%">
+                        <tbody>
+                            <tr>
+                                <td style="direction:ltr;font-size:0px;padding:0px 15px;text-align:center">
+                                    <div style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%">
+                                        <table border="0" cellpadding="0" cellspacing="0" style="vertical-align:top" width="100%">
+                                            <tbody>
+                                                <tr>
+                                                    <td align="left" style="font-size:0px;padding:0;padding-top:10px;word-break:break-word">
+                                                        <table cellpadding="0" cellspacing="0" width="100%" border="0" style="color:#000000;font-family:Ubuntu,Helvetica,Arial,sans-serif;font-size:13px;line-height:22px;table-layout:auto;width:100%;border:none">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td width="30%" style="border-top:1px solid #555555;border-bottom:1px solid #555555"><t t-out='k.ref'/></td>
+                                                                    <td style="border-top:1px solid #555555;border-bottom:1px solid #555555"><t t-out="object.freights_id.ref_num"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border-bottom:1px solid #555555"><t t-out="k.type"/></td>
+                                                                    <td style="border-bottom:1px solid #555555"><t t-out="object.freights_id.ordered_freights_type.type_name"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border-bottom:1px solid #555555"><t t-out="k.terminal"/></td>
+                                                                    <td style="border-bottom:1px solid #555555"><t t-out="object.freights_id.terminal_id.name"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border-bottom:1px solid #555555"><t t-out="k.contact"/></td>
+                                                                    <td style="border-bottom:1px solid #555555">
+                                                                    1,Агаар-Дүгэрдорж-99011173, 2,АБТЭМА-Чинзориг-96666370, 3.Бусад талбай-Мөнгөншагай-89005951
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border-bottom:1px solid #555555"><t t-out="k.contribute"/></td>
+                                                                    <td style="border-bottom:1px solid #555555">
+                                                                        <t t-value="false" t-set="checker"/>
+                                                                        <t t-foreach="object.freights_id.contributor_ids" t-as="contributor">
+                                                                            <!-- <t t-foreach="contributor.employee.user_groups" t-as="role">
+                                                                                <t t-if="checker == false">
+                                                                                    <t t-if="role.name == 'operation'">
+                                                                                        <strong><t t-out="contributor.employee.name"/></strong>,
+                                                                                         <a href="mailto:op3@mlw.mn" target="_blank"><t t-out="contributor.employee.work_email"/></a>,
+                                                                                        <t t-out="contributor.employee.work_phone"/>
+                                                                                        <t t-value="true" t-set="checker"/>
+                                                                                    </t>
+                                                                                </t>
+                                                                            </t> -->
+                                                                        </t>
+                                                                        <t t-foreach="object.freights_id.contributor_ids" t-as="contributor">
+                                                                            <!-- <t t-foreach="contributor.employee.user_groups" t-as="role">
+                                                                                <t t-if="checker == false">
+                                                                                    <t t-if="role.name == 'sales'">
+                                                                                        <strong><t t-out="contributor.employee.name"/></strong>,
+                                                                                         <a href="mailto:op3@mlw.mn" target="_blank"><t t-out="contributor.employee.work_email"/></a>,
+                                                                                        <t t-out="contributor.employee.work_phone"/>
+                                                                                        <t t-value="true" t-set="checker"/>
+                                                                                    </t>
+                                                                                </t>
+                                                                            </t> -->
+                                                                        </t>
+                                                                       <t t-foreach="object.freights_id.contributor_ids" t-as="contributor">
+                                                                            <!-- <t t-foreach="contributor.employee.user_groups" t-as="role">
+                                                                                <t t-if="checker == false">
+                                                                                    <strong><t t-out="contributor.employee.name"/></strong>,
+                                                                                        <a href="mailto:op3@mlw.mn" target="_blank"><t t-out="contributor.employee.work_email"/></a>,
+                                                                                    <t t-out="contributor.employee.work_phone"/>
+                                                                                    <t t-value="true" t-set="checker"/>
+                                                                                </t>
+                                                                            </t> -->
+                                                                        </t>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border-bottom:1px solid #555555"><t t-out="k.ata"/></td>
+                                                                    <td style="border-bottom:1px solid #555555"><t t-out="object.freights_id.terminal_id.name"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border-bottom:1px solid #555555"><t t-out="k.transit_time"/></td>
+                                                                    <td style="border-bottom:1px solid #555555"><t t-out="object.freights_id.terminal_id.name"/></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-size:0px;word-break:break-word">
+                                                        <div style="height:20px"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-size:0px;word-break:break-word">
+                                                        <div style="height:20px"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="left" style="font-size:0px;padding:10px 25px;padding-bottom:0px;word-break:break-word">
+                                                        <div style="font-family:Ubuntu,Helvetica,Arial,sans-serif;font-size:16px;line-height:1;text-align:left;color:#000000"><strong>
+                                                        <img style="height:1.2em; width:1.2em" src="https://fonts.gstatic.com/s/e/notoemoji/15.0/1f381/32.png" loading="lazy"/><t t-out="k.subTitle"/></strong></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="left" style="font-size:0px;padding:0px;padding-top:10px;word-break:break-word">
+                                                        <table cellpadding="0" cellspacing="0" width="100%" border="0" style="color:#000000;font-family:Ubuntu,Helvetica,Arial,sans-serif;font-size:13px;line-height:22px;table-layout:auto;width:100%;border:none">
+                                                            <tbody><tr>
+                                                                    <td rowspan="0" style="border-left:1px solid #555555;border-top:1px solid #555555;width:5px;border-left:1px solid #555555;background-color:#798897">
+                                                                    </td>
+                                                                    <td colspan="4" style="height:5px;border-top:1px solid #555555;background-color:#798897"></td>
+                                                                    <td rowspan="0" style="width:5px;border-top:1px solid #555555;border-right:1px solid #555555;background-color:#798897">
+                                                                    </td>
+                                                                </tr><tr>
+                                                                    <td colspan="2" width="160px" style="border-left:1px solid #555555;border-bottom:1px solid #555555;padding-top:5px;padding-left:5px;border-top:1px solid #555555"><t t-out="k.container_ref"/>
+                                                                    </td>
+                                                                    <td style="border-left:1px solid #555555;border-top:1px solid #555555;border-right:1px solid #555555;padding-left:5px">
+                                                                    <strong><t t-out="object.shipment_id.name"/></strong>
+                                                                    </td>
+                                                                </tr><tr>
+                                                                    <td colspan="3" style="border-bottom:1px solid #555555;background-color:#798897;height:5px"></td>
+                                                                </tr>
+                                                                <t t-value="1" t-set="counter"/>
+                                                                <t t-foreach="object.shipment_id.shipment_packages" t-as="package">
+                                                                    <tr>
+                                                                        <td rowspan="3" width="60px" style="height:60px;color:#ed3237;text-align:center;font-size:24px;border-left:1px solid #555555;border-top:1px solid #555555;border-bottom:1px solid #555555">
+                                                                            <t t-out="counter"/>
+                                                                        </td>
+                                                                        <td width="100px" style="padding-left:5px;border-left:1px solid #555555;border-top:1px solid #555555">
+                                                                            <t t-out="k.cargo_name"/>
+                                                                        </td>
+                                                                        <td style="border-left:1px solid #555555;border-top:1px solid #555555;border-right:1px solid #555555;padding-left:5px">
+                                                                            <t t-out="package.name"/>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="padding-left:5px;border-left:1px solid #555555;border-top:1px solid #555555">
+                                                                            <t t-out="k.shipper"/>
+                                                                        </td>
+                                                                        <td style="border-left:1px solid #555555;border-top:1px solid #555555;border-right:1px solid #555555;padding-left:5px">
+                                                                            <t t-out="object.freights_id.shipper_info"/>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="padding-left:5px;border-left:1px solid #555555;border-top:1px solid #555555;border-bottom:1px solid #555555">
+                                                                            <t t-out="k.detail"/>
+                                                                        </td>
+                                                                        <td style="border-left:1px solid #555555;border-top:1px solid #555555;border-right:1px solid #555555;border-bottom:1px solid #555555;padding-left:5px">
+                                                                            <t t-out="package.package_qty"/>pcs,<t t-out="package.volume"/>cbm,<t t-out="package.gross"/>kg
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="3" style="border-bottom:1px solid #555555;background-color:#798897;height:5px"></td>
+                                                                    </tr>
+                                                                    <t t-value="counter+1" t-set="counter"/>
+                                                                </t>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                            
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="background:#ffffff;background-color:#ffffff;margin:0px auto;max-width:600px">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" style="background:#ffffff;background-color:#ffffff;width:100%">
+                        <tbody>
+                            <tr>
+                                <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center">
+                                    <div style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%">
+                                        <table border="0" cellpadding="0" cellspacing="0" style="vertical-align:top" width="100%">
+                                            <tbody>
+                                                <tr>
+                                                    <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word">
+                                                        <div style="font-family:helvetica;font-size:14px;line-height:1;text-align:left;color:#666666">Thanks,<br/>
+                                                    Monlogistics Team</div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div> 
+           </field>
+       </record>
+   </data>
+</odoo>

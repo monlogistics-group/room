@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="freights_points_view_filter" model="ir.ui.view">
+        <field name="name">freights.points.view.search</field>
+        <field name="model">freights.points</field>
+        <field name="arch" type="xml">
+            <search string="Search Operations">
+                <field name="code"/>
+                <field name="name" context="{'special_display_name': True}"/>
+                <field name="country"/>
+                <field name="state"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Country" name="shipper" domain="[]" context="{'group_by':'country'}"/>
+                    <filter string="State" name="job" domain="[]" context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="freights_points_form_view">
+        <field name="name">freights.points.form</field>
+        <field name="model">freights.points</field>
+        <field name="arch" type="xml">
+            <form string="points">
+                <group>
+                    <group>
+                        <field name="code"/>
+                        <field name="name" required="1"/>
+                        <field name="country"/>
+                        <field name="state"/>
+                    </group>
+                    <group>
+                        <field name="border"/>
+                        <field name="latitude"/>
+                        <field name="longitude"/>
+                        <field name="active"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="freights_points_tree_view">
+        <field name="name">freights.points.tree</field>
+        <field name="model">freights.points</field>
+        <field name="arch" type="xml">
+            <tree string="points">
+                <field name="sequence" width="handle"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="country"/>
+                <field name="border"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="freights_points_view_action">
+        <field name="name">points</field>
+        <field name="res_model">freights.points</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new points.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_freights_points"
+            name="Points"
+            action="freights_points_view_action"
+            parent="menu_worldwide_configuration"
+            groups=""
+            sequence="130"/>
+</odoo>

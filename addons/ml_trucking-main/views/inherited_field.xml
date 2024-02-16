@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_partner_form_inherit_freight" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='vat']" position="after">
+                     <field name="truck_types" widget="many2many_tags"/> 
+                     <field name="other_lang" widget="many2many_tags"/>
+                     <field name='is_employee'/>
+                     
+                </xpath> 
+            </field>
+        </record>
+
+        <record id="view_account_move_form_inherit_freight" model="ir.ui.view">
+            <field name="name">account.move.form.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_date']" position="after">
+                    <field name="trucking_id" nolabel="0"/>
+                </xpath> 
+            </field>
+        </record>
+    </data>
+</odoo>
+
+

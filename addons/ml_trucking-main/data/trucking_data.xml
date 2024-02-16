@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+Created by Umbaa. 2022-10-25 -->
+
+<odoo>
+    <data noupdate="1">
+
+    <!--//////////////////////////////////////////////////////////////////////////////-->
+        <record id="trucking_budget_data" model="mltrucking.budget.data">
+            <field name="locale">1</field>
+            <field name="ceo">CEO</field>
+            <field name="title">Expenditure budget</field>
+            <field name="name">Name</field>
+            <field name="es_time">Estimated Time</field>
+            <field name="chassis_num">Chassis Number</field>
+            <field name="position">Position</field>
+            <field name="from_to">From To</field>
+            <field name="task">Task</field>
+            <field name="net_distance">Net Distance</field>
+            <field name="total_distance">Total Distance</field>
+            <field name="tr_num">Transportation Number</field>
+            <field name="purpose">Expenditure purpose</field>
+            <field name="quantity">Quantity</field>
+            <field name="cost">Cost</field>
+            <field name="subtotal">Subtotal</field>
+            <field name="total_cost">Total Cost</field>
+            <field name="profession_budget">Transportation organizer</field>
+            <field name="review">Reviewed</field>
+            <field name="ceo_name">N.Altantanzul</field>
+        </record>
+
+        <record id="trucking_document_data" model="mltrucking.document.data">
+            <field name="document">Document</field>
+            <field name="locale">1</field>
+            <field name="version">Version</field>
+            <field name="ref">Ref</field>
+            <field name="date">Date</field>
+            <field name="statement">Statement</field>
+            <field name="warning1">warning1</field>
+            <field name="warning2">warning1</field>
+            <field name="warning3">warning1</field>
+            <field name="warning4">warning1</field>
+            <field name="warning5">warning1</field>
+            <field name="phone">Phone Number</field>
+            <field name="address">Address</field>
+            <field name="company">Monlogistics Trucking LLC</field>
+            <field name="sender">Sender Name</field>
+            <field name="senderaddress">Address</field>
+            <field name="receiver">Receiver</field>
+            <field name="receiveaddress">Receive Address</field>
+            <field name="freight">Freight</field>
+            <field name="size">Size</field>
+            <field name="quantity">Quantity</field>
+            <field name="weight">Weight</field>
+            <field name="chassisnumber">Chassis Number/Container</field>
+            <field name="begintime">Begintime</field>
+            <field name="endtime">Endtime</field>
+            <field name="yes">Yes</field>
+            <field name="no">No</field>
+            <field name="ready">Ready</field>
+            <field name="invoice">Invoice</field>
+            <field name="sendercompany">Sender Company</field>
+            <field name="employeename">Name</field>
+            <field name="employeephone">Phone</field>
+            <field name="employeesignature">Autograph</field>
+            <field name="carriercompany">Carrier Company</field>
+            <field name="payment">Payment</field>
+            <field name="drivername">Driver name</field>
+            <field name="driverphone">Phone</field>
+            <field name="driversignature">Autograph</field>
+            <field name="receivercompany">Receiver Company</field>
+            <field name="receivername">Name</field>
+            <field name="receiverphone">Phone</field>
+            <field name="receiversignature">Autograph</field>
+            <field name="end">End</field>
+            <field name="note">Note</field>
+            <field name="warning">Warning</field>
+            <field name="begun">Begun</field>
+            <!-- <field name="companyAddress">SBD, New Horizons</field> -->
+            <field name="kmClause">km Clause:</field>
+        </record> -
+    <!--//////////////////////////////////////////////////////////////////////////////-->
+
+        <record id="quotation_data_text" model="mltrucking.quotation.data">
+            <field name="title_name">RATE QUOTATION</field>
+            <field name="truck_reference">REFERENCE</field>
+            <field name="truck_valit_until">VALID UNTIL</field>
+            <field name="truck_to">TO</field>
+            <field name="truck_detail">CARGO DETAIL</field>
+            <field name="truck_transit_time">ESTIMATED TRANSIT TIME</field>
+            <field name="truck_incoterms">INCOTERMS</field>
+            <field name="truck_routes">ROUTES</field>
+            <field name="truck_rate">RATE</field>
+            <field name="truck_include">ABOVE RATE INCLUDED BELOW CHARGES</field>
+            <field name="truck_not_include">ABOVE RATE NOT INCLUDED BELOW CHARGES</field>
+            <field name="truck_remark">REMARK</field>
+            <field name="truck_remark_body">Rate is not valid for non ferrous metals + DG
+                Above quotation does not include VAT
+                Actual Departure date is subject to vessel or airline space and empty container availability 
+                The actual date of dispatch means the date of loading cargo on vehicle and dispatching from origin point 
+                Shipping packages must meet international packaging standards
+                If required shipper/ consignee must provide special loading instructions
+                Shipper/ Consignee must provide all necessary documents for custom clearance
+                Shipper must load balanced. Quotation exclude any unbalance cost
+                In event of unexpected custom inspection at transit ports there will be additional cost
+                In case of occurred VAT refunding charges and local tax will be negotiated who will pay this charges 
+                Overweight charges will be incurred for weight from 21600kg/20’ to 25200kg/40’ /excluding container tare weight/ 
+                Regarding alcohol, tobaccos, cosmetic and other food shipment through China Health certificate, Test report, COO, CIQ and other relevant certificates are required. For Chemicals shipment required MSDS and Test report 
+                Regarding on “wooden” products/ rice/ honey/ milk powder/ bean/ corn/ other organic items, XinGang CIQ requires COO and Phytosanitary Certificate by original copy and there will be phytosanitary inspection charge 
+                Above rate Quotation invalid for nonferrous metals through Russia and for other products, prohibited for transporting via Russia </field>
+            <field name="locale">1</field>
+        </record>  
+        
+        
+
+
+        
+        <record id="email_default_text" model="mltrucking.mail">
+            <field name="greeting">Hello?</field>
+            <field name="description">Thanks for sending to us price inquiry. We're sending you a quotation.</field>
+            <field name="route">Transportation conditions &amp; Route:</field>
+            <field name="footer">If you have anything to tell us, tell us pls </field>
+            <field name="table_number">#</field>
+            <field name="table_type">Type</field>
+            <field name="table_id">ID</field>
+            <field name="table_information">Goods information</field>
+            <field name="price">Price</field>
+            <field name="table_estimated_time">Estimated time</field>
+            <field name="locale">1</field>
+        </record> 
+
+        <record id="transport_email_default_text" model="mltrucking.transport.mail">
+            <field name="entity">#</field>
+            <field name="container_id">Container ID</field>
+            <field name="count">Number of messages sent</field>
+            <field name="transportations">Transportations</field>
+            <field name="order_num">Order ID</field>
+            <field name="transportation_condition">Transportation condition</field>
+            <field name="sender">Sender</field>
+            <field name="employee">Consignee</field>
+            <field name="locale">1</field>
+        </record>
+        
+
+        <record id="invoice_default_text" model="mltrucking.invoice.data">
+            <field name="info_name">Invoice</field>
+            <field name="inv_name">PLANTIFF</field>
+            <field name="organi_name">NAME OF THE ORGANIZATION</field>
+            <field name="payer_number">Payer number</field>
+            <field name="inv_add">ADDRESS</field>
+            <field name="inv_phone">PHONE</field>
+            <field name="payer_email">Email</field>
+            <field name="payment_per">PAYMENT PERIOD</field>
+            <field name="bnk_name">BANK TYPE</field>
+            <field name="bnk_nmbr">BANK OF NUMBER</field>
+            <field name="payer">PAYER</field>
+            <field name="payer_name">NAME OF THE ORGANIZATION</field>
+            <field name="payer_add">RAYER ADDRESS</field>
+            <field name="contract_number">CONTRACT NUMBER</field>
+            <field name="inv_date">VALID DATE</field>
+            <field name="invoi_date">INVOICE DATE</field>
+            <field name="serv_desc">Description</field>
+            <field name="serv_name">SERVICE NAME</field>
+            <field name="serv_qty">QUANTITY</field>
+            <field name="serv_cost">N/TOTAL </field>
+            <field name="serv_tot">SERVICE TOTAL</field>
+            <field name="direct_name">Director Name</field>
+            <field name="senior_name">Senior A Name</field>
+            <field name="director_acc">Executive Director</field>
+            <field name="senior_acc">Senior Accountant</field>
+            <field name="locale">1</field>
+        </record>
+
+        <record id="saleorder_df_data" model="mltrucking.sale.order.quotation.data">
+            <field name="ship_conf">ORDER PAGE</field>
+            <field name="title_name">REFERENCE</field>
+            <field name="ship_date" >DATE</field>
+            <field name="ship_to" >TO</field>
+            <field name="ship_type" >SHIPMENT TYPE</field>
+            <field name="package_name">PACKAGE NAME</field>
+            <field name="package_desc" >PACKAGE DESKRIPTION</field>
+            <field name="package_qty" >PACKAGE QTY</field>
+            <field name="package_vendor" >PACKAGE VENDOR</field>
+
+            <field name="package_con">CONSIGNEE</field>
+            <field name="ekso_condi">INKOTERMIN CONSITION</field>
+            <field name="package_valid_until">VALID UNTIL</field>
+            <field name="package_rt_name">ROUTE MANAGER</field>
+            <field name="condi_route">CONDITION AND ROUTE</field>
+            <field name="package_cost">COST</field>
+            <field name="border">Border</field>
+            <field name="transport_agent">TRANSPORT NAME</field>
+            <field name="costumer_name">COSTUMER NAME</field>
+            <field name="agent_name" >NAME:KHOS-ERDENE</field>
+            <field name="cos_name">NAME:LHAGDULAM</field>
+            <field name="sign" >SIGN</field>
+            <field name="condi_text">CONDITION TEXT</field>
+            <field name="condi_texts">
+                The present “Shipment confrmation” is considered as a freight agreement between Monlogistics Worldwide (MLW)and Tianjin Well-Carry Logistics Co.,Ltd (agent).
+                By accepting this confrmation, MLW’s nominated agent undertakes a responsibility to deliver the cargo within estimated time to a named port/border to respect an agreement with cargoes actual consignee.
+                In case of unforeseen additional charges occurred at the port/border/station, the agent is responsible to advise MLW prior the cargoes arrival at destination or cargo release to consignee. Any additional charges must be proved by documents.
+                MLW and its agent will exchange cargoes tracing information in daily fashion including special notices and demurrage standard of used equipment, informing each other about a release instruction and necessary documents in relation to transit customs formality, to avoid cargoes excessive delay at transit port or border station and related hereto charges.
+                MLW’s agent should send the freight invoice before the cargo arrival to the fnal destination.
+                MLW’s agent shall be responsible to instruct the shipper about cargoes proper loading and fxing into equipment, in order to avoid further charges to correct and balance the loading.
+                MLW’s agent is aware of fnancial policy of MLW, that the payment for all operations shall be made upon agent’s invoice confrmation and confrmed “Shipment confrmation”.
+                MLW and its agent shall respect the interests of each other and will not disclose any part of this agreement to third party without authorization of contractual counterpart.
+                MLW’s agent should pay high attention to top priority cargoes.</field>
+            <field name="locale">1</field>
+        </record>
+
+        <record id="tdb_currency_rate_auotupdate" model="ir.cron">
+            <field name="name">TDB: currency rate update data</field>
+            <field name="model_id" ref="model_mltrucking_currency"/>
+            <field name="state">code</field>
+            <field name="code">model.get_rates_tdb()</field>
+            <field name='interval_number'>1</field>
+            <field name='interval_type'>days</field>
+            <field name="numbercall">-1</field>
+        </record>
+        
+    </data>
+
+</odoo>

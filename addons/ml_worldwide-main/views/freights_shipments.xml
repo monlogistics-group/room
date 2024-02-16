@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="freights_shipments_form_view">
+            <field name="name">freights.shipments.form</field>
+            <field name="model">freights.shipments</field>
+            <field name="arch" type="xml">
+                <form string="Shipments">
+                    <header>
+                        <button name="action_insurance_data" type="object" icon="fa-plus" string="Insurance case" confirm="Are you sure there is an Insurance claim for this shipment?"/>
+                        <button name="action_insurance_register" type="object" icon="fa-download" string="Insurance Incident Registration" class="btn-primary" attrs="{'invisible': [('insurance_ids','=', [])]}"/>
+                        <!-- attrs="{'invisible': ['|',('freights_id.has_insurance','!=', True), ('freights_id.state_id','!=', 'on-going')]}" -->
+                    </header>
+                    <sheet>
+                        <group col='2'>
+                            <group>
+                                <field name="freights_id" readonly="1"/>
+                                <field name="name" required="1"/>
+                                <field name='shipment_type_id'/>
+                                <field name="vehicle_show" invisible="1"/>
+                                <field name="container_show" invisible="1"/>
+                                <field name='shipment_type_id_related' invisible='1'/> 
+                                <field name='container_type_id' attrs="{'invisible':[('container_show','=',False)]}" />
+                                <field name='vehicle' attrs="{'invisible':[('vehicle_show','=',False)]}"/>
+                                <field name='track_number' force_save='1' attrs="{'readonly' : ['|',('shipment_type_id_related','=', 'Container'),('shipment_type_id_related', '=' , 'Vehicle')]}"/>
+                                <field name='cargo_currency_id'/>
+                            
+                                <field name='terminal_id'/>
+                                <field name='cargo_price'/>
+                                <field name='booking_number'/>
+                                <!-- <field name='container_details' attrs="{'invisible':[('shipment_type_id_related','!=','Container')]}"/> -->
+                            </group>
+                            
+                            
+                        </group>
+                        <group>
+                            <field name='shipment_packages'/>
+                            <field name='remark'/>
+                            <field name="insurance_ids" widget="many2many_taglinks" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="freights_shipments_tree_view">
+            <field name="name">freights.shipments.tree</field>
+            <field name="model">freights.shipments</field>
+            <field name="arch" type="xml">
+                <tree string="freights Shipments" create="false" >
+                    <field name="freights_id" readonly="1"/>
+                    <field name='shipment_type_id'/>
+                    <field name='container_type_id'/>
+                    <field name='track_number'/>
+                    <field name='cargo_currency_id'/>
+                    <field name='cargo_price'/>
+                    <field name='booking_number'/>
+                    <field name='shipment_packages'/>
+                    <field name='remark'/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="freights_shipments_kanban_view" model="ir.ui.view">
+            <field name="name">freights.shipments.kanban</field>
+            <field name="model">freights.shipments</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="freights_id"/>
+                    <field name='shipment_type_id'/>
+                    <field name='container_type_id'/>
+                    <field name='track_number'/>
+                    <field name='cargo_currency_id'/>
+                    <field name='cargo_price'/>
+                    <field name='booking_number'/>
+                    <field name='shipment_packages'/>
+                    <field name='remark'/>
+                    <field name="name"/>
+                    <field name="shipment_data"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                            <t t-set="data" t-value="record.shipment_data.raw_value.split('||')"/>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <strong><field name="freights_id"/></strong>
+                                    </div>
+                                    
+                                    <div class="o_field_many2manytags o_field_widget col-6 text-right" style="margin-top:15px"> 
+                                        <div class="badge badge-pill o_tag_color_7" style="float:right; margin-top: -15px;">
+                                            <span style = "font-size:10px;" class="badge badge-pill"><t t-esc="data[8]"/></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <strong>Cargo Name:</strong>
+                                    </div>
+                                    <div>
+                                        <span style="font-size:12px;"><t t-esc="data[2]"/></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <strong>Trucking Type:</strong>
+                                    </div>
+                                    <div>
+                                        <span style="font-size:12px;"><field name="shipment_type_id"/></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-6">
+                                        <strong>Trucking Number:</strong>
+                                    </div>
+                                    <div>
+                                        <field name="track_number"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="freights_shipments_pivot_view" model="ir.ui.view">
+            <field name="name">freights.shipments.pivot</field>
+            <field name="model">freights.shipments</field>
+            <field name="arch" type="xml">
+                <pivot string="Freights Shipments" sample="1">
+                    <field name="freights_id"/>
+                    <field name='container_type_id'/>
+                    <field name='track_number'/>
+                    <field name='cargo_currency_id'/>
+                    <field name='shipment_packages'/>
+                    <field name='remark'/>
+                    <field name="name"/>
+                    <field name="shipment_type_id" type="col"/>
+                    <field name="booking_number" type="row"/>
+                    <field name="cargo_price" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="freights_shipments_graph_view" model="ir.ui.view">
+            <field name="name">freights.shipments.graph</field>
+            <field name="model">freights.shipments</field>
+            <field name="arch" type="xml">
+                <graph string="Freights Shipments" type="line" sample="1">
+                    <field name="shipment_type_id"/>
+                    <field name="cargo_price" type="measure"/>
+                </graph>
+            </field>
+        </record>
+        <record id="freights_shipments_search_view" model="ir.ui.view">
+            <field name="name">freights.shipments.search</field>
+            <field name="model">freights.shipments</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="freights_id"/>
+                    <field name ="shipment_type_id" string ="Trucking Type" />     
+                    <field name ="container_type_id" string="Container"/>
+                    <field name="track_number" string="Truck Number"  />
+                    <field name="booking_number" string="Book Number"/>
+                    <field name ="shipment_packages" string="Shipment"/>
+                    <field name ="name" string="Number"/>
+                    <field name ="freights_id" string="Number"/>
+                    <separator/>
+                
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="freights_shipments_view_action">
+            <field name="name">Freights Shipments </field>
+            <field name="res_model">freights.shipments</field>
+            <field name="view_mode">tree,form,kanban,pivot,graph</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new port.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_worldwide_shipments"
+              parent="menu_worldwide_root"
+              name="Shipments"
+              action="freights_shipments_view_action"
+              sequence="102"/>
+              
+    </data>
+</odoo>

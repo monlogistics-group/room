@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mlworldwide_view_company_form" model="ir.ui.view">
+            <field name="name">res.company.form.inherit</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='favicon']" position="after">
+                     <field name="other_logos" widget="imege"/>
+                     <field name="bank_info_title"/>
+                     <field name="bank_info_l1"/>
+                     <field name="bank_info_l2"/>
+                     <field name="bank_info_l3"/>
+                     <field name="bank_info_l4"/>
+                </xpath> 
+            </field>
+        </record>
+
+        <record id="mlworldwide_res_currency_three" model="ir.ui.view">
+            <field name="name">res.currency.form.inherit</field>
+            <field name="model">res.currency</field>
+            <field name="inherit_id" ref="base.view_currency_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="before">
+                    <field name="sequence" widget="handle"/>
+                </xpath> 
+            </field>
+        </record>
+
+        <record id="mlworldwide_res_currency_action" model="ir.actions.act_window">
+            <field name="name">Currency</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.currency</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" eval="False"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Define a new pages
+                </p><p>
+                    Freights app are used to Pages module.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_mlworldwide_res_currency_action"
+            name="Currency"
+            action="mlworldwide_res_currency_action"
+            parent="menu_worldwide_customer_app"
+            groups=""
+            sequence="369"
+        />
+        
+    </data>
+</odoo>

@@ -1,0 +1,249 @@
+<odoo>
+    <data>
+
+        <record id="view_partner_form_inherit_freight" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit_new</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='category_id']" position="after">
+                <field name="cyrillic_name"/>
+                
+                    <field name="agent"/>
+                    <field name="not_billable"/>
+                    <field name="credit_day"/>
+                    <field name="interest_percentage"/>
+                    <field name="cron_jobs"/>
+                </xpath>
+                <xpath expr="//page[@name='internal_notes']" position="after">
+                    <page name="agent_info" string="Agent Info" attrs="{'invisible': [('agent', '=', False)]}">
+                        <group>
+                            <group>
+                                <field name="trusted"/>
+                                <field name="dont_send_sc"/>
+                            </group>
+                            <group>
+                                <field name="freigths_type" widget="many2many_tags"/>
+                                <field name="freigths_abilities" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page name="contract_info" string="Contract" >
+                        <group>
+                            <field name="freigths_contracts"/>
+                        </group>
+                    </page>
+                    <page name="freights_agent_review" string="Agent review" >
+                        <field name="freights_agent_review">
+                            <tree string="Agent reviews" editable="bottom" create="false" delete="false" no_open="1">
+                                <field name="agent_id" readonly = "1"/>
+                                <field name="freight_id" readonly = "1"/>
+                                <field name="rate" widget="priority" readonly = "1"/>
+                                <field name="review" readonly = "1"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="agent_rating" widget="field_float_rating"
+                           attrs="{'invisible': [('agent', '=', False)]}"/>
+                    <field name="bill_instruction" attrs="{'invisible': [('agent', '=', False)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='child_ids']//kanban//field[@name='country_id']" position="before">
+                    <field name="freigths_type" widget="many2many_tags"/>
+                </xpath>
+                <xpath expr="//field[@name='child_ids']//form//field[@name='comment']" position="before">
+                    <field name="freigths_type" widget="many2many_tags"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="sale_order_form_inherit_freight" model="ir.ui.view">
+            <field name="name">sale.order.line.form.inherit_new</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <!-- <xpath expr="//field[@name='order_line']//field[@name='qty_invoiced']" position="after">
+                    <field name='shipment_ids' widget="many2many_tags"/>
+                    <field name='payment_ids'/>
+                </xpath> -->
+                <xpath expr="//field[@name='order_line']//form//field[@name='tax_id']" position="after">
+                    <field name='shipment_ids' widget="many2many_tags"/>
+                    <field name='payment_ids'/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="res_partner_new_tree_view">
+            <field name="name">res.partner.names.view</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <header>
+                        <button type='object' name='add_filtered_items' string='add'/>
+                        <button type='object' name='update_filtered_items' string='update'/>
+                    </header>
+                    <field name="display_name"/>
+                    <field name="freigths_abilities" widget="many2many_tags"/>
+                    <field name="freigths_type" widget="many2many_tags"/>
+                    <field name="country_id"/>
+                    <field name="agent_rating"/>
+                </tree>
+            </field>
+        </record>
+        <!-- <record model="ir.ui.view" id="res_partner_new_tree_view_inherit">
+            <field name="name">res.partner.names.view.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="ml_worldwide.res_partner_new_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="/tree">
+                    <header>
+                        <button type='object' name='add_filtered_items' string='add'/>
+                        <button type='object' name='update_filtered_items' string='update'/>
+                    </header>
+                </xpath>
+            </field>
+        </record> -->
+        <record model="ir.ui.view" id="account_move_new_tree_view_inherit">
+            <field name="name">account.move.form.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_line_ids']//field[@name='quantity']" position="after">
+                    <field name='shipment_ids' widget="many2many_tags"/>
+                    <field name='payment_ids'/>
+                </xpath>
+                <xpath expr="//field[@name='invoice_line_ids']//form//field[@name='account_id']" position="after">
+                    <field name='shipment_ids' widget="many2many_tags"/>
+                    <field name='payment_ids'/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="account_move_tree_view_replace_inherit">
+            <field name="name">account.move.tree.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_line_ids']//tree" position="after">
+                    <tree editable="bottom" delete='false' string="Journal Items" default_order="sequence, date desc, move_name desc, id">
+                        <control>
+                            <create name="add_line_control" string="Add a line"/>
+                            <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>
+                            <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/>
+                        </control>
+
+                        <!-- Displayed fields -->
+                        <field name="sequence" widget="handle"/>
+                        <field name="move_name" invisible="1"/>
+                        <field name="product_id"
+                                optional="show"
+                                domain="
+                                    context.get('default_move_type') in ('out_invoice', 'out_refund', 'out_receipt')
+                                    and [('sale_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]
+                                    or [('purchase_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]
+                                "/>
+                        <field name="name" widget="section_and_note_text" attrs="{'required': [('parent.move_type', 'not in', ('in_invoice', 'in_refund','in_receipt'))]}"/>
+                        <field name="account_id"
+                                groups="account.group_account_readonly"
+                                options="{'no_create': True}"
+                                domain="[('deprecated', '=', False), ('user_type_id.type', 'not in', ('receivable', 'payable')), ('company_id', '=', parent.company_id), ('is_off_balance', '=', False)]"
+                                attrs="{'required': [('display_type', '=', False)]}"/>
+                        <field name="analytic_account_id"
+                                domain="['|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]"
+                                groups="analytic.group_analytic_accounting"
+                                optional="show"/>
+                        <field name="analytic_tag_ids"
+                                domain="['|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]"
+                                groups="analytic.group_analytic_tags"
+                                optional="show"
+                                widget="many2many_tags"/>
+                        <field name="quantity"/>
+                        <field name="product_uom_category_id" invisible="1"/>
+                        <field name="product_uom_id" string="UoM" groups="uom.group_uom" optional="show"/>
+                        <field name="price_unit" string="Price"/>
+                        <field name="discount" string="Disc.%" optional="hide"/>
+                        <field name="tax_ids" widget="many2many_tags"
+                                domain="[('type_tax_use', '=?', parent.invoice_filter_type_domain), ('company_id', '=', parent.company_id), ('country_id', '=', parent.tax_country_id)]"
+                                context="{'append_type_to_tax_name': not parent.invoice_filter_type_domain}"
+                                options="{'no_create': True}"
+                                optional="show"/>
+                        <field name="price_subtotal"
+                                string="Subtotal"
+                                groups="account.group_show_line_subtotals_tax_excluded"/>
+                        <field name="price_total"
+                                string="Total"
+                                groups="account.group_show_line_subtotals_tax_included"/>
+
+                        <!-- Others fields -->
+                        <field name="partner_id" invisible="1"/>
+                        <field name="amount_currency" invisible="1"/>
+                        <field name="currency_id" invisible="1"/>
+                        <field name="debit" invisible="1"/>
+                        <field name="credit" invisible="1"/>
+                        <field name="date" invisible="1"/>
+                        <field name="date_maturity" invisible="1"/>
+
+                        <field name="group_tax_id" invisible="1"/>
+                        <field name="tax_line_id" invisible="1"/>
+                        <field name="tax_repartition_line_id" invisible="1"/>
+                        <field name="tax_tag_ids" invisible="1"/>
+                        <field name="tax_base_amount" invisible="1"/>
+                        <field name="company_id" invisible="1"/>
+                        <field name="company_currency_id" invisible="1"/>
+                        <field name="recompute_tax_line" invisible="1" force_save="1"/>
+                        <field name="display_type" force_save="1" invisible="1"/>
+                        <field name="is_rounding_line" invisible="1"/>
+                        <field name="exclude_from_invoice_tab" invisible="1"/>
+                        <field name="account_internal_type" invisible="1"/>
+                        <field name="account_internal_group" invisible="1"/>
+                        <button name="delete_item" type="object" icon="fa-times" title="Delete" />
+                    </tree>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- <record id="view_partners_form_inherit_freight1" model="ir.ui.view">
+            <field name="name">res.partner.tree.inherited_view</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="/tree">
+                    <header>
+                        <button type='object' name='add_filtered_items' string='add'/>
+                        <button type='object' name='update_filtered_items' string='update'/>
+                    </header>
+                </xpath>
+            </field>
+        </record> -->
+
+    </data>
+
+   <data>
+       <record id="freights_inherit_view" model="ir.ui.view">
+           <field name="name">mlworldwide.freights.view.tree.inherit</field>
+           <field name="model">mlworldwide.freights</field>
+           <field name="inherit_id" ref="ml_worldwide-main.ml_worldwide_freight_tree_view"/>
+           <field name="arch" type="xml">
+               <xpath expr="//tree" position="attributes">
+                   <attribute name="js_class">export_in_freight</attribute>
+               </xpath>
+           </field>
+       </record>
+   </data>
+    <data>
+       <record id="package_inherited_view" model="ir.ui.view">
+           <field name="name">freights.packages.view.tree.inherit</field>
+           <field name="model">freights.packages</field>
+           <field name="inherit_id" ref="ml_worldwide-main.freights_packages_tree_view"/>
+           <field name="arch" type="xml">
+               <xpath expr="//tree" position="attributes">
+                    <attribute name="js_class">filter_buttons</attribute>
+               </xpath>
+           </field>
+       </record>
+   </data>
+</odoo>
+
+
+       

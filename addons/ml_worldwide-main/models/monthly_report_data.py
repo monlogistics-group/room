@@ -1,0 +1,50 @@
+from odoo import models, fields
+from datetime import datetime
+
+class MonthlyReportData(models.Model):
+    _name = "monthly.report.data"
+    _description = "ML WorldWide monthly report data model"
+    
+    title=fields.Char('Title')
+    monthd=fields.Char(string="Month")
+    date=fields.Char(string="Date")
+    to=fields.Char(string="To")
+    quo_det=fields.Char(string="Quotation Detials")
+   
+    price_inq=fields.Char(string="Price inquiries")
+    conf_order=fields.Char(string="Comfirmed orders")
+    conf_rate=fields.Char(string="Confirmed rate")
+    order_det=fields.Char(string="Order details")
+    state=fields.Char(string="State")
+    in_tran=fields.Char(string="In transit")
+    canc_ord=fields.Char(string="Cancelled Orders")
+    del_order=fields.Char(string="Delivered Orders")
+    del_freightstype=fields.Char(string="Delivered Order Freights Type")
+    del_det=fields.Char(string="Delivery details")
+    date_delivery=fields.Char(string="Arrived on time delivery")
+    over_order=fields.Char(string="Overdue order(other)")
+    overd_order=fields.Char(string="Overdue order(MLW)")
+    mlwontime_del=fields.Char(string="MLw Arrived on the time")
+    resi_pay=fields.Char(string="Residual payment")
+    curr=fields.Char(string="Currency")
+    mnt=fields.Char(string="MNT")
+    usd=fields.Char(string="USD")
+    eur=fields.Char(string="EUR")
+    cny=fields.Char(string="CNY")
+    ref_num=fields.Char(string="Ref number")
+    whr=fields.Char(string="From(origin term)")
+    calc_date=fields.Char(string="Calc date")
+    arv_date=fields.Char(string="Arrived date")
+    cau_over=fields.Char(string="Cause of overdue")
+    rep_by=fields.Char(string="Reported by")
+    sign=fields.Char(string="Sign")
+    shipp_report=fields.Char(string="Shipping details for the month of report")
+    sender=fields.Char(string="Sender")
+    reportDate = fields.Datetime()
+    confirmed=fields.Char(string="Confirmed")
+    ongoing=fields.Char(string="Ongoing")
+    arrived=fields.Char(string="Arrived")
+    released=fields.Char(string="Released")
+    closed=fields.Char(string="Closed")
+    
+    locate = fields.Many2one(string="Language",comodel_name='res.lang', domain=['|', ('active', '=', False), ('active', '=', True)])

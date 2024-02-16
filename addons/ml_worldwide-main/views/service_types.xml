@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+ -->
+<odoo>
+    
+    <record id="service_types_form_view" model="ir.ui.view">
+        <field name="name">service.types.form</field>
+        <field name="model">service.types</field>
+        <field name="arch" type="xml">
+            <form string="Service Types">
+                <sheet>
+                    <group>
+                        <field name="type"/>
+                        <field name="purpose"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="service_types_tree_view" model="ir.ui.view">
+        <field name="name">service.types.tree</field>
+        <field name="model">service.types</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Service Types">
+                <field name="type"/>
+                <field name="purpose"/>
+            </tree>
+        </field>
+    </record>
+    <record id="service_types_action" model="ir.actions.act_window">
+        <field name="name"> socprice rates</field>
+        <field name="type">ir.actions.act_window</field>  
+        <field name="res_model">service.types</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+    </record>
+    <menuitem id="menu_service_types"
+            name="Service Types"
+            action="service_types_action"
+            parent="menu_worldwide_etc"
+            groups=""
+            sequence="113"/>
+</odoo>

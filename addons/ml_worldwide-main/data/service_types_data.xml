@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="service_types_unloaded" model="service.types">
+        <field name="type">3</field>
+        <field name="purpose">unloaded</field>
+    </record>
+    <record id="service_types_loaded" model="service.types">
+        <field name="type">3</field>
+        <field name="purpose">loaded</field>
+    </record>
+    <record id="service_types_thc" model="service.types">
+        <field name="type">4</field>
+        <field name="purpose">THC</field>
+    </record>
+    <record id="service_types_storage" model="service.types">
+        <field name="type">4</field>
+        <field name="purpose">Storage</field>
+    </record>
+    <record id="service_types_clearance_service" model="service.types">
+        <field name="type">5</field>
+        <field name="purpose">Clearance Service</field>
+    </record>
+      <record id="service_types_from_dec" model="service.types">
+        <field name="type">5</field>
+        <field name="purpose">Form Declaration Cost</field>
+    </record>
+      <record id="service_types_clearance" model="service.types">
+        <field name="type">5</field>
+        <field name="purpose">Clearance Fee</field>
+    </record>
+      <record id="service_types_form_cost" model="service.types">
+        <field name="type">5</field>
+        <field name="purpose">Form Cost</field>
+    </record>
+</odoo>

@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Umbaa. 2022-12-02
+ -->
+<odoo>
+    <record id="freights_service_form_view" model="ir.ui.view">
+        <field name="name">freights.service.form</field>
+        <field name="model">freights.service</field>
+        <field name="arch" type="xml">
+            <form string="Freights serive">
+             	<sheet>
+                     <field name="quotation_id" readonly="1"/>
+                     
+                     <group expand="1">
+                        <field name="type" widget="custom_radio" options="{'horizontal': true}"/>
+                        <field name="show_freghts_service" invisible="1"/>
+                        <field name="show_other_service" invisible="1"/>
+                        <field name="show_package_service" invisible="1"/>
+                        <field name="show_thc_service" invisible="1"/>
+                        <field name="show_custiom_service" invisible="1"/>
+                        <field name="show_delivery_service" invisible="1"/>
+                        <field name="isWeightable" invisible="1"/>
+                        <field name="show_qrate" invisible="1"/>
+                        <field name="isMultimodal" invisible="1"/>
+                        <field name="q_rate_currency_id" invisible="1"/>
+                        <field name="template_id" invisible="1"/>
+                    </group>
+                    <div attrs="{'invisible':[('show_freghts_service','=',False)]}">
+                        <group attrs="{'invisible':[('isMultimodal','=',False)], 'required':[('isMultimodal','=',True)]}">
+                            <field name="freights_type_ids"/>
+                        </group>
+                        <group expand="1">
+                            <field name="agent_id" required="1"/>
+                        </group>
+                        <group expand="1">
+                            <group col="4">
+                                <field name="service_from"  attrs="{'required':['|',('show_freghts_service','=',True),('show_package_service','=',True)]}"/>
+                            </group>
+                            <group col="4">
+                                <field name="service_to"  attrs="{'required':['|',('show_freghts_service','=',True),('show_package_service','=',True)]}"/>
+                            </group>
+                            <group col="4">
+                                <field name="transport_type" attrs="{'required':[('show_freghts_service','=',True)]}"/>
+                            </group>
+                        </group>
+                        <group expand="1">
+                            <field name="recipents"  widget="many2many_tags" attrs="{'required':['|',('show_freghts_service','=',True), ('show_other_service','=',True)]}"/>
+                        </group>
+                        <group expand="1">
+                            <field name="have_unit_rate"  attrs="{'invisible':[('isWeightable','=',False)]}"/>
+                        </group>
+                        <group expand="1">
+                            <div class="o_address_format">
+                                <group>
+                                    <group>
+
+                                        <field name="currency_id" />
+                                        <field name="service_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                        <field name="unit_cost" widget="monetary" options="{'currency_field': 'currency_id'}" attrs="{'invisible':[('have_unit_rate','=',False)]}"/>
+                                        <field name="unit_qrate" widget="monetary"  options="{'currency_field': 'q_rate_currency_id'}" attrs="{'invisible':[('show_qrate','=',False)]}"/>
+                                        <field name="total_qrate" widget="monetary"  options="{'currency_field': 'q_rate_currency_id'}" attrs="{'invisible':[('show_qrate','=',False)]}"/>
+                                        <field name="ett" attrs="{'required':['|',('show_freghts_service','=',True),('show_package_service','=',True)]}"/>
+                                        <field name="valid_until_date" attrs="{'required':['|','|',('show_freghts_service','=',True), ('show_other_service','=',True), ('show_package_service','=',True)]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="cost_message" attrs="{'invisible': [('cost_message','!=','Auto')]}" style="color:green;" /> 
+                                        <field name="cost_message" attrs="{'invisible': [('cost_message','=','Auto')]}" style="color:orange;" /> 
+                                        <field name="domestic" attrs="{'invisible':[('show_other_service','=',False)]}"/>
+                                    </group>
+                                </group>
+                            </div>
+                        </group> 
+                        <group expand="1">
+                            <field name="remark"/>
+                        </group>
+                        <group expand="1">
+                            <group>
+                                <field name="show_qrat_on_pdf"/>
+                            </group>
+                            <group>
+                                <field name="at_cost" />
+                            </group>
+                        </group>
+                    </div>
+                    <div attrs="{'invisible':[('show_other_service','=',False)]}">
+                        <group expand="1">
+                            <field name="agent_id" required="1"/>
+                        </group>
+                        <group expand="1">
+                            <field name="recipents"  widget="many2many_tags" attrs="{'required':['|',('show_freghts_service','=',True), ('show_other_service','=',True)]}"/>
+                            <field name="purpose" string="Purpose (Will be shown in SC) *"/>
+                        </group>
+        
+                        <group expand="1">
+                            <div class="o_address_format">
+                                <group>
+                                    <group>
+
+                                        <field name="currency_id" />
+                                        <field name="service_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                        <field name="total_qrate" widget="monetary"  options="{'currency_field': 'q_rate_currency_id'}" attrs="{'invisible':[('show_qrate','=',False)]}"/>
+                                        <field name="valid_until_date" attrs="{'required':['|','|',('show_freghts_service','=',True), ('show_other_service','=',True), ('show_package_service','=',True)]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="cost_message" attrs="{'invisible': [('cost_message','!=','Auto')]}" style="color:green;" /> 
+                                        <field name="cost_message" attrs="{'invisible': [('cost_message','=','Auto')]}" style="color:orange;" /> 
+                                        <field name="domestic"/>
+                                    </group>
+                                </group>
+                            </div>
+                        </group> 
+                        <group expand="1">
+                            <field name="remark"/>
+                        </group>
+                        <group expand="1">
+                            <group>
+                                <field name="show_qrat_on_pdf"/>
+                            </group>
+                            <group>
+                                <field name="at_cost" />
+                            </group>
+                        </group>
+
+                    </div>
+                    <div attrs="{'invisible':[('show_package_service','=',False)]}">
+                        <group expand="1">
+                            <field name="agent_id" required="1"/>
+                        </group>
+                        <group expand="1">
+                            <group>
+                                <field name="service_from"  attrs="{'required':['|',('show_freghts_service','=',True),('show_package_service','=',True)]}"/>
+                            </group>
+                            <group>
+                                <field name="service_to"  attrs="{'required':['|',('show_freghts_service','=',True),('show_package_service','=',True)]}"/>
+                            </group>
+                            <group>
+                                <field name="ett" attrs="{'required':['|',('show_freghts_service','=',True),('show_package_service','=',True)]}"/>
+                            </group>
+                        </group>
+                        <group expand="1">
+                            <group>
+                                <field name="purpose_radio" widget='custom_radio' domain='purpose_radio_domain' options="{'horizontal': true}" attrs="{'invisible':['&amp;', ('show_package_service','=',False), ('show_custiom_service','=',False), ('show_thc_service','=',False)], 'required':['|', ('show_package_service','=',True), ('show_custiom_service','=',True), ('show_thc_service','=',True)]}"/>
+                                <field name='purpose_radio_domain' invisible='1' />
+                                <field name="purpose"/>
+                            </group>
+                        </group>
+                        <group expand="1">
+                            <div class="o_address_format">
+                                <group>
+                                    <group>
+
+                                        <field name="currency_id" />
+                                        <field name="service_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                        <field name="valid_until_date" attrs="{'required':['|','|',('show_freghts_service','=',True), ('show_other_service','=',True), ('show_package_service','=',True)]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="cost_message" attrs="{'invisible': [('cost_message','!=','Auto')]}" style="color:green;" /> 
+                                        <field name="cost_message" attrs="{'invisible': [('cost_message','=','Auto')]}" style="color:orange;" /> 
+                                    </group>
+                                </group>
+                            </div>
+                        </group> 
+                    </div>
+                    <div attrs="{'invisible':[('show_thc_service','=',False)]}">
+                        <group expand="1">
+                            <field name="agent_id" required="1"/>
+                        </group>
+                        <group expand="1">
+                            <group>
+                                <field name="purpose_radio" widget='custom_radio' domain='purpose_radio_domain' options="{'horizontal': true}" attrs="{'invisible':['&amp;', ('show_package_service','=',False), ('show_custiom_service','=',False), ('show_thc_service','=',False)], 'required':['|', ('show_package_service','=',True), ('show_custiom_service','=',True), ('show_thc_service','=',True)]}"/>
+                                <field name='purpose_radio_domain' invisible='1' />
+                                <field name="purpose"/>
+                                <field name ="days" attrs="{'required':[('show_thc_service','!=',True)]}"/>
+                            </group>
+                        </group>
+                         <group expand="1">
+                            <div class="o_address_format">
+                                <group>
+                                    <group>
+                                        <field name="rate_currency_id" string="Rate CCY" />
+                                        <field name="service_rate" widget="monetary" options="{'currency_field': 'rate_currency_id'}" />
+                        
+                                        <field name="currency_id" string="Cost CCY"/>
+                                        <field name="service_cost"  string="Cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                        
+                                    </group>
+                                    <group>
+                                        <field name="cost_message" attrs="{'invisible': [('cost_message','!=','Auto')]}" style="color:green;" /> 
+                                        <field name="cost_message" attrs="{'invisible': [('cost_message','=','Auto')]}" style="color:orange;" /> 
+                                    </group>
+                                </group>
+                            </div>
+                        </group> 
+                        <group expand="1">
+                            <field name="remark"/>
+                        </group>         
+                    </div>
+                    <div attrs="{'invisible':[('show_custiom_service','=',False)]}">
+                        <group expand="1">
+                            <field name="agent_id" required="1"/>
+                        </group>
+                        <group expand="1">
+                            <group>
+                                <field name="purpose_radio" widget='custom_radio' domain='purpose_radio_domain' options="{'horizontal': true}" attrs="{'invisible':['&amp;', ('show_package_service','=',False), ('show_custiom_service','=',False), ('show_thc_service','=',False)], 'required':['|', ('show_package_service','=',True), ('show_custiom_service','=',True), ('show_thc_service','=',True)]}"/>
+                                <field name='purpose_radio_domain' invisible='1' />
+                                <field name="purpose"/>
+                                <field name="recipents"  string="Customs Recipents" widget="many2many_tags" attrs="{'required':['|',('show_freghts_service','=',True), ('show_other_service','=',True)]}"/>
+                                <field name ="item_qty" attrs="{'required':[('show_custiom_service','!=',True)]}"/>
+                            </group>
+                        </group>
+                         <group expand="1">
+                            <div class="o_address_format">
+                                <group>
+                                    <group>
+                                        <field name="rate_currency_id" string="Rate CCY" />
+                                        <field name="service_rate" widget="monetary" options="{'currency_field': 'rate_currency_id'}" />
+                        
+                                        <field name="currency_id" string="Cost CCY"/>
+                                        <field name="service_cost"  string="Cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                        
+                                    </group>
+                                    <group>
+                                        <field name="cost_message" attrs="{'invisible': [('cost_message','!=','Auto')]}" style="color:green;" /> 
+                                        <field name="cost_message" attrs="{'invisible': [('cost_message','=','Auto')]}" style="color:orange;" /> 
+                                    </group>
+                                </group>
+                            </div>
+                        </group> 
+                        <group expand="1">
+                            <field name="remark"/>
+                        </group> 
+                    </div>
+                    <div attrs="{'invisible':[('show_delivery_service','=',False)]}">
+                         <group expand="1">
+                            <field name="agent_id" required="1"/>
+                        </group>
+                        <group expand="1" attrs="{'invisible':[('show_delivery_service','=',False)]}">
+                            <field name="fleet" attrs="{'required':[('show_delivery_service','=',True)]}"/>
+                            <field name="delivery_zone" attrs="{'required':[('show_delivery_service','=',True)]}"/>
+                        </group>
+                         <group expand="1">
+                            <div class="o_address_format">
+                                <group>
+                                    <group>
+                                        <field name="rate_currency_id" string="Rate CCY" />
+                                        <field name="service_rate" widget="monetary" options="{'currency_field': 'rate_currency_id'}" />
+                        
+                                        <field name="currency_id" string="Cost CCY"/>
+                                        <field name="service_cost" string="Cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                        
+                                    </group>
+                                    <group>
+                                        <field name="cost_message" attrs="{'invisible': [('cost_message','!=','Auto')]}" style="color:green;" /> 
+                                        <field name="cost_message" attrs="{'invisible': [('cost_message','=','Auto')]}" style="color:orange;" /> 
+                                    </group>
+                                </group>
+                            </div>
+                        </group> 
+                        <group expand="1">
+                            <field name="remark"/>
+                        </group> 
+                    </div>
+
+
+                    
+                    
+                </sheet>
+            </form>
+        </field>
+    </record>
+   
+    <record id="freights_service_tree_view" model="ir.ui.view">
+        <field name="name">freights.service.tree</field>
+        <field name="model">freights.service</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Freights service">
+                <field name="agent_id"/>
+                <field name="bill_instruction"/>
+                <field name="service_from"/>
+                <field name="service_to"/>
+                <field name="service_desc"/>
+                <field name="service_qty"/>
+                <field name="delivery_zone"/>
+                <field name="currency_id" />
+                <field name="ett" optional="hide"/>
+                <field name="valid_until_date" optional="hide"/>
+                <field name="transport_type" optional="hide"/>
+                <field name="service_cost" widget="monetary" />
+                <field name="service_rate" widget="monetary" />
+                <field name="subtotal_cost" widget="monetary" readonly="1"/>
+                <field name="subtotal_rate" widget="monetary" readonly="1"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="freights_service_kanban_view" model="ir.ui.view">
+        <field name="name">freights.service.kanban</field>
+        <field name="model">freights.service</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="agent_id"/>
+                <field name="service_from" />
+                <field name="service_to" />
+                <field name="subtotal_rate" />
+                <field name="service_qty" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong><field name="service_from"/> - <field name="service_to" /></strong>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <span class="badge badge-pill"><t t-esc="record.service_qty.value"/></span>
+                                </div>
+                            </div>
+                            <div>
+                                <strong>Rate: </strong><t t-esc="record.service_qty.value"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="freights_service_pivot_view" model="ir.ui.view">
+        <field name="name">freights.service.pivot</field>
+        <field name="model">freights.service</field>
+        <field name="arch" type="xml">
+            <pivot string="Freights service" sample="1">
+                <field name="agent_id" type="col"/>
+                <field name="service_rate" type="row"/>
+                <field name="service_qty" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="freights_service_graph_view" model="ir.ui.view">
+        <field name="name">freights.service.graph</field>
+        <field name="model">freights.service</field>
+        <field name="arch" type="xml">
+            <graph string="Freights service" type="line" sample="1">
+                <field name="agent_id"/>
+                <field name="service_rate" type="measure"/>
+            </graph>
+        </field>
+    </record>
+    
+    <record id="freights_service_action" model="ir.actions.act_window">
+        <field name="name">Freights service</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">freights.service</field>
+        <field name="view_mode">tree,form,kanban,pivot,graph</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Define a new pages
+            </p><p>
+                Freights app are used to Pages module.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_freights_service"
+              name="Service"
+              action="freights_service_action"
+              parent="menu_worldwide_master"
+              groups=""
+              sequence="102"/>
+</odoo>
+

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Javkha. 2022-10-26
+ -->
+<odoo>
+    <record id="ml_trucking_shipment_form_view" model="ir.ui.view">
+        <field name="name">mltrucking.shipment.form</field>
+        <field name="model">mltrucking.shipment</field>
+        <field name="arch" type="xml">
+            <form string="Trucking Page">
+            	<header>
+					<field name="state" widget="statusbar" options="{'clickable' : '1'}"/>
+				</header>
+                <sheet>
+                       <group >
+                            <field name="vehicle" />
+                            <field name="vehicle_rel" invisible="1" />
+                            <field name="total_distance"/>
+                            <field name="net_distance"/>
+                       </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+        <record id="ml_trucking_shipment_kanban_view" model="ir.ui.view">
+            <field name="name">mltrucking.shipment.kanban</field>
+            <field name="model">mltrucking.shipment</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                  <kanban default_group_by='state'>
+                    <field name="state"/>
+                    <field name="vehicle"/>
+                    <field name="color"/>
+                    <field name="total_distance"/>
+                    <field name="net_distance"/>
+                <!-- <progressbar field="activity_state" colors="{&quot;planned&quot;: &quot;success&quot;, &quot;today&quot;: &quot;warning&quot;, &quot;overdue&quot;: &quot;danger&quot;}"/> -->
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="{{'oe_kanban_color_' + kanban_getcolor(record.color.raw_value) }} oe_kanban_card oe_kanban_global_click oe_semantic_html_override">
+                                <div class="oe_kanban_details">
+                                    <strong class="o_kanban_record_title">
+                                        Model: <field name="vehicle"/>
+                                    </strong>
+                                    <div class="d-flex flex-column">
+                                        <div>Total distance: <field name='total_distance'/></div>
+                                        <div>Net distance: <field name='net_distance'/></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                  </kanban>
+               </field>
+        </record>
+    
+    <record id="ml_trucking_shipment_tree_view" model="ir.ui.view">
+        <field name="name">mltrucking.shipment.tree</field>
+        <field name="model">mltrucking.shipment</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Trucking Pages">
+                <field name="vehicle"/>
+                <field name="state"/>
+                <field name="total_distance"/>
+                <field name="net_distance"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="ml_trucking_shipment_action" model="ir.actions.act_window">
+        <field name="name">Trucking shipment</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mltrucking.shipment</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Define a new page
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_trucking_shipment"
+              name="Trucking shipment"
+              action="ml_trucking_shipment_action"
+              parent="menu_trucking_data"
+              sequence="20"/>
+</odoo>

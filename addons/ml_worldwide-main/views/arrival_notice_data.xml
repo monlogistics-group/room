@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Javkha. 2023-03-27
+ -->
+<odoo>
+
+    <record id="mlworldwide_arrival_notice_form_view" model="ir.ui.view">
+        <field name="name">arrival.notice.form</field>
+        <field name="model">arrival.notice</field>
+        <field name="arch" type="xml">
+            <form string="Arrival Notice">
+             	<sheet>
+                    <group>
+                        <field name="greetings"/>
+                        <field name="title"/>
+                        <field name="ref"/>
+                        <field name="type"/>
+                        <field name="terminal"/>
+                        <field name="contact"/>
+                        <field name="contribute"/>
+                        <field name="ata"/>
+                        <field name="transit_time"/>
+                        <field name="subTitle"/>
+                        <field name="container_ref"/>
+                        <field name="cargo_name"/>
+                        <field name="shipper"/>
+                        <field name="detail"/>
+                        <field name="lang"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mlworldwide_arrival_notice_tree_view" model="ir.ui.view">
+        <field name="name">arrival.notice.tree</field>
+        <field name="model">arrival.notice</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Arrival Notice">
+                       <field name="greetings"/>
+                       <field name="lang"/>
+                       <field name="title"/>
+                       <field name="type"/>
+                       <field name="terminal"/>
+                       <field name="contact"/>
+                       <field name="contribute"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="mlworldwide_arrival_notice_action" model="ir.actions.act_window">
+        <field name="name">Arrival Notice</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">arrival.notice</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Define a new pages
+            </p><p>
+                Freights app are used to Pages module.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_mlworldwide_arrival_notice"
+        name="Arrival notice data"
+        action="mlworldwide_arrival_notice_action"
+        parent="menu_worldwide_master_data"
+        groups=""
+        sequence="311"
+    />
+</odoo>

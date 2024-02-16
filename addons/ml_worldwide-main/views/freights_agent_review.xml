@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="freights_agent_review_form_view">
+            <field name="name">freights.agent.review.form</field>
+            <field name="model">freights.agent.review</field>
+            <field name="arch" type="xml">
+                <form string="Agent reviews">
+                    <sheet>
+                        <group col='2'>
+                            <group>
+                                <field name="agent_id" readonly = "1"/>
+                                <field name="freight_id" readonly = "1"/>
+                                <field name="rate" widget="priority"/>
+                                <field name="review"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="freights_agent_review_tree_view">
+            <field name="name">freights.agent.review.tree</field>
+            <field name="model">freights.agent.review</field>
+            <field name="arch" type="xml">
+                <tree string="freights Agent reviews">
+                    <field name="agent_id" />
+                    <field name="freight_id"/>
+                    <field name="rate" widget="priority"/>
+                    <field name="review"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="freights_agent_review_kanban_view" model="ir.ui.view">
+            <field name="name">freights.agent.review.kanban</field>
+            <field name="model">freights.agent.review</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="agent_id"/>
+                    <field name="freight_id"/>
+                    <field name="rate" widget="priority"/>
+                    <field name="review"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <strong><field name="agent_id"/></strong>
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        <span class="badge badge-pill"><field name="rate"/></span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <strong>Review: </strong><field name="review"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="freights_agent_review_pivot_view" model="ir.ui.view">
+            <field name="name">freights.agent.review.pivot</field>
+            <field name="model">freights.agent.review</field>
+            <field name="arch" type="xml">
+                <pivot string="Freights Shipments" sample="1">
+                    <field name="agent_id" type="col"/>
+                    <field name="freight_id" type="row"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="freights_agent_review_graph_view" model="ir.ui.view">
+            <field name="name">freights.agent.review.graph</field>
+            <field name="model">freights.agent.review</field>
+            <field name="arch" type="xml">
+                <graph string="Freights Shipments" type="line" sample="1">
+                    <field name="agent_id"/>
+                </graph>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="freights_agent_review_view_action">
+            <field name="name">freights Agent reviews </field>
+            <field name="res_model">freights.agent.review</field>
+            <field name="view_mode">tree,form,kanban,pivot,graph</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new port.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_worldwide_agent_reviews"
+            parent="menu_worldwide_root"
+            name="Agent reviews"
+            action="freights_agent_review_view_action"
+            sequence="105"/>
+            
+    </data>
+</odoo>

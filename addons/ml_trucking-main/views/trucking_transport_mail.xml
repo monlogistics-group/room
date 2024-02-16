@@ -1,0 +1,77 @@
+<odoo>
+   <data>
+       <record id="email_template_transport_name" model="mail.template">
+           <field name="name">Trucking Trasnport Email Template</field>
+           <field name="model_id" ref="model_mltrucking_base"/>
+           <field name="email_from">{{object.user_id.email}}</field>
+           <field name="email_to">{{object.vendor_id.email}}</field>
+           <field name="body_html" type="html">
+            <t t-if="request.env['mltrucking.transport.mail'].search([('locale','=' ,object.vendor_id.lang)], limit = 1)">
+                <t t-set="k" t-value="request.env['mltrucking.transport.mail'].search([('locale','=' ,object.vendor_id.lang)], limit=1)" />
+            </t>
+            <t t-else="">
+                <t t-set="k" t-value="request.env['mltrucking.transport.mail'].search([('locale','=','en_US')], limit = 1)" />
+            </t>
+                <div>
+                     <div style="width:100%;background-color:#20226d;color:white;padding:5px 10px;text-align:left;text-transform:uppercase;font-size:20px">
+                            <strong><t t-out="object.trucking_type.type_name"/>
+                            <t t-out="k.transportations"/></strong>
+                        </div>   
+                    <table style="margin-top:20px;width:100%;border-left:1px solid #555555;
+                    border-right:1px solid #555555;border-top:1px solid #555555" cellspacing="0" cellpadding="0">
+                        <tbody><tr>
+                            <td style="background-color:#798897;color:white;padding:5px 10px;
+                            width:180px;text-align:right;text-transform:uppercase"><t t-out="k.order_num"/></td>
+                            <td style="background-color:#798897;color:white;padding:5px 0px;text-align:left">
+                            <t t-out="object.ref"/></td>
+                        </tr><tr>
+                        <td style="padding-top:5px;padding-right:10px;text-align:right;text-transform:uppercase">
+                        <t t-out="k.transportation_condition"/>:</td>
+                        <td style="border-right:1px solid #555555;padding-top:5px;text-align:left">
+                        <b><t t-out="object.trucking_terms.code"/></b></td></tr>
+                        <tr>
+                            <td style="padding-right:10px;text-align:right;text-transform:uppercase">
+                            <t t-out="k.sender"/>:</td>
+                            <td style="border-right:1px solid #555555;text-align:left">
+                            <b><t t-out="object.vendor_id.name"/></b></td>
+                        </tr><tr>
+                        <td style="padding-right:10px;text-align:right;text-transform:uppercase">
+                        <t t-out="k.employee"/>:</td>
+                        <td style="border-right:1px solid #555555;text-align:left"><b><t t-out="object.vendor_id.name"/></b> 
+                        (<a href="mailto:tuvshinzaya@mlw.mn" target="_blank"><t t-out="object.vendor_id.email"/></a> 
+                        &amp; <t t-out="object.vendor_id.phone"/> )</td>
+                    </tr></tbody>
+                    </table>
+                <table style="display:flex;width:100%;border-top:1px solid #42515e;border-left:1px solid #42515e;text-align:center" cellspacing="0" cellpadding="5">
+                       <tbody>
+                            <tr style="font-size:11px">
+                                <th style="width: 4vw;border-right:1px solid #42515e;border-bottom:1px solid #42515e"><t t-out="k.entity"/></th>
+                                <th style="width: 24vw;border-right:1px solid #42515e;border-bottom:1px solid #42515e"><t t-out="k.container_id"/></th>
+                                <t t-value="object.truck_routes[0].vehicle.name" t-set='name'/>
+                                <t t-foreach='object.truck_routes' t-as='route'>
+                                    <t t-if='name == route.vehicle.name'>
+                                        <th style="width: 24vw;border-right:1px solid #42515e;border-bottom:1px solid #42515e">
+                                        <t t-out="route.origin_point.name"/>-<t t-out="route.dist_point.name"></t></th>
+                                    </t>
+                                </t>
+                            </tr>
+                            <t t-foreach="object.truck_shipment" t-as="shipment">
+                                    <tr>
+                                        <td style="border-right:1px solid #42515e;border-bottom:1px solid #42515e"><t t-out="1"/></td>
+                                        <td style="border-right:1px solid #42515e;border-bottom:1px solid #42515e"><t t-out="shipment.vehicle.name"/></td>
+                                        <t t-foreach='object.truck_routes' t-as='route'>
+                                            <t t-if='route.vehicle.name == shipment.vehicle.name'>
+                                                <th style="width: 24vw;border-right:1px solid #42515e;border-bottom:1px solid #42515e">
+                                                <t t-out="route.ETA"/>,<t t-out="route.ETD"></t></th>
+                                            </t>
+                                        </t>
+                                    </tr>
+                            </t>
+                     </tbody>
+                </table>
+                <t t-out="object.remark"/>
+            </div>
+           </field>
+       </record>
+   </data>
+</odoo>

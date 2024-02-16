@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Javkha. 2022-11-25
+ -->
+<odoo>
+    <template id="budget_body">
+            <t t-set="doc" t-value="doc.with_context(lang=base_lang)"/>
+            <t t-if="len(request.env['mltrucking.document.data'].search([('locale','=' ,base_lang)], limit = 1))>0">
+                <t t-set="k" t-value="request.env['mltrucking.document.data'].search([('locale','=' ,base_lang)], limit = 1)" />
+            </t>
+            <t t-else="">
+                <t t-set="k" t-value="request.env['mltrucking.document.data'].search([('locale','=','en_US')], limit = 1)" />
+            </t>
+                <img width="250" src="https://mltrucking.mn/wp-content/uploads/2021/05/2021-2.png" alt="..." height="50"/>
+                <table style="padding-right: 1em; width: 50%">
+                    <tr>
+                        <td>
+                            <table style="padding-right: 1em; width: 30%;">
+                                <tr>
+                                    <td style="font-weight:bold;">
+                                        Approved:
+                                    </td>
+                                    <td>
+                                        CEO:
+                                    </td>
+                                    <td>
+                                        N.Javkhlan
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                </table>
+                <h3 style='text-align:center;'>Expenditure budget</h3>
+            <table style="padding-right: 1em;width:100%">
+                    <tr>
+                    <td style="width:50%">
+                        <table style="padding-right: 1em;width:100%;">
+                            <tr>
+                                <td style="font-weight: bold;">
+                                    Name:
+                                </td>
+                                <td>
+                                    <t t-out="doc.truck_shipment.vehicle.driver_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">
+                                Estimated time:
+                                </td>
+                                <td>
+                                    <t t-out="doc.estimated_time"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">
+                                Chassis Number:
+                                </td>
+                                <td>
+                                    <t t-out="doc.truck_shipment.vehicle.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">
+                                Position:
+                                </td>
+                                <td>
+                                
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">
+                                From TO:
+                                </td>
+                                <td>
+                                <t t-out="doc.truck_routes.origin"/>-
+                                <t t-out="doc.truck_routes.destination"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="width:50%">
+                        <table style="padding-right: 1em;width:100%;">
+                            <tr>
+                                <td style="font-weight: bold;">
+                                Task:
+                                </td>
+                                <td>
+                                <t t-out="doc.remark"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">
+                                Net Distance:
+                                </td>
+                                <td>
+                                <t t-out="doc.truck_shipment.net_distance"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">
+                                Total Distance:
+                                </td>
+                                <td>
+                                <t t-out="doc.truck_shipment.total_distance"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">
+                                Transportation Number:
+                                </td>
+                                <td>
+                                <t t-out="doc.ref"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    </tr>
+            </table>
+        <table style="padding-right: 1em;width:100%;border: 1px solid black;border-collapse: collapse;">
+            <thead>
+            <tr>
+                <th scope="col" style="border: 1px solid black;">
+                No</th>
+                <th scope="col" style="border: 1px solid black;" colspan='2'>
+                Expenditure purpose
+                </th>
+                <th scope="col" style="border: 1px solid black;">
+                Quantity</th>
+                <th scope="col" style="border: 1px solid black;">
+                Cost</th>
+                <th scope="col" style="border: 1px solid black;">
+                Subtotal</th>
+            </tr>
+            </thead>
+            <tbody>
+                <t t-set="i" t-value="1"/>
+                <t t-foreach="doc.truck_budget" t-as="d">
+                    <tr>
+                        <td style="border: 1px solid black;">
+                            <t t-out="i"/>
+                        </td>
+                        <td style="border: 1px solid black;">
+                            <t t-out="d.service_id.name"/>
+                        </td>
+                        <td style="border: 1px solid black;">
+                            <t t-out="d.service_desc"/>
+                        </td>
+                        <td style="border: 1px solid black;">
+                            <t t-out="d.service_qty"/>
+                        </td>
+                        <td style="border: 1px solid black;text-align:right;padding-right: 1em">
+                            <t t-out="d.service_cost"/> <t t-out="d.currency_id.name"/>
+                        </td>
+                        <td style="border: 1px solid black;text-align:right;padding-right: 1em">
+                            <t t-out="d.total"/>
+                        </td>
+                    </tr>
+                    <t t-set="i" t-value="i+1"/>
+                </t>
+                <tr>
+                    <td colspan='5' style="text-align:right; border: 1px solid black;">
+                        Total Cost:
+                    </td>
+                    <td style="border: 1px solid black; background: grey; text-align:center;">
+                        <t t-out="doc.budget_total_cost"/>$
+                    </td>
+                </tr>
+            </tbody>
+      </table>
+      <table>
+        <tr>
+            <td style="width: 50%;">
+                <table style="padding-right: 1em;width:100%;">
+                    <tr>
+                        <td style="font-weight: bold;">
+                           Budget: 
+                        </td>
+                        <td>
+                            transportation organizer
+                        </td>
+                        <td>
+                         Bayraa
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+      </table>
+        <table>
+        <tr>
+            <td style="width: 50%;">
+                <table style="padding-right: 1em;width:100%;">
+                    <tr>
+                        <td style="font-weight: bold;">
+                           Reviewed: 
+                        </td>
+                        <td>
+                            qewr
+                        </td>
+                        <td>
+                         Amgaa
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+      </table>
+    </template>
+
+    <template id="mltrucking_budget">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="ml_trucking.budget_body" t-lang="base_lang"/>
+                <t t-set="base_lang" t-value="doc.consignee_id.lang"/>
+            </t>
+            <t t-foreach="doc.consignee_id.other_lang" t-as="lng">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-set="base_lang" t-value="lng.code"/>
+                    <t t-call="ml_trucking.budget_body" t-lang="base_lang"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="mltrucking_budget_paper_id" model="report.paperformat">
+        <field name="name">Paperformat</field>
+        <field name="default" eval="False"/>
+        <field name="disable_shrinking" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">8</field>
+        <field name="margin_bottom">32</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        <field name="dpi">96</field>
+    </record> 
+
+    <data>
+        <record id ="mltrucking_base_budget" model="ir.actions.report">
+            <field name= "name">Document</field>
+            <field name= "model">mltrucking.base</field>
+            <field name= "report_type">qweb-pdf</field>
+            <field name= "report_name">ml_trucking.mltrucking_budget</field>
+            <field name= "report_file">ml_trucking.mltrucking_budget</field>
+            <field name= "print_report_name">object.ref.replace('/','_')</field>
+            <field name= "binding_model_id" ref ="model_mltrucking_base"></field>
+            <field name= "binding_view_types">form</field>
+            <field name= "binding_type">report</field>
+            <field name="paperformat_id" ref="mltrucking_budget_paper_id"/>
+        </record>
+    </data>
+
+</odoo>    

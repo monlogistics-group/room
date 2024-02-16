@@ -1,0 +1,170 @@
+<odoo>
+   <data>
+       <record id="mlworldwide_feedback_email_template" model="mail.template">
+           <field name="name">Worldwide FeedBack Email Template</field>
+           <field name="model_id" ref="ml_worldwide-main.model_mlworldwide_freights"/>
+           <field name="email_from">{{object.employee.work_email}}</field>
+           <field name="email_to">{{}}</field>
+           <field name="subject"> </field>
+           <field name="body_html" type="html">
+                <div style="background-color: #e1e8ed">
+                    <div style="background-color: #ffffff; margin: 0px auto; max-width: 600px; " >
+                        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #ffffff; width: 100%" >
+                            <tbody>
+                                <tr>
+                                    <td style="direction: ltr; padding: 20px 20px; text-align: center; vertical-align: top; "     >
+                                        <img height="auto" src="https://ci4.googleusercontent.com/proxy/Opj6F4tjhCi5sDZVQ3m2PE7Po53NgZtkdL8G34T0MIq0w1_ZExXCGawi86ypCqY2FCuunhv6yRh3j3T7KC8RU6zWNo6i=s0-d-e1-ft#https://www.mlw.mn/static/images/logo/new-logo.png" style="border: 0;display: block;" width="180" /> 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p style="border-top: solid 2px #f45e43;font-size: 1;margin: 0px auto;width: 100%;"> </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="background-color: #ffffff; margin: 0px auto; max-width: 600px; padding: 20px 20px; word-break: break-word;">
+                        <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align: top" width="100%" >
+                            <tbody style="font-family: helvetica;font-size: 14px;line-height: 1;text-align: left;color: #666666;">
+                                <tr>
+                                    <td colspan="5" align="left">
+                                        <div>
+                                            Эрхэм үйлчлүүлэгч <t t-out='object.customer_id.name'/> танаа, 
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" align="left">
+                                        <div>         
+                                            Биднийг сонгон үйлчлүүлсэн танд баярлалаа. Дараах захиалгад бидний үйлчилгээг үнэлнэ үү.         
+                                            <br />         
+                                            <br />
+                                            Захиалгын дугаар: <strong><t t-out='object.ref_num'/></strong>
+                                            <br />
+                                            Илгээгч: <strong><t t-out='object.shipper_info'/></strong>
+                                            <br />
+                                            Хаанаас: 
+                                            <t t-if="len(object.freights_route)>0">
+                                                <strong><t t-out='object.freights_route[0].point.name'/> </strong>
+                                            </t>
+                                            <br />
+                                            Ачааны нэр: <strong><t t-out='object.notes'/></strong>
+                                            <t t-set="released_date" t-value="datetime.date(2000,1,1)"/>
+                                            <t t-foreach="object.freights_shipment" t-as="line">
+                                                <t t-foreach="line.shipment_packages" t-as="package">
+                                                    <t t-if="package.released_date.value &gt; released_date">
+                                                        <t t-set="released_date" t-value="package.released_date"/>
+                                                    </t>
+                                                </t>
+                                            </t>
+                                            <br />Олгогдсон огноо: <strong><t t-out="released_date.strftime('%Y-%m-%d')"/></strong>
+                                            <br />
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" style="height: 20px"> </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        Муу
+                                    </td>
+                                    <td colspan="3" align="right">
+                                        Сайн
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" style="height: 20px"> </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center">
+                                        <a t-attf-href="#{object.get_base_url() + str(object.customer_id.id) + '&amp;rate=1'}" style="text-decoration: none; font-size: 20px; color: #111111; border: 1px solid #aaaaaa; border-radius: 32px; padding: 10px 16px;"> 
+                                            1 
+                                        </a>
+                                    </td>
+                                    <td style="text-align: center">
+                                        <a t-attf-href="#{object.get_base_url() + str(object.customer_id.id) + '&amp;rate=2'}" style="text-decoration: none; font-size: 20px; color: #111111; border: 1px solid #aaaaaa; border-radius: 32px; padding: 10px 16px;">
+                                            2
+                                        </a>
+                                    </td>
+                                    <td style="text-align: center">
+                                        <a t-attf-href="#{object.get_base_url() + str(object.customer_id.id) + '&amp;rate=3'}" style="text-decoration: none; font-size: 20px; color: #111111; border: 1px solid #aaaaaa; border-radius: 32px; padding: 10px 16px;">
+                                            3
+                                        </a>
+                                    </td>
+                                    <td style="text-align: center">
+                                        <a t-attf-href="#{object.get_base_url() + str(object.customer_id.id) + '&amp;rate=4'}" style="text-decoration: none; font-size: 20px; color: #111111; border: 1px solid #aaaaaa; border-radius: 32px; padding: 10px 16px;">
+                                            4
+                                        </a>
+                                    </td>
+                                    <td style="text-align: center">
+                                        <a t-attf-href="#{object.get_base_url() + str(object.customer_id.id) + '&amp;rate=1'}"  style="text-decoration: none; font-size: 20px; color: #111111; border: 1px solid #aaaaaa; border-radius: 32px; padding: 10px 16px;">
+                                            5
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" style="height: 20px"> </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" align="left">
+                                        <div style="font-family: helvetica;font-size: 14px;line-height: 1;text-align: left;color: #888888;">
+                                            Хэрэв танд нэмэлт санал хүсэлт байвал         
+                                            <a href="https://www.mlw.mn/tracing/feedback.php?ref=C121227E356&amp;email=mungunzul.b@monospharmatrade.mn&amp;t=c13c4d528fe61d06dd933ca839b98abcd4ab7eabb1930a1605d03cf2ab0d4ec1" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://www.mlw.mn/tracing/feedback.php?ref%3DC121227E356%26email%3Dmungunzul.b@monospharmatrade.mn%26t%3Dc13c4d528fe61d06dd933ca839b98abcd4ab7eabb1930a1605d03cf2ab0d4ec1&amp;source=gmail&amp;ust=1673421654812000&amp;usg=AOvVaw2btztMGxZcr0T-2HaUh_xu">
+                                                ЭНД
+                                            </a>
+                                            дарна уу
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" style="height: 20px"> </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" align="left">
+                                        <div style="font-family: helvetica; font-size: 14px; line-height: 1; text-align: left; color: #666666;">
+                                            Хүндэтгэсэн,
+                                            <br />         
+                                            Монложистикс
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" style="height: 20px"> </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" align="center">
+                                        <div style="font-family: helvetica; font-size: 12px; line-height: 1; text-align: center; color: #666666;">
+                                            <a style="color: #46be8a; text-decoration: none" href="https://www.facebook.com/Monlogistics" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://www.facebook.com/Monlogistics&amp;source=gmail&amp;ust=1673421654812000&amp;usg=AOvVaw2bWw12tbbIpnB7vddtB8Jo">
+                                                Facebook
+                                            </a>
+                                            <a style="color: #46be8a; text-decoration: none" href="https://www.mlw.mn" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://www.mlw.mn&amp;source=gmail&amp;ust=1673421654812000&amp;usg=AOvVaw2wMDJCbfb3Pzm2j-z_TLNr">
+                                                Web
+                                            </a>
+                                            <a style="color: #46be8a; text-decoration: none" href="https://www.mlw.mn/contact_us.php" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://www.mlw.mn/contact_us.php&amp;source=gmail&amp;ust=1673421654812000&amp;usg=AOvVaw3RRCr4RANOKLqOjSUN4vPo">
+                                                Contact
+                                            </a>     
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" style="height: 20px"> </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" align="center">
+                                        <div style="font-family: helvetica;font-size: 12px;line-height: 1;text-align: center;color: #666666;">
+                                            This email has been sent to you by Monlogistics #404 Zaisan Square Center, Dunjingarav 14, 11 khoroo, Khan Uul district, Ulaanbaatar, Mongolia
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+           </field>
+       </record>
+   </data>
+</odoo>
+
+ 

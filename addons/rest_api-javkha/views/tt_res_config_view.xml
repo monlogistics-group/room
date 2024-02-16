@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="tt_res_config_form_view" model="ir.ui.view">
+            <field name="name">res.comfig.inherit.form.view</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="40"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('settings')]" data-key="tt_odoo_rest_api"
+                       position="inside">
+                    <div class="app_settings_block" data-string="OdooRest API"
+                         data-key="tt_odoo_rest_api" string="Odoo Rest API"
+                         groups="base.group_system">
+                        <t groups="base.group_system">
+                            <h2>Token Expiry Time(in sec)</h2>
+                            <div class="row mt16 o_settings_container" id="setup">
+                                <div class="col-12 col-lg-12 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label string="API Token Expiry" for="tt_api_expire"/>
+                                        <div class="row mt16">
+                                            <label string="API Token Expiry" for="tt_api_expire"
+                                                   class="col-lg-3 o_light_label"/>
+                                            <field name="tt_api_expire"/>
+                                        </div>
+                                        <div class="row mt16">
+                                            <label string="Refresh Token Expiry" for="tt_refresh_expire"
+                                                   class="col-lg-3 o_light_label"/>
+                                            <field name="tt_refresh_expire"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="tt_res_config_action" model="ir.actions.act_window">
+            <field name="name">Settings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_id" ref="tt_res_config_form_view"/>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="context">{'module': 'tt_odoo_rest_api'}</field>
+        </record>
+
+        <menuitem id="tt_rest_api_setting_submenu" name="Settings" parent="tt_rest_api_model_menu"
+                  sequence="31" action="tt_res_config_action"/>
+
+    </data>
+</odoo>

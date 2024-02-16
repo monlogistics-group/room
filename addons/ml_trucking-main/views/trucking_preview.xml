@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Umbaa. 2022-11-11
+ -->
+<odoo>
+        
+    <record id="ml_trucking_base_preview_form_view" model="ir.ui.view">
+        <field name="name">mltrucking.base.preview.form</field>
+        <field name="model">mltrucking.base.preview</field>
+        <field name="arch" type="xml">
+            <form string="Preview">
+                <sheet>
+                    <group>
+                        <field name="preview_data" widget="html"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="ml_trucking_base_preview_tree_view" model="ir.ui.view">
+        <field name="name">mltrucking.base.preview.tree</field>
+        <field name="model">mltrucking.base.preview</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Preview">
+                <field name="preview_data" widget="html"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="ml_trucking_base_preview_action" model="ir.actions.act_window">
+        <field name="name">Trucking base.preview</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mltrucking.base.preview</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                LMS Monlogistics Holding LLC © 2023 он. Version 0.0.1
+            </p><p>
+                Trucking preview are used to LMS trucking module.
+            </p>
+        </field>
+    </record>
+
+</odoo>

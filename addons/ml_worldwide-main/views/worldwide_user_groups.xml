@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Umbaa. 2022-12-05
+ -->
+<odoo>
+    <record id="mlworldwide_user_groups_tree_view" model="ir.ui.view">
+        <field name="name">mlworldwide.user.groups.tree</field>
+        <field name="model">mlworldwide.user.groups</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="User groups" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name" />
+                <field name="ref_name" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="mlworldwide_user_groups_action" model="ir.actions.act_window">
+        <field name="name">User groups</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mlworldwide.user.groups</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Define a new pages
+            </p><p>
+                Freights app are used to Pages module.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_mlworldwide_user_groups"
+        name="User groups"
+        action="mlworldwide_user_groups_action"
+        parent="menu_worldwide_master_data"
+        groups=""
+        sequence="330"
+    />
+
+</odoo>

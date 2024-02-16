@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Ariuka.
+ -->
+<odoo>
+    
+    <record id="fob_rates_form_view" model="ir.ui.view">
+        <field name="name">fob.rates.form</field>
+        <field name="model">fob.rates</field>
+        <field name="arch" type="xml">
+            <form string="fob rates">
+                <sheet>
+                    <group>
+                        <field name="selection"/>
+                        <field name="agent_data"/>
+                        <field name="from_data"/>
+                        <field name="to_data"/>
+                        <field name="terminal"/>
+                        <field name="ett"/>
+                        <field name="cost_data"/>
+                        <field name="taras_data"/>
+                        <field name="empty"/>
+                        <field name="startdate"/>
+                        <field name="enddate"/>
+                        <field name="currency_id"/>
+                        
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="fob_rates_tree_view" model="ir.ui.view">
+        <field name="name">fob.rates.tree</field>
+        <field name="model">fob.rates</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Fob rates">
+                <field name="selection"/>
+                       <field name="selection"/>
+                        <field name="agent_data"/>
+                        <field name="from_data"/>
+                        <field name="to_data"/>
+                        <field name="terminal"/>
+                        <field name="ett"/>
+                        <field name="cost_data"/>
+                        <field name="taras_data"/>
+                        <field name="empty"/>
+                        <field name="startdate"/>
+                        <field name="enddate"/>
+                        <field name="currency_id"/>
+            </tree>
+        </field>
+    </record>
+    <record id="fob_rates_action" model="ir.actions.act_window">
+        <field name="name"> fob rates</field>
+        <field name="type">ir.actions.act_window</field>  
+        <field name="res_model">fob.rates</field>
+        <field name="view_mode">tree,form,pivot</field>
+        <field name="view_id" eval="False"/>
+    </record>
+    <menuitem id="menu_fob_rates"
+            name="Fob rates"
+            action="fob_rates_action"
+            parent="menu_worldwide_etc"
+            groups=""
+            sequence="109"/>
+</odoo>

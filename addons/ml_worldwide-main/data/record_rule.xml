@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="can_edit_own_freight" model="ir.rule">
+        <field name="name">Worldwide: Sales</field>
+        <field name="model_id" ref="ml_worldwide-main.model_mlworldwide_freights"/>
+        <field name="domain_force">['|', ('user_id', '=', user.id), ('create_uid', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_mlworldwide_sales'))]"/>
+    </record>
+    <record id="can_edit_all_freight" model="ir.rule">
+        <field name="name">Worldwide: Sales manager</field>
+        <field name="model_id" ref="ml_worldwide-main.model_mlworldwide_freights"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_mlworldwide_manager'))]"/>
+    </record>
+
+    <record id="can_edit_freight_operation" model="ir.rule">
+        <field name="name">Worldwide: Operation</field>
+        <field name="model_id" ref="ml_worldwide-main.model_mlworldwide_freights"/>
+        <field name="domain_force">[('contributor_ids.employee.user_id.id', '=',  user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_mlworldwide_operation'))]"/>
+    </record>
+
+    <record id="can_assign_freight_pd" model="ir.rule">
+        <field name="name">Worldwide: Operation</field>
+        <field name="model_id" ref="ml_worldwide-main.model_mlworldwide_freights"/>
+        <field name="domain_force">['|',"!", ( 'contributor_ids.employee.user_id','in',[user.id]),('contributor_ids.employee.user_id.id', '=',  user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_mlworldwide_pd'))]"/>
+    </record>
+
+    <!-- <record id="cannot_assign_freight_pd" model="ir.rule">
+        <field name="name">Worldwide: Cannot assign pd</field>
+        <field name="model_id" ref="ml_worldwide.model_freights_quotations"/>
+        <field name="domain_force">[('freights_id.is_assigned_freights','=',True)]</field>
+        <field name="groups" eval="[(4, ref('group_mlworldwide_pd'))]"/>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record> -->
+
+    
+
+    
+
+    <!-- <record id="sales_can_edit_field_1" model="ir.model.field.access">
+        <field name="name">Sales: can edit</field>
+        <field name="field_id" ref="ml_worldwide.field_freights_quotations__abroad_rate"/>
+        <field name="group_id" ref="ml_worldwide.group_mlworldwide_sales"/>
+        <field name="term_read" eval="True"/>
+        <field name="term_write" eval="True"/>
+    </record> -->
+</odoo>

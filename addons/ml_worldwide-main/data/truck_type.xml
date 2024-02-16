@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="freight_truck_data" model="freights.truck.type">
+        <field name="name">Trailer</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freight_truck_data2" model="freights.truck.type">
+        <field name="name">Box</field>
+        <field name="active">1</field>
+    </record>
+</odoo>

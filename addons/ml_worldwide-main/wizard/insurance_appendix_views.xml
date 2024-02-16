@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="insurance_appendix_views_form" model="ir.ui.view">
+        <field name="name">insurance.appendix.views.form</field>
+        <field name="model">insurance.appendix</field>
+        <field name="arch" type="xml">
+            <form>
+                <p>
+                    Select two date.
+                </p>
+                <p>
+                   Start date: <field name="start_date"/>
+                </p>
+                <p>
+                   End date: <field name="end_date"/>
+                </p>
+                <footer>
+                    <button name="action_insurance_appendix" type="object" icon="fa-download" string="Appendix-1" class="btn-primary" data-hotkey="q"/>
+                    <button name="export_insurance_cases" type="object" icon="fa-download" string="Insurance cases" class="btn-primary"/>
+                    <button special="cancel" data-hotkey="z" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="insurance_appendix_action" model="ir.actions.act_window">
+        <field name="name">Insurance appendix</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">insurance.appendix</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <!-- <field name="view_id" ref="insurance_appendix_views_form"/> -->
+    </record>
+
+    <report string="Insurance appendix" id="action_insurance_appendix_report" model="insurance.appendix" report_type="xlsx" name="ml_worldwide-main.insurance_appendix_report" file="appendix" attachment_use="False" />
+    <report string="Insurance cases" id="action_insurance_cases_report" model="insurance.appendix" report_type="xlsx" name="ml_worldwide-main.insurance_cases_report" file="insurance" attachment_use="False" />
+    <report string="Insurance register" id="action_insurance_register" model="insurance.appendix" report_type="xlsx" name="ml_worldwide-main.insurance_incident_regisration" file="regisration" attachment_use="False" />
+    
+</odoo>

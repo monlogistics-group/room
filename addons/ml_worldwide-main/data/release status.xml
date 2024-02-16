@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="freights_release_type" model="freights.release.status">
+        <field name="name">Onhold</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_release_type2" model="freights.release.status">
+        <field name="name">Releasable</field>
+        <field name="active">1</field>
+    </record>
+</odoo>

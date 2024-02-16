@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mlworldwide_crm_lead_form_ext" model="ir.ui.view">
+            <field name="name">crm.lead.form.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">    
+                    <button name="action_create_freights" type="object" string="Create Freight"/>
+                </xpath> 
+            </field>
+        </record>
+    </data>
+</odoo>

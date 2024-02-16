@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Javkha.
+ -->
+<odoo>
+    
+    <record id="quotation_agents_mails_form_view" model="ir.ui.view">
+        <field name="name">quotation.agents.mail.form</field>
+        <field name="model">quotation.agents.mail</field>
+        <field name="arch" type="xml">
+            <form string="Quotation Agents mails">
+                <sheet>
+                    <group>
+                        <field name="agent"/>
+                        <field name="contacts"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="quotation_agents_mails_tree_view" model="ir.ui.view">
+        <field name="name">quotation.agents.mail.tree</field>
+        <field name="model">quotation.agents.mail</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Quotation Agents mails">
+                <field name="agent"/>
+                <field name="contacts" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="quotation_agents_mails_action" model="ir.actions.act_window">
+        <field name="name">Quotation Agents mails</field>
+        <field name="type">ir.actions.act_window</field>  
+        <field name="res_model">quotation.agents.mail</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+    </record>
+
+    <menuitem id="quotation_agents_mails"
+            name="Quotation Agents Mails"
+            action="quotation_agents_mails_action"
+            parent="menu_worldwide_master_data"
+            groups=""
+            sequence="601"/>
+    </odoo>          

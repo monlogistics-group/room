@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python:Odoo",
+            "type":"python",
+            "request":"launch",
+            "stopOnEntry": false,
+            "python":"/home/munkhbat-mlh/Desktop/Work/Odoo15/myodoo15/bin/python3",
+            "console":"integratedTerminal",
+            "program":"/home/munkhbat-mlh/Desktop/Work/Odoo15/odoo/odoo-bin",
+            "args": [
+               "--config=/etc/odoo15.conf",
+            ],
+            "cwd":"${workspaceRoot}",
+            "env": {},
+            "envFile":"${workspaceRoot}/.env",
+            "debugOptions": [
+                "RedirectOutput"
+            ]
+        }
+    ]
+}

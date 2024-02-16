@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="freights_order_ruotes_form_view">
+            <field name="name">freights.order.routes.form</field>
+            <field name="model">freights.order.routes</field>
+            <field name="arch" type="xml">
+                <form string="Order route">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                                <field name="route_point_ids" required="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="freights_order_ruotes_tree_view">
+            <field name="name">freights.order.routes.tree</field>
+            <field name="model">freights.order.routes</field>
+            <field name="arch" type="xml">
+                <tree string="freights Order route">
+                    <field name="name"/>
+                    <field name="route_point_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="freights_order_ruotes_view_action">
+            <field name="name">freights Order route </field>
+            <field name="res_model">freights.order.routes</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new port.
+                </p>
+            </field>
+        </record>
+
+         <menuitem id="menu_freights_order_ruotes"
+              name="Order route"
+              action="freights_order_ruotes_view_action"
+              parent="menu_worldwide_master"
+              groups=""
+              sequence="154"/>
+    </data>
+</odoo>

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="freights_packages_form_view">
+            <field name="name">freights.packages.form</field>
+            <field name="model">freights.packages</field>
+            <field name="arch" type="xml">
+                <form string="Packages">
+                    <header>
+                        <field name="state_id" widget="statusbar" options="{'clickable': '1'}"/>
+                        <button name='goods_pdf' type='object' string='Goods Pdf'/>
+                        <field name ="shipment" invisible='1' />
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="state" readonly='1'  />
+                                <field name='assessment_late' invisible='1'/>
+                                <field name='is_late' invisible='1'/>
+                                <button name='show_wizard' type='object' string='request' attrs="{'invisible' : [('is_late' , '=' , True)]}"/>
+                                <field name="name" required="1"/>
+                                <field name="consignee_id"/>
+                                <field name="consignee_phone"/>
+                                <field name="referral"/>
+                                <field name="release_note_remark"/>
+                                <field name="package_qty"/>
+                                <field name="volume"/>
+                                <field name='note' readonly='1'/>
+                                <field name='released_date'/>
+                                <field name="gross"/>
+                                <!-- <field name='terminal'/> -->
+                                <field name="ppcoll_currency_id"/>
+                                <field name="ppcoll_price"/>
+                                <field name="attachement_ids" widget="many2many_binary"/>
+                                <field name='date_saver' invisible='1'/>
+                                <field name='customs_boolean' invisible='1'/>
+                                <field name='terminal_boolean' invisible='1'/>
+                                <field name='delivery_boolean' invisible='1'/>
+                                <field name='customs_spent_time' readonly='1' force_save = '1' attrs="{'invisible' : [('shipment' , '!=', False)]}" groups="ml_worldwide-main.group_mlworldwide_border,ml_worldwide-main.group_mlworldwide_custom,ml_worldwide-main.group_mlworldwide_terminal"/>
+                                <field name='spent_time' readonly='1' attrs="{'invisible' : [('shipment' , '!=', False)]}" groups="ml_worldwide-main.group_mlworldwide_border,ml_worldwide-main.group_mlworldwide_custom,ml_worldwide-main.group_mlworldwide_terminal"/>
+                                <field name='released_date_boolean' invisible='1'/>
+                                <field name='released_date_button' invisible='1'/>
+                                <button type='object' attrs="{'invisible': [('released_date_button', '!=', True)]}"  name='send_request_to_admin_date' string='Send Request For Customs date' groups="ml_worldwide-main.group_mlworldwide_border,ml_worldwide-main.group_mlworldwide_custom,ml_worldwide-main.group_mlworldwide_terminal"/>
+                                
+                                <field name='customs_date_start_boolean' invisible='1'/>
+                                <field name='customs_date_start_button' invisible='1'/>
+                                <field name="customs_date_start" attrs="{'invisible':[('shipment' , '!=', False)],'readonly': [('customs_date_start_boolean', '=', True)]}" groups="ml_worldwide-main.group_mlworldwide_border,ml_worldwide-main.group_mlworldwide_custom,ml_worldwide-main.group_mlworldwide_terminal"/>
+                                <button type='object' attrs="{'invisible': [('customs_date_start_button', '!=', True)]}"  name='send_request_to_admin_customs_date_start' string='Send Request For Customs date start' groups="ml_worldwide-main.group_mlworldwide_border,ml_worldwide-main.group_mlworldwide_custom,ml_worldwide-main.group_mlworldwide_terminal"/>
+
+                                <field name='customs_date_end_boolean' invisible='1'/>
+                                <field name='customs_date_end_button' invisible='1'/>
+                                <field name="customs_date_end" attrs = "{'invisible':[('shipment' , '!=', False)],'readonly' : [('customs_date_end_boolean', '=', True)]}" groups="ml_worldwide-main.group_mlworldwide_border,ml_worldwide-main.group_mlworldwide_custom,ml_worldwide-main.group_mlworldwide_terminal"/>
+                                <button type='object' attrs="{'invisible' : [('customs_date_end_button' , '!=', True)]}" name='send_request_to_admin_customs_date_end' string='Send Request for customs date end ' groups="ml_worldwide-main.group_mlworldwide_border,ml_worldwide-main.group_mlworldwide_custom,ml_worldwide-main.group_mlworldwide_terminal"/>
+
+                                <field name='assessment_date_start_boolean' invisible='1'/>
+                                <field name='assessment_date_start_button' invisible='1'/>
+                                <field name="assessment_date_start" attrs = "{'invisible':[('shipment' , '!=', False)],'readonly' : [('assessment_date_start_boolean', '=', True)]}" groups="ml_worldwide-main.group_mlworldwide_border,ml_worldwide-main.group_mlworldwide_custom,ml_worldwide-main.group_mlworldwide_terminal"/>
+                                <button type='object' attrs="{'invisible' : [('assessment_date_start_button' , '!=', True)]}" name='send_request_to_admin_assessment_date_start' string='Send Request for assessment date start' groups="ml_worldwide-main.group_mlworldwide_border,ml_worldwide-main.group_mlworldwide_custom,ml_worldwide-main.group_mlworldwide_terminal"/>
+
+                                <field name='assessment_date_end_boolean' invisible='1'/>
+                                <field name='assessment_date_end_button' invisible='1'/> 
+                                <field name="assessment_date_end"  attrs="{'invisible':[('shipment' , '!=', False)], 'readonly':[('assessment_date_end_boolean', '=', True)]}" groups="ml_worldwide-main.group_mlworldwide_border,ml_worldwide-main.group_mlworldwide_custom,ml_worldwide-main.group_mlworldwide_terminal"/>
+                                <button type='object' attrs="{'invisible' : [('assessment_date_end_button' , '!=', True)]}" name='send_request_to_admin_assessment_date_end' string='Send Request for assessment date end' groups="ml_worldwide-main.group_mlworldwide_border,ml_worldwide-main.group_mlworldwide_custom,ml_worldwide-main.group_mlworldwide_terminal"/>
+                                
+                                <field name="did_check"  attrs="{'invisible' : [('shipment' , '!=', False)]}" groups="ml_worldwide-main.group_mlworldwide_border,ml_worldwide-main.group_mlworldwide_custom,ml_worldwide-main.group_mlworldwide_terminal"/>
+                                <field name="delivered" attrs="{'invisible' : [('shipment' , '!=', False)]}" groups="ml_worldwide-main.group_mlworldwide_border,ml_worldwide-main.group_mlworldwide_custom,ml_worldwide-main.group_mlworldwide_terminal"/>
+                                <field name="granted" attrs="{'invisible' : [('shipment' , '!=', False)]}" groups="ml_worldwide-main.group_mlworldwide_border,ml_worldwide-main.group_mlworldwide_custom,ml_worldwide-main.group_mlworldwide_terminal"/>        
+        
+                                                  
+                            </group>
+                        </group>
+                        <button name='action_gaali' string='Customs ' type='object' groups="ml_worldwide-main.group_mlworldwide_border,ml_worldwide-main.group_mlworldwide_custom,ml_worldwide-main.group_mlworldwide_terminal"/>
+                        <button name='action_terminal' string='Terminal' type='object' groups="ml_worldwide-main.group_mlworldwide_border,ml_worldwide-main.group_mlworldwide_custom,ml_worldwide-main.group_mlworldwide_terminal"/>
+                        <button name='action_delivery' string='Delivery' type='object' groups="ml_worldwide-main.group_mlworldwide_border,ml_worldwide-main.group_mlworldwide_custom,ml_worldwide-main.group_mlworldwide_terminal"/>
+
+                        <group>
+                            <!-- <field name="payments"/> -->
+                            <field name="freights_payments" groups="ml_worldwide-main.group_mlworldwide_border,ml_worldwide-main.group_mlworldwide_custom,ml_worldwide-main.group_mlworldwide_terminal"/>
+                        </group>
+                        
+                    </sheet>
+                    <div class="oe_chatter" editable="bottom">
+                        <field name="activity_ids" type="html" options="{'collaborative': true}"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form> 
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="freights_packages_tree_view">
+            <field name="name">freights.packages.tree</field>
+            <field name="model">freights.packages</field>
+            <field name="arch" type="xml">
+                <tree string="freights Packages" >
+                    <field name="name" readonly='1'/>
+                    <field name="consignee_phone"/>
+                    <field name="referral"/>
+                    <field name="release_note_remark"/>
+                    <field name="package_qty"/>
+                    <field name="volume"/>
+                    <field name="gross"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="freights_packages_kanban_view" model="ir.ui.view">
+            <field name="name">freights.packages.kanban</field>
+            <field name="model">freights.packages</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="state" readonly='1'/>
+                    <field name="name"/>
+                    <field name="consignee_id"/>
+                    <field name="consignee_phone"/>
+                    <field name="referral"/>
+                    <field name="release_note_remark"/>
+                    <field name="package_qty"/>
+                    <field name="volume"/>
+                    <field name="gross"/>
+                    <field name="ppcoll_currency_id"/>
+                    <field name="ppcoll_price"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <strong><field name="name"/></strong>
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        <span class="badge badge-pill"><field name="package_qty"/></span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <strong>Price: </strong><field name="ppcoll_price"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="freights_packages_pivot_view" model="ir.ui.view">
+            <field name="name">freights.packages.pivot</field>
+            <field name="model">freights.packages</field>
+            <field name="arch" type="xml">
+                <pivot string="Freights Packages" sample="1">
+                    <field name="name"/>
+                    <field name="consignee_phone"/>
+                    <field name="referral"/>
+                    <field name="release_note_remark"/>
+                    <field name="volume"/>
+                    <field name="gross"/>
+                    <field name="ppcoll_currency_id"/>
+                    <field name="consignee_id" type="col"/>
+                    <field name="package_qty" type="row"/>
+                    <field name="ppcoll_price" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="freights_packages_search_view" model="ir.ui.view">
+            <field name="name">freights.packages.view.search</field>
+            <field name="model">freights.packages</field>
+            <field name="arch" type="xml">
+                <search>
+                    <separator/>
+                    <!-- <separator/> -->
+                    <!-- <filter name="delivery" string="Delivery" domain="[('delivery_fiilter', '=', True)]"/> -->
+                </search>
+            </field>
+        </record>
+
+        <record id="freights_packages_graph_view" model="ir.ui.view">
+            <field name="name">freights.packages.graph</field>
+            <field name="model">freights.packages</field>
+            <field name="arch" type="xml">
+                <graph string="Freights Packages" type="line" sample="1">
+                    <field name="consignee_id"/>
+                    <field name="ppcoll_price" type="measure"/>
+                </graph>
+            </field>
+        </record>
+        <record id="freights_packages__search_view" model="ir.ui.view">
+            <field name="name">freights.packages.search</field>
+            <field name="model">freights.packages</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name ="freight_id" string ="Freight" />     
+                    <field name ="number_id" string="Shipment Id"/>
+                    <field name="freight_type" string="Freight Type"  />
+                    <field name="shipper" string="Shipper"/>
+                    <field name ="freight_condition" string="Freight Condition"/>
+                    <field name ="terminal" string="Terminal"/>
+                    <field name="cargo_name" string="Cargo Name"  />
+                    <field name="employee" string="Employee"/>
+                    <field name ="consignee_id" string="Consignee"/>
+                    <field name ="consignee_phone" string="Consignee Phone"/>
+                    <field name ="state" string="State"/>
+                    <separator/>
+                
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="freights_packages_view_action">
+            <field name="name">Freights Packages </field>
+            <field name="res_model">freights.packages</field>
+            <field name="view_mode">tree,form,kanban,pivot,graph</field>
+            <field name="context">{'search_default_customs':1}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new port.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_worldwide_packages"
+            parent="menu_worldwide_root"
+            name="Packages"
+            action="freights_packages_view_action"
+            sequence="103"/>
+    </data>
+</odoo>

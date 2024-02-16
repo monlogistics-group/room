@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Javkha. 2022-12-30
+ -->
+<odoo>
+    <template id="mlworldwide_generate_pdf_using_img">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="doc" t-value="doc.with_context(lang=base_lang)"/>
+                <t t-set="k" t-value="request.env['mlworldwide.freight.photo'].search([])" />
+                 <t t-set="data_report_margin_top" t-value="1"/>
+                    <div class="article" style="position:absolute; top:0px;">
+                        <t t-set='a' t-value='1'/>
+                        <t t-foreach='k' t-as='img'>
+                            <div style="position:relative;">
+                                <img t-att-src="image_data_uri(img.freight_photo)" style='width:100% ; height:90vh;'/>
+                                <t t-if="a % 2 == 1">
+                                    <div t-out="doc.sender" style='font-size: 10px; position: absolute; top:100px; width: 300px; left: 80px;'/>
+                                    <div t-out="doc.senderCertificateNumber" style='font-size: 10px; position: absolute; top:80px; left: 47%; font-weight: bold;'/>
+                                    <div t-out="doc.stations[0].name" style="font-size: 10px; position: absolute; top:90px; right: 20%; font-weight: bold;"/>
+                                    <div t-out="doc.stations[0].code" style="font-size: 10px; position: absolute; top: 80px; right: 8%; font-weight: bold;"/>
+                                    <div t-out="doc.polucha" style='font-size: 10px; position: absolute; top: 180px; right: 50px;width: 300px; font-weight: bold;'/>
+                                    <div t-out="doc.uplata" style='font-size: 10px; position: absolute; top: 180px; left: 80px; font-weight: bold;width: 300px;'/>
+                                    <t t-value='0' t-set="i"/>
+                                    <t t-foreach='doc.stations' t-as='station'>
+                                        <t t-value='i+1' t-set="i"/>
+                                    </t>
+                                    <div t-out="doc.stations[i-1].name" style="position: absolute; font-weight:bold; font-size:10px;top: 260px; left: 90px;"/>
+                                    <div style="position: absolute; font-weight:bold; font-size:10px;top: 260px; left: 22%;">-</div>
+                                    <div t-out="doc.stations[i-1].code" style="position: absolute; font-weight:bold; font-size:10px;top: 260px; left: 25%;"/>
+                                    <div style='font-size: 10px; position: absolute; top: 380px; left: 80px; font-weight: bold;'>
+                                        <t t-value='0' t-set="g"/>
+                                        <t t-foreach='doc.stations' t-as='station'>
+                                            <t t-if="g!=0 and g != i -1">
+                                                <div t-out="doc.stations[g].name"/>
+                                            </t>
+                                            <t t-value='g+1' t-set="g"/>
+                                        </t>
+                                    </div>
+                                    <div t-out="doc.cargoName" style="font-size: 10px; position: absolute; top: 480px; left: 60px; font-weight: bold;width: 300px;"/>
+                                    <div t-out="doc.cargoType" style="font-size: 10px; position: absolute; top: 480px; left: 48%; font-weight: bold;width: 300px;"/>
+                                    <div t-out="doc.packageQty" style="font-size: 10px; position: absolute; top: 480px; font-weight: bold; right: 35%;"/>
+                                    <div style="font-size: 10px; position: absolute; top: 480px; right: 31%; font-weight: bold;">т:</div>
+                                    <div t-out="doc.shipment.container_type_id.weight" style="font-size: 10px; position: absolute; top: 480px; right: 27%; font-weight: bold;"/>
+                                    <div style="font-size: 10px; position: absolute; top: 480px; right: 25%; font-weight: bold;">кг</div>
+                                    <div style="font-size: 10px; position: absolute; top: 490px; right: 31%; font-weight: bold;">Б:</div>
+                                    <div t-out="doc.shipment.container_type_id.weight" style="font-size: 10px; position: absolute; top: 490px; right: 27%; font-weight: bold;"/>
+                                    <div style="font-size: 10px; position: absolute; top: 490px; right: 25%; font-weight: bold;">кг</div>
+                                    <div t-out="doc.loader" style="font-size: 10px; position: absolute; top: 600px; right: 15%; font-weight: bold;"/>
+                                    <div t-out="doc.weightCalculation" style="font-size: 10px; position: absolute; top: 640px; right: 10%; font-weight: bold;"/>
+                                    <div t-out="doc.shipment.container_type_id.name" style="font-size: 10px; position: absolute; top: 675px; left: 60px; font-weight: bold;"/>
+                                    <div t-out="doc.packageQty" style="font-size: 10px; position: absolute; top: 675px; left: 29%; font-weight: bold;"/>
+                                    <div t-out="doc.shipment.container_type_id.taras_id.name" style="font-size: 10px; position: absolute; top: 675px; left: 30%; font-weight: bold;"/>
+                                    
+                                    <div t-out="doc.uplata" style="font-size: 10px; position: absolute; top: 750px; left: 60px; font-weight: bold;width: 300px;"/>
+                                    <t t-value="" t-set='name'/>
+                                    <div style="font-size: 10px; position: absolute; top: 690px; right: 42%; font-weight: bold;">
+                                        <t t-foreach="doc.stations" t-as="station">
+                                            <t t-if="name != station.transporter">
+                                                <div t-out='station.transporter'/>
+                                                <div style='height: 2px;'/>
+                                                <t t-value="station.transporter" t-set='name'/>
+                                            </t>
+                                        </t>
+                                    </div>
+                                    <div style="font-size: 10px; position: absolute; top: 690px; right: 100px; font-weight: bold;">
+                                        <t t-foreach="doc.stations" t-as='station'>
+                                                <div t-out="station.name"/>
+                                                <div style='height: 2px;'/>
+                                        </t>
+                                    </div>
+                                    <div style="font-size: 10px; position: absolute; top: 690px; right: 30px; font-weight: bold;">
+                                        <t t-foreach="doc.stations" t-as='station'>
+                                                <div t-out="station.code"/>
+                                                <div style='height: 2px;'/>
+                                        </t>
+                                    </div>
+                                </t>
+                                <t t-set='a' t-value='a+1'/>
+                            </div>
+                        </t>
+
+                    </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="mlworldwide_generate_pdf_paper_id" model="report.paperformat">
+         <field name="name">PaperFormat for freight shipment</field>
+        <field name="default" eval="False"/>
+        <field name="disable_shrinking" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">0</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">0</field>
+        <field name="margin_right">0</field>
+        <field name="dpi">96</field>
+    </record> 
+
+    <data>
+        <record id ="mlworldwide_generate_pdf_action" model="ir.actions.report">
+            <field name= "name">Generate PDF</field>
+            <field name= "model">freights.container.movement</field>
+            <field name= "report_type">qweb-pdf</field>
+            <field name= "report_name">ml_worldwide-main.mlworldwide_generate_pdf_using_img</field>
+            <field name= "report_file">ml_worldwide-main.mlworldwide_generate_pdf_using_img</field>
+            <field name= "print_report_name">object</field>
+            <field name= "binding_model_id" ref ="model_mlworldwide_freights"></field>
+            <field name= "binding_view_types">form</field>
+            <field name= "binding_type">report</field>
+            <field name="paperformat_id" ref="mlworldwide_generate_pdf_paper_id"/>
+        </record>
+    </data>
+
+</odoo>   

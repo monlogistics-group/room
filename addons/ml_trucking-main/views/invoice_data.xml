@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Ariuka. 2022-11-22
+ -->
+<odoo>
+    
+    <record id="ml_trucking_invoice_data_form_view" model="ir.ui.view">
+        <field name="name">mltrucking.invoice.data.form</field>
+        <field name="model">mltrucking.invoice.data</field>
+        <field name="arch" type="xml">
+            <form string="Invoice Data">
+                <sheet>
+                    <group>
+                        <field name="locale"/>
+                        <field name="info_name"/>
+                        <field name="inv_name"/>
+                        <field name="organi_name"/>
+                        <field name="inv_add" />
+                        <field name="inv_phone" />
+                        <field name="payment_per" />
+                        <field name="bnk_name"/>
+                        <field name="bnk_nmbr" />
+                        <field name="payer_email"/>
+                        <field name="payer_number"/>
+                        <field name="payer" />
+                        <field name="payer_name" />
+                        <field name="payer_add"/>
+                        <field name="contract_number" />
+                        <field name="inv_date" />
+                        <field name="invoi_date" />
+                        <field name="serv_desc" />
+                        <field name="serv_name" />
+                        <field name="serv_qty" />
+                        <field name="serv_cost" />
+                        <field name="serv_tot" />
+                        
+                        <field name="direct_name" />
+                        <field name="senior_name" />
+                        <field name="senior_acc"/>
+                        <field name="director_acc"/>
+                        
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="ml_trucking_invoice_data_tree_view" model="ir.ui.view">
+        <field name="name">mltrucking.invoice.data.tree</field>
+        <field name="model">mltrucking.invoice.data</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Invoice Data">
+                <field name="locale"/>
+                <field name="info_name"/>
+                <field name="inv_name"/>
+                <field name="organi_name"/>
+                <field name="inv_add" />
+                <field name="inv_phone" />
+                <field name="payment_per" />
+                <field name="bnk_name"/>
+                <field name="bnk_nmbr" />
+                <field name="payer_email"/>
+                <field name="payer_number"/>
+                <field name="payer" />
+                <field name="payer_name" />
+                <field name="payer_add"/>
+                <field name="contract_number" />
+                <field name="inv_date" />
+                <field name="invoi_date" />
+                <field name="serv_desc" />
+                <field name="serv_name" />
+                <field name="serv_qty" />
+                <field name="serv_cost" />
+                <field name="serv_tot" />
+                
+                <field name="direct_name" />
+                <field name="senior_name" />
+                <field name="senior_acc"/>
+                <field name="director_acc"/>
+            </tree>
+        </field>
+    </record>
+    <record id="ml_trucking_invoice_data_action" model="ir.actions.act_window">
+        <field name="name"> Invoice Data</field>
+        <field name="type">ir.actions.act_window</field>  
+        <field name="res_model">mltrucking.invoice.data</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+       
+  
+    </record>
+    <menuitem id="menu_trucking_invoice_data"
+              name=" Trucking invoice Data"
+              action="ml_trucking_invoice_data_action"
+              parent="menu_trucking_config"
+              groups=""
+              sequence="11"/>
+</odoo>

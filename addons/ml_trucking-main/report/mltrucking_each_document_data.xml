@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+ <template id="mltrucking_each_a">
+         <t t-call="ml_trucking.mltrucking_empty_blank">
+            <t t-set="doc" t-value="doc.with_context(lang=base_lang)"/>
+            <t t-if="len(request.env['mltrucking.document.data'].search([('locale','=' ,base_lang)], limit = 1))>0">
+                <t t-set="k" t-value="request.env['mltrucking.document.data'].search([('locale','=' ,base_lang)], limit = 1)" />
+            </t>
+            <t t-else="">
+                <t t-set="k" t-value="request.env['mltrucking.document.data'].search([('locale','=','English (US)')], limit = 1)" />
+            </t>
+         <table style="padding-right: 1em;width:100%">
+            <tbody>
+                <tr>
+                <td style="width:50%"><img width="250" src="https://mltrucking.mn/wp-content/uploads/2021/05/2021-2.png" alt="..." height="50"/></td>
+                <td style="width:50%">
+                    <table style="padding-right: 1em;width:100%;text-align: right;">
+                        <tr>
+                            <td style="font-weight: bold;">
+                            <t t-out="k.document"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="">
+                            <t t-out="k.version"/></td>
+                        </tr>
+                    </table>
+                </td>
+                </tr>
+            </tbody>
+        </table>
+	<br/>
+    <table style="padding-right: 1em;width:100%">
+            <tr>
+              <td style="width:50%">
+                <table style="padding-right: 1em;width:100%;">
+                    <tr>
+                        <td style="font-weight: bold;">
+                        <t t-out="k.company"/>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="float:left;"><span style="font-weight: bold;">
+                        <t t-out="k.address"/>:
+                        </span>
+                        <t t-out="k.companyAddress"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="float:left;"><span style="font-weight: bold;">
+                        <t t-out="k.phone"/>:
+                        </span>
+                         <t t-out="doc.vendor_id.phone"/></td>
+                    </tr>
+                </table>
+                
+              </td>
+              <td style="width:50%">
+                <table style="padding-right: 1em;width:100%;">
+                    <tr>
+                        <td style="font-weight: bold;" >
+                        <t t-out="k.ref"/>:
+                        </td>
+                        <td>
+                         <t t-out="doc.ref"/> 
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="font-weight: bold;" >
+                        <t t-out="k.date"/>:
+                        </td>
+                        <td>
+                        <t t-out="doc.your_date_field"/>
+  
+                        </td>
+                      </tr>
+                </table>
+              </td>
+            </tr>
+             </table>
+            <br/>
+            <table style="padding-right: 1em;width:100%">
+                <tr>
+                <td style="width:50%">
+                    <table style="padding-right: 1em;width:100%;">
+                        <tr>
+                            <td style="font-weight: bold;">
+                            <t t-out="k.sender"/>:
+                            </td>
+                            <td>
+                            <t t-out="doc.vendor_id.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold;">
+                            <t t-out="k.senderaddress"/>:
+                            
+                            </td>
+                            <td> 
+                            <!-- <t t-out="doc.vendor_id"/>: -->
+                            <!-- <?php echo get_post_meta( $shipmentDetails['shipmentID'], 'wpcargo_from', true ); ?> -->
+                            </td>
+                        </tr>
+                    </table>
+                    
+                </td>
+                <td style="width:50%">
+                    <table style="padding-right: 1em;width:100%;">
+                        <tr>
+                            <td style="font-weight: bold;" >
+                            <t t-out="k.receiver"/>:
+                            </td>
+                            <td> 
+                            <t t-out="doc.vendor_id.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold;" >
+                            <t t-out="k.receiveaddress"/>:
+                            </td>
+                            <td> 
+                                <t t-out="doc.vendor_id"/>:
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                </tr>
+            </table>
+    <br/>
+    <div class='table'>
+           <table style="padding-right: 1em;width:100%;border: 1px solid black;border-collapse: collapse;">
+                        <thead>
+                        <tr>
+                            <th scope="col" style="border: 1px solid black;">
+                            <t t-out="k.freight"/></th>
+                            <th scope="col" style="border: 1px solid black;">
+                            <t t-out="k.size"/></th>
+                            <th scope="col" style="border: 1px solid black;">
+                            <t t-out="k.quantity"/></th>
+                            <th scope="col" style="border: 1px solid black;">
+                            <t t-out="k.weight"/></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid black;">
+                                    <t t-out="doc.active_docs.name"/>
+                                </td>
+                                <td style="border: 1px solid black;text-align:right;padding-right: 1em">
+                                    <!-- <t t-out="doc.active_docs.size"/> -->
+                                </td>
+                                <td style="border: 1px solid black;text-align:right;padding-right: 1em">
+                                    <t t-out="doc.active_docs.quantity"/>
+                                </td>
+                                <td style="border: 1px solid black;text-align:right;padding-right: 1em">
+                                    <t t-out="doc.active_docs.weight"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+    </div>
+    <br/>
+   <table style="padding-right: 1em;width:100%;border: 1px solid black;border-collapse: collapse;">
+	   <thead>
+		   <tr>
+			   <th scope="col" style="border: 1px solid black;">
+               <t t-out="k.chassisnumber"/>
+                   </th>
+			   <th scope="col" style="border: 1px solid black;">
+               <t t-out="k.chassisnumber"/></th>
+			   <th scope="col" style="border: 1px solid black;">
+               <t t-out="k.begintime"/>
+               </th>
+			   <th scope="col" style="border: 1px solid black;">
+               <t t-out="k.endtime"/>
+               </th>
+		   </tr>
+	   </thead>
+	   <tbody>
+            <t t-foreach="doc.truck_shipment" t-as="el">
+		        <tr>
+                    <td style="border: 1px solid black;">
+                        <t t-out="el.vehicle.name"/>
+                    </td>
+                    <td style="border: 1px solid black;">
+                    </td>
+                    <td style="border: 1px solid black;">
+                        <!-- <t t-out="el[0].date_begin"/> -->
+                        </td>
+                    <td style="border: 1px solid black;">
+                        <!-- <t t-out="el[len(el)-1].date_end"/> -->
+                    </td>
+		        </tr>
+            </t>
+	   </tbody>
+	</table>
+	<br/>
+	<table style="padding-right: 1em;width:100%">
+        <tr>
+          <td style="width:50%">
+            <table style="padding-right: 1em;width:100%;font-weight: bold;">
+                <tr>
+                    <td ><t t-out="k.statement"/></td>
+                </tr>
+                <tr>
+                    <td>
+						<table style="padding-right: 1em;width:100%;">
+							<tr>
+								<td style="width:50%;align-items: end;">
+									<input type="checkbox" value="" id="flexCheckDefault1"/>
+									<label for="flexCheckDefault1">
+									<t t-out="k.yes"/>
+									</label>
+								</td>
+								<td style="width:50%;align-items: start;">
+									<input type="checkbox" value="" id="flexCheckDefault2"/>
+                                <label for="flexCheckDefault2">
+                                  <t t-out="k.no"/>
+                                </label>
+								</td>
+							</tr>
+						</table>
+					</td>
+                </tr>
+            </table>
+
+          </td>
+          <td style="width:50%">
+            <table style="padding-right: 1em;width:100%;font-weight: bold;">
+                 <tr>
+                    <td ><t t-out="k.payment"/>:
+                    <t t-out="doc.total_cost"/></td>
+                </tr>
+                <tr>
+                    <td>
+						<table style="padding-right: 1em;width:100%;">
+							<tr>
+								<td style="width:50%;align-items: end;">
+									<input type="checkbox" value="" id="flexCheckDefault1"/>
+									<label for="flexCheckDefault1">
+									<t t-out="k.ready"/>
+									</label>
+								</td>
+								<td style="width:50%;align-items: start;">
+									<input type="checkbox" value="" id="flexCheckDefault2"/>
+                                <label for="flexCheckDefault2">
+                                  <t t-out="k.invoice"/>
+                                </label>
+								</td>
+							</tr>
+						</table>
+					</td>
+                </tr>
+            </table>
+          </td>
+        </tr>
+</table>
+
+    <br/>
+	<table style="padding-right: 1em;width:100%">
+        <tr>
+			<td style="width:34%;font-weight: bold;"><t t-out="k.kmClause"/>
+			</td>
+			<td style="width:33%"> <t t-out="k.begun"/>
+            <!-- <?php echo get_post_meta( $shipmentDetails['shipmentID'], 'wpcargo_startkm', true ); ?> -->
+			</td>
+			<td style="width:33%"> <t t-out="k.end"/>
+            <!-- <?php echo get_post_meta( $shipmentDetails['shipmentID'], 'wpcargo_endkm', true ); ?> -->
+			</td>
+		</tr>
+	</table>
+
+    <br/>
+	<table style="padding-right: 1em;width:100%">
+        <tr>
+			<td style="width:34%">
+				<div style="font-weight: bold;">
+                 <t t-out="k.sendercompany"/></div>
+                   <div> <t t-out="k.employeename"/>: .............</div>
+                   <div> <t t-out="k.employeephone"/>: .............</div>
+                   <div><t t-out="k.employeesignature"/>: .............</div>
+			</td>
+			<td style="width:33%">
+				<div style="font-weight: bold;"><t t-out="k.carriercompany"/></div>
+                    <div><t t-out="k.drivername"/>:: .............</div>
+                   <div><t t-out="k.driverphone"/>:: .............</div>
+                   <div><t t-out="k.driversignature"/>:: .............</div>
+			</td>
+			<td style="width:33%">
+				<div style="font-weight: bold;"><t t-out="k.receivercompany"/>:</div>
+                    <div><t t-out="k.receivername"/>: .............</div>
+                   <div><t t-out="k.receiverphone"/>: .............</div>
+                   <div><t t-out="k.receiversignature"/>: .............</div>
+			</td>
+		</tr>
+	</table>
+    <br/>
+    <div>
+        <div>
+            <div>
+                <div>
+                   <div style="font-weight: bold;"><t t-out="k.note"/></div>
+                   <div>
+                   <!-- <?php echo get_post_meta( $shipmentDetails['shipmentID'], 'wpcargo_comments', true ); ?> -->
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div>
+        <div>
+            <div>
+                <div>
+                   <div style="font-weight: bold;"><t t-out="k.warning"/></div>
+                   <div>1. <t t-out="k.warning1"/>
+                   </div>
+                   <div>2. <t t-out="k.warning2"/>
+                    </div>
+                    <div>3. <t t-out="k.warning3"/>
+                    </div>
+                    <div>4. <t t-out="k.warning4"/>
+                    </div>
+                    <div>5. <t t-out="k.warning5"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </t>
+    </template>
+
+    <template id="mltrucking_each_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="ml_trucking.mltrucking_each_a" t-lang="base_lang"/>
+                <t t-set="base_lang" t-value="doc.vendor_id.lang"/>
+            </t>
+            <t t-foreach="doc.vendor_id.other_lang" t-as="lng">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-set="base_lang" t-value="lng.code"/>
+                    <t t-call="ml_trucking.mltrucking_each_a" t-lang="base_lang"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="mltruck_each_document_paper_id" model="report.paperformat">
+        <field name="name">Paperformat</field>
+        <field name="default" eval="False"/>
+        <field name="disable_shrinking" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">8</field>
+        <field name="margin_bottom">32</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        <field name="dpi">96</field>
+    </record> 
+
+    <data>
+        <record id ="mltrucking_base_each_document" model="ir.actions.report">
+            <field name= "name">Document Data</field>
+            <field name= "model">mltrucking.base</field>
+            <field name= "report_type">qweb-pdf</field>
+            <field name= "report_name">ml_trucking.mltrucking_each_document</field>
+            <field name= "report_file">ml_trucking.mltrucking_each_document</field>
+            <field name= "print_report_name">object.ref.replace('/','_')</field>
+            <field name= "binding_model_id" ref ="model_mltrucking_base"></field>
+            <field name= "binding_view_types">form</field>
+            <field name= "binding_type">report</field>
+            <field name="paperformat_id" ref="mltruck_each_document_paper_id"/>
+        </record>
+    </data>
+</odoo>

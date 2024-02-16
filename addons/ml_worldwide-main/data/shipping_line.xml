@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="freights_shipping_line" model="freights.shipping.line">
+        <field name="name">COSCO</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipping_line2" model="freights.shipping.line">
+        <field name="name">Sinotrans</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipping_line3" model="freights.shipping.line">
+        <field name="name">OOCL</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipping_line4" model="freights.shipping.line">
+        <field name="name">ONE Line</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipping_line5" model="freights.shipping.line">
+        <field name="name">TBJU</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipping_line6" model="freights.shipping.line">
+        <field name="name">MAERSK</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipping_line7" model="freights.shipping.line">
+        <field name="name">CMA CGM</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipping_line8" model="freights.shipping.line">
+        <field name="name">HMM</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipping_line9" model="freights.shipping.line">
+        <field name="name">Wanhai</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipping_line10" model="freights.shipping.line">
+        <field name="name">Hapag Lloyd</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipping_line11" model="freights.shipping.line">
+        <field name="name">PIL</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipping_line12" model="freights.shipping.line">
+        <field name="name">Evergreen</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipping_line13" model="freights.shipping.line">
+        <field name="name">SITC</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipping_line14" model="freights.shipping.line">
+        <field name="name">Transcontainer</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipping_line15" model="freights.shipping.line">
+        <field name="name">CSAV</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipping_line16" model="freights.shipping.line">
+        <field name="name">MSC</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipping_line17" model="freights.shipping.line">
+        <field name="name">Agent</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipping_line18" model="freights.shipping.line">
+        <field name="name">Nam Sung</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipping_line19" model="freights.shipping.line">
+        <field name="name">Hyundai</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipping_line20" model="freights.shipping.line">
+        <field name="name">Hede</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipping_line21" model="freights.shipping.line">
+        <field name="name">FESCO</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_shipping_line22" model="freights.shipping.line">
+        <field name="name">Panstar</field>
+        <field name="active">1</field>
+    </record>   
+</odoo>

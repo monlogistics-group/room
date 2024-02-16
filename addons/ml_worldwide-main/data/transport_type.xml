@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="transport_type_line" model="mlworldwide.transport.type">
+        <field name="name">AIR</field>
+        <field name="active">1</field>
+    </record>
+    <record id="transport_type_line2" model="mlworldwide.transport.type">
+        <field name="name">OCEAN</field>
+        <field name="active">1</field>
+    </record>
+    <record id="transport_type_line3" model="mlworldwide.transport.type">
+        <field name="name">RAIL</field>
+        <field name="active">1</field>
+    </record>
+    <record id="transport_type_line4" model="mlworldwide.transport.type">
+        <field name="name">ROAD</field>
+        <field name="active">1</field>
+    </record>
+    <record id="transport_type_line5" model="mlworldwide.transport.type">
+        <field name="name">Multimodal</field>
+        <field name="active">1</field>
+    </record>    
+</odoo>

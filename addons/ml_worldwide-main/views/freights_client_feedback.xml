@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="freights_client_feedback_form_view">
+            <field name="name">freights.client.feedback.form</field>
+            <field name="model">freights.client.feedback</field>
+            <field name="arch" type="xml">
+                <form string="Client feedback">
+                    <sheet>
+                        <group col='2'>
+                            <group>
+                                <field name="agent_id"/>
+                                <field name="freight_id"/>
+                                <field name="rate" widget="priority"/>
+                                <field name="review"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="freights_client_feedback_tree_view">
+            <field name="name">freights.client.feedback.tree</field>
+            <field name="model">freights.client.feedback</field>
+            <field name="arch" type="xml">
+                <tree string="freights Client feedback">
+                    <field name="agent_id"/>
+                    <field name="freight_id"/>
+                    <field name="rate" widget="priority"/>
+                    <field name="review"/>
+                </tree>
+            </field>
+        </record>
+        <record id="freights_client_feedback_kanban_view" model="ir.ui.view">
+            <field name="name">freights.client.feedback.kanban</field>
+            <field name="model">freights.client.feedback</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="agent_id"/>
+                    <field name="freight_id"/>
+                    <field name="rate" widget="priority"/>
+                    <field name="review"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <strong><field name="agent_id"/></strong>
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        <span class="badge badge-pill"><field name="rate"/></span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <strong>Review: </strong><field name="review"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="freights_client_feedback_pivot_view" model="ir.ui.view">
+            <field name="name">freights.client.feedback.pivot</field>
+            <field name="model">freights.client.feedback</field>
+            <field name="arch" type="xml">
+                <pivot string="Freights Shipments" sample="1">
+                    <field name="agent_id" type="col"/>
+                    <field name="freight_id" type="row"/>
+                </pivot>
+            </field>
+        </record>
+        
+        <record id="freights_client_feedback_graph_view" model="ir.ui.view">
+            <field name="name">freights.client.feedback.graph</field>
+            <field name="model">freights.client.feedback</field>
+            <field name="arch" type="xml">
+                <graph string="Freights Shipments" type="line" sample="1">
+                    <field name="agent_id"/>
+                </graph>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="freights_client_feedback_view_action">
+            <field name="name">freights Client feedback </field>
+            <field name="res_model">freights.client.feedback</field>
+            <field name="view_mode">tree,form,kanban,pivot,graph</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new port.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_worldwide_feedbacks"
+            parent="menu_worldwide_root"
+            name="Feedback"
+            action="freights_client_feedback_view_action"
+            sequence="106"/>
+    </data>
+</odoo>

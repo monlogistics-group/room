@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<template>
+   <t t-name="MLWorldwideDashBoard">
+       <div class="oh_dashboards" style="margin: 0px;">
+           <div class="container-fluid o_pj_dashboard" style="padding: 0px; overflow-y: auto;">
+           </div>
+       </div>
+   </t>
+   <t t-name="DashboardProject">
+        <div class="main-panel ps">
+            <div style="width: 98%; margin-right:15px; margin-top:15px;">
+                <div class="menu1 collapse pull-right"> 
+                    <div class="pull-left clearfix op-status ml-5"> 
+                        <div
+                            class="op-stat c-pointer pull-left l-line t-line b-stat-line tl-rounded ng-star-inserted b-stat-line-1">
+                            <div class="op-title"> Cancelled </div>
+                            <div class="op-number" id="f_cancelled">0</div>
+                        </div>
+                        <div
+                            class="op-stat c-pointer pull-left l-line t-line b-stat-line ng-star-inserted b-stat-line-2 ">
+                            <div class="op-title"> Created </div>
+                            <div class="op-number" id="f_created">0</div>
+                        </div>
+                        <div
+                            class="op-stat c-pointer pull-left l-line t-line b-stat-line ng-star-inserted b-stat-line-3">
+                            <div class="op-title"> Re Inquiry </div>
+                            <div class="op-number" id="f_reinquiry">0</div>
+                        </div>
+                        <div
+                            class="op-stat c-pointer pull-left l-line t-line b-stat-line ng-star-inserted b-stat-line-4">
+                            <div class="op-title"> Quotation </div>
+                            <div class="op-number" id="f_quotation">0</div>
+                        </div>
+                        <div
+                            class="op-stat c-pointer pull-left l-line t-line b-stat-line ng-star-inserted b-stat-line-5">
+                            <div class="op-title"> Confirmed </div>
+                            <div class="op-number" id="f_confirmed">0</div>
+                        </div>
+                        <div
+                            class="op-stat c-pointer pull-left l-line t-line b-stat-line ng-star-inserted b-stat-line-6">
+                            <div class="op-title"> Ongoing </div>
+                            <div class="op-number" id="f_ongoing">0</div>
+                        </div>
+                        <div
+                            class="op-stat c-pointer pull-left l-line t-line b-stat-line ng-star-inserted b-stat-line-7">
+                            <div class="op-title"> Arrived </div>
+                            <div class="op-number" id="f_arrived">0</div>
+                        </div>
+                        <div
+                            class="op-stat c-pointer pull-left l-line t-line b-stat-line ng-star-inserted b-stat-line-8">
+                            <div class="op-title"> Released </div>
+                            <div class="op-number" id="f_released">0</div>
+                        </div>
+                        <div
+                            class="op-stat c-pointer pull-left l-line t-line b-stat-line tr-rounded r-line ng-star-inserted b-stat-line-9">
+                            <div class="op-title"> Closed </div>
+                            <div class="op-number" id="f_closed">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div _ngcontent-serverapp-c0="" class="main-content">
+            <div _ngcontent-serverapp-c0="" class="container-fluid">  
+                <div _ngcontent-serverapp-c0="" class="ng-tns-c0-0"><router-outlet _ngcontent-serverapp-c0=""
+                        class="ng-tns-c0-0"></router-outlet><app-dashboard class="ng-star-inserted"> 
+                        <div class="row small-gutters ng-star-inserted">
+                            <div class="col-12 mb-1">
+                                <div class="bg-purple rounded mx-0">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item"><a aria-controls="costs" aria-selected="true"
+                                                class="nav-link active" data-toggle="tab" role="tab" href="/dashboard"><i
+                                                    class="material-icons">dashboard</i> Dashboard 1</a></li>   
+                                        <!-- <li class="nav-item ng-star-inserted"><a aria-controls="costs" aria-selected="true"
+                                                class="nav-link" data-toggle="tab" role="tab" href="/dashboard/bi"><i
+                                                    class="material-icons">trending_up</i> Dashboard 2 </a></li> 
+                                        <li class="nav-item ng-star-inserted"><a aria-controls="costs" aria-selected="true"
+                                                class="nav-link" data-toggle="tab" role="tab" href="/dashboard/managers"><i
+                                                    class="material-icons">pie_chart</i> Managers </a></li> -->
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-2 col-xl-2 text-center"><app-dashboard-quotation-by-status>
+                                    <div class="tms-stat py-0">
+                                        <div class="row zero-gutters">
+                                            <div class="col-8">
+                                                <div class="row zero-gutters">
+                                                    <div class="col-6 stat tl-rounded" style="height: 50px;">
+                                                        <div>
+                                                            <div>Started</div>
+                                                            <div id="q_started" class="mlw_quotes">0</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 stat bg-stat-warning" style="height: 50px;">
+                                                        <div>
+                                                            <div>Filled</div>
+                                                            <div id="q_filled" class="mlw_quotes">0</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row zero-gutters">
+                                                    <div class="col-6 stat bl-rounded bg-stat-primary"
+                                                        style="height: 50px;">
+                                                        <div>
+                                                            <div>Ready</div>
+                                                            <div id="q_ready" class="mlw_quotes">0</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 stat bg-stat-danger" style="height: 50px;">
+                                                        <div>
+                                                            <div>Re Cost</div>
+                                                            <div id="q_recost" class="mlw_quotes">0</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="row zero-gutters">
+                                                    <div class="col-12 stat tr-rounded bg-stat-success"
+                                                        style="height: 50px;">
+                                                        <div>
+                                                            <div>Sent</div>
+                                                            <div id="q_sent" class="mlw_quotes">0</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row zero-gutters">
+                                                    <div class="col-12 stat br-rounded bg-stat-dark" style="height: 50px;">
+                                                        <div>
+                                                            <div>Cancelled</div>
+                                                            <div id="q_cancelled" class="mlw_quotes">0</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </app-dashboard-quotation-by-status></div> 
+                            <div class="col-6 col-sm-4 col-md-2 col-xl-2 text-center ng-star-inserted">
+                                <div class="tms-stat">
+                                    <div class="b-line py-1 stat-title">Departure</div>
+                                    <div class="stat-body">
+                                        <div class="py-0" style="line-height: 1.2em;">
+                                            <div class="row zero-gutters">
+                                                <div class="col-3"></div>
+                                                <div class="col-3"><small>Total</small></div>
+                                                <div class="col-2"><small class="text-success mlw_quotes">Ontime</small></div>
+                                                <div class="col-2"><small class="text-warning mlw_quotes">In 5</small></div>
+                                                <div class="col-2"><small class="text-danger mlw_quotes">Late</small></div>
+                                            </div>
+                                        </div>
+                                        <div class="py-0">
+                                            <div class="row zero-gutters">
+                                                <div class="col-3">Est</div>
+                                                <div class="col-3 stat"><span id="departure_total_ect"></span></div>
+                                                <div class="col-2 stat"><span class="text-success mlw_quotes" id="departure_ontime_ect"></span></div>
+                                                <div class="col-2 stat"><span class="text-warning mlw_quotes" id="departure_in5_ect"></span></div>
+                                                <div class="col-2 stat"><span class="text-danger mlw_quotes" id="departure_late_ect"></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="py-0 rounded-bottom">
+                                            <div class="row zero-gutters">
+                                                <div class="col-3">Act</div>
+                                                <div class="col-3 stat"><span id="departure_total_act"></span></div>
+                                                <div class="col-2 stat"><span class="text-success mlw_quotes" id="departure_ontime_act"></span></div>
+                                                <div class="col-2 stat"><span class="text-warning mlw_quotes" id="departure_in5_act"></span></div>
+                                                <div class="col-2 stat"><span class="text-danger mlw_quotes" id="departure_late_act"></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-2 col-xl-2 text-center ng-star-inserted">
+                                <div class="tms-stat">
+                                    <div class="b-line py-1 stat-title">Border Arrival</div>
+                                    <div class="stat-body">
+                                        <div class="py-0" style="line-height: 1.2em;">
+                                            <div class="row zero-gutters">
+                                                <div class="col-3"></div>
+                                                <div class="col-3"><small>Total</small></div>
+                                                <div class="col-2"><small class="text-success mlw_quotes">Ontime</small></div>
+                                                <div class="col-2"><small class="text-warning mlw_quotes">In 5</small></div>
+                                                <div class="col-2"><small class="text-danger mlw_quotes">Late</small></div>
+                                            </div>
+                                        </div>
+                                        <div class="py-0">
+                                            <div class="row zero-gutters">
+                                                <div class="col-3">Est</div>
+                                                <div class="col-3 stat"><span id="ba_total_ect"></span></div>
+                                                <div class="col-2 stat"><span class="text-success mlw_quotes" id="ba_ontime_ect"></span></div>
+                                                <div class="col-2 stat"><span class="text-warning mlw_quotes" id="ba_in5_ect"></span></div>
+                                                <div class="col-2 stat"><span class="text-danger mlw_quotes" id="ba_late_ect"></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="py-0 rounded-bottom">
+                                            <div class="row zero-gutters">
+                                                <div class="col-3">Act</div>
+                                                <div class="col-3 stat"><span id="ba_total_act"></span></div>
+                                                <div class="col-2 stat"><span class="text-success mlw_quotes" id="ba_ontime_act"></span></div>
+                                                <div class="col-2 stat"><span class="text-warning mlw_quotes" id="ba_in5_act"></span></div>
+                                                <div class="col-2 stat"><span class="text-danger mlw_quotes" id="ba_late_act"></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-2 col-xl-2 text-center ng-star-inserted">
+                                <div class="tms-stat">
+                                    <div class="b-line py-1 stat-title">Border Departure</div>
+                                    <div class="stat-body">
+                                        <div class="py-0" style="line-height: 1.2em;">
+                                            <div class="row zero-gutters">
+                                                <div class="col-3"></div>
+                                                <div class="col-3"><small>Total</small></div>
+                                                <div class="col-2"><small class="text-success mlw_quotes">Ontime</small></div>
+                                                <div class="col-2"><small class="text-warning mlw_quotes">In 5</small></div>
+                                                <div class="col-2"><small class="text-danger mlw_quotes">Late</small></div>
+                                            </div>
+                                        </div>
+                                        <div class="py-0">
+                                            <div class="row zero-gutters">
+                                                <div class="col-3">Est</div>
+                                                <div class="col-3 stat"><span id="bd_total_ect"></span></div>
+                                                <div class="col-2 stat"><span class="text-success mlw_quotes" id="bd_ontime_ect"></span></div>
+                                                <div class="col-2 stat"><span class="text-warning mlw_quotes" id="bd_in5_ect"></span></div>
+                                                <div class="col-2 stat"><span class="text-danger mlw_quotes" id="bd_late_ect"></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="py-0 rounded-bottom">
+                                            <div class="row zero-gutters">
+                                                <div class="col-3">Act</div>
+                                                <div class="col-3 stat"><span id="bd_total_act"></span></div>
+                                                <div class="col-2 stat"><span class="text-success mlw_quotes" id="bd_ontime_act"></span></div>
+                                                <div class="col-2 stat"><span class="text-warning mlw_quotes" id="bd_in5_act"></span></div>
+                                                <div class="col-2 stat"><span class="text-danger mlw_quotes" id="bd_late_act"></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-2 col-xl-2 text-center ng-star-inserted">
+                                <div class="tms-stat">
+                                    <div class="b-line py-1 stat-title">Arrival</div>
+                                    <div class="stat-body">
+                                        <div class="py-0" style="line-height: 1.2em;">
+                                            <div class="row zero-gutters">
+                                                <div class="col-3"></div>
+                                                <div class="col-3"><small>Total</small></div>
+                                                <div class="col-2"><small class="text-success mlw_quotes">Ontime</small></div>
+                                                <div class="col-2"><small class="text-warning mlw_quotes">In 5</small></div>
+                                                <div class="col-2"><small class="text-danger mlw_quotes">Late</small></div>
+                                            </div>
+                                        </div>
+                                        <div class="py-0">
+                                            <div class="row zero-gutters">
+                                                <div class="col-3">Est</div>
+                                                <div class="col-3 stat"><span id="arrival_total_ect"></span></div>
+                                                <div class="col-2 stat"><span class="text-success mlw_quotes" id="arrival_ontime_ect"></span></div>
+                                                <div class="col-2 stat"><span class="text-warning mlw_quotes" id="arrival_in5_ect"></span></div>
+                                                <div class="col-2 stat"><span class="text-danger mlw_quotes" id="arrival_late_ect"></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="py-0 rounded-bottom">
+                                            <div class="row zero-gutters">
+                                                <div class="col-3">Act</div>
+                                                <div class="col-3 stat"><span id="arrival_total_act"></span></div>
+                                                <div class="col-2 stat"><span class="text-success mlw_quotes" id="arrival_ontime_act"></span></div>
+                                                <div class="col-2 stat"><span class="text-warning mlw_quotes" id="arrival_in5_act"></span></div>
+                                                <div class="col-2 stat"><span class="text-danger mlw_quotes" id="arrival_late_act"></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-2 col-xl-2">
+                                <div class="tms-stat py-0 text-center">
+                                    <div class="row zero-gutters" style="height: 100%;">
+                                        <div class="col-6">
+                                            <div class="stat tl-rounded bg-stat-danger" style="height: 50%;">
+                                                <div>Hold</div>
+                                                <div>183</div>
+                                            </div>
+                                            <div class="stat bl-rounded bg-stat-warning" style="height: 50%;">
+                                                <div>Releasable</div>
+                                                <div>141</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 stat rounded-right bg-stat-success">
+                                            <div>Released</div>
+                                            <div class="my-2" style="font-size: 1.5rem;">62</div><small>this week</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="row small-gutters ng-star-inserted">
+                            <div class="col-12 col-sm-6">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="row small-gutters">
+                                            <div class="col-12 col-sm-4 text-center">
+                                                <div class="tms-stat">
+                                                    <div class="b-line py-1 stat-title">MLW Invoice</div>
+                                                    <div class="row zero-gutters">
+                                                        <div class="py-1 stat col-4 stat-body bl-rounded bg-stat-danger">
+                                                            <div mattooltip="No Invoice" mattooltipposition="above"
+                                                                aria-describedby="cdk-describedby-message-6"
+                                                                cdk-describedby-host="">
+                                                                <div><span class="material-icons">error_outline</span></div>
+                                                                <div>896</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="py-1 stat col-4 stat-body bg-stat-warning">
+                                                            <div mattooltip="Re Invoice Needed" mattooltipposition="above"
+                                                                aria-describedby="cdk-describedby-message-7"
+                                                                cdk-describedby-host="">
+                                                                <div><span class="material-icons">refresh</span></div>
+                                                                <div>3549</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="py-1 stat col-4 stat-body br-rounded bg-stat-primary">
+                                                            <div mattooltip="Approve Needed" mattooltipposition="above"
+                                                                aria-describedby="cdk-describedby-message-8"
+                                                                cdk-describedby-host="">
+                                                                <div><span class="material-icons">access_time</span></div>
+                                                                <div>24</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-4 text-center">
+                                                <div class="tms-stat">
+                                                    <div class="b-line py-1 stat-title">Agent Invoice</div>
+                                                    <div class="row zero-gutters">
+                                                        <div class="py-1 stat stat-body col-6 bl-rounded bg-stat-danger">
+                                                            <div mattooltip="No Invoice" mattooltipposition="above"
+                                                                aria-describedby="cdk-describedby-message-6"
+                                                                cdk-describedby-host="">
+                                                                <div><span class="material-icons">error_outline</span></div>
+                                                                <div>463</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="py-1 stat stat-body col-6 br-rounded bg-stat-warning">
+                                                            <div mattooltip="Re Invoice Needed" mattooltipposition="above"
+                                                                aria-describedby="cdk-describedby-message-7"
+                                                                cdk-describedby-host="">
+                                                                <div><span class="material-icons">refresh</span></div>
+                                                                <div>68</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>     
+                                            <div class="col-6 col-sm-2 text-center ng-star-inserted">
+                                                <div class="tms-stat">
+                                                    <div class="b-line py-1 stat-title">To Close</div>
+                                                    <div
+                                                        class="stat stat-body py-2 px-2 text-center bg-stat-danger rounded-bottom">
+                                                        <div class="stat-value mt-2">718</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </app-dashboard>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <div align="center">
+            <span>© 2023 ML Holding LLC - All Rights Reserved.</span>
+        </div>
+        <!-- Widgets End -->
+    </div>
+   </t>
+</template>

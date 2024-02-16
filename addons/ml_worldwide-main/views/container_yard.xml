@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    
+    <record id="container_yard_form_view" model="ir.ui.view">
+        <field name="name">container.yard.form</field>
+        <field name="model">container.yard</field>
+        <field name="arch" type="xml">
+            <form string="Container yard">
+                <sheet>
+                    <group>
+                        
+                        <field name="name"/>
+                
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="container_yard_tree_view" model="ir.ui.view">
+        <field name="name">container.yard.tree</field>
+        <field name="model">container.yard</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Container yard">
+                <field name="name"/>
+               
+            </tree>
+        </field>
+    </record>
+    <record id="container_yard_action" model="ir.actions.act_window">
+        <field name="name">container yard</field>
+        <field name="type">ir.actions.act_window</field>  
+        <field name="res_model">container.yard</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+       
+  
+    </record>
+    <menuitem id="menu_container_yard"
+            name="Container yard"
+            action="container_yard_action"
+            parent="menu_worldwide_master_data"
+            groups=""
+            sequence="55"/>
+        
+</odoo>

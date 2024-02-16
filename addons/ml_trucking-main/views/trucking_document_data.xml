@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Javkha. 2022-11-25
+ -->
+<odoo>
+    <record id="ml_trucking_document" model="ir.ui.view">
+        <field name="name">mltrucking.document.data.form</field>
+        <field name="model">mltrucking.document.data</field>
+        <field name="arch" type="xml">
+            <form string="Trucking document data">
+                <sheet>
+                    <group>
+                        <field name="locale"/>
+                        <field name="document"/>
+                        <field name="version"/>
+                        <field name="ref"/>
+                        <field name="date"/>
+                        <field name="statement"/>
+                        <field name="warning1"/>
+                        <field name="warning2"/>
+                        <field name="warning3"/>
+                        <field name="warning4"/>
+                        <field name="warning5"/>
+                        <field name="phone"/>
+                        <field name="address"/>
+                        <field name="company"/>
+                        <field name="sender"/>
+                        <field name="senderaddress"/>
+                        <field name="receiver"/>
+                        <field name="receiveaddress"/>
+                        <field name="freight"/>
+                        <field name="size"/>
+                        <field name="quantity"/>
+                        <field name="weight"/>
+                        <field name="chassisnumber"/>
+                        <field name="begintime"/>
+                        <field name="endtime"/>
+                        <field name="yes"/>
+                        <field name="no"/>
+                        <field name="ready"/>
+                        <field name="invoice"/>
+                        <field name="sendercompany"/>
+                        <field name="employeename"/>
+                        <field name="employeephone"/>
+                        <field name="employeesignature"/>
+                        <field name="carriercompany"/>
+                        <field name="payment"/>
+                        <field name="drivername"/>
+                        <field name="driverphone"/>
+                        <field name="driversignature"/>
+                        <field name="receivercompany"/>
+                        <field name="receivername"/>
+                        <field name="receiverphone"/>
+                        <field name="receiversignature"/>
+                        <field name="end"/>
+                        <field name="note"/>
+                        <field name="warning"/>
+                        <field name="begun"/>
+                        <field name="companyAddress"/>
+                        <field name="kmClause"/>
+                  </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record id="ml_trucking_document_tree_view" model="ir.ui.view">
+        <field name="name">mltrucking.document.data.tree</field>
+        <field name="model">mltrucking.document.data</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Trucking document data">
+                    <field name="document"/>
+                        <field name="locale"/>
+                        <field name="version"/>
+                        <field name="begun"/>
+                        <field name="end"/>
+                        <field name="ref"/>
+                        <field name="date"/>
+                        <field name="phone"/>
+                        <field name="address"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id='ml_trucking_document_action' model='ir.actions.act_window'>
+        <field name="name">document data</field>
+        <field name="res_model">mltrucking.document.data</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+       
+    <menuitem id="menu_trucking_document"
+              name="Document data"
+              action="ml_trucking_document_action"
+              parent="menu_trucking_config"
+              sequence="46"/>
+</odoo>

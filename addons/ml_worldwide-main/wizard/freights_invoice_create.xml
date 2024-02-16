@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="freights_invoice_create_wizard_form" model="ir.ui.view">
+            <field name="name">freights.invoice.create.form</field>
+            <field name="model">freights.invoice.create</field>
+            <field name="groups_id" eval="[(4,ref('base.group_user'))]"/>
+            <field name="arch" type="xml">
+                <form string="Invocie create">
+                    <group>
+                        <group>
+                            <field name="freights_id" readonly="1"/>
+                            <field name="abroad_title" />
+                            <field name="abroad_currency" />
+                            <field name="due_date" />
+                            <field name="all_shippment" />
+                        </group>    
+                        <group>
+                            <field name="customer_id" />
+                            <field name="domestic_title" />
+                            <field name="domestic_currency" />
+                            <field name="interest" />
+                            <field name="lang" />
+                        </group>
+                        <field name="freights_shipment" widget="many2many_checkboxes" attrs="{'invisible': [('all_shippment', '=', True)]}"/>
+                        <field name="freights_payments"/>
+                    </group>
+                    <footer>
+                        <button string="Create Invoice " class="send btn-primary" name="create_invoice" type="object" />
+                        <button string="Cancel" class="btn-secondary" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

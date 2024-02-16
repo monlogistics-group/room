@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="quotation_email" model="mlworldwide.quotation.mail">
+        <field name="locale">1</field>
+        <field name="table_number">#</field>
+        <field name="table_type" >TYPE </field>
+        <field name="table_id" >REF</field>
+        <field name="table_information" >CARGO DETAILS </field>
+        <field name="price"> RATE</field>
+        <field name="border"> Border</field>
+        <field name="greeting" >Dear Partner,</field>
+        <field name="table_estimated_time" > ETT</field>
+        <field name="description" >Thank you for rate inquiry,please check the attached file for our rate offer.</field>
+        <field name="route">FREIGHT TERMS &amp; ROUTE</field>
+        <field name="footer" >If you have any question,please feel free to contact us.</field>
+        
+    </record>
+</odoo>

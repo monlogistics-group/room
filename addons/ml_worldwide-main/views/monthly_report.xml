@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <record id="monthly_report_form_view" model="ir.ui.view">
+        <field name="name">monthly.report.form</field>
+        <field name="model">monthly.report</field>
+        <field name="arch" type="xml">
+            <form string="Monthly Report">
+                <sheet>
+                    <group>
+                        <field name="reportDate"/>
+                        <field name="employee"/>
+                        <field name="customer_id"/>
+                        <field name="reportmonth"/>
+                        <field name="subject"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="monthly_report_tree_view" model="ir.ui.view">
+        <field name="name">monthly.report.tree</field>
+        <field name="model">monthly.report</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Monthly Report">
+                <field name="reportDate"/>
+                <field name="employee"/>
+                <field name="customer_id"/>
+                <field name="reportmonth"/>
+                <field name="subject"/> 
+                <button name="zzzz" 
+                    type="object" 
+                    icon="fa-edit" 
+                    string=" Edit" 
+                    class="btn-primary" 
+            />
+            <button name="action_send" 
+                type="object" 
+                string=" Send" 
+                class="btn-primary" 
+            />
+                
+            </tree>
+        </field>
+    </record>
+
+    <record id="monthly_report_action" model="ir.actions.act_window">
+        <field name="name">Monthly Report</field>
+        <field name="type">ir.actions.act_window</field>  
+        <field name="res_model">monthly.report</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+    </record>
+    
+    <menuitem id="menu_worldwide_monthly_report"
+            name="Monthly report"
+            action="monthly_report_action"
+            parent="menu_worldwide_configuration"
+            groups=""
+            sequence="308"/>
+    
+
+</odoo>

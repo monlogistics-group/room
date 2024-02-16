@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Javkha. 2022-12-20
+ -->
+<odoo>
+
+    <record id="mlworldwide_container_information_from_view" model="ir.ui.view">
+        <field name="name">container.information.form</field>
+        <field name="model">container.information</field>
+        <field name="arch" type="xml">
+            <form string="Container information">
+             	<sheet>
+                    <group>
+                        <field name="container_image"/>
+                        <field name="title"/>
+                        <field name="height"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mlworldwide_container_information_tree_view" model="ir.ui.view">
+        <field name="name">container.information.tree</field>
+        <field name="model">container.information</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Container information">
+                        <field name="container_image"/>
+                        <field name="title"/>
+                        <field name="height"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="mlworldwide_container_information_action" model="ir.actions.act_window">
+        <field name="name">Container information</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">container.information</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Define a new pages
+            </p><p>
+                Freights app are used to Pages module.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="mlworldwide_container_information"
+        name="Container information"
+        action="mlworldwide_container_information_action"
+        parent="menu_worldwide_customer_app"
+        groups=""
+        sequence="200"
+    />
+
+</odoo>

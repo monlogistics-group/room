@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2023 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Umbaa. 2023-10-05
+ -->
+<odoo>
+    
+    <record id="ml_trucking_core_form_view" model="ir.ui.view">
+        <field name="name">mltrucking.core.form</field>
+        <field name="model">mltrucking.core</field>
+        <field name="arch" type="xml">
+            <form string="Trucking core">
+                <sheet>
+                    <group>
+                        <field name="truck_quotation"/>
+                        <field name="truck_order"/>
+                        <field name="truck_state"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record id="ml_trucking_core_tree_view" model="ir.ui.view">
+        <field name="name">mltrucking.core.tree</field>
+        <field name="model">mltrucking.core</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Trucking" create="false" editable="top">  <!-- delete="false" --> 
+                <field name="truck_quotation"/>
+                <field name="truck_order"/>
+                <field name="truck_state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="ml_trucking_core_action" model="ir.actions.act_window">
+        <field name="name">Trucking</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mltrucking.core</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                LMS Monlogistics Holding LLC © 2023 он. Version 0.0.1
+            </p><p>
+                Trucking core are used to LMS trucking module.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_trucking_core"
+              name="Trucking"
+              action="ml_trucking_core_action"
+              parent="menu_trucking_master"
+              groups=""
+              sequence="14"/>
+</odoo>

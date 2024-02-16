@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Umbaa. 2022-12-05
+ -->
+<odoo>
+
+    <record id="mlworldwide_reason_remark_form_view" model="ir.ui.view">
+        <field name="name">mlworldwide.reason.remark.form</field>
+        <field name="model">mlworldwide.reason.remark</field>
+        <field name="arch" type="xml">
+            <form string="Freights">
+             	<sheet>
+                    <group>
+                        <field name="reason_remark_type" required="1"/>
+                        <field name="note" required="1"/>
+                    </group>
+                    <footer>
+                        <button type="object" name="cancel_button" string="save"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    
+
+</odoo>

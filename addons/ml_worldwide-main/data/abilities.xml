@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="freight_ability_data" model="freights.ability">
+        <field name="type_name">Via China</field>
+    </record>
+    <record id="freight_ability_data2" model="freights.ability">
+        <field name="type_name">Via Russia</field>
+    </record>
+    <record id="freight_ability_data3" model="freights.ability">
+        <field name="type_name">China Export</field>    
+    </record>
+    <record id="freight_ability_data4" model="freights.ability">
+        <field name="type_name">China Transit</field>
+    </record>
+    <record id="freight_ability_data5" model="freights.ability">
+        <field name="type_name">Bulk.WGN.(Cntr to wagon)</field>
+    </record>
+    <record id="freight_ability_data6" model="freights.ability">
+        <field name="type_name">DG.Special cntr</field>  
+    </record>
+    <record id="freight_ability_data7" model="freights.ability">
+        <field name="type_name">Project &amp; Moving</field>   
+    </record>
+    <record id="freight_ability_data8" model="freights.ability">
+        <field name="type_name">SOC Agent</field>
+    </record>
+    <record id="freight_ability_data9" model="freights.ability">
+        <field name="type_name">Only from XG</field>
+    </record>
+    <record id="freight_ability_data10" model="freights.ability">
+        <field name="type_name">Other</field>
+    </record>
+    <record id="freight_ability_data11" model="freights.ability">
+        <field name="type_name">OOG</field>
+    </record>
+</odoo>

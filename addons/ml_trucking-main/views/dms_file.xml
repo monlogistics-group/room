@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Umbaa. 2022-08-18
+ -->
+<odoo>
+    <!-- <record id="view_dms_file_ext" model="ir.ui.view">
+        <field name="name">dms.file.extend</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_form" />
+        <field name="arch" type="xml">
+            <field name="locked_by" position="after">
+                <field name="is_blocked"/>
+            </field>
+            <xpath expr="//notebook/page[2]" position="after">
+                <page string="Available User" attrs="{'invisible': [('is_blocked','!=',True)] }" >
+                    <field name="available_user_ids" invisible="0" />
+                </page>
+            </xpath>
+        </field>
+    </record> -->
+</odoo>

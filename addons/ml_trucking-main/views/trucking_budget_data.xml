@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Javkha. 2022-12-01
+ -->
+<odoo>
+    <record id="ml_trucking_budget_data" model="ir.ui.view">
+        <field name="name">mltrucking.budget.data.form</field>
+        <field name="model">mltrucking.budget.data</field>
+        <field name="arch" type="xml">
+            <form string="Trucking budget data">
+                <sheet>
+                    <group>
+                    <field name="locale"/>
+                    <field name="ceo"/>
+                    <field name="title"/>
+                    <field name="name"/>
+                    <field name="es_time"/>
+                    <field name="chassis_num"/>
+                    <field name="position"/>
+                    <field name="from_to"/>
+                    <field name="task"/>
+                    <field name="net_distance"/>
+                    <field name="total_distance"/>
+                    <field name="tr_num"/>
+                    <field name="purpose"/>
+                    <field name="quantity"/>
+                    <field name="cost"/>
+                    <field name="subtotal"/>
+                    <field name="total_cost"/>
+                    <field name="profession_budget"/>
+                    <field name="review"/>
+                    <field name="ceo_name"/>
+                  </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record id="ml_trucking_budget_data_tree_view" model="ir.ui.view">
+        <field name="name">mltrucking.budget.data.tree</field>
+        <field name="model">mltrucking.budget.data</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Trucking budget data">
+                    <field name="locale"/>
+                    <field name="ceo"/>
+                    <field name="title"/>
+                    <field name="name"/>
+                    <field name="es_time"/>
+                    <field name="chassis_num"/>
+                    <field name="position"/>
+                    <field name="from_to"/>
+                    <field name="task"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id='ml_trucking_budget_data_action' model='ir.actions.act_window'>
+        <field name="name">budget data</field>
+        <field name="res_model">mltrucking.budget.data</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+       
+    <menuitem id="menu_trucking_budget_data"
+              name="Budget Data"
+              action="ml_trucking_budget_data_action"
+              parent="menu_trucking_config"
+              sequence="50"/>
+</odoo>

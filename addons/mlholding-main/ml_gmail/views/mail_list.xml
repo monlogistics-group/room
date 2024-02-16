@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Umbaa. 2022-08-18
+ -->
+<odoo>
+    <record id="view_mail_list" model="ir.ui.view">
+        <field name="name">mail.mail.extgmail</field>
+        <field name="model">mail.mail</field>
+        <field name="inherit_id" ref="mail.view_mail_tree" />
+        <field name="arch" type="xml">
+            <field name="subject" position="before">
+                <field name="is_gmail"/>
+                <field name="gmail_profile_img"/>
+                <field name="gmail_profile_name"/>
+                <field name="gmail_date"/>
+                <field name="is_read"/>
+            </field>
+        </field>
+    </record>
+</odoo>

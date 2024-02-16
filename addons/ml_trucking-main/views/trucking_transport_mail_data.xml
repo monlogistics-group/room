@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Javkha. 2022-11-11
+ -->
+<odoo>
+    <record id="ml_trucking_transport_mail" model="ir.ui.view">
+        <field name="name">mltrucking.transport.mail.form</field>
+        <field name="model">mltrucking.transport.mail</field>
+        <field name="arch" type="xml">
+            <form string="Trucking trasnport mail">
+                <sheet>
+                    <group>
+                        <field name="locale"/>
+                        <field name="entity"/>
+                        <field name="container_id"/>
+                        <field name="count"/>
+                        <field name="transportations"/>
+                        <field name="order_num"/>
+                        <field name="transportation_condition"/>
+                        <field name="sender"/>
+                        <field name="employee"/>
+                        
+                  </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record id="ml_trucking_transport_mail_tree_view" model="ir.ui.view">
+        <field name="name">mltrucking.transport.mail.tree</field>
+        <field name="model">mltrucking.transport.mail</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Trucking trasnport mail">
+                    <field name="locale"/>
+                    <field name="entity"/>
+                    <field name="container_id"/>
+                    <field name="count"/>
+                    <field name="transportations"/>
+                    <field name="order_num"/>
+                    <field name="transportation_condition"/>
+                    <field name="sender"/>
+                    <field name="employee"/>
+                    
+            </tree>
+        </field>
+    </record>
+
+    <record id='ml_trucking_transport_mail_action' model='ir.actions.act_window'>
+        <field name="name">Transport Mail</field>
+        <field name="res_model">mltrucking.transport.mail</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+       
+    <menuitem id="menu_trucking_transport_mail"
+              name="Transport Mail Data"
+              action="ml_trucking_transport_mail_action"
+              parent="menu_trucking_config"
+              sequence="44"/>
+</odoo>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="fcl_route" model="freights.route.category">
+        <field name="name">via XG</field>
+        <field name="active">1</field>
+    </record>
+    <record id="fcl_route2" model="freights.route.category">
+        <field name="name">via Erilan</field>
+        <field name="active">1</field>
+    </record>
+    <record id="fcl_route3" model="freights.route.category">
+        <field name="name">via Russia</field>
+        <field name="active">1</field>
+    </record>
+    <record id="fcl_route4" model="freights.route.category">
+        <field name="name">via Riga</field>
+        <field name="active">1</field>
+    </record>
+    <record id="fcl_route5" model="freights.route.category">
+        <field name="name">via Klaipeda</field>
+        <field name="active">1</field>
+    </record>
+    <record id="fcl_route6" model="freights.route.category">
+        <field name="name">via Vladivostok</field>
+        <field name="active">1</field>
+    </record>
+    <record id="fcl_route7" model="freights.route.category">
+        <field name="name">via Beijing</field>
+        <field name="active">1</field>
+    </record>
+    <record id="fcl_route8" model="freights.route.category">
+        <field name="name">via Novorossiysk</field>
+        <field name="active">1</field>
+    </record>
+    <record id="fcl_route9" model="freights.route.category">
+        <field name="name">via Gashuunsukhait</field>
+        <field name="active">1</field>
+    </record>
+    
+    
+</odoo>

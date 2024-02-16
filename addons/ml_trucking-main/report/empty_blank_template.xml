@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="mltrucking_empty_blank">
+        <t t-if="doc and 'company_id' in doc">
+            <t t-set="company" t-value="doc.company_id"/>
+        </t>
+        
+        <!-- <div class="header">
+           
+        
+            
+        </div> -->
+        
+        <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout {{  'o_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  '' }}"
+             t-att-data-oe-model="doc and doc._name" t-att-data-oe-id="doc and doc.id"
+             t-att-data-oe-lang="doc and doc.env.context.get('lang')">
+            <t t-raw="0"/>
+        </div>
+
+        <div t-attf-class="footer o_company_#{company.id}_layout">
+            <div class="text-center">
+                <ul class="list-inline">
+                    <li t-if="report_type == 'pdf'" class="list-inline-item text-right">
+                        Page:
+                        <span style="font-family: Ubuntu;" class="page"/>
+                        /
+                        <span class="topage"/>
+                    </li>
+                </ul>
+                <t t-foreach="company.other_logos" t-as="logo">
+                    <img t-if="logo.freight_photo" t-att-src="image_data_uri(logo.freight_photo)" style="max-height:50px; margin-left: 8px; margin-right: 8px" alt="Logo"/>
+                </t>
+            </div>
+        </div>
+    </template>
+    <data>
+        <record id="mltrucking_empty_blank_external" model="report.layout">
+            <field name="name">Empty blank</field>
+            <field name="view_id" ref="mltrucking_empty_blank"/>
+        </record>
+    </data>
+</odoo>

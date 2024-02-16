@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Javkha. 2022-10-27
+ -->
+<odoo>
+    <record id="ml_trucking_route_form_view" model="ir.ui.view">
+        <field name="name">mltrucking.route.form</field>
+        <field name="model">mltrucking.route</field>
+        <field name="arch" type="xml">
+            <form string="Trucking Page">
+                <sheet>
+                <group col='2'>
+                    <group>
+                        <field name="type" widget="radio"/>
+                    </group>
+                    <group>
+                        <field name="transport" widget="radio"/>
+                    </group>
+                    <group string="From">
+                        <field name="origin_point"/>
+                    </group>
+                    <group string="To">
+                        <field name="dist_point"/>
+                        <!-- <field name="date"/> -->
+                        <field name="trucker"/>
+                        <field name="truckerNo"/>
+                    </group>
+                    <group>
+                        <field name="ETD"/>
+                        <field name="ETA"/>
+                    </group>
+                    <group>
+                        <field name="ATD"/>
+                        <field name="ATA"/>
+                    </group>
+                    <group>
+                        <field name="vehicle"/>
+                    </group>
+                </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record id="ml_trucking_fleet_tree_view" model="ir.ui.view">
+        <field name="name">mltrucking.route.tree</field>
+        <field name="model">mltrucking.route</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Trucking Pages">
+                <field name="type"/>
+                <field name="transport"/>
+                <field name="origin_point"/>
+                <field name="dist_point"/>
+                <field name="date"/>
+                <field name="ETD"/>
+                <field name="ETA"/>
+                <field name="ATD"/>
+                <field name="ATA"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="mltrucking_route_action" model="ir.actions.act_window">
+        <field name="name">Route</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mltrucking.route</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Define a new page
+            </p>
+        </field>
+    </record>
+
+    <menuitem 
+        action="mltrucking_route_action" 
+        parent="menu_trucking_data" 
+        id="mltrucking_route_action_menu" 
+        name="Trucking Routes" 
+        groups="" 
+        sequence="17"/>
+
+</odoo>
+

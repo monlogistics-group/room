@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+		<record id="test_model_view_form" model="ir.ui.view">
+        	<field name="name">test.model.form</field>
+        	<field name="model">test.model</field>
+        	<field name="arch" type="xml">
+				<form string="Test">
+				<group>
+					<!-- <field name="description"/>
+					<field name="price"/> -->
+					<field name="shipment"/>
+				</group>
+                <field name="truck_photo" mode="tree">
+                        <tree string="Photos">
+                            <control>
+                                <create name="add_product_control" string="Add a Photo"/>
+                            </control>
+                            <field name="freight_photo" widget="image" options="{'size': [90, 90]}"/>
+                        </tree>
+                </field>
+				<footer>
+					<button type="object" name="generate_service" string="Save"/>
+				</footer>
+				</form>
+			</field>
+		</record>
+</odoo>
+        	 

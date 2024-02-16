@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_product_f_cost_data" model="product.product">
+        <field name="invoice_policy">order</field>
+        <field name="categ_id">1</field>
+        <field name="detailed_type">service</field>
+        <field name="name">Freight cost</field>
+    </record>
+     <record id="product_product_other_charges_data" model="product.product">
+        <field name="invoice_policy">order</field>
+        <field name="categ_id">1</field>
+        <field name="detailed_type">service</field>
+        <field name="name">Other charges</field>
+    </record>
+     <record id="product_product_package_data" model="product.product">
+        <field name="invoice_policy">order</field>
+        <field name="categ_id">1</field>
+        <field name="detailed_type">service</field>
+        <field name="name">Package</field>
+    </record>
+     <record id="product_product_thc_data" model="product.product">
+        <field name="invoice_policy">order</field>
+        <field name="categ_id">1</field>
+        <field name="detailed_type">service</field>
+        <field name="name">THC</field>
+    </record>
+     <record id="product_product_customs_data" model="product.product">
+        <field name="invoice_policy">order</field>
+        <field name="categ_id">1</field>
+        <field name="detailed_type">service</field>
+        <field name="name">Customs</field>
+    </record>
+    <record id="product_product_delivery_data" model="product.product">
+        <field name="invoice_policy">order</field>
+        <field name="categ_id">1</field>
+        <field name="detailed_type">service</field>
+        <field name="name">Delivery</field>
+    </record>
+</odoo>

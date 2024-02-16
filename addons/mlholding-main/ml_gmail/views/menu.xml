@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Umbaa. 2022-08-22
+ -->
+<odoo>
+
+    <menuitem id="ml_gmail_root_menu"
+        name="ML Gmail"
+        web_icon="ml_gmail,odoo_icon.png"
+        sequence="4" />
+
+    <menuitem id="ml_gmail_list_view"
+        name="Mail list"
+        parent="ml_gmail_root_menu" />
+
+</odoo>

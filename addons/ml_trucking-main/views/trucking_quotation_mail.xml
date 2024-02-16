@@ -1,0 +1,53 @@
+<odoo>
+   <data>
+       <record id="email_template_name" model="mail.template">
+           <field name="name">Trucking Quotation Email Template</field>
+           <field name="model_id" ref="model_mltrucking_base"/>
+           <field name="email_from">{{object.vendor_id.email}}</field>
+           <field name="email_to">{{object.vendor_id.email}}</field>
+           <field name="reply_to">{{object.user_id.email}}</field>
+           <field name="report_template" ref="mltrucking_base_quotation"/>
+           <field name="report_name">{{object.ref.replace('/','_')}}</field>
+           <field name="body_html" type="html">
+            <t t-if="request.env['mltrucking.mail'].search([('locale','=' ,object.vendor_id.lang)], limit = 1)">
+                <t t-set="k" t-value="request.env['mltrucking.mail'].search([('locale','=' ,object.vendor_id.lang)], limit=1)" />
+            </t>
+            <t t-else="">
+                <t t-set="k" t-value="request.env['mltrucking.mail'].search([('locale','=','en_US')], limit = 1)" />
+            </t>
+                <t t-out="k.greeting"/> 
+                <t t-out="object.vendor_id.name"/><br/>
+                <t t-out="k.description"/><br/>
+                <t t-out="k.route"/>
+                <strong>
+                <t t-out="object.trucking_terms.code"/>
+                </strong>
+                <table style="width:100%;margin-top:10px;border-top:1px solid #42515e;border-left:1px solid #42515e;text-align:center" cellspacing="0" cellpadding="5">
+                <tbody>
+                    <tr style="background-color:#798897;color:#eeeeee;font-size:11px">
+                        <th style="border-right:1px solid #42515e;border-bottom:1px solid #42515e"><t t-out="k.table_number"/></th>
+                        <th style="border-right:1px solid #42515e;border-bottom:1px solid #42515e"><t t-out="k.table_type"/></th>
+                        <th style="border-right:1px solid #42515e;border-bottom:1px solid #42515e"><t t-out="k.table_id"/></th>
+                        <th style="border-right:1px solid #42515e;border-bottom:1px solid #42515e"><t t-out="k.table_information"/></th>
+                        <th style="border-right:1px solid #42515e;border-bottom:1px solid #42515e"><t t-out="k.price"/></th>
+                        <th style="border-right:1px solid #42515e;border-bottom:1px solid #42515e"><t t-out="k.table_estimated_time"/></th>
+                    </tr>
+                    <tr>
+                        <td style="border-right:1px solid #42515e;border-bottom:1px solid #42515e"><t t-out="1"/></td>
+                        <td style="border-right:1px solid #42515e;border-bottom:1px solid #42515e"><t t-out="object.trucking_type.type_name"/></td>
+                        <td style="border-right:1px solid #42515e;border-bottom:1px solid #42515e"><t t-out="object.ref"/></td>
+                        <td style="border-right:1px solid #42515e;border-bottom:1px solid #42515e">
+                        <!-- <t t-foreach="object.freights" t-as="obj">
+                                <t t-out="obj.freight_name"/> 
+                            </t> -->
+                        </td>
+                        <td style="border-right:1px solid #42515e;border-bottom:1px solid #42515e"><t t-out="object.total_rate"/></td>
+                        <td style="border-right:1px solid #42515e;border-bottom:1px solid #42515e"><t t-out="object.date_diff"/></td>
+                    </tr>
+                </tbody>
+                </table>
+                <t t-out="k.footer"/>
+           </field>
+       </record>
+   </data>
+</odoo>

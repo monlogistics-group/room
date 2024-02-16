@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="monthly_report1" model="monthly.report.data">
+        <field name="title"> Monthly report</field>
+        <field name="locate"> 1</field>
+        <field name="monthd"> Month</field>
+        <field name="date"> Date</field>
+        <field name="to">To </field>
+        <field name="quo_det"> Quotation detail</field>
+        <field name="price_inq"> Price inquiries</field>
+        <field name="conf_order">Confirmed order </field>
+        <field name="conf_rate"> Confirmed rate</field>
+        <field name="order_det">Order details </field>
+        <field name="state">State </field>
+        <field name="in_tran">In transit</field>
+        <field name="canc_ord">Cancelled order </field>
+        <field name="del_order">Delivered order</field>
+        <field name="del_det">Delivery details </field>
+        <field name="date_delivery">Arrived on the time delivery </field>
+        <field name="over_order"> Overdue order(other)</field>
+        <field name="overd_order"> Overdue order(MLW) </field>
+        <field name="mlwontime_del"> MLW Arrived on the time </field>
+        <field name="resi_pay"> Reisdual payment</field>
+        <field name="curr">Currency </field>
+        <field name="mnt"> MNT</field>
+        <field name="usd">USD </field>
+        <field name="eur">EUR </field>
+        <field name="cny">CNY </field>
+        <field name="ref_num">Ref number </field>
+        <field name="whr">From (origin term) </field>
+        <field name="calc_date">Calc date </field>
+        <field name="arv_date"> Arrived date</field>
+        <field name="shipp_report">Shipping details for the month of report </field>
+        <field name="sender"> Sender</field>
+        <field name="cau_over"> Cause of overdue</field>
+        <field name="rep_by">Reported by </field>
+        <field name="sign"> Sign</field>
+        <field name="confirmed">Confirmed </field>
+        <field name="ongoing">Ongoing </field>
+        <field name="arrived"> Arrived</field>
+        <field name="released">Released </field>
+        <field name="closed">Closed </field>
+    </record>
+</odoo>

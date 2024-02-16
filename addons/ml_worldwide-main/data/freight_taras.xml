@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="freights_taras_data" model="freights.taras">
+        <field name="name">20'</field>
+        <field name="taras_type">20'</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_taras_data2" model="freights.taras">
+        <field name="name">40'</field>
+        <field name="taras_type">40'</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_taras_data3" model="freights.taras">
+        <field name="name">40H</field>
+        <field name="taras_type">40'</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_taras_data4" model="freights.taras">
+        <field name="name">20'RF</field>
+        <field name="taras_type">20'</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_taras_data5" model="freights.taras">
+        <field name="name">40'RF</field>
+        <field name="taras_type">40'</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_taras_data6" model="freights.taras">
+        <field name="name">20ISO</field>
+        <field name="taras_type">20'</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_taras_data7" model="freights.taras">
+        <field name="name">20'OT</field>
+        <field name="taras_type">20'</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_taras_data8" model="freights.taras">
+        <field name="name">40'OT</field>
+        <field name="taras_type">40'</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_taras_data9" model="freights.taras">
+        <field name="name">40'FR</field>
+        <field name="taras_type">40'</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_taras_data10" model="freights.taras">
+        <field name="name">40ISO</field>
+        <field name="taras_type">40'</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_taras_data11" model="freights.taras">
+        <field name="name">45'</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_taras_data12" model="freights.taras">
+        <field name="name">20'FR</field>
+        <field name="taras_type">20'</field>
+        <field name="active">1</field>
+    </record>
+</odoo>

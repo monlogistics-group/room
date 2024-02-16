@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+   <data>
+       <record id="mlworlwide_confirm_agent_quotation_email" model="mail.template">
+           <field name="name">Worldwide Confirm Agent Quotation Email Template</field>
+           <field name="model_id" ref="ml_worldwide-main.model_freights_quotations"/>
+           <!-- <field name="email_from">{{object.user_id.email}}</field> -->
+           <field name="email_from">{{object.employee.work_email}}</field> 
+           <field name="report_template" ref="ml_worldwide-main.mlworldwide_base_shipment_order"/>
+           <field name="report_name">{{object.freights_id.ref_num.replace('/','_')}}</field>
+           <field name="subject">Shipment Order * {{object.freights_id.ref_num.replace('Freight','Quotation')}} * {{object.employee.name}} * {{object.freights_type_ids.type_name}} * {{object.taras_ids.name}}x{{object.freights_id.shipment_qty}} *  {{object.consignee}}</field>
+           <field name="body_html" type="html">
+                <t t-if="request.env['confirm.agent.quotation'].search([('locale.code','=' ,object.freights_id.customer_id.lang)], limit = 1)">
+                    <t t-set="doc" t-value="request.env['confirm.agent.quotation'].search([('locale.code','=' ,object.freights_id.customer_id.lang)], limit=1)" />
+                </t>
+                <t t-else="">
+                    <t t-set="doc" t-value="request.env['confirm.agent.quotation'].search([('locale.code','=','en_US')], limit = 1)" />
+                </t>
+                    <t t-out='doc.greeting'/><br/>
+                    <t t-out='doc.desc'/><br/>
+                    <t t-out='doc.desc2'/>
+                    <strong>
+                        <t t-out='object.employee.name'/>
+                    </strong>
+                    <span>(email: </span>
+                    <t t-out='object.employee.work_email'/> <span> &amp; mobile:</span><t t-out='object.employee.work_phone'/><span>)</span>
+                    <t t-out='doc.desc3'/><br/>
+                    <br/>
+                    <strong>
+                        <t t-out='doc.ref'/>: <t t-out="object.freights_id.ref_num"/>
+                    </strong><br/>
+                    <strong>
+                        <t t-out='doc.shipper'/>: <t t-out='object.freights_id.shipper_info'/>
+                    </strong><t t-out='object.freights_id.shipper_info'/><br/>
+                    <strong>
+                        <t t-out='doc.consignee'/>:
+                    </strong><t t-out='object.freights_id.customer_id.name'/><br/>
+                    <strong>
+                        <t t-out='doc.hs_code'/>:
+                    </strong><t t-out='object.freights_id.hs_code'/><br/>
+                    <strong>
+                        <t t-out='doc.cargo_detail'/>:
+                    </strong><t t-out='object.freights_id.hscode_category_id.name'/><br/>
+                    <strong>
+                        <t t-out='doc.freight_type'/>:
+                    </strong>
+                    <t t-out='object.freights_type_ids.display_name'/><br/>
+                    <br/>
+                    <t t-out='doc.ending'/>
+           </field>
+       </record>
+   </data>
+</odoo>

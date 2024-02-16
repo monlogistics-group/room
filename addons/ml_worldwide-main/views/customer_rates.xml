@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    
+    <record id="customers_rates_form_view" model="ir.ui.view">
+        <field name="name">customers.rates.form</field>
+        <field name="model">customers.rates</field>
+        <field name="arch" type="xml">
+            <form string="custom rates">
+                <sheet>
+                    <group>
+                        
+                        <field name="service_data"/>
+                        <field name="point_data"/>
+                        <field name="package_data"/>
+                        <field name="to_data"/>
+                        <field name="from_data"/>
+                        <field name="type_data"/>
+                        <field name="cost_data"/>
+                        <field name="currency_id"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="is_last"/>
+                        
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="customers_rates_tree_view" model="ir.ui.view">
+        <field name="name">customers.rates.tree</field>
+        <field name="model">customers.rates</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Custom rates">
+                <field name="service_data"/>                    
+                <field name="package_data"/>
+                <field name="point_data"/>
+                <field name="to_data"/>
+                <field name="from_data"/>
+                <field name="type_data"/>
+                <field name="cost_data"/>
+                <field name="currency_id"/>
+                <field name="is_last"/>
+                
+            </tree>
+        </field>
+    </record>
+    <record id="customers_rates_pivot_view" model="ir.ui.view">
+        <field name="name">customers.rates.pivot</field>
+        <field name="model">customers.rates</field>
+        <field name="arch" type="xml">
+            <pivot string="Custom rates" sample="1">
+                <field name="point_data" type="row"/>
+                <field name="service_data" type="col"/>
+                <field name="package_data" type="col"/>
+                <field name="type_data" type="col"/>
+                <field name="is_last" type="col"/>
+                <field name="cost_data" type="measure"/>
+                <field name="from_data"/>
+                <field name="to_data"/>
+            </pivot>
+        </field>
+    </record>
+    <record id="customers_rates_pivot_search_view" model="ir.ui.view">
+        <field name="name">customers.rates.search</field>
+        <field name="model">customers.rates</field>
+        <field name="arch" type="xml">
+            <search string="Custom">
+                <group expand="0" string="Filters">
+                    <field string="is_last" name="is_last" context="{'group_by':'is_last'}"/>
+                </group>
+                <!-- <separator/>
+                    <filter string="Last document" name="inactive" domain="[('is_last', '=', True)]"/> -->
+            </search>
+        </field>
+    </record>   
+    <record id="customers_rates_action" model="ir.actions.act_window">
+        <field name="name">Custom rates</field>
+        <field name="type">ir.actions.act_window</field>  
+        <field name="res_model">customers.rates</field>
+        <field name="view_mode">tree,form,pivot</field>
+        <field name="view_id" eval="False"/>
+        <field name="usage">menu</field>
+        <field name="context">{'search_default_is_last':1}</field>
+    </record>
+    
+    <menuitem id="menu_customers_rates"
+            name="Custom rates"
+            action="customers_rates_action"
+            parent="menu_worldwide_etc"
+            groups=""
+            sequence="112"/>
+</odoo>

@@ -1,0 +1,53 @@
+<odoo>
+  <data>
+
+    <record id="ml_currency_rate_update_form_view" model="ir.ui.view">
+        <field name="name">mlcurrency.rate.update.form</field>
+        <field name="model">mlcurrency.rate.update</field>
+        <field name="arch" type="xml">
+            <form string="Currency rate URL">
+                <sheet>
+                    <group>
+                        <field name="currency_rate_url"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record id="ml_currency_rate_update_tree_view" model="ir.ui.view">
+        <field name="name">mlcurrency.rate.update.tree</field>
+        <field name="model">mlcurrency.rate.update</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Currency rate URL" editable="bottom">
+                <field name="currency_rate_url"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="ml_currency_rate_update_action" model="ir.actions.act_window">
+        <field name="name">Truckings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mlcurrency.rate.update</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Define a new pages
+            </p>
+            <p>
+                Currency rate update URL app are used to Pages module.
+            </p>
+        </field>
+    </record>
+
+    <menuitem 
+        id="menu_mlcurrency_rate_update"
+        name="Currency rate URL"
+        action="ml_currency_rate_update_action"
+        parent="base.menu_users"
+        sequence="202"
+    />
+  </data>
+</odoo>

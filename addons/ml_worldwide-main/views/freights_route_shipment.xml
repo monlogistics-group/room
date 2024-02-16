@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="freights_route_shipment_form_view">
+            <field name="name">freights.route.shipment.form</field>
+            <field name="model">freights.route.shipment</field>
+            <field name="arch" type="xml">
+                <form string="Route shipment">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="route_point_new"/>
+                                <field name="shipment_id"/>
+                                <field name="etd_date"/>
+                                <field name="atd_date"/>
+                                <field name="eta_date"/>
+                                <field name="ata_date"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="freights_route_shipment_tree_view">
+            <field name="name">freights.route.shipment.tree</field>
+            <field name="model">freights.route.shipment</field>
+            <field name="arch" type="xml">
+                <tree string="freights Route shipment">
+                    <field name="route_point_new"/>
+                    <field name="shipment_id"/>
+                    <field name="etd_date"/>
+                    <field name="atd_date"/>
+                    <field name="eta_date"/>
+                    <field name="ata_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="freights_route_shipment_view_action">
+            <field name="name">freights Route shipment </field>
+            <field name="res_model">freights.route.shipment</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new port.
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

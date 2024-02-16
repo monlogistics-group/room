@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Javkha. 2022-11-03
+ -->
+<odoo>
+    
+    <record id="ml_trucking_package_form_view" model="ir.ui.view">
+        <field name="name">mltrucking.package.form</field>
+        <field name="model">mltrucking.package</field>
+        <field name="arch" type="xml">
+            <form string="Trucking package">
+            <header>
+                <!-- <button name="write_fn" type="object" string="Confirm"/> -->
+            </header>
+                <sheet>
+                    <group col="2">
+                        <group>
+                            <field name="consignee"/>
+                            <field name="weight"/>
+                            <field name="height"/>
+                            <field name="width"/>
+                            <field name="length"/>
+                            <field name="quantity"/>
+                        </group>
+                        <group>
+
+                            <field name="dangerousGoods"/>
+                            <field name="name"/>
+                            <field name="temp"/>
+                            <field name="note"/>
+                            <field name="shipment"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record id="ml_trucking_package_tree_view" model="ir.ui.view">
+        <field name="name">mltrucking.package.tree</field>
+        <field name="model">mltrucking.package</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Trucking package">
+                <field name="consignee" />
+                <field name="weight"/>
+                <field name="quantity"/>
+                <field name="dangerousGoods"/>
+                <field name="name"/>
+                <field name="temp"/>
+                <field name="note"/>
+                <field name="shipment"/>
+            </tree>
+        </field>
+    </record>
+    <record id="ml_trucking_package_kanban_view" model="ir.ui.view">
+        <field name="name">mltrucking.package.kanban</field>
+        <field name="model">mltrucking.package</field>
+        <field name="type">kanban</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="consignee"/>
+                <field name="weight"/>
+                <field name="quantity"/>
+                <field name="dangerousGoods"/>
+                <field name="name"/>
+                <field name="temp"/>
+                <field name="note"/>
+                <field name="shipment"/>
+                <field name="color"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="{{'oe_kanban_color_' + kanban_getcolor(record.color.raw_value) }} oe_kanban_card oe_kanban_global_click oe_semantic_html_override">
+                            <div class="col-oe_kanban_details d-flex flex-column">
+                                <strong class="o_kanban_record_title">
+                                    Consignee: <field name="consignee"/>
+                                </strong>
+                                <div class="d-flex flex-column">
+                                    <div>Weight: <field name="weight"/></div>
+                                    <div>Quantity: <field name="quantity"/></div>
+                                    <div>Dangerous Goods: <field name="dangerousGoods"/></div>
+                                    <div>Name: <field name="name"/></div>
+                                    <div>Temperature: <field name="temp"/></div>
+                                    <div>Note: <field name="note"/></div>
+                                    <div>Shipment: <field name="shipment"/></div>
+                                </div>
+                                <div class="o_kanban_record_bottom mt-3">
+                                    <div class="oe_kanban_bottom_left">
+                                        <div class="o_project_kanban_boxes">
+                                                <div>
+                                                    <span class="o_value">Note:<t t-esc="record.note.value"/></span>
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="oe_kanban_bottom_right">
+                                        <field name="consignee" widget="many2one_avatar_user" t-if="record.consignee.raw_value"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="ml_trucking_package_action" model="ir.actions.act_window">
+        <field name="name">Trucking Package</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mltrucking.package</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Define a new page
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_trucking_package"
+              name="Trucking Package"
+              action="ml_trucking_package_action"
+              parent="menu_trucking_data"
+              sequence="36"/>
+</odoo>

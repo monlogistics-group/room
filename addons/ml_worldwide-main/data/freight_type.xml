@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="freight_type_data" model="freights.type">
+        <field name="type_name">FCL</field>
+        <field name="sequence">1</field>
+    </record>
+    <record id="freight_type_data2" model="freights.type">
+        <field name="type_name">LCL</field>
+        <field name="sequence">2</field>
+    </record>
+    <record id="freight_type_data3" model="freights.type">
+        <field name="type_name">FTL</field>
+        <field name="sequence">3</field>
+    </record>
+    <record id="freight_type_data4" model="freights.type">
+        <field name="type_name">LTL</field>
+        <field name="sequence">4</field>
+    </record>
+    <record id="freight_type_data5" model="freights.type">
+        <field name="type_name">AIR</field>
+        <field name="sequence">5</field>
+    </record>
+    <record id="freight_type_data6" model="freights.type">
+        <field name="type_name">Train</field>
+        <field name="sequence">6</field>
+    </record>
+    <record id="freight_type_data7" model="freights.type">
+        <field name="type_name">WGN</field>
+        <field name="sequence">7</field>
+    </record>
+    <record id="freight_type_data8" model="freights.type">
+        <field name="type_name">Multimodal</field>
+        <field name="sequence">8</field>
+    </record>
+</odoo>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+		<record id="package_wizard_model_view_form" model="ir.ui.view">
+        	<field name="name">package.wizard.form</field>
+        	<field name="model">package.wizard</field>
+        	<field name="arch" type="xml">
+				<form string="Test">
+				<group>
+					<field name='late_reason'/>
+				</group>
+				<footer>
+					<button type="object" name="package_wizard" string="Send"/>
+				</footer>
+				</form>
+			</field>
+		</record>
+		<record id="package_date_wizard_model_view_form" model="ir.ui.view">
+        	<field name="name">packages.pop.up.form</field>
+        	<field name="model">packages.pop.up</field>
+        	<field name="arch" type="xml">
+				<form string="Change States">
+					<group>
+						<field name="date"/>
+					</group>
+					<footer>
+						<button name="confirm" type="object" string="Confirm"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+</odoo>
+        	 

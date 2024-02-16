@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Umbaa. 2022-12-02
+ -->
+<odoo>
+ <record id="freights_service_type_form_view" model="ir.ui.view">
+        <field name="name">freights.service.type.form</field>
+        <field name="model">freights.service.type</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Freights service types">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="product_id" attrs="{'required':1}"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="freights_service_type_tree_view" model="ir.ui.view">
+        <field name="name">freights.service.type.tree</field>
+        <field name="model">freights.service.type</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Freights service types">
+                <field name="sequence" widget="handle"/>
+                <field name="name" />
+                <field name="product_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="freights_service_type_action" model="ir.actions.act_window">
+        <field name="name">Freights service types</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">freights.service.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Define a new pages
+            </p><p>
+                Freights app are used to Pages module.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_freights_service_type"
+        name="Freights Service type"
+        action="freights_service_type_action"
+        parent="menu_worldwide_configuration"
+        groups=""
+        sequence="198"
+    />
+
+</odoo>

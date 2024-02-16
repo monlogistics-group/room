@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Javkha.
+ -->
+<odoo>
+    
+    <record id="worldwide_pdf_photo_form_view" model="ir.ui.view">
+        <field name="name">mlworldwide.freight.photo.form</field>
+        <field name="model">mlworldwide.freight.photo</field>
+        <field name="arch" type="xml">
+            <form string="Pdf photo">
+                <sheet>
+                    <group>
+                        <field name="freight_photo"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="worldwide_pdf_photo_tree_view" model="ir.ui.view">
+        <field name="name">mlworldwide.freight.photo.tree</field>
+        <field name="model">mlworldwide.freight.photo</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Pdf photo">
+                <field name="freight_photo"/>
+            </tree>
+        </field>
+    </record>
+    <record id="worldwide_pdf_photo_action" model="ir.actions.act_window">
+        <field name="name">Pdf photo</field>
+        <field name="type">ir.actions.act_window</field>  
+        <field name="res_model">mlworldwide.freight.photo</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+    </record>
+    <menuitem id="menu_worldwide_pdf_photo"
+            name="PDF Photos"
+            action="worldwide_pdf_photo_action"
+            parent="menu_worldwide_master_data"
+            groups=""
+            sequence="152"/>
+</odoo>

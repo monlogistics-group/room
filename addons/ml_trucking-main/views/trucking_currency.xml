@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Umbaa. 2023-10-20
+ -->
+<odoo>
+
+    <record id="ml_trucking_currency_form_view" model="ir.ui.view">
+        <field name="name">mltrucking.currency.form</field>
+        <field name="model">mltrucking.currency</field>
+        <field name="arch" type="xml">
+            <form string="Trucking" edit="0" create="1" delete="0">
+                <sheet>
+                    <group>
+                        <field name="currency_name"/>
+                        <field name="mb_rate" />
+                        <field name="not_ready_buy" />
+                        <field name="not_ready_sell" />
+                        <field name="ready_buy" />
+                        <field name="ready_sell" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="ml_trucking_currency_searh_view" model="ir.ui.view">
+        <field name="name">mltrucking.currency.search</field>
+        <field name="model">mltrucking.currency</field>
+        <field name="arch" type="xml">
+            <search string="Service">
+                <field name="currency_name" string="Service" filter_domain="['|', ('currency_name', 'ilike', self), ('mb_rate', 'ilike', self)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="ml_trucking_currency_three" model="ir.ui.view">
+        <field name="name">mltrucking.currency.form.inherit</field>
+        <field name="model">mltrucking.currency</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Currency rate" edit="0" create="1" delete="0">
+                <field name="currency_name"/>
+                <field name="mb_rate" />
+                <field name="not_ready_buy" />
+                <field name="not_ready_sell" />
+                <field name="ready_buy" />
+                <field name="ready_sell" />
+                <field name="create_date"/>
+                <field name="create_uid"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="ml_trucking_currency_action" model="ir.actions.act_window">
+        <field name="name">Currency rate</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mltrucking.currency</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                LMS Monlogistics Holding LLC © 2023 он. Version 0.0.1
+            </p><p>
+                Currency are used to LMS trucking module.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_ml_trucking_currency_action"
+        name="Currency rate"
+        action="ml_trucking_currency_action"
+        parent="menu_trucking_data"
+        groups=""
+        sequence="369"
+    />
+
+</odoo>

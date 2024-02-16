@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <record id="monthly_report_data_form_view" model="ir.ui.view">
+        <field name="name">monthly.report.data.form</field>
+        <field name="model">monthly.report.data</field>
+        <field name="arch" type="xml">
+            <form string="Monthly Report Data">
+                <sheet>
+                    <group>
+                        <field name="title"/>
+                        <field name="locate"/>
+                        <field name="monthd"/>
+                        <field name="date"/>
+                        <field name="to"/>
+                        <field name="quo_det"/>
+                        <field name="price_inq"/>
+                        <field name="conf_order"/>
+                        <field name="conf_rate"/>
+                        <field name="order_det"/>
+                        <field name="state"/>
+                        <field name="in_tran"/>
+                        <field name="canc_ord"/>
+                        <field name="del_order"/>
+                        <field name="del_det"/>
+                        <field name="date_delivery"/>
+                        <field name="over_order"/>
+                        <field name="overd_order"/>
+                        <field name="mlwontime_del"/>
+                        <field name="resi_pay"/>
+                        <field name="curr"/>
+                        <field name="mnt"/>
+                        <field name="usd"/>
+                        <field name="eur"/>
+                        <field name="cny"/>
+                        <field name="ref_num"/>
+                        <field name="whr"/>
+                        <field name="calc_date"/>
+                        <field name="arv_date"/>
+                        <field name="shipp_report"/>
+                        <field name="sender"/>
+                        <field name="cau_over"/>
+                        <field name="rep_by"/>
+                        <field name="sign"/>
+                        <field name="confirmed"/>
+                        <field name="ongoing"/>
+                        <field name="arrived"/>
+                        <field name="released"/>
+                        <field name="closed"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="monthly_report_data_tree_view" model="ir.ui.view">
+        <field name="name">monthly.report.data.tree</field>
+        <field name="model">monthly.report.data</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Monthly Report Data">
+                <field name="title"/>
+                    <field name="locate"/>
+                    <field name="date"/>
+                    <field name="to"/>
+                    <field name="quo_det"/>  
+            </tree>
+        </field>
+    </record>
+
+    <record id="monthly_report_data_action" model="ir.actions.act_window">
+        <field name="name">Monthly Report Data</field>
+        <field name="type">ir.actions.act_window</field>  
+        <field name="res_model">monthly.report.data</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+    </record>
+
+    <menuitem id="menu_worldwide_monthly_report_data"
+            name="Monthly report data"
+            action="monthly_report_data_action"
+            parent="menu_worldwide_configuration"
+            groups=""
+            sequence="308"/>
+</odoo>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="freights_hscode_category" model="freights.hscode.category">
+        <field name="name">01-05 Animal &amp; Animal Products</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_hscode_category2" model="freights.hscode.category">
+        <field name="name">06-15 Vegetable Products</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_hscode_category3" model="freights.hscode.category">
+        <field name="name">16-24 Foodstuffs</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_hscode_category4" model="freights.hscode.category">
+        <field name="name">25-27 Mineral Products</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_hscode_category5" model="freights.hscode.category">
+        <field name="name">28-38 Chemicals &amp; Allied Industries</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_hscode_category6" model="freights.hscode.category">
+        <field name="name">39-40 Plastics / Rubbers</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_hscode_category7" model="freights.hscode.category">
+        <field name="name">41-43 Raw Hides, Skins, Leather, &amp; Furs</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_hscode_category8" model="freights.hscode.category">
+        <field name="name">44-49 Wood &amp; Wood Products</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_hscode_category9" model="freights.hscode.category">
+        <field name="name">50-63 Textiles</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_hscode_category10" model="freights.hscode.category">
+        <field name="name">64-67 Footwear / Headgear</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_hscode_category11" model="freights.hscode.category">
+        <field name="name">68-71 Stone / Glass</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_hscode_category12" model="freights.hscode.category">
+        <field name="name">72-83 Metals</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_hscode_category13" model="freights.hscode.category">
+        <field name="name">84-85 Machinery / Electrical</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_hscode_category14" model="freights.hscode.category">
+        <field name="name">86-89 Transportation</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freights_hscode_category15" model="freights.hscode.category">
+        <field name="name">90-97 Miscellaneous</field>
+        <field name="active">1</field>
+    </record>
+</odoo>

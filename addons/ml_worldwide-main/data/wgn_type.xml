@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="freight_wgn_data" model="freights.wagon.type">
+        <field name="name">Platform</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freight_wgn_data2" model="freights.wagon.type">
+        <field name="name">Covered</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freight_wgn_data3" model="freights.wagon.type">
+        <field name="name">Cistern</field>
+        <field name="active">1</field>
+    </record>
+    <record id="freight_wgn_data4" model="freights.wagon.type">
+        <field name="name">Open Top</field>
+        <field name="active">1</field>
+    </record>
+</odoo>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Javkha. 2022-11-10
+ -->
+<odoo>
+    <record id="ml_trucking_mail" model="ir.ui.view">
+        <field name="name">mltrucking.mail.form</field>
+        <field name="model">mltrucking.mail</field>
+        <field name="arch" type="xml">
+            <form string="Trucking address">
+                <sheet>
+                    <group>
+                        <field name="locale"/>
+                        <field name="greeting"/>
+                        <field name="description"/>
+                        <field name="route"/>
+                        <field name="footer"/>
+                        <field name="table_number"/>
+                        <field name="table_type"/>
+                        <field name="table_id"/>
+                        <field name="table_information"/>
+                        <field name="price"/>
+                        <field name="table_estimated_time"/>
+                        
+                  </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record id="ml_trucking_mail_tree_view" model="ir.ui.view">
+        <field name="name">mltrucking.mail.tree</field>
+        <field name="model">mltrucking.mail</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Trucking Mail">
+                  <field name="locale"/>
+                  <field name="greeting"/>
+                  <field name="description"/>
+                  <field name="route"/>
+                  <field name="footer"/>
+                  <field name="table_number"/>
+                  <field name="table_type"/>
+                  <field name="table_id"/>
+                  <field name="table_information"/>
+                  <field name="price"/>
+                  <field name="table_estimated_time"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id='ml_trucking_mail_action' model='ir.actions.act_window'>
+        <field name="name">Mail</field>
+        <field name="res_model">mltrucking.mail</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+       
+    <menuitem id="menu_trucking_mail"
+              name="Mail data"
+              action="ml_trucking_mail_action"
+              parent="menu_trucking_config"
+              sequence="40"/>
+</odoo>

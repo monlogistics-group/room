@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Umbaa. 2022-10-27
+ -->
+<odoo>
+    <record id="ml_trucking_service_form_view" model="ir.ui.view">
+        <field name="name">mltrucking.service.form</field>
+        <field name="model">mltrucking.service</field>
+        <field name="arch" type="xml">
+            <form string="Trucking">
+             	<header>
+					
+				</header>
+                <sheet>
+                    <group>
+                        <field class="text-break" name="template_id" placeholder="e.g. Belen zabgaaruudaas songoh"/>
+                        <field class="text-break" name="service_name" placeholder="e.g. Tuuber achaa"/>
+                        <group>
+                            <field name="agent_id" />
+                            <field name="service_id" />    
+                            <field name="service_qty" />
+                            <field name="service_desc" />
+                            <field name="is_show_quote" />
+                        </group>
+                        <group>
+                            <field name="cost_currency_id" />
+                            <field name="service_cost" widget="monetary" />
+                            <field name="subtotal_cost" widget="monetary" />
+                            <field name="rate_currency_id" />
+                            <field name="service_rate" widget="monetary" />
+                            <field name="is_localtrucking" />
+                        </group>
+                        <notebook>
+                            <page string="Photos" name="photo">
+                                <!-- <field name="service_photos" mode="tree">
+                                <tree string="Photos">
+                                    <field name="freight_photo" widget="image" options="{'size': [90, 90]}"/>
+                                </tree>
+                                </field> -->
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+   
+    <record id="ml_trucking_service_tree_view" model="ir.ui.view">
+        <field name="name">mltrucking.service.tree</field>
+        <field name="model">mltrucking.service</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Trucking service">
+                <field class="text-break" name="service_name"/>
+                <field name="agent_id"/>
+                <field name="service_id" />
+                <field name="service_desc" />
+                <field name="service_qty" />
+                <field name="cost_currency_id" />
+                <field name="is_show_quote" optional="hide"/>
+                <field name="is_localtrucking" optional="hide"/>
+                <field name="service_cost" widget="monetary"/>
+                <field name="subtotal_cost" widget="monetary"/>
+                <field name="rate_currency_id" />
+                <field name="service_rate" widget="monetary"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="ml_trucking_service_search_view" model="ir.ui.view">
+        <field name="name">mltrucking.service.search</field>
+        <field name="model">mltrucking.service</field>
+        <field name="arch" type="xml">
+            <search string="Service">
+                <field name="service_name" string="Service" filter_domain="['|', ('service_name', 'ilike', self), ('service_desc', 'ilike', self)]"/>
+                <!-- <field name="categ_id" filter_domain="[('categ_id', 'child_of', raw_value)]"/>
+                <separator/>
+                <filter string="Services" name="services" domain="[('type','=','service')]"/>
+                <filter string="Products" name="consumable" domain="[('type', 'in', ['consu', 'product'])]"/>
+                <separator/>
+                <filter string="Can be Sold" name="filter_to_sell" domain="[('sale_ok','=',True)]"/>
+                <filter string="Can be Purchased" name="filter_to_purchase" domain="[('purchase_ok', '=', True)]"/>
+                <separator/>
+                <field string="Attributes" name="attribute_line_ids" groups="product.group_product_variant"/>
+                <field name="pricelist_id" context="{'pricelist': self}" filter_domain="[]" groups="product.group_product_pricelist"/>
+                <filter invisible="1" string="Late Activities" name="activities_overdue"
+                    domain="[('my_activity_date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]"
+                    help="Show all records which has next action date is before today"/>
+                <filter invisible="1" string="Today Activities" name="activities_today"
+                    domain="[('my_activity_date_deadline', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter invisible="1" string="Future Activities" name="activities_upcoming_all"
+                    domain="[('my_activity_date_deadline', '&gt;', context_today().strftime('%Y-%m-%d'))
+                    ]"/>
+                <separator/>
+                <filter string="Favorites" name="favorites" domain="[('priority','=','1')]"/>
+                <separator/>
+                <filter string="Warnings" name="activities_exception"
+                        domain="[('activity_exception_decoration', '!=', False)]"/>
+                <separator/>
+                <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
+                <group expand="1" string="Group By">
+                    <filter string="Product Type" name="type" context="{'group_by':'type'}"/>
+                    <filter string="Product Category" name="categ_id" context="{'group_by':'categ_id'}"/>
+                </group> -->
+            </search>
+        </field>
+    </record>
+
+    <record id="ml_trucking_service_kanban_view" model="ir.ui.view">
+        <field name="name">mltrucking.service.kanban</field>
+        <field name="model">mltrucking.service</field>
+        <field name="type">kanban</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="agent_id"/>
+                <field name="service_id" />
+                <field name="service_desc" />
+                <field name="service_qty" />
+                <field name="cost_currency_id" />
+                <field name="rate_currency_id" />
+                <field name="service_cost" widget="monetary"/>
+                <field name="subtotal_cost" widget="monetary"/>
+                <field name="service_rate" widget="monetary"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_color_2 oe_kanban_card oe_kanban_global_click oe_semantic_html_override">
+                            <div class="col-oe_kanban_details d-flex flex-column">
+                                <strong class="o_kanban_record_title">
+                                    Agent: <field name="agent_id"/>
+                                </strong>
+                                <div class="d-flex flex-column">
+                                    <div>Service: <field name="service_id"/></div>
+                                    <div>Description: <field name="service_desc"/></div>
+                                    <div>Quantity: <field name="service_qty"/></div>
+                                    <div>Currency: <field name="cost_currency_id"/></div>
+                                    <div>Cost: <field name="subtotal_cost"/></div>
+                                    <div>Currency: <field name="rate_currency_id"/></div>
+                                    <div>Rate: <field name="service_rate"/></div>
+                                </div>
+                                <div class="o_kanban_record_bottom mt-3">
+                                    <div class="oe_kanban_bottom_left">
+                                        <div class="o_project_kanban_boxes">
+                                            <div>
+                                                <span class="o_value">Sub Total:<t t-esc="record.subtotal_cost.value"/></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="oe_kanban_bottom_right">
+                                        <field name="agent_id" widget="many2one_avatar_user" t-if="record.agent_id.raw_value"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="ml_trucking_service_action" model="ir.actions.act_window">
+        <field name="name">Trucking service</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mltrucking.service</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                LMS Monlogistics Holding LLC © 2023 он. Version 0.0.1
+            </p><p>
+                Trucking services are used to LMS trucking module.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_trucking_service"
+              name="Service"
+              action="ml_trucking_service_action"
+              parent="menu_trucking_data"
+              groups=""
+              sequence="16"/>
+</odoo>

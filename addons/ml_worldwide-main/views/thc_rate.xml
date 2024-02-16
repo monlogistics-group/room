@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Copyright 2022 Mon Logistics Group <https://www.mlholding.mn>
+     Created by Ariuka.
+ -->
+<odoo>
+    
+    <record id="ths_rates_form_view" model="ir.ui.view">
+        <field name="name">ths.rates.form</field>
+        <field name="model">ths.rates</field>
+        <field name="arch" type="xml">
+            <form string="Thc rates">
+                <sheet>
+                    <group>
+                        
+                        <field name="terminal"/>
+                        <field name="code"/>
+                        <field name="taras_id"/>
+                        <field name="container"/>
+                        <field name="service_type"/>
+                        <field name="type_data"/>
+                        <field name="cost_data"/>
+                        <field name="currency_id"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="ths_rates_tree_view" model="ir.ui.view">
+        <field name="name">ths.rates.tree</field>
+        <field name="model">ths.rates</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="THC rates">
+                <field name="terminal"/>
+                <field name="code"/>
+                <field name="taras_id"/>
+                <field name="container"/>
+                <field name="service_type"/>
+                <field name="type_data"/>
+                <field name="cost_data"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+            </tree>
+        </field>
+    </record>
+    <record id="ths_rates_action" model="ir.actions.act_window">
+        <field name="name"> THC rates</field>
+        <field name="type">ir.actions.act_window</field>  
+        <field name="res_model">ths.rates</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+       
+  
+    </record>
+    <menuitem id="menu_ths_rates"
+            name="THC rates"
+            action="ths_rates_action"
+            parent="menu_worldwide_etc"
+            groups=""
+            sequence="112"/>
+</odoo>

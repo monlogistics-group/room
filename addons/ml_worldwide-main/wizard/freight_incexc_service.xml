@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="freights_incexc_service_add_wizard_form" model="ir.ui.view">
+            <field name="name">freight.incexc.service.form</field>
+            <field name="model">freight.incexc.service</field>
+            <!-- <field name="groups_id" eval="[(4,ref('base.group_user'))]"/> -->
+            <field name="arch" type="xml">
+                <form string="Freigths type">
+                    <group>
+                        <field name="name" />
+                        <field name="quotation_id" />
+                        <field name="isincluded" />
+                        <field name="locale" />
+                    </group>
+                    <footer>
+                        <button string="Save / Close " class="send btn-primary o_mail_send" name="add_service_close" type="object" />
+                        <button string="Cancel" class="btn-secondary" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
